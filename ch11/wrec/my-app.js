@@ -1,4 +1,4 @@
-import { html, Wrec } from "wrec";
+import { css, html, Wrec } from "wrec";
 import "./hello-world.js";
 import "./radio-group.js";
 
@@ -7,13 +7,14 @@ class MyApp extends Wrec {
     color: { type: String, value: "red" },
   };
 
+  static css = css`
+    :host {
+      font-family: sans-serif;
+      padding: 1rem;
+    }
+  `;
+
   static html = html`
-    <style>
-      body {
-        font-family: sans-serif;
-        padding: 1rem;
-      }
-    </style>
     <hello-world color="this.color" name="Mark"></hello-world>
     <radio-group
       name="color"
