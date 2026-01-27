@@ -17,7 +17,7 @@ function App() {
   }
 
   function updateColor(color: string) {
-    if (helloWorldRef) helloWorldRef.style.color = color;
+    if (helloWorldRef) (helloWorldRef as any).color = color;
   }
 
   return (

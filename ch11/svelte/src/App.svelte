@@ -19,7 +19,7 @@
   }
 
   function updateColor(color: string) {
-    if (helloWorldElement) helloWorldElement.style.color = color;
+    if (helloWorldElement) (helloWorldElement as any).color = color;
   }
 </script>
 

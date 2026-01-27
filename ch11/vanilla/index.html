@@ -12,9 +12,9 @@
     <script type="module">
       const helloWorld = document.querySelector("hello-world");
       const radioGroup = document.querySelector("radio-group");
-      helloWorld.style.color = radioGroup.getAttribute("value");
+      helloWorld.color = radioGroup.getAttribute("value");
       radioGroup.addEventListener("change", (event) => {
-        helloWorld.style.color = event.detail.value;
+        helloWorld.color = event.detail.value;
       });
     </script>
   </head>

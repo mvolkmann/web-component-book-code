@@ -16,7 +16,7 @@ function handleChange(event) {
 
 function updateColor(color) {
   const { value } = helloWorldElement;
-  if (value) value.style.color = color;
+  if (value) value.color = color;
 }
 </script>
 

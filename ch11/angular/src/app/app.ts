@@ -25,6 +25,6 @@ export class App {
 
   updateColor(color: string) {
     const el = this.helloWorldRef();
-    if (el) el.nativeElement.style.color = color;
+    if (el) (el.nativeElement as any).color = color;
   }
 }

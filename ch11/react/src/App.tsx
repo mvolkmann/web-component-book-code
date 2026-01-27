@@ -20,7 +20,7 @@ function App() {
 
   function updateColor(color: string) {
     const { current } = helloWorldRef;
-    if (current) current.style.color = color;
+    if (current) (current as any).color = color;
   }
 
   return (
