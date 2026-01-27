@@ -1,0 +1,6 @@
+{
+  "name": "custom-element",
+  "scripts": {
+    "dev": "vite"
+  }
+}

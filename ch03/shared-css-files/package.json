@@ -1,0 +1,9 @@
+{
+  "name": "shared-css-files",
+  "scripts": {
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "vite": "^7.3.1"
+  }
+}

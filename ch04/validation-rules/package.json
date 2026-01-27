@@ -1,0 +1,13 @@
+{
+  "name": "validation-rules",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "start": "node dist/demo.js"
+  },
+  "devDependencies": {
+    "rimraf": "^6.1.2",
+    "typescript": "^5.9.3"
+  }
+}

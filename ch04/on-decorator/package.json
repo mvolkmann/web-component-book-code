@@ -1,0 +1,6 @@
+{
+  "name": "on-decorator",
+  "scripts": {
+    "dev": "vite"
+  }
+}

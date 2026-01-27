@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" class="wa-theme-default wa-palette-default wa-brand-blue">
+  <head>
+    <title>Web Awesome Demo</title>
+    <link rel="stylesheet" href="./web-awesome/styles/webawesome.css" />
+    <link rel="stylesheet" href="./web-awesome/styles/themes/default.css" />
+    <script type="module">
+      import "./web-awesome/components/button/button.js";
+      const button = document.getElementById("my-button");
+      button.addEventListener("click", () => {
+        alert("Got click");
+      });
+
+      const { classList } = document.documentElement;
+      const query = window.matchMedia("(prefers-color-scheme: dark)");
+      classList.toggle("wa-dark", query.matches);
+      query.addEventListener("change", (event) => {
+        classList.toggle("wa-dark", event.matches);
+      });
+    </script>
+  </head>
+  <body>
+    <wa-button appearance="filled-outlined" id="my-button" variant="danger"
+      >Click Me</wa-button
+    >
+  </body>
+</html>

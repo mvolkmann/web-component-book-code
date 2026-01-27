@@ -1,0 +1,12 @@
+{
+  "name": "button-demo",
+  "scripts": {
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "@awesome.me/webawesome": "^3.1.0"
+  }
+}

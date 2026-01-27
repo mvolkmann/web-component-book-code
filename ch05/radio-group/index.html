@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <style>
+      radio-group {
+        --border-color: cornflowerblue;
+        --direction: column;
+        --gap: 0;
+        --legend-color: blue;
+      }
+    </style>
+    <script src="radio-group.ts" type="module"></script>
+  </head>
+  <body>
+    <radio-group
+      name="color"
+      labels="Red,Green,Blue"
+      legend="Color"
+      value="blue"
+      values="red,green,blue"
+    >
+      <div slot="before">Select a color for your new car.</div>
+      <div slot="after">Don't choose a color you will regret.</div>
+    </radio-group>
+  </body>
+</html>

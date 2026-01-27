@@ -1,0 +1,12 @@
+<main>
+  <hello-world name="Mark" #helloWorldTag></hello-world>
+  <radio-group
+    name="color"
+    labels="Red,Green,Blue"
+    [attr.value]="initialColor"
+    values="red,green,blue"
+    (change)="handleChange($event)"
+  ></radio-group>
+</main>
+
+<router-outlet />

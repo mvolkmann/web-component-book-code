@@ -1,0 +1,9 @@
+{
+  "name": "non-negative",
+  "scripts": {
+    "start": "vite-node ./demo.ts"
+  },
+  "dependencies": {
+    "vite-node": "^5.2.0"
+  }
+}

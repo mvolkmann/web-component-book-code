@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    // Including "DOM" gives access to console methods.
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "Node",
+    "outDir": "./dist",
+    "skipLibCheck": true, // avoids "Cannot find namespace 'JSX'"
+    "strict": true,
+    "target": "ES2022" // "ESNext" does not work with decorators!
+  }
+}

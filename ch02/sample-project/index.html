@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" class="wa-theme-default wa-palette-default wa-brand-blue">
+  <head>
+    <title>Web Awesome Demo</title>
+    <link rel="stylesheet" href="./web-awesome/styles/webawesome.css" />
+    <link rel="stylesheet" href="./web-awesome/styles/themes/default.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module">
+      const components = `
+        badge, button, dialog, drawer, input, progress-bar, progress-ring,
+        radio, radio-group, rating, relative-time, switch
+      `;
+      const path = "./web-awesome/components";
+      for (const part of components.split(",")) {
+        const component = part.trim();
+        import(/* @vite-ignore */ `${path}/${component}/${component}.js`);
+      }
+    </script>
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+    <h1>Web Awesome Demo</h1>
+
+    <wa-radio-group
+      id="color-radio"
+      label="Select a heading color."
+      orientation="horizontal"
+      size="small"
+    >
+      <wa-radio value="red">Red</wa-radio>
+      <wa-radio value="green">Green</wa-radio>
+      <wa-radio value="blue">Blue</wa-radio>
+    </wa-radio-group>
+
+    <div class="wa-align-items-center wa-gap-xs">
+      <wa-input
+        id="date-input"
+        label="Dentist Appointment"
+        type="date"
+      ></wa-input>
+      <wa-relative-time id="relative-time"></wa-relative-time>
+    </div>
+
+    <div class="wa-align-items-center wa-gap-xl">
+      <wa-button id="view-button" size="small">
+        View Messages
+        <wa-badge attention="pulse" variant="danger" pill></wa-badge>
+      </wa-button>
+      <wa-switch id="badge-switch" checked>Show Badge</wa-switch>
+    </div>
+
+    <wa-dialog id="message-dialog" label="Messages" light-dismiss>
+      <div></div>
+      <wa-button data-dialog="close" slot="footer" variant="brand">
+        Close
+      </wa-button>
+    </wa-dialog>
+
+    <div>
+      <wa-button id="drawer-button" size="small">Open Drawer</wa-button>
+    </div>
+
+    <wa-drawer id="message-drawer" label="Messages" placement="bottom">
+      <div></div>
+      <wa-button data-drawer="close" slot="footer" variant="brand">
+        Close
+      </wa-button>
+    </wa-drawer>
+
+    <wa-progress-bar
+      id="progress-bar"
+      label="Message Progress"
+    ></wa-progress-bar>
+    <wa-progress-ring id="progress-ring"></wa-progress-ring>
+
+    <div>
+      <div>Click a heart to indicate how much you like Web Awesome.</div>
+      <div class="wa-align-items-center wa-gap-m">
+        <wa-rating
+          id="rating"
+          label="Rating"
+          precision="0.5"
+          max="10"
+          size="large"
+        ></wa-rating>
+        <span>0</span>
+      </div>
+    </div>
+  </body>
+</html>

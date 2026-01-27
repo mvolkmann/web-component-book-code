@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script src="car-table.js" type="module"></script>
+    <script type="module">
+      const carTable = document.querySelector("car-table");
+      carTable.cars = [
+        { make: "MINI", model: "Cooper", year: 2015 },
+        { make: "Subaru", model: "Forester", year: 2025 },
+      ];
+    </script>
+  </head>
+  <body>
+    <car-table></car-table>
+  </body>
+</html>

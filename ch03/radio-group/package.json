@@ -1,0 +1,9 @@
+{
+  "name": "radio-group",
+  "scripts": {
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "vite": "^7.3.1"
+  }
+}

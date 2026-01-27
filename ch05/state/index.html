@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>@lit/context demo</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+    </style>
+    <script type="module" src="/src/lit-app.ts"></script>
+    <script type="module" src="/src/hello-world.ts"></script>
+    <script type="module" src="/src/labeled-input.ts"></script>
+  </head>
+  <body>
+    <lit-app>
+      <labeled-input id="name" label="Name" name="name"></labeled-input>
+      <hello-world></hello-world>
+    </lit-app>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  background-color: aliceblue;
+  padding: 2rem;
+}
+
+#relative-time {
+  display: none;
+  margin-left: 1rem;
+}
+
+#badge-switch {
+  --thumb-size: 15px; /* default seems too small */
+}
+
+#message-dialog::part(footer) {
+  padding-top: 1rem;
+}
+
+#message-drawer::part(footer) {
+  padding-top: 1rem;
+}
+
+#progress-bar {
+  --indicator-color: green;
+  --track-color: lightgreen;
+  --track-height: 1rem;
+  width: 18rem;
+}
+
+#progress-ring {
+  --indicator-color: green;
+  --indicator-width: 12px;
+  --size: 5rem;
+  --track-color: lightgreen;
+  --track-width: 6px;
+}
+
+#rating {
+  --symbol-color: pink;
+  --symbol-color-active: red;
+  --symbol-spacing: 0.1rem;
+}
