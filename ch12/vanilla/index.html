@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 1rem;
+      }
+    </style>
+    <script src="hello-world.js" type="module"></script>
+    <script src="radio-group.js" type="module"></script>
+    <script type="module">
+      const helloWorld = document.querySelector("hello-world");
+      const radioGroup = document.querySelector("radio-group");
+      helloWorld.color = radioGroup.getAttribute("value");
+      radioGroup.addEventListener("change", (event) => {
+        helloWorld.color = event.detail.value;
+      });
+    </script>
+  </head>
+  <body>
+    <hello-world name="Mark"></hello-world>
+    <radio-group
+      name="color"
+      labels="Red,Green,Blue"
+      value="red"
+      values="red,green,blue"
+    ></radio-group>
+  </body>
+</html>
