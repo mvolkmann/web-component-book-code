@@ -71,6 +71,79 @@
     },
     {
       "kind": "javascript-module",
+      "path": "my-counter.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "This is a counter web component.",
+          "name": "MyCounter",
+          "members": [
+            {
+              "kind": "field",
+              "name": "#count",
+              "privacy": "private",
+              "type": {
+                "text": "number"
+              },
+              "default": "3"
+            },
+            {
+              "kind": "field",
+              "name": "#decBtn",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "#span",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": {
+                "text": "number"
+              },
+              "description": "current count",
+              "default": "3"
+            },
+            {
+              "kind": "method",
+              "name": "decrement"
+            },
+            {
+              "kind": "method",
+              "name": "increment"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "count",
+              "type": {
+                "text": "number"
+              },
+              "description": "initial count"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "my-counter",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "my-counter",
+          "declaration": {
+            "name": "MyCounter",
+            "module": "my-counter.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "radio-group.js",
       "declarations": [
         {
