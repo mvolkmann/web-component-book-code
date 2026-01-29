@@ -33,7 +33,7 @@ export function required(_target: unknown, context: DecoratorContext) {
 }
 
 export function range(min: number, max: number) {
-  return (target: unknown, context: DecoratorContext) => {
+  return (_target: unknown, context: DecoratorContext) => {
     fieldOrAccessor(context);
     addValidationRule(context, {
       validate: (v: number) => min <= v && v <= max,
@@ -43,7 +43,7 @@ export function range(min: number, max: number) {
 }
 
 export function minLength(len: number) {
-  return (target: unknown, context: DecoratorContext) => {
+  return (_target: unknown, context: DecoratorContext) => {
     fieldOrAccessor(context);
     addValidationRule(context, {
       validate: (v: string) => v.length >= len,
@@ -53,7 +53,7 @@ export function minLength(len: number) {
 }
 
 export function regex(pattern: string) {
-  return (target: unknown, context: DecoratorContext) => {
+  return (_target: unknown, context: DecoratorContext) => {
     fieldOrAccessor(context);
     addValidationRule(context, {
       validate: (v: string) => new RegExp(pattern).test(v),
