@@ -10,7 +10,7 @@ type ValidationRule = {
 function fieldOrAccessor({ kind }: DecoratorContext) {
   if (kind !== "field" && kind !== "accessor") {
     throw new Error(
-      "This decorator can only be applied to a class field or accessor."
+      "This decorator can only be applied to a class field or accessor.",
     );
   }
 }
@@ -24,7 +24,7 @@ function addValidationRule(context: DecoratorContext, rule: ValidationRule) {
   constraints[name].push(rule);
 }
 
-export function required(target: unknown, context: DecoratorContext) {
+export function required(_target: unknown, context: DecoratorContext) {
   fieldOrAccessor(context);
   addValidationRule(context, {
     validate: (v: unknown) => v !== undefined && v !== null && v !== "",
