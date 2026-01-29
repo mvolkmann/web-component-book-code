@@ -1,15 +1,19 @@
 export function logAccess<This, Value>(
   target: ClassAccessorDecoratorTarget<This, Value>,
-  { kind, name }: ClassAccessorDecoratorContext<This, Value>
+  { kind, name }: ClassAccessorDecoratorContext<This, Value>,
 ) {
   if (kind !== "accessor") {
     throw new Error(
       "This decorator can only be applied to " +
-        'a field with the "accessor" keyword.'
+        'a field with the "accessor" keyword.',
     );
   }
   const nameString = String(name); // name is a Symbol
   return {
+    init(initialValue: unknown) {
+      console.log(`Initial value of ${nameString} field is ${initialValue}.`);
+      return initialValue;
+    },
     get(this: This) {
       const value = target.get.call(this);
       console.log(`Getting ${nameString} field value ${value}.`);

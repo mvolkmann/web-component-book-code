@@ -1,6 +1,6 @@
 export function countInstances<Value extends new (...args: any[]) => {}>(
   target: Value,
-  { kind }: ClassDecoratorContext<T>
+  { kind }: ClassDecoratorContext,
 ) {
   if (kind !== "class") {
     throw new Error("This decorator can only be applied to a class.");

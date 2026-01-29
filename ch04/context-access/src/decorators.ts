@@ -1,6 +1,6 @@
-export function fieldLog<This, Value>(
+export function logField<This, Value>(
   _target: undefined, // always undefined in field decorators
-  context: ClassFieldDecoratorContext<This, Value>
+  context: ClassFieldDecoratorContext<This, Value>,
 ) {
   if (context.kind !== "field") {
     throw new Error("This decorator can only be applied to a field.");
@@ -8,7 +8,7 @@ export function fieldLog<This, Value>(
   context.addInitializer(function (this: This) {
     const name = String(context.name);
     const initialValue = context.access.get(this);
-    console.log(`${name} initial value is ${initialValue}`);
+    console.log(`Initial value of ${name} field is ${initialValue}.`);
     if (initialValue === "random") {
       // Changes the value to a string containing a random number.
       context.access.set(this, String(Math.random()) as Value);
@@ -16,37 +16,29 @@ export function fieldLog<This, Value>(
   });
 }
 
-export function accessorLog<This, Value>(
+export function logAccess<This, Value>(
   target: ClassAccessorDecoratorTarget<This, Value>,
-  context: ClassAccessorDecoratorContext<This, Value>
+  { kind, name }: ClassAccessorDecoratorContext<This, Value>,
 ) {
-  if (context.kind !== "accessor") {
+  if (kind !== "accessor") {
     throw new Error(
       "This decorator can only be applied to " +
-        'a field with the "accessor" keyword.'
+        'a field with the "accessor" keyword.',
     );
   }
-
-  const name = String(context.name);
+  const nameString = String(name); // name is a Symbol
   return {
-    init(initialValue: Value) {
-      console.log(`${name} initial value is ${initialValue}`);
+    init(initialValue: any) {
+      console.log(`Initial value of ${nameString} field is ${initialValue}.`);
       return initialValue;
     },
     get(this: This) {
-      // Using the following line results in infinite recursion
-      // because the get method just calls itself.
-      //const value = context.access.get(this);
-
-      const value = target.get.call(this) as Value;
-      console.log(`${name} value = ${value}`);
+      const value = target.get.call(this);
+      console.log(`Getting ${nameString} field value ${value}.`);
       return value;
     },
     set(this: This, value: Value) {
-      // This line and the next are equivalent.
-      //const oldValue = context.access.get(this);
-      const oldValue = target.get.call(this) as Value;
-      console.log(`${name} changing from "${oldValue}" to "${value}"`);
+      console.log(`Setting ${nameString} field to ${value}.`);
       target.set.call(this, value);
     },
   };
