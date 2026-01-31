@@ -1,6 +1,6 @@
 export function timeMethod<This, Return>(
   originalMethod: (...args: any[]) => Return,
-  { kind, name }: ClassMethodDecoratorContext<This>
+  { kind, name }: ClassMethodDecoratorContext<This>,
 ) {
   if (kind !== "method") {
     throw new Error("This decorator can only be applied to a method.");
