@@ -1,21 +1,3 @@
-export function logField<This, Value>(
-  _target: undefined, // always undefined in field decorators
-  context: ClassFieldDecoratorContext<This, Value>,
-) {
-  if (context.kind !== "field") {
-    throw new Error("This decorator can only be applied to a field.");
-  }
-  context.addInitializer(function (this: This) {
-    const name = String(context.name);
-    const initialValue = context.access.get(this);
-    console.log(`Initial value of ${name} field is ${initialValue}.`);
-    if (initialValue === "random") {
-      // Changes the value to a string containing a random number.
-      context.access.set(this, String(Math.random()) as Value);
-    }
-  });
-}
-
 export function logAccess<This, Value>(
   target: ClassAccessorDecoratorTarget<This, Value>,
   { kind, name }: ClassAccessorDecoratorContext<This, Value>,
@@ -41,5 +23,20 @@ export function logAccess<This, Value>(
       console.log(`Setting ${nameString} field to ${value}.`);
       target.set.call(this, value);
     },
+  };
+}
+
+export function logField<This, Value>(
+  target: undefined, // always undefined in field decorators
+  context: ClassFieldDecoratorContext<This, Value>,
+) {
+  if (context.kind !== "field") {
+    throw new Error("This decorator can only be applied to a field.");
+  }
+  const name = String(context.name);
+  return (initialValue: Value) => {
+    console.log(`The initial value of the ${name} field is ${initialValue}.`);
+    if (initialValue === "random") return String(Math.random()) as Value;
+    return initialValue;
   };
 }
