@@ -1,6 +1,6 @@
 export function nonNegative<This>(
   target: (value: number) => void,
-  context: ClassSetterDecoratorContext<This>
+  context: ClassSetterDecoratorContext<This>,
 ) {
   return function (this: This, newValue: number) {
     if (newValue < 0) {
