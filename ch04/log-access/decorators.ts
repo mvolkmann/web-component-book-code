@@ -8,7 +8,7 @@ export function logAccess<This, Value>(
         'a field with the "accessor" keyword.',
     );
   }
-  const nameString = String(name); // name is a Symbol
+  const nameString = String(name);
   return {
     init(initialValue: unknown) {
       console.log(`Initial value of ${nameString} field is ${initialValue}.`);
