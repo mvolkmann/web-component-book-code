@@ -1,11 +1,10 @@
-import { logAccess, logField } from "./decorators.js";
+import { logField } from "./decorators.js";
 
 export class Residence {
   accessor city = "";
 
   accessor zip = "";
 
-  @logAccess
   accessor years = 0;
 
   @logField
