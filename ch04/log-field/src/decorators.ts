@@ -33,7 +33,6 @@ export function logField<This, Value>(
   if (context.kind !== "field") {
     throw new Error("This decorator can only be applied to a field.");
   }
-  console.log("decorators.ts logField: context.access =", context.access);
   const name = String(context.name);
   return (initialValue: Value) => {
     console.log(`The initial value of the ${name} field is ${initialValue}.`);
