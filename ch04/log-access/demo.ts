@@ -13,4 +13,5 @@ class Dog {
 
 const dog = new Dog("Comet");
 dog.age = 5;
-console.log(dog.age);
+const nextAge = dog.age + 1;
+console.log(`Next year, ${dog.name} will be ${nextAge}.`);
