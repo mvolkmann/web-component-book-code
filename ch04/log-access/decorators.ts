@@ -10,7 +10,7 @@ export function logAccess<This, Value>(
   }
   const nameString = String(name);
   return {
-    init(initialValue: unknown) {
+    init(initialValue: Value) {
       console.log(`Initial value of ${nameString} field is ${initialValue}.`);
       return initialValue;
     },

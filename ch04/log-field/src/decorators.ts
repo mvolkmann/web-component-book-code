@@ -1,5 +1,5 @@
 export function logField<This, Value>(
-  target: undefined, // always undefined in field decorators
+  _target: undefined, // always undefined in field decorators
   context: ClassFieldDecoratorContext<This, Value>,
 ) {
   if (context.kind !== "field") {
