@@ -1,16 +1,9 @@
 import { logField } from "./decorators.js";
 
-export class Residence {
-  accessor city = "";
-
-  accessor zip = "";
-
-  accessor years = 0;
-
+export class Secret {
   @logField
-  secret = "random";
+  code = "random";
 }
 
-const residence = new Residence();
-console.log("secret =", residence.secret);
-residence.years = 3;
+const secret = new Secret();
+console.log(`Secret code is ${secret.code}.`);
