@@ -6,6 +6,13 @@
         font-family: sans-serif;
         padding: 1rem;
       }
+      hello-world {
+        --border-color: blue;
+      }
+      hello-world::part(greeting) {
+        color: purple;
+        font-weight: bold;
+      }
     </style>
     <script src="hello-world.js" type="module"></script>
     <script src="my-counter.js" type="module"></script>
@@ -21,7 +28,11 @@
   </head>
   <body>
     <my-counter></my-counter>
-    <hello-world name="Mark"></hello-world>
+    <hello-world name="Mark">
+      <div slot="before">before slot content</div>
+      <div>unnamed slot content</div>
+      <div slot="after">after slot content</div>
+    </hello-world>
     <radio-group
       name="color"
       labels="Red,Green,Blue"

@@ -8,8 +8,35 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "This displays a greeting message for a given name in a specified color.",
           "name": "HelloWorld",
+          "cssProperties": [
+            {
+              "description": "color of border that surrounds the component",
+              "name": "--border-color",
+              "default": "gray"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "greeting message",
+              "name": "greeting"
+            }
+          ],
+          "slots": [
+            {
+              "description": "for content after the greeting",
+              "name": ""
+            },
+            {
+              "description": "for content before the greeting",
+              "name": "before"
+            },
+            {
+              "description": "for content after the greeting and the unnamed slot",
+              "name": "after"
+            }
+          ],
           "members": [
             {
               "kind": "field",
@@ -36,26 +63,45 @@
             },
             {
               "kind": "field",
-              "name": "color"
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "description": "current text color",
+              "default": "\"black\""
             },
             {
               "kind": "field",
-              "name": "name"
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "current name to greet",
+              "default": "\"World\""
             }
           ],
           "attributes": [
             {
-              "name": "color"
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "description": "initial text color"
             },
             {
-              "name": "name"
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "initial name to greet"
             }
           ],
           "superclass": {
             "name": "HTMLElement"
           },
           "tagName": "hello-world",
-          "customElement": true
+          "customElement": true,
+          "summary": "This displays a greeting message."
         }
       ],
       "exports": [
@@ -148,7 +194,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "This displays a set of related radio buttons.",
           "name": "RadioGroup",
           "members": [
             {
@@ -157,7 +203,8 @@
               "type": {
                 "text": "string"
               },
-              "default": "\"\""
+              "default": "\"\"",
+              "description": "comma-separated list of radio button labels"
             },
             {
               "kind": "field",
@@ -165,7 +212,8 @@
               "type": {
                 "text": "string"
               },
-              "default": "\"\""
+              "default": "\"\"",
+              "description": "name associated with the selected radio button"
             },
             {
               "kind": "field",
@@ -173,7 +221,8 @@
               "type": {
                 "text": "string"
               },
-              "default": "\"\""
+              "default": "\"\"",
+              "description": "comma-separated list of radio button values"
             },
             {
               "kind": "field",
@@ -186,7 +235,11 @@
             },
             {
               "kind": "field",
-              "name": "value"
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "value of the selected radio button"
             },
             {
               "kind": "method",
@@ -199,7 +252,32 @@
           ],
           "attributes": [
             {
-              "name": "value"
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "value of the selected radio button"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "comma-separated list of radio button labels",
+              "name": "labels"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "name associated with the selected radio button",
+              "name": "name"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "comma-separated list of radio button values",
+              "name": "values"
             }
           ],
           "superclass": {

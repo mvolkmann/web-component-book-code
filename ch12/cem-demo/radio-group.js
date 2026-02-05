@@ -17,6 +17,18 @@ template.innerHTML = html`
   <div></div>
 `;
 
+/**
+ * This displays a set of related radio buttons.
+ * @element radio-group
+ * @attr {string} labels - comma-separated list of radio button labels
+ * @attr {string} name - name associated with the selected radio button
+ * @attr {string} values - comma-separated list of radio button values
+ * @attr {string} value - value of the selected radio button
+ * @prop {string} labels - comma-separated list of radio button labels
+ * @prop {string} name - name associated with the selected radio button
+ * @prop {string} values - comma-separated list of radio button values
+ * @prop {string} value - value of the selected radio button
+ */
 export class RadioGroup extends HTMLElement {
   static get observedAttributes() {
     return ["value"];
