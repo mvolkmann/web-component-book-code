@@ -4,11 +4,18 @@
     "cem": "custom-elements-manifest analyze",
     "cem:watch": "custom-elements-manifest analyze --watch",
     "dev": "vite",
-    "reinstall": "rm -rf node_modules package-lock.json && npm install"
+    "cem2": "wca analyze *.{js,ts} --format json --outFile custom-elements2.json",
+    "readme": "wca analyze *.{js,ts} --outFile README.md",
+    "reinstall": "rm -rf node_modules package-lock.json && npm install",
+    "view": "wca view --format vscode *.{js,ts}"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.11.0",
-    "vite": "^7.3.1"
+    "vite": "^7.3.1",
+    "web-component-analyzer": "^2.0.0"
   },
-  "customElements": "custom-elements.json"
+  "customElements": "custom-elements.json",
+  "dependencies": {
+    "api-viewer-element": "^0.6.4"
+  }
 }

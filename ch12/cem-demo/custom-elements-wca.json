@@ -1,0 +1,153 @@
+{
+  "version": "experimental",
+  "tags": [
+    {
+      "name": "hello-world",
+      "path": "./hello-world.js",
+      "description": "This displays a greeting message for a given name in a specified color.",
+      "attributes": [
+        {
+          "name": "color",
+          "description": "current text color",
+          "type": "string",
+          "default": "\"black\""
+        },
+        {
+          "name": "name",
+          "description": "current name to greet",
+          "type": "string",
+          "default": "\"World\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "color",
+          "attribute": "color",
+          "description": "current text color",
+          "type": "string",
+          "default": "\"black\""
+        },
+        {
+          "name": "name",
+          "attribute": "name",
+          "description": "current name to greet",
+          "type": "string",
+          "default": "\"World\""
+        }
+      ],
+      "slots": [
+        {
+          "name": "",
+          "description": "for content after the greeting"
+        },
+        {
+          "name": "before",
+          "description": "for content before the greeting"
+        },
+        {
+          "name": "after",
+          "description": "for content after the greeting and the unnamed slot"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--border-color",
+          "description": "color of border that surrounds the component",
+          "default": "\"gray\""
+        }
+      ],
+      "cssParts": [
+        {
+          "name": "greeting",
+          "description": "greeting message"
+        }
+      ]
+    },
+    {
+      "name": "my-counter",
+      "path": "./my-counter.js",
+      "description": "This is a counter web component.",
+      "attributes": [
+        {
+          "name": "count",
+          "description": "current count",
+          "type": "number",
+          "default": "3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "count",
+          "attribute": "count",
+          "description": "current count",
+          "type": "number",
+          "default": "3"
+        }
+      ]
+    },
+    {
+      "name": "radio-group",
+      "path": "./radio-group.js",
+      "description": "This displays a set of related radio buttons.",
+      "attributes": [
+        {
+          "name": "labels",
+          "description": "comma-separated list of radio button labels",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "name",
+          "description": "name associated with the selected radio button",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "values",
+          "description": "comma-separated list of radio button values",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "value",
+          "description": "value of the selected radio button",
+          "type": "string"
+        }
+      ],
+      "properties": [
+        {
+          "name": "labels",
+          "attribute": "labels",
+          "description": "comma-separated list of radio button labels",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "name",
+          "attribute": "name",
+          "description": "name associated with the selected radio button",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "values",
+          "attribute": "values",
+          "description": "comma-separated list of radio button values",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "description": "value of the selected radio button",
+          "type": "string"
+        }
+      ],
+      "events": [
+        {
+          "name": "change"
+        }
+      ]
+    }
+  ]
+}

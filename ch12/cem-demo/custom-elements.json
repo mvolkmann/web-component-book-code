@@ -68,7 +68,7 @@
                 "text": "string"
               },
               "description": "current text color",
-              "default": "\"black\""
+              "default": "black"
             },
             {
               "kind": "field",
@@ -77,7 +77,7 @@
                 "text": "string"
               },
               "description": "current name to greet",
-              "default": "\"World\""
+              "default": "World"
             }
           ],
           "attributes": [
