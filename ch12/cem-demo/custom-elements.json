@@ -50,11 +50,7 @@
             {
               "kind": "field",
               "name": "#name",
-              "privacy": "private",
-              "type": {
-                "text": "string"
-              },
-              "default": "\"World\""
+              "privacy": "private"
             },
             {
               "kind": "field",

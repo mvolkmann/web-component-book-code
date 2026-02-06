@@ -20,7 +20,7 @@ function createSlot(name) {
  */
 class HelloWorld extends HTMLElement {
   #color = "black";
-  #name = "World";
+  #name;
   #p = document.createElement("p");
 
   static get observedAttributes() {
@@ -46,6 +46,7 @@ class HelloWorld extends HTMLElement {
         padding: 0.5rem;
       }
     `;
+    this.name = "World";
     this.#p.setAttribute("part", "greeting");
     this.shadowRoot.replaceChildren(
       style,
