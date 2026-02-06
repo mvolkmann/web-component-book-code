@@ -76,8 +76,8 @@ class MyCounter extends HTMLElement {
 
   set count(value) {
     if (value === this.#count) return;
-    if (!this.#span) return;
     this.#count = value;
+    if (!this.#span) return;
     this.#span.textContent = this.count;
     this.#decBtn.toggleAttribute("disabled", this.count === 0);
     this.setAttribute("count", this.count);
