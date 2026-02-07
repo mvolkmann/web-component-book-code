@@ -9,20 +9,26 @@
       hello-world {
         --border-color: blue;
       }
+      /*
       hello-world::part(greeting) {
         color: purple;
         font-weight: bold;
       }
+      */
     </style>
     <script src="hello-world.js" type="module"></script>
+    <script src="hello-lit.ts" type="module"></script>
     <script src="my-counter.js" type="module"></script>
     <script src="radio-group.js" type="module"></script>
     <script type="module">
       const helloWorld = document.querySelector("hello-world");
+      const helloLit = document.querySelector("hello-lit");
       const radioGroup = document.querySelector("radio-group");
       helloWorld.color = radioGroup.getAttribute("value");
+      helloLit.color = radioGroup.getAttribute("value");
       radioGroup.addEventListener("change", (event) => {
         helloWorld.color = event.detail.value;
+        helloLit.color = event.detail.value;
       });
     </script>
   </head>
@@ -33,6 +39,11 @@
       <div>unnamed slot content</div>
       <div slot="after">after slot content</div>
     </hello-world>
+    <hello-lit name="Mark">
+      <div slot="before">before slot content</div>
+      <div>unnamed slot content</div>
+      <div slot="after">after slot content</div>
+    </hello-lit>
     <radio-group
       name="color"
       labels="Red,Green,Blue"

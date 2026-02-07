@@ -1,10 +1,10 @@
 {
   "name": "cem-demo",
   "scripts": {
-    "cem": "custom-elements-manifest analyze",
-    "cem:watch": "custom-elements-manifest analyze --watch",
+    "cem": "cem analyze --litelement",
+    "cem:watch": "cem analyze --litelement --watch",
     "dev": "vite",
-    "cem2": "wca analyze *.{js,ts} --format json --outFile custom-elements2.json",
+    "cem:wca": "wca analyze *.{js,ts} --format json --outFile custom-elements2.json",
     "readme": "wca analyze *.{js,ts} --outFile README.md",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "view": "wca view --format vscode *.{js,ts}"
@@ -16,6 +16,7 @@
   },
   "customElements": "custom-elements.json",
   "dependencies": {
-    "api-viewer-element": "^0.6.4"
+    "api-viewer-element": "^0.6.4",
+    "lit": "^3.3.2"
   }
 }

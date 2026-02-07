@@ -4,6 +4,113 @@
   "modules": [
     {
       "kind": "javascript-module",
+      "path": "hello-lit.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "This displays a greeting message for a given name in a specified color.",
+          "name": "HelloLit",
+          "cssProperties": [
+            {
+              "description": "color of border that surrounds the component",
+              "name": "--border-color",
+              "default": "gray"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "greeting message",
+              "name": "greeting"
+            }
+          ],
+          "slots": [
+            {
+              "description": "for content after the greeting",
+              "name": ""
+            },
+            {
+              "description": "for content before the greeting",
+              "name": "before"
+            },
+            {
+              "description": "for content after the greeting and the unnamed slot",
+              "name": "after"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "default": "black",
+              "description": "current text color",
+              "attribute": "color",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "World",
+              "description": "current name to greet",
+              "attribute": "name",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "current text color",
+              "name": "color",
+              "default": "black",
+              "fieldName": "color"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "current name to greet",
+              "name": "name",
+              "default": "World",
+              "fieldName": "name"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hello-lit",
+          "customElement": true,
+          "summary": "This displays a greeting message."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HelloLit",
+          "declaration": {
+            "name": "HelloLit",
+            "module": "hello-lit.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hello-lit",
+          "declaration": {
+            "name": "HelloLit",
+            "module": "hello-lit.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "hello-world.js",
       "declarations": [
         {
@@ -50,7 +157,11 @@
             {
               "kind": "field",
               "name": "#name",
-              "privacy": "private"
+              "privacy": "private",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"World\""
             },
             {
               "kind": "field",
@@ -240,10 +351,6 @@
             {
               "kind": "method",
               "name": "makeButtons"
-            },
-            {
-              "kind": "method",
-              "name": "render"
             }
           ],
           "attributes": [
