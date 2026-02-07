@@ -18,17 +18,21 @@
     </style>
     <script src="hello-world.js" type="module"></script>
     <script src="hello-lit.ts" type="module"></script>
+    <script src="hello-wrec.js" type="module"></script>
     <script src="my-counter.js" type="module"></script>
     <script src="radio-group.js" type="module"></script>
     <script type="module">
       const helloWorld = document.querySelector("hello-world");
       const helloLit = document.querySelector("hello-lit");
+      const helloWrec = document.querySelector("hello-wrec");
       const radioGroup = document.querySelector("radio-group");
       helloWorld.color = radioGroup.getAttribute("value");
       helloLit.color = radioGroup.getAttribute("value");
+      helloWrec.color = radioGroup.getAttribute("value");
       radioGroup.addEventListener("change", (event) => {
         helloWorld.color = event.detail.value;
         helloLit.color = event.detail.value;
+        helloWrec.color = event.detail.value;
       });
     </script>
   </head>
@@ -44,6 +48,11 @@
       <div>unnamed slot content</div>
       <div slot="after">after slot content</div>
     </hello-lit>
+    <hello-wrec name="Mark">
+      <div slot="before">before slot content</div>
+      <div>unnamed slot content</div>
+      <div slot="after">after slot content</div>
+    </hello-wrec>
     <radio-group
       name="color"
       labels="Red,Green,Blue"

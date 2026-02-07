@@ -224,6 +224,12 @@
     },
     {
       "kind": "javascript-module",
+      "path": "hello-wrec.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
       "path": "my-counter.js",
       "declarations": [
         {
