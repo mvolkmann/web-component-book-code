@@ -1,5 +1,6 @@
 {
   "name": "cem-demo",
+  "type": "module",
   "scripts": {
     "cem": "cem analyze --litelement",
     "cem:watch": "cem analyze --litelement --watch",
@@ -11,7 +12,7 @@
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.11.0",
-    "cem-plugin-wrec": "^0.1.4",
+    "cem-plugin-wrec": "^0.2.0",
     "vite": "^7.3.1",
     "web-component-analyzer": "^2.0.0"
   },

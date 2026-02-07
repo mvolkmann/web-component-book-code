@@ -225,8 +225,107 @@
     {
       "kind": "javascript-module",
       "path": "hello-wrec.js",
-      "declarations": [],
-      "exports": []
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "This displays a greeting message for a given name in a specified color.",
+          "name": "HelloWrec",
+          "cssProperties": [
+            {
+              "description": "color of border that surrounds the component",
+              "name": "--border-color",
+              "default": "gray"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "greeting message",
+              "name": "greeting"
+            }
+          ],
+          "slots": [
+            {
+              "description": "for content after the greeting",
+              "name": ""
+            },
+            {
+              "description": "for content before the greeting",
+              "name": "before"
+            },
+            {
+              "description": "for content after the greeting and the unnamed slot",
+              "name": "after"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "color",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "color"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "name"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "color"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "name"
+            },
+            {
+              "default": "black",
+              "description": "text color",
+              "fieldName": "color",
+              "name": "color",
+              "type": "String"
+            },
+            {
+              "default": "World",
+              "description": "name to greet",
+              "fieldName": "name",
+              "name": "name",
+              "type": "String"
+            }
+          ],
+          "superclass": {
+            "name": "Wrec",
+            "package": "wrec"
+          },
+          "summary": "This displays a greeting message.",
+          "tagName": "hello-wrec",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "hello-wrec",
+          "declaration": {
+            "name": "HelloWrec",
+            "module": "hello-wrec.js"
+          }
+        }
+      ]
     },
     {
       "kind": "javascript-module",
