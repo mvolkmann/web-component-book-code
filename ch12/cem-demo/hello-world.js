@@ -16,12 +16,18 @@ function createSlot(name) {
  * @slot before - for content before the greeting
  * @slot after - for content after the greeting and the unnamed slot
  * @cssprop [--border-color=gray] color of border that surrounds the component
- * @csspart greeting - greeting message
+ * @part greeting - greeting message
  */
 class HelloWorld extends HTMLElement {
   #color = "black";
   #name = "World";
   #p = document.createElement("p");
+
+  /**
+   * @default "Earth"
+   * @type { string }
+   */
+  planet = "Earth";
 
   static get observedAttributes() {
     return ["color", "name"];
