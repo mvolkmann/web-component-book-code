@@ -1,3 +1,35 @@
+# hello-lit
+
+This displays a greeting message for a given name in a specified color.
+
+## Properties
+
+| Property | Attribute | Type     | Default | Description           |
+|----------|-----------|----------|---------|-----------------------|
+| `color`  | `color`   | `string` | "black" | initial text color    |
+| `name`   | `name`    | `string` | "World" | initial name to greet |
+
+## Slots
+
+| Name     | Description                                      |
+|----------|--------------------------------------------------|
+|          | for content after the greeting                   |
+| `after`  | for content after the greeting and the unnamed slot |
+| `before` | for content before the greeting                  |
+
+## CSS Shadow Parts
+
+| Part       | Description      |
+|------------|------------------|
+| `greeting` | greeting message |
+
+## CSS Custom Properties
+
+| Property         | Default | Description                                  |
+|------------------|---------|----------------------------------------------|
+| `--border-color` | "gray"  | color of border that surrounds the component |
+
+
 # hello-world
 
 This displays a greeting message for a given name in a specified color.
