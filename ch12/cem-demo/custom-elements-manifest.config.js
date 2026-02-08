@@ -6,6 +6,6 @@ import wrecPlugin from "cem-plugin-wrec";
 //import wrecPlugin from "./cem-plugin-wrec.js";
 
 export default {
-  exclude: ["node_modules"],
+  exclude: ["generate-docs.js", "node_modules"],
   plugins: [wrecPlugin()],
 };
