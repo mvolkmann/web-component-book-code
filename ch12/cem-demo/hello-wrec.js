@@ -5,11 +5,6 @@ import { css, html, Wrec } from "wrec";
 /**
  * This displays a greeting message for a given name in a specified color.
  * @summary This displays a greeting message.
- * @Xelement hello-wrec
- * @Xattr {string} color - initial text color
- * @Xattr {string} name - initial name to greet
- * @Xprop {string} [color=black] - current text color
- * @Xprop {string} [name=World] - current name to greet
  * @slot - for content after the greeting
  * @slot before - for content before the greeting
  * @slot after - for content after the greeting and the unnamed slot

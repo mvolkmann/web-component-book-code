@@ -265,7 +265,10 @@
               "type": {
                 "text": "string"
               },
-              "attribute": "color"
+              "attribute": "color",
+              "default": "black",
+              "description": "text color",
+              "reflects": true
             },
             {
               "kind": "field",
@@ -274,7 +277,10 @@
               "type": {
                 "text": "string"
               },
-              "attribute": "name"
+              "attribute": "name",
+              "default": "World",
+              "description": "name to greet",
+              "reflects": true
             }
           ],
           "attributes": [
@@ -283,28 +289,18 @@
               "type": {
                 "text": "string"
               },
-              "fieldName": "color"
+              "fieldName": "color",
+              "default": "black",
+              "description": "text color"
             },
             {
               "name": "name",
               "type": {
                 "text": "string"
               },
-              "fieldName": "name"
-            },
-            {
-              "default": "black",
-              "description": "text color",
-              "fieldName": "color",
-              "name": "color",
-              "type": "String"
-            },
-            {
-              "default": "World",
-              "description": "name to greet",
               "fieldName": "name",
-              "name": "name",
-              "type": "String"
+              "default": "World",
+              "description": "name to greet"
             }
           ],
           "superclass": {
