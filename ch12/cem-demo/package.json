@@ -2,8 +2,8 @@
   "name": "cem-demo",
   "type": "module",
   "scripts": {
-    "cem": "cem analyze --litelement",
-    "cem:watch": "cem analyze --litelement --watch",
+    "cem": "cem analyze",
+    "cem:watch": "cem analyze --watch",
     "cem:wca": "wca analyze *.{js,ts} --format json --outFile custom-elements2.json",
     "dev": "vite",
     "docs": "cem analyze && node ./generate-docs.js",
