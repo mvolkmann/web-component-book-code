@@ -4,7 +4,7 @@
   "modules": [
     {
       "kind": "javascript-module",
-      "path": "hello-lit.ts",
+      "path": "src/hello-lit.ts",
       "declarations": [
         {
           "kind": "class",
@@ -36,18 +36,14 @@
           "members": [
             {
               "kind": "field",
-              "name": "styles",
-              "static": true,
-              "default": "css` :host { display: inline-block; border: 3px solid var(--border-color, gray); margin: 0.5rem 0; padding: 0.5rem; } p { color: var(--color); } `"
-            },
-            {
-              "kind": "field",
               "name": "color",
               "type": {
                 "text": "string"
               },
               "default": "black",
-              "description": "current text color"
+              "description": "current text color",
+              "attribute": "color",
+              "reflects": true
             },
             {
               "kind": "field",
@@ -56,11 +52,9 @@
                 "text": "string"
               },
               "default": "World",
-              "description": "current name to greet"
-            },
-            {
-              "kind": "method",
-              "name": "render"
+              "description": "current name to greet",
+              "attribute": "name",
+              "reflects": true
             }
           ],
           "attributes": [
@@ -68,15 +62,19 @@
               "type": {
                 "text": "string"
               },
-              "description": "initial text color",
-              "name": "color"
+              "description": "current text color",
+              "name": "color",
+              "default": "black",
+              "fieldName": "color"
             },
             {
               "type": {
                 "text": "string"
               },
-              "description": "initial name to greet",
-              "name": "name"
+              "description": "current name to greet",
+              "name": "name",
+              "default": "World",
+              "fieldName": "name"
             }
           ],
           "superclass": {
@@ -94,14 +92,22 @@
           "name": "HelloLit",
           "declaration": {
             "name": "HelloLit",
-            "module": "hello-lit.ts"
+            "module": "src/hello-lit.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hello-lit",
+          "declaration": {
+            "name": "HelloLit",
+            "module": "src/hello-lit.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "hello-world.js",
+      "path": "src/hello-world.js",
       "declarations": [
         {
           "kind": "class",
@@ -203,14 +209,14 @@
           "name": "hello-world",
           "declaration": {
             "name": "HelloWorld",
-            "module": "hello-world.js"
+            "module": "src/hello-world.js"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "hello-wrec.js",
+      "path": "src/hello-wrec.js",
       "declarations": [
         {
           "kind": "class",
@@ -300,14 +306,14 @@
           "name": "hello-wrec",
           "declaration": {
             "name": "HelloWrec",
-            "module": "hello-wrec.js"
+            "module": "src/hello-wrec.js"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "my-counter.js",
+      "path": "src/my-counter.js",
       "declarations": [
         {
           "kind": "class",
@@ -373,14 +379,14 @@
           "name": "my-counter",
           "declaration": {
             "name": "MyCounter",
-            "module": "my-counter.js"
+            "module": "src/my-counter.js"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "radio-group.js",
+      "path": "src/radio-group.js",
       "declarations": [
         {
           "kind": "class",
@@ -434,10 +440,6 @@
             {
               "kind": "method",
               "name": "makeButtons"
-            },
-            {
-              "kind": "method",
-              "name": "render"
             }
           ],
           "attributes": [
@@ -483,7 +485,7 @@
           "name": "RadioGroup",
           "declaration": {
             "name": "RadioGroup",
-            "module": "radio-group.js"
+            "module": "src/radio-group.js"
           }
         },
         {
@@ -491,7 +493,7 @@
           "name": "radio-group",
           "declaration": {
             "name": "RadioGroup",
-            "module": "radio-group.js"
+            "module": "src/radio-group.js"
           }
         }
       ]
