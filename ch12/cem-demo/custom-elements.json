@@ -170,14 +170,6 @@
             },
             {
               "kind": "field",
-              "name": "planet",
-              "type": {
-                "text": "string"
-              },
-              "default": "\"Earth\""
-            },
-            {
-              "kind": "field",
               "name": "color",
               "type": {
                 "text": "string"

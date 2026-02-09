@@ -23,12 +23,6 @@ class HelloWorld extends HTMLElement {
   #name = "World";
   #p = document.createElement("p");
 
-  /**
-   * @default "Earth"
-   * @type { string }
-   */
-  planet = "Earth";
-
   static get observedAttributes() {
     return ["color", "name"];
   }
