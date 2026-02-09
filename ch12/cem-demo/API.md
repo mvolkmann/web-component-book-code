@@ -48,11 +48,10 @@
 
 ### Slots
 
-| Name     | Description                                         |
-| -------- | --------------------------------------------------- |
-|          | for content after the greeting                      |
-| `before` | for content before the greeting                     |
-| `after`  | for content after the greeting and the unnamed slot |
+| Name     | Description                     |
+| -------- | ------------------------------- |
+|          | for content after the greeting  |
+| `before` | for content before the greeting |
 
 <hr/>
 
@@ -100,11 +99,10 @@
 
 ### Slots
 
-| Name     | Description                                         |
-| -------- | --------------------------------------------------- |
-|          | for content after the greeting                      |
-| `before` | for content before the greeting                     |
-| `after`  | for content after the greeting and the unnamed slot |
+| Name     | Description                     |
+| -------- | ------------------------------- |
+|          | for content after the greeting  |
+| `before` | for content before the greeting |
 
 <hr/>
 
@@ -152,11 +150,10 @@
 
 ### Slots
 
-| Name     | Description                                         |
-| -------- | --------------------------------------------------- |
-|          | for content after the greeting                      |
-| `before` | for content before the greeting                     |
-| `after`  | for content after the greeting and the unnamed slot |
+| Name     | Description                     |
+| -------- | ------------------------------- |
+|          | for content after the greeting  |
+| `before` | for content before the greeting |
 
 <hr/>
 

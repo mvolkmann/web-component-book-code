@@ -11,7 +11,6 @@ import { customElement, property } from "lit/decorators.js";
  * @prop {string} [name=World] - current name to greet
  * @slot - for content after the greeting
  * @slot before - for content before the greeting
- * @slot after - for content after the greeting and the unnamed slot
  * @cssprop [--border-color=gray] color of border that surrounds the component
  * @csspart greeting - greeting message
  */
@@ -40,7 +39,6 @@ export class HelloLit extends LitElement {
       <slot name="before"></slot>
       <p style="--color: ${this.color}">Hello, ${this.name}!</p>
       <slot></slot>
-      <slot name="after"></slot>
     `;
   }
 }

@@ -14,7 +14,6 @@ function createSlot(name) {
  * @prop {string} [name=World] - current name to greet
  * @slot - for content after the greeting
  * @slot before - for content before the greeting
- * @slot after - for content after the greeting and the unnamed slot
  * @cssprop [--border-color=gray] color of border that surrounds the component
  * @part greeting - greeting message
  */
@@ -53,7 +52,6 @@ class HelloWorld extends HTMLElement {
       createSlot("before"),
       this.#p,
       createSlot(),
-      createSlot("after"),
     );
   }
 

@@ -11,11 +11,10 @@ This displays a greeting message for a given name in a specified color.
 
 ## Slots
 
-| Name     | Description                                      |
-|----------|--------------------------------------------------|
-|          | for content after the greeting                   |
-| `after`  | for content after the greeting and the unnamed slot |
-| `before` | for content before the greeting                  |
+| Name     | Description                     |
+|----------|---------------------------------|
+|          | for content after the greeting  |
+| `before` | for content before the greeting |
 
 ## CSS Shadow Parts
 
@@ -43,17 +42,10 @@ This displays a greeting message for a given name in a specified color.
 
 ## Slots
 
-| Name     | Description                                      |
-|----------|--------------------------------------------------|
-|          | for content after the greeting                   |
-| `after`  | for content after the greeting and the unnamed slot |
-| `before` | for content before the greeting                  |
-
-## CSS Shadow Parts
-
-| Part       | Description      |
-|------------|------------------|
-| `greeting` | greeting message |
+| Name     | Description                     |
+|----------|---------------------------------|
+|          | for content after the greeting  |
+| `before` | for content before the greeting |
 
 ## CSS Custom Properties
 

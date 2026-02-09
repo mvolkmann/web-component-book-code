@@ -31,13 +31,15 @@
             {
               "description": "for content before the greeting",
               "name": "before"
-            },
-            {
-              "description": "for content after the greeting and the unnamed slot",
-              "name": "after"
             }
           ],
           "members": [
+            {
+              "kind": "field",
+              "name": "styles",
+              "static": true,
+              "default": "css` :host { display: inline-block; border: 3px solid var(--border-color, gray); margin: 0.5rem 0; padding: 0.5rem; } p { color: var(--color); } `"
+            },
             {
               "kind": "field",
               "name": "color",
@@ -45,9 +47,7 @@
                 "text": "string"
               },
               "default": "black",
-              "description": "current text color",
-              "attribute": "color",
-              "reflects": true
+              "description": "current text color"
             },
             {
               "kind": "field",
@@ -56,9 +56,11 @@
                 "text": "string"
               },
               "default": "World",
-              "description": "current name to greet",
-              "attribute": "name",
-              "reflects": true
+              "description": "current name to greet"
+            },
+            {
+              "kind": "method",
+              "name": "render"
             }
           ],
           "attributes": [
@@ -66,19 +68,15 @@
               "type": {
                 "text": "string"
               },
-              "description": "current text color",
-              "name": "color",
-              "default": "black",
-              "fieldName": "color"
+              "description": "initial text color",
+              "name": "color"
             },
             {
               "type": {
                 "text": "string"
               },
-              "description": "current name to greet",
-              "name": "name",
-              "default": "World",
-              "fieldName": "name"
+              "description": "initial name to greet",
+              "name": "name"
             }
           ],
           "superclass": {
@@ -94,14 +92,6 @@
         {
           "kind": "js",
           "name": "HelloLit",
-          "declaration": {
-            "name": "HelloLit",
-            "module": "hello-lit.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "hello-lit",
           "declaration": {
             "name": "HelloLit",
             "module": "hello-lit.ts"
@@ -138,10 +128,6 @@
             {
               "description": "for content before the greeting",
               "name": "before"
-            },
-            {
-              "description": "for content after the greeting and the unnamed slot",
-              "name": "after"
             }
           ],
           "members": [
@@ -251,10 +237,6 @@
             {
               "description": "for content before the greeting",
               "name": "before"
-            },
-            {
-              "description": "for content after the greeting and the unnamed slot",
-              "name": "after"
             }
           ],
           "members": [
@@ -452,6 +434,10 @@
             {
               "kind": "method",
               "name": "makeButtons"
+            },
+            {
+              "kind": "method",
+              "name": "render"
             }
           ],
           "attributes": [

@@ -7,7 +7,6 @@ import { css, html, Wrec } from "wrec";
  * @summary This displays a greeting message.
  * @slot - for content after the greeting
  * @slot before - for content before the greeting
- * @slot after - for content after the greeting and the unnamed slot
  * @cssprop [--border-color=gray] color of border that surrounds the component
  * @csspart greeting - greeting message
  */
@@ -33,7 +32,6 @@ class HelloWrec extends Wrec {
     <slot name="before"></slot>
     <p>Hello, <span>this.name</span>!</p>
     <slot></slot>
-    <slot name="after"></slot>
   `;
 }
 
