@@ -32,7 +32,7 @@ export class HelloWorld extends HTMLElement {
   }
 
   get name() {
-    return this.getAttribute("name") ?? "";
+    return this.#name;
   }
 
   set name(value: string) {
