@@ -1,3 +1,6 @@
 .DS_Store
 dist
 node_modules
+
+*storybook.log
+storybook-static
