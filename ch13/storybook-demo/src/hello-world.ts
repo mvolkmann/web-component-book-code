@@ -10,7 +10,7 @@ template.innerHTML = html`<p>Hello, <span></span>!</p>`;
  */
 export class HelloWorld extends HTMLElement {
   #name = "World";
-  #span!: HTMLSpanElement; // assigned in connectedCallback
+  #span: HTMLSpanElement | undefined; // assigned in connectedCallback
 
   static get observedAttributes() {
     return ["name"];
@@ -28,7 +28,7 @@ export class HelloWorld extends HTMLElement {
   connectedCallback() {
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
     this.#span = this.shadowRoot?.querySelector("span")!;
-    this.#span.textContent = this.getAttribute("name") || "World";
+    this.name = this.getAttribute("name") || this.#name;
   }
 
   get name() {
@@ -36,10 +36,10 @@ export class HelloWorld extends HTMLElement {
   }
 
   set name(value: string) {
+    if (this.#span) this.#span.textContent = value;
     if (value === this.#name) return;
     this.#name = value;
     this.setAttribute("name", value);
-    this.#span.textContent = value;
   }
 }
 

@@ -9,5 +9,6 @@ const html = String.raw;
 export const Default: StoryObj = {};
 
 export const Named: StoryObj = {
-  render: () => html`<hello-world name="Mark" />`,
+  //render: () => html`<hello-world name="Mark" />`,
+  args: { name: "Earth" },
 };
