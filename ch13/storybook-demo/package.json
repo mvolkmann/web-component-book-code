@@ -3,7 +3,9 @@
   "scripts": {
     "dev": "vite",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "vite": "^7.3.1",

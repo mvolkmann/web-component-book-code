@@ -1,33 +1,45 @@
 import type { Meta, StoryObj } from "@storybook/web-components-vite";
+import { expect } from "storybook/test";
+import { HelloWorld } from "../hello-world.ts";
 import "../hello-world.ts";
 
 const meta: Meta = {
   component: "hello-world",
-  /*
-  argTypes: {
-    name: { control: "text" },
-    boolean: { control: "boolean" },
-    check: { control: "check", options: ["Red", "Green", "Blue"] },
-    color: { control: "color" },
-    date: { control: "date" },
-    file: { control: "file" },
-    inlineCheck: { control: "inline-check", options: ["Red", "Green", "Blue"] },
-    inlineRadio: { control: "inline-radio", options: ["Red", "Green", "Blue"] },
-    multiSelect: { control: "multi-select", options: ["Red", "Green", "Blue"] },
-    number: { control: "number" },
-    object: { control: "object" },
-    range: { control: { type: "range", min: 10, max: 90, step: 10 } },
-    radio: { control: "radio", options: ["Red", "Green", "Blue"] },
-    select: { control: "select", options: ["Red", "Green", "Blue"] },
-    text: { control: "text" },
-  },
-  */
 };
 export default meta;
 
 const html = String.raw;
 
-export const Default: StoryObj = {};
+export const Default: StoryObj = {
+  play: ({ canvasElement }) => {
+    console.log("hello-world.stories.ts play entered");
+    const helloWorld = canvasElement.querySelector("hello-world") as HelloWorld;
+    expect(helloWorld).toBeInTheDocument();
+    if (!helloWorld) return;
+
+    function verifyText(name: string) {
+      const p = helloWorld!.shadowRoot?.querySelector("p");
+      expect(p).toBeInTheDocument();
+      expect(p).toHaveTextContent(`Hello, ${name}!`);
+    }
+
+    // The "name" attribute is not set yet.
+    let name = "World";
+    verifyText(name);
+
+    // Set the "name" attribute.
+    name = "Earth";
+    helloWorld.setAttribute("name", name);
+    expect(helloWorld).toHaveProperty("name", name);
+    verifyText(name);
+
+    // Set the "name" property.
+    name = "Moon";
+    helloWorld.name = name;
+    expect(helloWorld).toHaveAttribute("name", name);
+    verifyText(name);
+  },
+};
 
 export const Named: StoryObj = {
   args: { name: "Earth" },
