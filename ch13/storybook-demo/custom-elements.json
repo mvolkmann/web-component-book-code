@@ -1,0 +1,592 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/hello-goodbye.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "This is a simple web component that renders a greeting message.",
+          "name": "HelloGoodbye",
+          "members": [
+            {
+              "kind": "field",
+              "name": "#salutation",
+              "privacy": "private",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"Hello\""
+            },
+            {
+              "kind": "field",
+              "name": "#name",
+              "privacy": "private",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"World\""
+            },
+            {
+              "kind": "field",
+              "name": "#span1",
+              "privacy": "private",
+              "type": {
+                "text": "HTMLSpanElement | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#span2",
+              "privacy": "private",
+              "type": {
+                "text": "HTMLSpanElement | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "current name to greet",
+              "default": "\"World\""
+            },
+            {
+              "kind": "field",
+              "name": "salutation",
+              "type": {
+                "text": "string"
+              },
+              "description": "current salutation",
+              "default": "\"Hello\""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "initial name to greet"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "initial salutation",
+              "name": "salutation"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hello-goodbye",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HelloGoodbye",
+          "declaration": {
+            "name": "HelloGoodbye",
+            "module": "src/hello-goodbye.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hello-goodbye",
+          "declaration": {
+            "name": "HelloGoodbye",
+            "module": "src/hello-goodbye.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/hello-world.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "This is a simple web component that renders a greeting message.",
+          "name": "HelloWorld",
+          "members": [
+            {
+              "kind": "field",
+              "name": "#name",
+              "privacy": "private",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"World\""
+            },
+            {
+              "kind": "field",
+              "name": "#span",
+              "privacy": "private",
+              "type": {
+                "text": "HTMLSpanElement | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "current name to greet",
+              "default": "\"World\""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "initial name to greet"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hello-world",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HelloWorld",
+          "declaration": {
+            "name": "HelloWorld",
+            "module": "src/hello-world.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hello-world",
+          "declaration": {
+            "name": "HelloWorld",
+            "module": "src/hello-world.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/my-counter.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "This is a counter web component.",
+          "name": "MyCounter",
+          "members": [
+            {
+              "kind": "field",
+              "name": "#count",
+              "privacy": "private",
+              "type": {
+                "text": "number"
+              },
+              "default": "3"
+            },
+            {
+              "kind": "field",
+              "name": "#decBtn",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "#span",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": {
+                "text": "number"
+              },
+              "description": "current count",
+              "default": "3"
+            },
+            {
+              "kind": "method",
+              "name": "decrement"
+            },
+            {
+              "kind": "method",
+              "name": "increment"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "count",
+              "type": {
+                "text": "number"
+              },
+              "description": "initial count"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "my-counter",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "my-counter",
+          "declaration": {
+            "name": "MyCounter",
+            "module": "src/my-counter.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/traffic-light.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "This web component emulates a U.S. traffic light\nwith red, yellow, and green lights.\nThe `state` attribute specifies the initial state.\nTo advance to the next state, click the component\nor call the next() method on an instance.\nTo get the current state, access the `state` property of an instance.",
+          "name": "TrafficLight",
+          "members": [
+            {
+              "kind": "field",
+              "name": "states",
+              "type": {
+                "text": "array"
+              },
+              "static": true,
+              "default": "[\"stop\", \"yield\", \"go\"]"
+            },
+            {
+              "kind": "field",
+              "name": "#state",
+              "privacy": "private",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"stop\""
+            },
+            {
+              "kind": "field",
+              "name": "#stateToDivMap",
+              "privacy": "private",
+              "default": "new Map()"
+            },
+            {
+              "kind": "field",
+              "name": "state"
+            },
+            {
+              "kind": "method",
+              "name": "next"
+            },
+            {
+              "kind": "method",
+              "name": "#change",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "on"
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "state-change",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "state",
+              "type": {
+                "text": "string"
+              },
+              "description": "The starting state.",
+              "default": "\"stop\""
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "traffic-light",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TrafficLight",
+          "declaration": {
+            "name": "TrafficLight",
+            "module": "src/traffic-light.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "traffic-light",
+          "declaration": {
+            "name": "TrafficLight",
+            "module": "src/traffic-light.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/block-navigation.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/prettify.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/sorter.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/stories/hello-goodbye.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta"
+          },
+          "default": "{ component: \"hello-goodbye\", }"
+        },
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "StoryObj"
+          },
+          "default": "{ play: async ({ canvasElement }) => { const body = canvasElement.ownerDocument.body; const helloGoodbye = body.querySelector(\"hello-goodbye\"); expect(helloGoodbye).toBeInTheDocument(); if (!helloGoodbye) return; const p = helloGoodbye.shadowRoot?.querySelector(\"p\"); expect(p).toBeInTheDocument(); if (!p) return; expect(p).toHaveTextContent(\"Hello\"); await userEvent.click(p); expect(p).toHaveTextContent(\"Goodbye\"); await userEvent.click(p); expect(p).toHaveTextContent(\"Hello\"); }, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Named",
+          "type": {
+            "text": "StoryObj"
+          },
+          "default": "{ args: { name: \"Earth\" }, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "src/stories/hello-goodbye.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/stories/hello-goodbye.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Named",
+          "declaration": {
+            "name": "Named",
+            "module": "src/stories/hello-goodbye.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/stories/hello-world.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta"
+          },
+          "default": "{ component: \"hello-world\", args: { name: defaultName, }, argTypes: { name: { control: \"text\", // the default table: { defaultValue: { summary: defaultName }, }, description: \"name to greet\", }, }, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "StoryObj"
+          },
+          "default": "{ play: ({ canvasElement }) => { const helloWorld = canvasElement.querySelector(\"hello-world\") as HelloWorld; expect(helloWorld).toBeInTheDocument(); if (!helloWorld) return; function verifyText(name: string) { const p = helloWorld!.shadowRoot?.querySelector(\"p\"); expect(p).toBeInTheDocument(); expect(p).toHaveTextContent(`Hello, ${name}!`); } // The \"name\" attribute is not set yet. let name = \"World\"; verifyText(name); // Set the \"name\" attribute. name = \"Earth\"; helloWorld.setAttribute(\"name\", name); expect(helloWorld).toHaveProperty(\"name\", name); verifyText(name); // Set the \"name\" property. name = \"Moon\"; helloWorld.name = name; expect(helloWorld).toHaveAttribute(\"name\", name); verifyText(name); }, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Named",
+          "type": {
+            "text": "StoryObj"
+          },
+          "default": "{ args: { name: \"Earth\" }, //render: () => html`<hello-world name=\"Earth\" />`, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "src/stories/hello-world.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/stories/hello-world.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Named",
+          "declaration": {
+            "name": "Named",
+            "module": "src/stories/hello-world.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/stories/my-counter.stories-save.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta"
+          },
+          "default": "{ component: \"my-counter\" }"
+        },
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "StoryObj"
+          },
+          "default": "{}"
+        },
+        {
+          "kind": "variable",
+          "name": "Named",
+          "type": {
+            "text": "StoryObj"
+          },
+          "default": "{ args: { count: 19 }, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "src/stories/my-counter.stories-save.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/stories/my-counter.stories-save.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Named",
+          "declaration": {
+            "name": "Named",
+            "module": "src/stories/my-counter.stories-save.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/stories/traffic-light.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta"
+          },
+          "default": "{ component: \"traffic-light\", args: { state: defaultState, }, argTypes: { state: { control: \"radio\", options: [\"stop\", \"yield\", \"go\"], table: { defaultValue: { summary: defaultState }, }, description: \"traffic light state\", }, }, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "StoryObj"
+          },
+          "default": "{}"
+        },
+        {
+          "kind": "variable",
+          "name": "Specified",
+          "type": {
+            "text": "StoryObj"
+          },
+          "default": "{ //args: { state: \"yield\" }, render: () => html`<traffic-light state=\"yield\" />`, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "src/stories/traffic-light.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/stories/traffic-light.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Specified",
+          "declaration": {
+            "name": "Specified",
+            "module": "src/stories/traffic-light.stories.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

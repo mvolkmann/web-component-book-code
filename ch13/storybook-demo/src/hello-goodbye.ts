@@ -7,6 +7,13 @@ template.innerHTML = html`
   </p>
 `;
 
+/**
+ * This is a simple web component that renders a greeting message.
+ * @attr {string} salutation - initial salutation
+ * @attr {string} name - initial name to greet
+ * @prop {string} [name="World"] - current name to greet
+ * @prop {string} [salutation="Hello"] - current salutation
+ */
 export class HelloGoodbye extends HTMLElement {
   #salutation = "Hello";
   #name = "World";

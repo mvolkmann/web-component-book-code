@@ -50,8 +50,6 @@ template.innerHTML = html`
  * To advance to the next state, click the component
  * or call the next() method on an instance.
  * To get the current state, access the `state` property of an instance.
- * It is intentional that the state cannot be changed by
- * modifying the `state` attribute or setting the `state` property.
  * @attr {string} [state="stop"] - The starting state.
  */
 export class TrafficLight extends HTMLElement {
