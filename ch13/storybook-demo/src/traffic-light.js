@@ -91,10 +91,12 @@ export class TrafficLight extends HTMLElement {
     return this.#state;
   }
 
-  set state(newValue) {
+  set state(value) {
+    if (value === this.#state) return;
     this.#change(false);
-    this.#state = newValue;
+    this.#state = value;
     this.#change(true);
+    this.setAttribute("state", value);
   }
 
   next() {
