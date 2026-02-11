@@ -2,7 +2,9 @@ const html = String.raw;
 
 const template = document.createElement("template");
 template.innerHTML = html`
-  <p><span class="salutation"></span>, <span class="name"></span>!</p>
+  <p style="color: green">
+    <span class="salutation"></span>, <span class="name"></span>!
+  </p>
 `;
 
 export class HelloGoodbye extends HTMLElement {

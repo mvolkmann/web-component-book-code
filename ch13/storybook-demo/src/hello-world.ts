@@ -1,7 +1,7 @@
 const html = String.raw;
 
 const template = document.createElement("template");
-template.innerHTML = html`<p>Hello, <span></span>!</p>`;
+template.innerHTML = html`<p style="color: blue">Hello, <span></span>!</p>`;
 
 /**
  * This is a simple web component that renders a greeting message.
