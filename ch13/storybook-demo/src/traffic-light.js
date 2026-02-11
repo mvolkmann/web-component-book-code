@@ -59,9 +59,17 @@ export class TrafficLight extends HTMLElement {
   #state = "stop";
   #stateToDivMap = new Map();
 
+  static get observedAttributes() {
+    return ["state"];
+  }
+
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+  }
+
+  attributeChangedCallback(name, _oldValue, newValue) {
+    if (name === "state") this.state = newValue;
   }
 
   connectedCallback() {
@@ -75,8 +83,6 @@ export class TrafficLight extends HTMLElement {
       this.#stateToDivMap.set(state, divs[index]);
     });
 
-    // Listen on the custom element instead of the button
-    // so the click method can be called on it.
     this.addEventListener("click", () => this.next());
     this.#change(true);
   }
@@ -86,7 +92,9 @@ export class TrafficLight extends HTMLElement {
   }
 
   set state(newValue) {
+    this.#change(false);
     this.#state = newValue;
+    this.#change(true);
   }
 
   next() {
@@ -104,7 +112,8 @@ export class TrafficLight extends HTMLElement {
   }
 
   #change(on) {
-    this.#stateToDivMap.get(this.#state).classList.toggle("on", on);
+    const div = this.#stateToDivMap.get(this.#state);
+    div?.classList.toggle("on", on);
   }
 }
 

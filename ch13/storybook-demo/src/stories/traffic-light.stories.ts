@@ -11,5 +11,6 @@ const html = String.raw;
 export const Default: StoryObj = {};
 
 export const Specified: StoryObj = {
-  args: { state: "yield" },
+  //args: { state: "yield" },
+  render: () => html`<traffic-light state="yield" />`,
 };
