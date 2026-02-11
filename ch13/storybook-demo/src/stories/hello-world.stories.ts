@@ -12,7 +12,6 @@ const html = String.raw;
 
 export const Default: StoryObj = {
   play: ({ canvasElement }) => {
-    console.log("hello-world.stories.ts play entered");
     const helloWorld = canvasElement.querySelector("hello-world") as HelloWorld;
     expect(helloWorld).toBeInTheDocument();
     if (!helloWorld) return;
