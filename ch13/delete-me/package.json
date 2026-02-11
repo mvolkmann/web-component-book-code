@@ -1,0 +1,24 @@
+{
+  "name": "playwright-demo",
+  "scripts": {
+    "dev": "vite",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^5.0.1",
+    "@storybook/addon-a11y": "^10.2.8",
+    "@storybook/addon-docs": "^10.2.8",
+    "@storybook/addon-vitest": "^10.2.8",
+    "@storybook/web-components-vite": "^10.2.8",
+    "@vitest/browser-playwright": "^4.0.18",
+    "@vitest/coverage-v8": "^4.0.18",
+    "chromatic": "^15.1.0",
+    "lit": "^3.3.2",
+    "playwright": "^1.58.2",
+    "storybook": "^10.2.8",
+    "storybook-addon-test-codegen": "^3.0.1",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.18"
+  }
+}
