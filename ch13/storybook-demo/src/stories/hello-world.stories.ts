@@ -1,11 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/web-components-vite";
+import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
 import { expect } from "storybook/test";
 import { HelloWorld } from "../hello-world.ts";
 import "../hello-world.ts";
 
+const component = "hello-world";
+let { args, argTypes, template } = getStorybookHelpers(component);
 const defaultName = "World";
 const meta: Meta = {
-  component: "hello-world",
+  component,
+  /*
   args: {
     name: defaultName,
   },
@@ -18,6 +22,10 @@ const meta: Meta = {
       description: "name to greet",
     },
   },
+  */
+  args,
+  argTypes,
+  render: (args) => template(args),
 };
 export default meta;
 

@@ -12,20 +12,14 @@ import {
 import { setCustomElementsManifest } from "@storybook/web-components";
 import { setStorybookHelpersConfig } from "@wc-toolkit/storybook-helpers";
 import manifest from "../custom-elements.json" with { type: "json" };
-
-setCustomElementsManifest(manifest);
+// The next line is needed even though no settings are specified.
+// Without this, the following message appears in the UI:
+// "Args table with interactive controls couldn't be auto-generated".
 setStorybookHelpersConfig({});
+setCustomElementsManifest(manifest);
 
 const preview = {
   parameters: {
-    controls: {
-      expanded: true,
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
-
     docs: {
       page: () => (
         <>

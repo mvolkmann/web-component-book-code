@@ -285,7 +285,12 @@
             },
             {
               "kind": "field",
-              "name": "state"
+              "name": "state",
+              "type": {
+                "text": "string"
+              },
+              "description": "current traffic light state",
+              "default": "\"stop\""
             },
             {
               "kind": "method",
@@ -316,8 +321,7 @@
               "type": {
                 "text": "string"
               },
-              "description": "The starting state.",
-              "default": "\"stop\""
+              "description": "initial traffic light state."
             }
           ],
           "superclass": {
@@ -426,11 +430,19 @@
       "declarations": [
         {
           "kind": "variable",
+          "name": "component",
+          "type": {
+            "text": "string"
+          },
+          "default": "\"hello-world\""
+        },
+        {
+          "kind": "variable",
           "name": "meta",
           "type": {
             "text": "Meta"
           },
-          "default": "{ component: \"hello-world\", args: { name: defaultName, }, argTypes: { name: { control: \"text\", // the default table: { defaultValue: { summary: defaultName }, }, description: \"name to greet\", }, }, }"
+          "default": "{ component, /* args: { name: defaultName, }, argTypes: { name: { control: \"text\", // the default table: { defaultValue: { summary: defaultName }, }, description: \"name to greet\", }, }, */ args, argTypes, render: (args) => template(args), }"
         },
         {
           "kind": "variable",
@@ -538,11 +550,19 @@
       "declarations": [
         {
           "kind": "variable",
+          "name": "component",
+          "type": {
+            "text": "string"
+          },
+          "default": "\"traffic-light\""
+        },
+        {
+          "kind": "variable",
           "name": "meta",
           "type": {
             "text": "Meta"
           },
-          "default": "{ component: \"traffic-light\", args: { state: defaultState, }, argTypes: { state: { control: \"radio\", options: [\"stop\", \"yield\", \"go\"], table: { defaultValue: { summary: defaultState }, }, description: \"traffic light state\", }, }, }"
+          "default": "{ component, /* args: { state: defaultState, }, argTypes: { state: { control: \"radio\", options: [\"stop\", \"yield\", \"go\"], table: { defaultValue: { summary: defaultState }, }, description: \"traffic light state\", }, }, */ args, argTypes, render: (args) => template(args), }"
         },
         {
           "kind": "variable",
