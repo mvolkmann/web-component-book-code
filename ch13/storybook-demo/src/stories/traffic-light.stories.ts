@@ -1,8 +1,22 @@
 import type { Meta, StoryObj } from "@storybook/web-components-vite";
 import "../traffic-light.js";
 
+const defaultState = "stop";
 const meta: Meta = {
   component: "traffic-light",
+  args: {
+    state: defaultState,
+  },
+  argTypes: {
+    state: {
+      control: "radio",
+      options: ["stop", "yield", "go"],
+      table: {
+        defaultValue: { summary: defaultState },
+      },
+      description: "traffic light state",
+    },
+  },
 };
 export default meta;
 

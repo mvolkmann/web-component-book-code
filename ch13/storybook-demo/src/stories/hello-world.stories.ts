@@ -3,8 +3,21 @@ import { expect } from "storybook/test";
 import { HelloWorld } from "../hello-world.ts";
 import "../hello-world.ts";
 
+const defaultName = "World";
 const meta: Meta = {
   component: "hello-world",
+  args: {
+    name: defaultName,
+  },
+  argTypes: {
+    name: {
+      control: "text", // the default
+      table: {
+        defaultValue: { summary: defaultName },
+      },
+      description: "name to greet",
+    },
+  },
 };
 export default meta;
 
