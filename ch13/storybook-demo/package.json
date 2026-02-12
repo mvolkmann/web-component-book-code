@@ -1,7 +1,8 @@
 {
   "name": "playwright-demo",
   "scripts": {
-    "cem": "cem analyze",
+    "cem": "node ./custom-elements-manifest/packages/analyzer/cem.js analyze",
+    "cem-save": "cem analyze",
     "cem:watch": "cem analyze --watch",
     "dev": "vite",
     "storybook": "storybook dev -p 6006",
