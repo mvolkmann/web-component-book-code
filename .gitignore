@@ -5,3 +5,5 @@ node_modules
 
 *storybook.log
 storybook-static
+ch13/storybook-demo/custom-elements-manifest
+ch13/storybook-demo/storybook-static
