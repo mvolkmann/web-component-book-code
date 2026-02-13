@@ -32,7 +32,7 @@ export default meta;
 const html = String.raw;
 
 export const Default: StoryObj = {
-  render: (args) => html`<hello-world name=${args.name ?? ""}></hello-world>`,
+  render: (args) => html`<hello-world name=${args.name}></hello-world>`,
   play: ({ canvasElement }) => {
     const helloWorld = canvasElement.querySelector("hello-world") as HelloWorld;
     expect(helloWorld).toBeInTheDocument();
