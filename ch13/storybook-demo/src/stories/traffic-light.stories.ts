@@ -4,10 +4,12 @@ import "../traffic-light.js";
 
 const component = "traffic-light";
 const { args, argTypes, template } = getStorybookHelpers(component);
+
 // The control type is inferred to be "text", but we want "radio".
 const { state } = argTypes;
 state.control = "radio";
 state.options = ["stop", "yield", "go"];
+
 //const defaultState = "stop";
 const meta: Meta = {
   component,
