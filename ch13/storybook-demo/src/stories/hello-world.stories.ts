@@ -32,6 +32,7 @@ export default meta;
 const html = String.raw;
 
 export const Default: StoryObj = {
+  render: (args) => html`<hello-world name=${args.name ?? ""}></hello-world>`,
   play: ({ canvasElement }) => {
     const helloWorld = canvasElement.querySelector("hello-world") as HelloWorld;
     expect(helloWorld).toBeInTheDocument();
@@ -43,12 +44,8 @@ export const Default: StoryObj = {
       expect(p).toHaveTextContent(`Hello, ${name}!`);
     }
 
-    // The "name" attribute is not set yet.
-    let name = "World";
-    verifyText(name);
-
     // Set the "name" attribute.
-    name = "Earth";
+    let name = "Earth";
     helloWorld.setAttribute("name", name);
     expect(helloWorld).toHaveProperty("name", name);
     verifyText(name);
@@ -58,10 +55,13 @@ export const Default: StoryObj = {
     helloWorld.name = name;
     expect(helloWorld).toHaveAttribute("name", name);
     verifyText(name);
+
+    name = "World";
+    helloWorld.setAttribute("name", name);
+    verifyText(name);
   },
 };
 
 export const Named: StoryObj = {
   args: { name: "Earth" },
-  //render: () => html`<hello-world name="Earth" />`,
 };

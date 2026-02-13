@@ -34,9 +34,10 @@ export default meta;
 
 const html = String.raw;
 
-export const Default: StoryObj = {};
+export const Default: StoryObj = {
+  render: (args) => html`<traffic-light state=${args.state ?? ""} />`,
+};
 
 export const Specified: StoryObj = {
-  //args: { state: "yield" },
-  render: () => html`<traffic-light state="yield" />`,
+  args: { state: "yield" },
 };
