@@ -34,10 +34,10 @@ const meta: Meta = {
 };
 export default meta;
 
-const html = String.raw;
+type Story = StoryObj<typeof meta>;
 
-export const Primary: StoryObj = {};
+export const Primary: Story = {};
 
-export const Specified: StoryObj = {
-  args: { state: "yield" },
+export const Specified: Story = {
+  args: { state: "yield" } as Partial<Meta>,
 };

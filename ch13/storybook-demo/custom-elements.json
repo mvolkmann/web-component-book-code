@@ -252,7 +252,7 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/traffic-light.js",
+      "path": "src/traffic-light.ts",
       "declarations": [
         {
           "kind": "class",
@@ -261,19 +261,10 @@
           "members": [
             {
               "kind": "field",
-              "name": "states",
-              "type": {
-                "text": "array"
-              },
-              "static": true,
-              "default": "[\"stop\", \"yield\", \"go\"]"
-            },
-            {
-              "kind": "field",
               "name": "#state",
               "privacy": "private",
               "type": {
-                "text": "string"
+                "text": "State"
               },
               "default": "\"stop\""
             },
@@ -287,7 +278,7 @@
               "kind": "field",
               "name": "state",
               "type": {
-                "text": "string"
+                "text": "State"
               },
               "description": "current traffic light state",
               "default": "\"stop\""
@@ -302,7 +293,10 @@
               "privacy": "private",
               "parameters": [
                 {
-                  "name": "on"
+                  "name": "on",
+                  "type": {
+                    "text": "boolean"
+                  }
                 }
               ]
             }
@@ -337,7 +331,7 @@
           "name": "TrafficLight",
           "declaration": {
             "name": "TrafficLight",
-            "module": "src/traffic-light.js"
+            "module": "src/traffic-light.ts"
           }
         },
         {
@@ -345,7 +339,7 @@
           "name": "traffic-light",
           "declaration": {
             "name": "TrafficLight",
-            "module": "src/traffic-light.js"
+            "module": "src/traffic-light.ts"
           }
         }
       ]

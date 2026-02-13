@@ -32,7 +32,9 @@ const meta: Meta = {
 };
 export default meta;
 
-export const Primary: StoryObj = {
+type Story = StoryObj<typeof meta>;
+
+export const Primary: Story = {
   play: ({ canvasElement }) => {
     const helloWorld = canvasElement.querySelector("hello-world") as HelloWorld;
     expect(helloWorld).toBeInTheDocument();
@@ -62,6 +64,6 @@ export const Primary: StoryObj = {
   },
 };
 
-export const Named: StoryObj = {
-  args: { name: "Earth" },
+export const Named: Story = {
+  args: { name: "Earth" } as Partial<Meta>,
 };
