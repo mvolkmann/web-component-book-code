@@ -15,13 +15,13 @@ template.innerHTML = html`
  * @prop {string} [salutation="Hello"] - current salutation
  */
 export class HelloGoodbye extends HTMLElement {
-  #salutation = "Hello";
   #name = "World";
+  #salutation = "Hello";
   #span1: HTMLSpanElement | undefined; // assigned in connectedCallback
   #span2: HTMLSpanElement | undefined; // assigned in connectedCallback
 
   static get observedAttributes() {
-    return ["name"];
+    return ["name", "salutation"];
   }
 
   constructor() {
@@ -30,7 +30,11 @@ export class HelloGoodbye extends HTMLElement {
   }
 
   attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
-    if (name === "name") this.name = newValue;
+    if (name === "name") {
+      this.name = newValue;
+    } else if (name === "salutation") {
+      this.salutation = newValue;
+    }
   }
 
   connectedCallback() {
