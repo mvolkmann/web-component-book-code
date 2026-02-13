@@ -10,7 +10,7 @@ export default meta;
 
 const html = String.raw;
 
-export const Default: StoryObj = {
+export const Primary: StoryObj = {
   play: async ({ canvasElement }) => {
     const body = canvasElement.ownerDocument.body;
     const helloGoodbye = body.querySelector("hello-goodbye");

@@ -6,7 +6,8 @@ import "../hello-world.ts";
 
 const component = "hello-world";
 let { args, argTypes, template } = getStorybookHelpers(component);
-const defaultName = "World";
+//const defaultName = "World";
+//const html = String.raw;
 const meta: Meta = {
   component,
   /*
@@ -22,6 +23,8 @@ const meta: Meta = {
       description: "name to greet",
     },
   },
+  render: (args) =>
+    html`<hello-world name="${args.name}"></hello-world>`,
   */
   args,
   argTypes,
@@ -29,10 +32,7 @@ const meta: Meta = {
 };
 export default meta;
 
-const html = String.raw;
-
-export const Default: StoryObj = {
-  render: (args) => html`<hello-world name=${args.name}></hello-world>`,
+export const Primary: StoryObj = {
   play: ({ canvasElement }) => {
     const helloWorld = canvasElement.querySelector("hello-world") as HelloWorld;
     expect(helloWorld).toBeInTheDocument();
