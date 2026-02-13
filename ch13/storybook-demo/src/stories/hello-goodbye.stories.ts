@@ -1,9 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/web-components-vite";
+import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
 import { expect, userEvent } from "storybook/test";
+import { HelloGoodbye } from "../hello-goodbye.ts";
 import "../hello-goodbye.ts";
 
+const component = "hello-goodbye";
+let { args, argTypes, template } = getStorybookHelpers(component);
 const meta: Meta = {
-  component: "hello-goodbye",
+  component,
+  args,
+  argTypes,
+  render: (args) => template(args),
 };
 export default meta;
 
@@ -11,8 +18,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   play: async ({ canvasElement }) => {
-    const body = canvasElement.ownerDocument.body;
-    const helloGoodbye = body.querySelector("hello-goodbye");
+    const helloGoodbye = canvasElement.querySelector(
+      "hello-goodbye",
+    ) as HelloGoodbye;
     expect(helloGoodbye).toBeInTheDocument();
     if (!helloGoodbye) return;
 
