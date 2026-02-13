@@ -4,8 +4,10 @@ import "../my-counter.js";
 const meta: Meta = { component: "my-counter" };
 export default meta;
 
-export const Primary: StoryObj = {};
+type Story = StoryObj<typeof meta>;
 
-export const Named: StoryObj = {
-  args: { count: 19 },
+export const Primary: Story = {};
+
+export const Named: Story = {
+  args: { count: 19 } as Partial<Meta>,
 };

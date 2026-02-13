@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/web-components-vite";
-import { expect, userEvent, waitFor } from "storybook/test";
-import { HelloGoodbye } from "../hello-goodbye.ts";
+import { expect, userEvent } from "storybook/test";
 import "../hello-goodbye.ts";
 
 const meta: Meta = {
@@ -8,9 +7,9 @@ const meta: Meta = {
 };
 export default meta;
 
-const html = String.raw;
+type Story = StoryObj<typeof meta>;
 
-export const Primary: StoryObj = {
+export const Primary: Story = {
   play: async ({ canvasElement }) => {
     const body = canvasElement.ownerDocument.body;
     const helloGoodbye = body.querySelector("hello-goodbye");
@@ -29,6 +28,6 @@ export const Primary: StoryObj = {
   },
 };
 
-export const Named: StoryObj = {
-  args: { name: "Earth" },
+export const Named: Story = {
+  args: { name: "Earth" } as Partial<Meta>,
 };
