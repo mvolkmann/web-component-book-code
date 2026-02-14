@@ -1,5 +1,5 @@
 {
-  "name": "playwright-demo",
+  "name": "storybook-demo",
   "scripts": {
     "cem": "node ./custom-elements-manifest/packages/analyzer/cem.js analyze",
     "cem-save": "cem analyze",
