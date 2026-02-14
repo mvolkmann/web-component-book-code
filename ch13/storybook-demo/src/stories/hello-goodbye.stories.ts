@@ -29,9 +29,9 @@ export const Primary: Story = {
     if (!p) return;
 
     expect(p).toHaveTextContent("Hello");
-    await userEvent.click(p);
+    await userEvent.click(helloGoodbye);
     expect(p).toHaveTextContent("Goodbye");
-    await userEvent.click(p);
+    await userEvent.click(helloGoodbye);
     expect(p).toHaveTextContent("Hello");
   },
 };

@@ -43,7 +43,7 @@ export class HelloGoodbye extends HTMLElement {
     this.#span2 = this.shadowRoot?.querySelector(".name")!;
     this.name = this.getAttribute("name") || this.#name;
     this.salutation = this.getAttribute("salutation") || this.#salutation;
-    this.shadowRoot?.addEventListener("click", () => {
+    this.addEventListener("click", () => {
       const newValue = this.#salutation === "Hello" ? "Goodbye" : "Hello";
       this.salutation = newValue;
     });
