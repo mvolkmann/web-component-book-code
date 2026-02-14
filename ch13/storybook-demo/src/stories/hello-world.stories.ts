@@ -7,7 +7,6 @@ import "../hello-world.ts";
 const component = "hello-world";
 let { args, argTypes, template } = getStorybookHelpers(component);
 //const defaultName = "World";
-//const html = String.raw;
 const meta: Meta = {
   component,
   /*
@@ -23,8 +22,6 @@ const meta: Meta = {
       description: "name to greet",
     },
   },
-  render: (args) =>
-    html`<hello-world name="${args.name}"></hello-world>`,
   */
   args,
   argTypes,
