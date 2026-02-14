@@ -24,6 +24,9 @@ export const Primary: Story = {
     expect(helloGoodbye).toBeInTheDocument();
     if (!helloGoodbye) return;
 
+    expect(helloGoodbye.salutation).toBe("Hello");
+    expect(helloGoodbye.name).toBe("World");
+
     const p = helloGoodbye.shadowRoot?.querySelector("p");
     expect(p).toBeInTheDocument();
     if (!p) return;
