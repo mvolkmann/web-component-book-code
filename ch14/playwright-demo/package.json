@@ -1,9 +1,14 @@
 {
   "name": "playwright-demo",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "test": "playwright test",
+    "test-report": "playwright show-report",
+    "test-ui": "playwright test --ui"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.2.3",
     "vite": "^7.3.1"
   }
 }
