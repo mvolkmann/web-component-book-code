@@ -1,8 +1,8 @@
 {
   "name": "storybook-demo",
   "scripts": {
-    "cem": "node ./custom-elements-manifest/packages/analyzer/cem.js analyze",
-    "cem-save": "cem analyze",
+    "cem-local": "node ./custom-elements-manifest/packages/analyzer/cem.js analyze",
+    "cem": "cem analyze --exclude 'coverage/**' 'custom-elements-manifest/**' 'src/stories/**' 'storybook-static/**'",
     "cem:watch": "cem analyze --watch",
     "deploy-storybook": "gh-pages -d storybook-static",
     "dev": "vite",

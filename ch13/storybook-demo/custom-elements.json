@@ -13,21 +13,21 @@
           "members": [
             {
               "kind": "field",
-              "name": "#salutation",
-              "privacy": "private",
-              "type": {
-                "text": "string"
-              },
-              "default": "\"Hello\""
-            },
-            {
-              "kind": "field",
               "name": "#name",
               "privacy": "private",
               "type": {
                 "text": "string"
               },
               "default": "\"World\""
+            },
+            {
+              "kind": "field",
+              "name": "#salutation",
+              "privacy": "private",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"Hello\""
             },
             {
               "kind": "field",
@@ -73,11 +73,11 @@
               "description": "initial name to greet"
             },
             {
+              "name": "salutation",
               "type": {
                 "text": "string"
               },
-              "description": "initial salutation",
-              "name": "salutation"
+              "description": "initial salutation"
             }
           ],
           "superclass": {
