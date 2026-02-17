@@ -1,10 +1,5 @@
 import { expect, test } from "@playwright/test";
-import {
-  expectAttribute,
-  expectProperty,
-  setAttribute,
-  setProperty,
-} from "./util"; // utility methods shown below
+import { setAttribute, setProperty } from "./util"; // utility methods shown below
 
 // This runs before each of the test functions below
 // to perform common setup steps.
@@ -38,7 +33,7 @@ test("set attribute", async ({ page }) => {
   await setAttribute(el, "name", name);
   await expect(p).toHaveText(`Hello, ${name}!`);
   // Verify that setting an attribute also sets the corresponding property.
-  await expectProperty(el, "name", name);
+  await expect(el).toHaveJSProperty("name", name);
 });
 
 test("set property", async ({ page }) => {
@@ -48,5 +43,6 @@ test("set property", async ({ page }) => {
   await setProperty(el, "name", name);
   await expect(p).toHaveText(`Hello, ${name}!`);
   // Verify that setting a property also sets the corresponding attribute.
-  await expectAttribute(el, "name", name);
+  //await expectAttribute(el, "name", name);
+  await expect(el).toHaveAttribute("name", name);
 });
