@@ -2,6 +2,7 @@
 coverage
 dist
 node_modules
+.stencil
 
 *storybook.log
 storybook-static

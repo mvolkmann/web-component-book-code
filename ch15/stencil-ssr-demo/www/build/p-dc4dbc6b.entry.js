@@ -1,0 +1,2 @@
+import{r as t,h as e}from"./p-o25rBXgV.js";import{format as s}from"./index.esm.js";const r=":host{display:block}";const o=class{constructor(e){t(this,e)}first;middle;last;getText(){return s(this.first,this.middle,this.last)}render(){return e("div",{key:"87518bde3acc437e7c1d21ced9ee6f7c0fe47553"},"Hello, World! I'm ",this.getText())}};o.style=r;export{o as my_component};
+//# sourceMappingURL=p-dc4dbc6b.entry.js.map

@@ -1,0 +1,13 @@
+<!doctype html><html lang="en"><head> <title>Stencil SSR Demo</title> <link rel="modulepreload" href="/build/p-o25rBXgV.js"><script type="module" data-stencil data-resources-url="/build/" data-stencil-namespace="stencil-ssr-demo">import{p as o,b as r}from"/build/p-o25rBXgV.js";export{s as setNonce}from"/build/p-o25rBXgV.js";import{g as t}from"/build/p-DQuL1Twl.js";var a=()=>{const r=import.meta.url;const s={};if(r!==""){s.resourcesUrl=new URL(".",r).href}return o(s)};a().then((async o=>{await t();return r([["p-cac044c9",[[769,"hello-world",{name:[1]}]]],["p-dc4dbc6b",[[769,"my-component",{first:[1],middle:[1],last:[1]}]]]],o)}));
+//# sourceMappingURL=stencil-ssr-demo.esm.js.map
+</script> <script type="module">
+      // Listen for Greet button clicks.
+      const button = document.querySelector('button');
+      button.addEventListener('click', async () => {
+        // Get HTML from the greet endpoint.
+        const res = await fetch('http://localhost:3000/greet?name=Mark');
+        const html = await res.text();
+        // Insert the HTML after the Greet button.
+        button.insertAdjacentHTML('afterend', html);
+      });
+    </script> </head> <body> <p>The following components are client-side rendered:</p> <hello-world></hello-world> <hello-world name="Mark"></hello-world> <button>Greet</button> </body></html>

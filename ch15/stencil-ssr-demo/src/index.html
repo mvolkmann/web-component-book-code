@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Stencil SSR Demo</title>
+    <script type="module" src="/build/stencil-ssr-demo.esm.js"></script>
+    <script type="module">
+      // Listen for Greet button clicks.
+      const button = document.querySelector('button');
+      button.addEventListener('click', async () => {
+        // Get HTML from the greet endpoint.
+        const res = await fetch('http://localhost:3000/greet?name=Mark');
+        const html = await res.text();
+        // Insert the HTML after the Greet button.
+        button.insertAdjacentHTML('afterend', html);
+      });
+    </script>
+  </head>
+  <body>
+    <p>The following components are client-side rendered:</p>
+    <hello-world></hello-world>
+    <hello-world name="Mark"></hello-world>
+
+    <button>Greet</button>
+  </body>
+</html>

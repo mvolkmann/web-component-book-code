@@ -1,0 +1,2 @@
+import{r as e,h as o}from"./p-o25rBXgV.js";const r=":host{display:block}";const s=class{constructor(o){e(this,o)}name="World";render(){return o("p",{key:"70537b93c48ded692d7e157ea2e6f57ad057e34e"},"Hello, ",this.name,"!")}};s.style=r;export{s as hello_world};
+//# sourceMappingURL=p-cac044c9.entry.js.map

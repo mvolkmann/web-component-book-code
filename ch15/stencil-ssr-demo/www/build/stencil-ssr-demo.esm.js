@@ -1,0 +1,2 @@
+import{p as o,b as r}from"./p-o25rBXgV.js";export{s as setNonce}from"./p-o25rBXgV.js";import{g as t}from"./p-DQuL1Twl.js";var a=()=>{const r=import.meta.url;const s={};if(r!==""){s.resourcesUrl=new URL(".",r).href}return o(s)};a().then((async o=>{await t();return r([["p-cac044c9",[[769,"hello-world",{name:[1]}]]],["p-dc4dbc6b",[[769,"my-component",{first:[1],middle:[1],last:[1]}]]]],o)}));
+//# sourceMappingURL=stencil-ssr-demo.esm.js.map
