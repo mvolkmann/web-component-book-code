@@ -1,5 +1,5 @@
 import { expect, Locator, test } from "@playwright/test";
-import type { TrafficLight } from "../src/traffic-light";
+import { TrafficLight } from "../src/traffic-light";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("http://localhost:5173");
