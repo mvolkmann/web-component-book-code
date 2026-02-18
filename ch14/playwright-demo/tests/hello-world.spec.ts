@@ -10,7 +10,13 @@ test.beforeEach(async ({ page }) => {
   await page.goto("http://localhost:5173/");
 });
 
-test("snapshot", async ({ page }) => {
+test("count", async ({ page }) => {
+  const elements = page.locator("hello-world");
+  const count = await elements.count();
+  expect(count).toBe(2);
+});
+
+test("screenshot", async ({ page }) => {
   await expect(page).toHaveScreenshot();
 });
 
