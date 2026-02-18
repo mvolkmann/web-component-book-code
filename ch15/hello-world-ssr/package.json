@@ -1,0 +1,9 @@
+{
+  "name": "hello-world-ssr",
+  "scripts": {
+    "dev": "bun --watch server.js"
+  },
+  "dependencies": {
+    "hono": "^4.11.10"
+  }
+}

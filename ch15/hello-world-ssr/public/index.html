@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Vanilla Web Component SSR</title>
+    <script src="https://unpkg.com/htmx.org@2.0.8"></script>
+  </head>
+  <body>
+    <button hx-get="/hello-world?name=SSR" hx-target="#hello-world-ssr">
+      hello-world SSR
+    </button>
+    <div id="hello-world-ssr"></div>
+  </body>
+</html>

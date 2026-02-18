@@ -50,5 +50,5 @@ app.get("/radio-group", (c) => {
 });
 
 serve(app, (info) => {
-  console.log(`listing on port ${info.port}`);
+  console.log(`listening on port ${info.port}`);
 });
