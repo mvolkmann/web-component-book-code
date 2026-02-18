@@ -1,0 +1,10 @@
+body {
+  font-family: sans-serif;
+}
+
+button {
+  border-radius: 0.5rem;
+  display: block;
+  margin: 1rem 0;
+  padding: 0.5rem;
+}

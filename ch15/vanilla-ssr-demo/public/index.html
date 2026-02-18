@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vanilla Web Component SSR</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module">
+      // If these imports are removed, SSR components still renders correctly,
+      // but they will not be upgraded to custom elements and
+      // will not have any functionality (clicking does nothing).
+      import "./hello-world.js";
+      import "./radio-group.js";
+
+      // Listen for changes to the color selected
+      // in the first `radio-group` custom element, and change
+      // the color of all `hello-world` custom elements to match.
+      const radioGroup = document.querySelector("radio-group[name=color]");
+      radioGroup.addEventListener("change", (e) => {
+        const { value } = e.detail;
+        const helloWorlds = document.querySelectorAll("hello-world");
+        for (const helloWorld of helloWorlds) {
+          helloWorld.style.color = value;
+        }
+      });
+
+      const button1 = document.getElementById("hello-world-btn");
+      button1.addEventListener("click", async () => {
+        const res = await fetch("/hello-world?name=SSR");
+        const html = await res.text();
+
+        // This works, but gives the warning
+        // "Found declarative shadowrootmode attribute on a template,
+        // but declarative Shadow DOM is not being parsed.
+        // Use setHTMLUnsafe() or parseHTMLUnsafe() instead."
+        // There is no warning in Firefox or Safari.
+        //button1.insertAdjacentHTML("afterend", html);
+
+        // This avoids the warning described above.
+        document.getElementById("greetings").setHTMLUnsafe(html);
+      });
+
+      const button2 = document.getElementById("radio-group-btn");
+      button2.addEventListener("click", async () => {
+        const url =
+          "/radio-group?" +
+          "name=season&" +
+          "labels=Spring,Summer,Fall,Winter&" +
+          "values=spring,summer,fall,winter&value=summer";
+        const res = await fetch(url);
+        const html = await res.text();
+        document.getElementById("seasons").setHTMLUnsafe(html);
+
+        // Listen for changes to the color selected
+        // in the first `radio-group` custom element, and change
+        // the color of all `hello-world` custom elements to match.
+        const radioGroup = document.querySelector("radio-group[name=season]");
+        radioGroup.addEventListener("change", (e) => {
+          const { label } = e.detail;
+          alert(`You selected ${label}.`);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <p>The following are client-side rendered web components.</p>
+    <hello-world></hello-world>
+    <hello-world name="CSR"></hello-world>
+    <radio-group
+      labels="Red,Green,Blue"
+      name="color"
+      value="red"
+      values="red,green,blue"
+    ></radio-group>
+
+    <button id="hello-world-btn">hello-world SSR</button>
+    <div id="greetings"></div>
+
+    <button id="radio-group-btn">radio-group SSR</button>
+    <div id="seasons"></div>
+
+    <a href="/new-page">New Page</a>
+  </body>
+</html>
