@@ -3,11 +3,18 @@
   <head>
     <title>Vanilla Web Component SSR</title>
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
+    <!-- <script src="hello-world.js" type="module"></script> -->
+    <script type="module">
+      import "./hello-world.js";
+    </script>
   </head>
   <body>
     <button hx-get="/hello-world?name=SSR" hx-target="#hello-world-ssr">
       hello-world SSR
     </button>
     <div id="hello-world-ssr"></div>
+
+    <hello-world></hello-world>
+    <hello-world name="Client-Side Rendered"></hello-world>
   </body>
 </html>

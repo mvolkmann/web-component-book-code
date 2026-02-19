@@ -1,7 +1,8 @@
 import { content } from "./hello-world-html.js";
 
 class HelloWorld extends HTMLElement {
-  p; // reference to p element
+  #name = "World";
+  #p; // reference to p element
 
   static get observedAttributes() {
     return ["name"];
@@ -25,12 +26,8 @@ class HelloWorld extends HTMLElement {
     }
   }
 
-  attributeChangedCallback(name) {
-    // The first call to this will occur before connectedCallback.
-    // At that time, this.p will be undefined.
-    if (this.p && name === "name") {
-      this.p.textContent = `Hello, ${this.name}!`;
-    }
+  attributeChangedCallback(name, _oldValue, value) {
+    if (name === "name") this.name = value;
   }
 
   connectedCallback() {
@@ -44,11 +41,14 @@ class HelloWorld extends HTMLElement {
   }
 
   get name() {
-    return this.getAttribute("name") || "World";
+    return this.#name;
   }
 
   set name(value) {
+    if (value === this.#name) return;
+    this.#name = value;
     this.setAttribute("name", value);
+    if (this.p) this.p.textContent = `Hello, ${this.name}!`;
   }
 }
 
