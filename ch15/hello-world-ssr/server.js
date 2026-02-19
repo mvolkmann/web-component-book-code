@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { serveStatic } from "hono/bun";
-import { ssr } from "./hello-world-html.js";
+import { ssr } from "./public/hello-world-html.js";
 
 const app = new Hono();
 
