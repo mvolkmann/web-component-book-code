@@ -35,4 +35,4 @@ class HelloWrec extends Wrec {
   `;
 }
 
-HelloWrec.register();
+HelloWrec.define("hello-wrec");

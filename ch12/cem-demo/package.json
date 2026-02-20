@@ -22,6 +22,6 @@
   "dependencies": {
     "api-viewer-element": "^0.6.4",
     "lit": "^3.3.2",
-    "wrec": "^0.19.3"
+    "wrec": "^0.20.4"
   }
 }

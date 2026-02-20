@@ -25,4 +25,4 @@ class MyApp extends Wrec {
   `;
 }
 
-MyApp.register();
+MyApp.define("my-app");
