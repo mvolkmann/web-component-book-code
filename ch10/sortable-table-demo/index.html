@@ -13,7 +13,8 @@
     <script src="sortable-table.ts" type="module"></script>
     <script src="sortable-table2.ts" type="module"></script>
     <script type="module">
-      function configure(table) {
+      function configureTable(elementName) {
+        const table = document.querySelector(elementName);
         if (!table) return;
         table.data = [
           { make: "BMW", model: "Z3", year: 2002 },
@@ -29,8 +30,8 @@
           );
         });
       }
-      configure(document.querySelector("sortable-table"));
-      configure(document.querySelector("sortable-table2"));
+      configureTable("sortable-table");
+      configureTable("sortable-table2");
     </script>
   </head>
   <body>
