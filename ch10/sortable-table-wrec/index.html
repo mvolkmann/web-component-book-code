@@ -18,13 +18,8 @@
           { make: "Toyota", model: "RAV4", year: 2010 },
         ];
         table.addEventListener("change", (event) => {
-          console.log("index.html change: event.detail =", event.detail);
-          /*
-          console.log(
-            `The table is now sorted by ${property}`,
-            `${descending ? "descending" : "ascending"}.`,
-          );
-          */
+          const { property, oldValue, value } = event.detail;
+          console.log(`${property} changed from "${oldValue}" to "${value}"`);
         });
       }
       configureTable("sortable-table");
