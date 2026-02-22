@@ -8,15 +8,14 @@
     </style>
     <script src="sortable-table.ts" type="module"></script>
     <script type="module">
-      const cars = [
-        { make: "BMW", model: "Z3", year: 2002 },
-        { make: "MINI", model: "Cooper", year: 2015 },
-        { make: "Subaru", model: "Forester", year: 2025 },
-        { make: "Toyota", model: "RAV4", year: 2010 },
-      ];
       const sortableTable = document.querySelector("sortable-table");
       if (sortableTable) {
-        sortableTable.data = cars;
+        sortableTable.data = [
+          { make: "BMW", model: "Z3", year: 2002 },
+          { make: "MINI", model: "Cooper", year: 2015 },
+          { make: "Subaru", model: "Forester", year: 2025 },
+          { make: "Toyota", model: "RAV4", year: 2010 },
+        ];
       }
     </script>
   </head>
