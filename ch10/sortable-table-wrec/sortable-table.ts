@@ -7,10 +7,6 @@ class SortableTable extends Wrec {
     data: { type: Array<LooseObject> },
     descending: { type: Boolean, dispatch: true },
     headings: { type: String },
-    headingArray: {
-      type: Array<string>,
-      computed: "this.headings.split(',')",
-    },
     properties: { type: String, value: "" },
     propertyArray: {
       type: Array<string>,
@@ -57,16 +53,26 @@ class SortableTable extends Wrec {
     <table>
       <thead>
         <tr>
-          this.headingArray.map((heading, i) => this.makeTh(heading, i,
-          this.propertyArray))
+          this.makeHeadings(this.headings, this.propertyArray)
         </tr>
       </thead>
       <tbody>
-        this.sortedData.map(obj => this.makeTr(obj, this.propertyArray))
+        this.makeRows(this.sortedData, this.propertyArray)
       </tbody>
     </table>
     <slot name="footnote"></slot>
   `;
+
+  makeHeadings(headings: string, propertyArray: string[]) {
+    const headingArray = headings.split(",");
+    return headingArray.map((heading, i) =>
+      this.makeTh(heading, i, propertyArray),
+    );
+  }
+
+  makeRows(sortedData: LooseObject[], propertyArray: string[]) {
+    return sortedData.map((obj) => this.makeTr(obj, propertyArray));
+  }
 
   makeTd(value: unknown) {
     return html`<td>${value}</td>`;
