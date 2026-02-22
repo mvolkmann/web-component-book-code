@@ -27,9 +27,6 @@ class SortableTable extends Wrec {
     :host {
       display: inline-block;
     }
-    :host([hidden]) {
-      display: none;
-    }
     .sort-indicator {
       color: white;
       display: inline-block;
@@ -71,11 +68,7 @@ class SortableTable extends Wrec {
     <slot name="footnote"></slot>
   `;
 
-  makeRows(data: LooseObject[], propertyArray: string[]) {
-    data.map((obj) => this.makeTr(obj, propertyArray));
-  }
-
-  makeTd(value: unknown | number) {
+  makeTd(value: unknown) {
     return html`<td>${value}</td>`;
   }
 
