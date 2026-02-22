@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+    </style>
+    <script src="sortable-table.ts" type="module"></script>
+    <script type="module">
+      const cars = [
+        { make: "BMW", model: "Z3", year: 2002 },
+        { make: "MINI", model: "Cooper", year: 2015 },
+        { make: "Subaru", model: "Forester", year: 2025 },
+        { make: "Toyota", model: "RAV4", year: 2010 },
+      ];
+      const sortableTable = document.querySelector("sortable-table");
+      if (sortableTable) {
+        sortableTable.data = cars;
+      }
+    </script>
+  </head>
+  <body>
+    <sortable-table
+      headings="Make,Model,Year"
+      properties="make,model,year"
+      title="My Cars table"
+    >
+      <h2>My Cars</h2>
+      <p slot="footnote">Some of these cars are no longer owned.</p>
+    </sortable-table>
+  </body>
+</html>
