@@ -5,6 +5,10 @@
       body {
         font-family: sans-serif;
       }
+      .bordered {
+        border: 3px dashed red;
+        padding: 0.5rem;
+      }
     </style>
     <script src="sortable-table.ts" type="module"></script>
     <script type="module">
@@ -16,11 +20,19 @@
           { make: "Subaru", model: "Forester", year: 2025 },
           { make: "Toyota", model: "RAV4", year: 2010 },
         ];
+        sortableTable.addEventListener("sort", (event) => {
+          const { property, ascending } = event.detail;
+          console.log(
+            `The table is now sorted by ${property}`,
+            `${ascending ? "ascending" : "descending"}.`,
+          );
+        });
       }
     </script>
   </head>
   <body>
     <sortable-table
+      class="bordered"
       headings="Make,Model,Year"
       properties="make,model,year"
       title="My Cars table"

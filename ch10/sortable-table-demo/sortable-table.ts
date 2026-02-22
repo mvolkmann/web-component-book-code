@@ -158,7 +158,7 @@ class SortableTable extends HTMLElement {
   #sort(event: Event) {
     let th = event.target! as HTMLTableCellElement;
     const property = th.getAttribute("data-property")!;
-    this.#sortAscending = th === this.#sortHeader ? !this.#sortAscending : true;
+    const ascending = th === this.#sortHeader ? !this.#sortAscending : true;
 
     this.#data.sort((a: LooseObject, b: LooseObject) => {
       const aValue = a[property];
@@ -169,7 +169,7 @@ class SortableTable extends HTMLElement {
           : typeof aValue === "number"
             ? aValue - (bValue as number)
             : 0;
-      return this.#sortAscending ? compare : -compare;
+      return ascending ? compare : -compare;
     });
 
     // Trigger "set data".
@@ -188,6 +188,15 @@ class SortableTable extends HTMLElement {
     }
 
     this.#sortHeader = th;
+    this.#sortAscending = ascending;
+
+    this.dispatchEvent(
+      new CustomEvent("sort", {
+        bubbles: true,
+        composed: true,
+        detail: { property, ascending },
+      }),
+    );
   }
 }
 
