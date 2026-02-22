@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+    </style>
+    <script src="sortable-table.ts" type="module"></script>
+    <script type="module">
+      function configureTable(elementName) {
+        const table = document.querySelector(elementName);
+        if (!table) return;
+        table.data = [
+          { make: "BMW", model: "Z3", year: 2002 },
+          { make: "MINI", model: "Cooper", year: 2015 },
+          { make: "Subaru", model: "Forester", year: 2025 },
+          { make: "Toyota", model: "RAV4", year: 2010 },
+        ];
+        table.addEventListener("change", (event) => {
+          console.log("index.html change: event.detail =", event.detail);
+          /*
+          console.log(
+            `The table is now sorted by ${property}`,
+            `${descending ? "descending" : "ascending"}.`,
+          );
+          */
+        });
+      }
+      configureTable("sortable-table");
+    </script>
+  </head>
+  <body>
+    <sortable-table
+      headings="Make,Model,Year"
+      properties="make,model,year"
+      title="My Cars table"
+    >
+      <h2>My Cars</h2>
+      <p slot="footnote">Some of these cars are no longer owned.</p>
+    </sortable-table>
+  </body>
+</html>
