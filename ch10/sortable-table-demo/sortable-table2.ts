@@ -53,6 +53,7 @@ class SortableTable2 extends HTMLElement {
   #headTr!: HTMLTableRowElement;
   #properties = "";
   #propertyArray: string[] = [];
+  #sortByClick = false;
   #sortHeader: HTMLTableCellElement | null = null;
   #sortProperty = "";
 
@@ -166,6 +167,7 @@ class SortableTable2 extends HTMLElement {
   }
 
   #handleSort(event: Event) {
+    this.#sortByClick = true;
     const th = event.target! as HTMLTableCellElement;
     const property = th.getAttribute("data-property")!;
     const sameProperty = property === this.#sortProperty;
@@ -241,13 +243,18 @@ class SortableTable2 extends HTMLElement {
     }
     this.#sortHeader = th;
 
-    this.dispatchEvent(
-      new CustomEvent("sort", {
-        bubbles: true,
-        composed: true,
-        detail: { property, descending },
-      }),
-    );
+    // This check satisfies the best practice
+    // "Do not dispatch events in response to the host setting a property."
+    if (this.#sortByClick) {
+      this.dispatchEvent(
+        new CustomEvent("sort", {
+          bubbles: true,
+          composed: true,
+          detail: { property, descending },
+        }),
+      );
+      this.#sortByClick = false;
+    }
   }
 }
 
