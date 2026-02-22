@@ -64,10 +64,9 @@ class SortableTable extends Wrec {
   `;
 
   makeHeadings(headings: string, propertyArray: string[]) {
-    const headingArray = headings.split(",");
-    return headingArray.map((heading, i) =>
-      this.makeTh(heading, i, propertyArray),
-    );
+    return headings
+      .split(",")
+      .map((heading, i) => this.makeTh(heading, propertyArray[i]));
   }
 
   makeRows(sortedData: LooseObject[], propertyArray: string[]) {
@@ -78,8 +77,7 @@ class SortableTable extends Wrec {
     return html`<td>${value}</td>`;
   }
 
-  makeTh(heading: string, index: number, propertyArray: string[]) {
-    const property = propertyArray[index];
+  makeTh(heading: string, property: string) {
     return html`
       <th
         data-property="${property}"
