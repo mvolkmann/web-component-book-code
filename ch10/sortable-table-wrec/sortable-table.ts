@@ -93,11 +93,6 @@ class SortableTable extends Wrec {
     `;
   }
 
-  sortIndicator(sortProperty: string, descending: boolean, property: string) {
-    if (property !== sortProperty) return "";
-    return this.descending ? "▼" : "▲";
-  }
-
   makeTr(obj: LooseObject, propertyArray: string[]) {
     return html`
       <tr>
@@ -120,6 +115,11 @@ class SortableTable extends Wrec {
             : 0;
       return descending ? -compare : compare;
     });
+  }
+
+  sortIndicator(sortProperty: string, descending: boolean, property: string) {
+    if (property !== sortProperty) return "";
+    return this.descending ? "▼" : "▲";
   }
 
   updateSort(property: string) {
