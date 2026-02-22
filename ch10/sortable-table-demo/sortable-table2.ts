@@ -1,3 +1,5 @@
+// This version of the component adds support for
+// the "sort-property" and "descending" attributes.
 type LooseObject = Record<string, unknown>;
 
 const template = document.createElement("template");
@@ -44,16 +46,18 @@ template.innerHTML = html`
   <slot name="footnote"></slot>
 `;
 
-class SortableTable extends HTMLElement {
+class SortableTable2 extends HTMLElement {
   #data: LooseObject[] = [];
-  #headings: string = "";
-  #properties: string = "";
+  #descending = false; // no sort yet
+  #headings = "";
+  #headTr!: HTMLTableRowElement;
+  #properties = "";
   #propertyArray: string[] = [];
-  #sortDescending = false;
   #sortHeader: HTMLTableCellElement | null = null;
+  #sortProperty = "";
 
   static get observedAttributes() {
-    return ["headings", "properties"];
+    return ["descending", "headings", "properties", "sort-property"];
   }
 
   constructor() {
@@ -66,6 +70,7 @@ class SortableTable extends HTMLElement {
     if (!this.hasAttribute("title")) {
       this.setAttribute("title", "sortable-table");
     }
+    this.#headTr = this.shadowRoot!.querySelector("table thead tr")!;
   }
 
   attributeChangedCallback(
@@ -73,15 +78,29 @@ class SortableTable extends HTMLElement {
     _oldValue: string,
     newValue: string,
   ) {
-    if (attrName === "headings") {
+    if (attrName === "descending") {
+      this.descending = Boolean(newValue);
+    } else if (attrName === "headings") {
       this.headings = newValue;
     } else if (attrName === "properties") {
       this.properties = newValue;
+    } else if (attrName === "sort-property") {
+      this.sortProperty = newValue;
     }
   }
 
+  /*************  ✨ Windsurf Command ⭐  *************/
+  /**
+   * Gets the data array.
+   * @returns {LooseObject[]} The data array.
+   */
+  /*******  00bad099-3cc8-4f92-8b58-54461ad374fe  *******/
   get data() {
     return this.#data;
+  }
+
+  get descending() {
+    return this.#descending;
   }
 
   get headings() {
@@ -90,6 +109,21 @@ class SortableTable extends HTMLElement {
 
   get properties() {
     return this.#properties;
+  }
+
+  get sortProperty() {
+    return this.#sortProperty;
+  }
+
+  set descending(descending: boolean) {
+    if (descending === this.#descending) return;
+    this.#descending = descending;
+    if (descending) {
+      this.setAttribute("descending", "descending");
+    } else {
+      this.removeAttribute("descending");
+    }
+    this.#sort();
   }
 
   set data(data: LooseObject[]) {
@@ -104,8 +138,8 @@ class SortableTable extends HTMLElement {
 
     this.#headings = headings;
     this.setAttribute("headings", headings);
-    const tr = this.shadowRoot!.querySelector("table thead tr")!;
-    tr!.innerHTML = "";
+    const tr = this.#headTr;
+    tr.innerHTML = "";
     const self = this;
     const values = headings.split(",").map((heading) => heading.trim());
     values.forEach((heading, i) => tr.appendChild(self.#makeTh(heading, i)));
@@ -122,6 +156,23 @@ class SortableTable extends HTMLElement {
     this.data = this.data;
   }
 
+  set sortProperty(property: string) {
+    if (property === this.#sortProperty) return;
+    this.#sortProperty = property;
+    this.setAttribute("sort-property", property);
+    this.#descending = false;
+    this.removeAttribute("descending");
+    this.#sort();
+  }
+
+  #handleSort(event: Event) {
+    const th = event.target! as HTMLTableCellElement;
+    const property = th.getAttribute("data-property")!;
+    const sameProperty = property === this.#sortProperty;
+    this.sortProperty = property;
+    if (sameProperty) this.descending = !this.#descending;
+  }
+
   #makeTd(dataIndex: number, prop: string) {
     const td = document.createElement("td");
     const value = this.data[dataIndex][prop];
@@ -134,7 +185,7 @@ class SortableTable extends HTMLElement {
     th.setAttribute("data-property", this.#propertyArray[index]);
     th.setAttribute("role", "button");
     th.setAttribute("title", `sort by ${heading}`);
-    th.addEventListener("click", this.#sort.bind(this));
+    th.addEventListener("click", this.#handleSort.bind(this));
 
     let span = document.createElement("span");
     span.textContent = heading;
@@ -155,10 +206,12 @@ class SortableTable extends HTMLElement {
     return tr;
   }
 
-  #sort(event: Event) {
-    let th = event.target! as HTMLTableCellElement;
-    const property = th.getAttribute("data-property")!;
-    const descending = th === this.#sortHeader ? !this.#sortDescending : false;
+  #sort() {
+    const property = this.#sortProperty;
+    const descending = this.#descending;
+    const th = this.#headTr.querySelector(
+      `th[data-property="${property}"]`,
+    ) as HTMLTableCellElement;
 
     this.#data.sort((a: LooseObject, b: LooseObject) => {
       const aValue = a[property];
@@ -186,9 +239,7 @@ class SortableTable extends HTMLElement {
     if (sortIndicator) {
       sortIndicator.textContent = descending ? "\u25BC" : "\u25B2";
     }
-
     this.#sortHeader = th;
-    this.#sortDescending = descending;
 
     this.dispatchEvent(
       new CustomEvent("sort", {
@@ -200,4 +251,4 @@ class SortableTable extends HTMLElement {
   }
 }
 
-customElements.define("sortable-table", SortableTable);
+customElements.define("sortable-table2", SortableTable2);
