@@ -107,7 +107,7 @@ class SortableTable extends Wrec {
     return data.toSorted((a: LooseObject, b: LooseObject) => {
       const aValue = a[sortProperty];
       const bValue = b[sortProperty];
-      let compare =
+      const compare =
         typeof aValue === "string"
           ? aValue.localeCompare(bValue as string)
           : typeof aValue === "number"
@@ -123,8 +123,8 @@ class SortableTable extends Wrec {
   }
 
   updateSort(property: string) {
-    const same = property === this.sortProperty;
     this.sortProperty = property;
+    const same = property === this.sortProperty;
     this.descending = same ? !this.descending : false;
   }
 }
