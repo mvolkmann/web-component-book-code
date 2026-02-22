@@ -11,16 +11,17 @@
       }
     </style>
     <script src="sortable-table.ts" type="module"></script>
+    <script src="sortable-table2.ts" type="module"></script>
     <script type="module">
-      const sortableTable = document.querySelector("sortable-table");
-      if (sortableTable) {
-        sortableTable.data = [
+      function configure(table) {
+        if (!table) return;
+        table.data = [
           { make: "BMW", model: "Z3", year: 2002 },
           { make: "MINI", model: "Cooper", year: 2015 },
           { make: "Subaru", model: "Forester", year: 2025 },
           { make: "Toyota", model: "RAV4", year: 2010 },
         ];
-        sortableTable.addEventListener("sort", (event) => {
+        table.addEventListener("sort", (event) => {
           const { property, descending } = event.detail;
           console.log(
             `The table is now sorted by ${property}`,
@@ -28,6 +29,8 @@
           );
         });
       }
+      configure(document.querySelector("sortable-table"));
+      configure(document.querySelector("sortable-table2"));
     </script>
   </head>
   <body>
@@ -40,5 +43,14 @@
       <h2>My Cars</h2>
       <p slot="footnote">Some of these cars are no longer owned.</p>
     </sortable-table>
+
+    <sortable-table2
+      headings="Make,Model,Year"
+      properties="make,model,year"
+      title="My Cars table"
+    >
+      <h2>My Cars</h2>
+      <p slot="footnote">Some of these cars are no longer owned.</p>
+    </sortable-table2>
   </body>
 </html>
