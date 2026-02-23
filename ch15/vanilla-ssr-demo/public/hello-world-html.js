@@ -13,8 +13,9 @@ export function content(name) {
 }
 
 export function ssr(name) {
+  const attr = name ? `name="${name}"` : "";
   return html`
-    <hello-world name="${name}">
+    <hello-world ${attr}">
       <template shadowrootmode="open">${content(name)}</template>
     </hello-world>
   `;
