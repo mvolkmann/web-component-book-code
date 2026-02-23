@@ -155,7 +155,7 @@ class SortableTable extends HTMLElement {
   }
 
   #sort(event: Event) {
-    let th = event.target! as HTMLTableCellElement;
+    const th = event.target! as HTMLTableCellElement;
     const property = th.getAttribute("data-property")!;
     const descending = th === this.#sortHeader ? !this.#sortDescending : false;
 
