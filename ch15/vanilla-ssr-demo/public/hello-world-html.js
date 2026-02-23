@@ -4,8 +4,7 @@ export function content(name) {
   return html`
     <style>
       :host {
-        color: red;
-        font-family: fantasy;
+        color: blue;
       }
     </style>
     <p>Hello, ${name || "World"}!</p>
@@ -15,7 +14,7 @@ export function content(name) {
 export function ssr(name) {
   const attr = name ? `name="${name}"` : "";
   return html`
-    <hello-world ${attr}">
+    <hello-world ${attr}>
       <template shadowrootmode="open">${content(name)}</template>
     </hello-world>
   `;
