@@ -171,7 +171,7 @@ class SortableTable extends HTMLElement {
       return descending ? -compare : compare;
     });
 
-    // Trigger "set data".
+    // Trigger the data setter method.
     this.data = this.data;
 
     // Clear sort indicator from previously selected header.
