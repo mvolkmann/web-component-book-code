@@ -96,7 +96,9 @@ class SortableTable extends HTMLElement {
     this.#data = data;
     const tbody = this.shadowRoot!.querySelector("table tbody")!;
     tbody.innerHTML = "";
-    data.forEach((obj) => tbody.appendChild(this.#makeTr(obj)));
+    for (const obj of data) {
+      tbody.appendChild(this.#makeTr(obj));
+    }
   }
 
   set headings(headings: string) {
