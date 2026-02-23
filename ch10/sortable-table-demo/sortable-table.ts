@@ -96,7 +96,7 @@ class SortableTable extends HTMLElement {
     this.#data = data;
     const tbody = this.shadowRoot!.querySelector("table tbody")!;
     tbody.innerHTML = "";
-    data.forEach((_obj, index) => tbody.appendChild(this.#makeTr(index)));
+    data.forEach((obj) => tbody.appendChild(this.#makeTr(obj)));
   }
 
   set headings(headings: string) {
@@ -107,7 +107,10 @@ class SortableTable extends HTMLElement {
     const tr = this.shadowRoot!.querySelector("table thead tr")!;
     tr!.innerHTML = "";
     const values = headings.split(",").map((heading) => heading.trim());
-    values.forEach((heading, i) => tr.appendChild(this.#makeTh(heading, i)));
+    values.forEach((heading, i) => {
+      const property = this.#propertyArray[i];
+      tr.appendChild(this.#makeTh(heading, property));
+    });
   }
 
   set properties(properties: string) {
@@ -121,16 +124,15 @@ class SortableTable extends HTMLElement {
     this.data = this.data;
   }
 
-  #makeTd(dataIndex: number, prop: string) {
+  #makeTd(obj: LooseObject, prop: string) {
     const td = document.createElement("td");
-    const value = this.data[dataIndex][prop];
-    td.textContent = String(value);
+    td.textContent = String(obj[prop]);
     return td;
   }
 
-  #makeTh(heading: string, index: number) {
+  #makeTh(heading: string, property: string) {
     const th = document.createElement("th");
-    th.setAttribute("data-property", this.#propertyArray[index]);
+    th.setAttribute("data-property", property);
     th.setAttribute("role", "button");
     th.setAttribute("title", `sort by ${heading}`);
     th.addEventListener("click", this.#sort.bind(this));
@@ -146,10 +148,10 @@ class SortableTable extends HTMLElement {
     return th;
   }
 
-  #makeTr(dataIndex: number) {
+  #makeTr(obj: LooseObject) {
     const tr = document.createElement("tr");
     for (const propName of this.#propertyArray) {
-      tr.appendChild(this.#makeTd(dataIndex, propName));
+      tr.appendChild(this.#makeTd(obj, propName));
     }
     return tr;
   }
