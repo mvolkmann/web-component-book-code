@@ -6,7 +6,7 @@
     <script type="module">
       const button = document.querySelector("button");
       button.addEventListener("click", async () => {
-        const res = await fetch("http://localhost:3000/greet?name=SSR");
+        const res = await fetch("greet?name=SSR");
         const html = await res.text();
         document.getElementById("greetings").innerHTML = html;
       });
