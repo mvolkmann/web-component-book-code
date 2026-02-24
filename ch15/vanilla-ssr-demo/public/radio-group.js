@@ -1,10 +1,7 @@
 import { content } from "./radio-group-html.js";
 
 class RadioGroup extends HTMLElement {
-  labels = "";
-  name = "";
-  values = "";
-  #value = ""; // managed by a getter and setter
+  #value = "";
 
   static get observedAttributes() {
     return ["value"];
@@ -12,39 +9,19 @@ class RadioGroup extends HTMLElement {
 
   constructor() {
     super();
-    if (!this.shadowRoot) {
-      this.attachShadow({ mode: "open" });
-    }
+    if (!this.shadowRoot) this.attachShadow({ mode: "open" });
   }
 
-  attributeChangedCallback(attrName, oldValue, newValue) {
-    if (attrName === "value") {
-      this.#value = newValue;
-
-      let radioButton = this.shadowRoot.querySelector(
-        `input[name="${this.name}"][value="${oldValue}"]`
-      );
-      radioButton?.removeAttribute("checked");
-
-      radioButton = this.shadowRoot.querySelector(
-        `input[name="${this.name}"][value="${newValue}"]`
-      );
-      radioButton?.setAttribute("checked", "checked");
-      if (radioButton) radioButton.checked = true;
-    }
+  attributeChangedCallback(attrName, _oldValue, newValue) {
+    if (attrName === "value") this.value = newValue;
   }
 
   connectedCallback() {
-    this.labels = this.getAttribute("labels");
-    this.name = this.getAttribute("name");
-    this.#value = this.getAttribute("value");
-    this.values = this.getAttribute("values");
-
     this.shadowRoot.innerHTML = content({
-      labels: this.labels,
-      name: this.name,
+      labels: this.getAttribute("labels"),
+      name: this.getAttribute("name"),
       value: this.#value,
-      values: this.values,
+      values: this.getAttribute("values"),
     });
 
     this.shadowRoot.addEventListener("change", (e) => {
@@ -56,7 +33,7 @@ class RadioGroup extends HTMLElement {
           bubbles: true,
           composed: true, // to bubble outside the shadow DOM
           detail: { label, value },
-        })
+        }),
       );
     });
   }
