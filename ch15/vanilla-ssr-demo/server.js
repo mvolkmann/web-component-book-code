@@ -11,10 +11,9 @@ app.use("/*", serveStatic({ root: "./public" }));
 
 app.get("/hello-world", (c) => {
   const name = c.req.query("name");
-  return c.html(`
+  return c.html(html`
     <div>The following content was server-side rendered:</div>
-    ${helloWorldSSR()}
-    ${helloWorldSSR(name)}
+    ${helloWorldSSR()} ${helloWorldSSR(name)}
   `);
 });
 
