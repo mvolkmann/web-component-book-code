@@ -1,0 +1,22 @@
+{
+  "name": "lit-ssr-demo",
+  "type": "module",
+  "scripts": {
+    "build:client": "vite build",
+    "build:server": "vite build --config vite.config.server.ts",
+    "build": "npm run build:client && npm run build:server",
+    "clean": "rm -rf dist",
+    "start": "node dist/server.js",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.9",
+    "@lit-labs/ssr": "^4.0.0",
+    "hono": "^4.12.2",
+    "lit": "^3.3.2"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "vite": "^7.3.1"
+  }
+}
