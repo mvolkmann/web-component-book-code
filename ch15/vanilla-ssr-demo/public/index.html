@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <title>Vanilla Web Component SSR</title>
@@ -9,18 +9,6 @@
       // will not have any functionality (clicking does nothing).
       import "./hello-world.js";
       import "./radio-group.js";
-
-      // Listen for changes to the color selected
-      // in the first `radio-group` custom element, and change
-      // the color of all `hello-world` custom elements to match.
-      const radioGroup = document.querySelector("radio-group[name=color]");
-      radioGroup.addEventListener("change", (e) => {
-        const { value } = e.detail;
-        const helloWorlds = document.querySelectorAll("hello-world");
-        for (const helloWorld of helloWorlds) {
-          helloWorld.style.color = value;
-        }
-      });
 
       const button1 = document.getElementById("hello-world-btn");
       button1.addEventListener("click", async () => {
@@ -36,6 +24,18 @@
 
         // This avoids the warning described above.
         document.getElementById("greetings").setHTMLUnsafe(html);
+      });
+
+      // Listen for changes to the color selected
+      // in the first `radio-group` custom element, and change
+      // the color of all `hello-world` custom elements to match.
+      const radioGroup = document.querySelector("radio-group[name=color]");
+      radioGroup.addEventListener("change", (e) => {
+        const { value } = e.detail;
+        const helloWorlds = document.querySelectorAll("hello-world");
+        for (const helloWorld of helloWorlds) {
+          helloWorld.style.color = value;
+        }
       });
 
       const button2 = document.getElementById("radio-group-btn");
