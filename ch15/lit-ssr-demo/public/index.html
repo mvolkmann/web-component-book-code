@@ -4,22 +4,20 @@
     <title>Lit SSR Demo</title>
     <script type="module" src="./hello-world.js"></script>
     <script type="module">
-      // Listen for Greet button clicks.
       const button = document.querySelector("button");
       button.addEventListener("click", async () => {
-        // Get HTML from the greet endpoint.
         const res = await fetch("http://localhost:3000/greet?name=SSR");
         const html = await res.text();
-        // Insert the HTML after the Greet button.
-        button.insertAdjacentHTML("afterend", html);
+        document.getElementById("greetings").innerHTML = html;
       });
     </script>
   </head>
   <body>
     <p>The following components are client-side rendered:</p>
     <hello-world></hello-world>
-    <hello-world name="Mark"></hello-world>
+    <hello-world name="CSR"></hello-world>
 
     <button>Greet</button>
+    <div id="greetings"></div>
   </body>
 </html>
