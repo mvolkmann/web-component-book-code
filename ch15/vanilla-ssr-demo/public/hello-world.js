@@ -1,8 +1,8 @@
 import { content } from "./hello-world-html.js";
-//const supportsDSD = HTMLElement.prototype.hasOwnProperty("attachInternals");
 
 class HelloWorld extends HTMLElement {
-  p; // reference to p element
+  #name = "World";
+  #p;
 
   static get observedAttributes() {
     return ["name"];
@@ -11,25 +11,16 @@ class HelloWorld extends HTMLElement {
   constructor() {
     super();
 
-    // This is only needed if this component
-    // will contribute data to form submissions.
-    //if (supportsDSD) this.attachInternals();
-
     // When using Declarative Shadow DOM,
     // this.shadowRoot will already be set.
     if (!this.shadowRoot) {
       this.attachShadow({ mode: "open" });
-      // this.name triggers a call to "get name" below.
-      this.shadowRoot.innerHTML = content(this.name);
+      this.shadowRoot.innerHTML = content(this.#name);
     }
   }
 
-  attributeChangedCallback(name) {
-    // The first call to this will occur before connectedCallback.
-    // At that time, this.p will be undefined.
-    if (this.p && name === "name") {
-      this.p.textContent = `Hello, ${this.name}!`;
-    }
+  attributeChangedCallback(name, _oldValue, value) {
+    if (name === "name") this.name = value;
   }
 
   connectedCallback() {
@@ -43,11 +34,14 @@ class HelloWorld extends HTMLElement {
   }
 
   get name() {
-    return this.getAttribute("name") || "World";
+    return this.#name;
   }
 
   set name(value) {
+    if (value === this.#name) return;
+    this.#name = value;
     this.setAttribute("name", value);
+    if (this.p) this.p.textContent = `Hello, ${this.name}!`;
   }
 }
 
