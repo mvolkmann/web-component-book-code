@@ -5,13 +5,6 @@ import { customElement, property } from "lit/decorators.js";
 export class HelloWorld extends LitElement {
   @property({ type: String, reflect: true }) name = "World";
   render() {
-    return html`
-      <style>
-        :host {
-          font-family: sans-serif;
-        }
-      </style>
-      <p>Hello, ${this.name}!</p>
-    `;
+    return html`<p>Hello, ${this.name}!</p>`;
   }
 }
