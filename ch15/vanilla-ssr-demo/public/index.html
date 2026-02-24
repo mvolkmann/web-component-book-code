@@ -22,6 +22,14 @@
           helloWorld.style.color = value;
         }
       });
+
+      const target = document.getElementById("radio-group-ssr");
+      target.addEventListener("htmx:afterSettle", (event) => {
+        const radioGroup = event.target.querySelector("radio-group");
+        radioGroup.addEventListener("change", (e) => {
+          alert(`You selected ${e.detail.label}.`);
+        });
+      });
     </script>
   </head>
   <body>
