@@ -46,6 +46,8 @@ class RadioGroup extends HTMLElement {
     if (v === this.#value) return;
     this.#value = v;
     this.setAttribute("value", v);
+
+    // Update the checked property in all the radio buttons.
     const inputs = this.shadowRoot.querySelectorAll("input");
     for (const input of inputs) {
       input.checked = input.value === v;
