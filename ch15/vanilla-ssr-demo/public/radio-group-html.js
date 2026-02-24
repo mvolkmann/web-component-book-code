@@ -16,7 +16,7 @@ function makeButtons(props) {
             ${thisValue === value ? "checked" : ""}
           />
           <label for="${thisValue}">${labelArray[index]}</label>
-        </div>`
+        </div>`,
     )
     .join("");
 }
@@ -24,7 +24,7 @@ function makeButtons(props) {
 export function content(props) {
   return html`
     <style>
-      div {
+      :host {
         display: flex;
         gap: 1rem;
 
@@ -39,7 +39,7 @@ export function content(props) {
         margin: 0;
       }
     </style>
-    <div>${makeButtons(props)}</div>
+    ${makeButtons(props)}
   `;
 }
 

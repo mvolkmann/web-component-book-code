@@ -24,10 +24,9 @@ class HelloWorld extends HTMLElement {
   }
 
   connectedCallback() {
-    this.p = this.shadowRoot.querySelector("p");
+    const p = (this.#p = this.shadowRoot.querySelector("p"));
 
     // When the p element is clicked, change its text to uppercase.
-    const p = this.p;
     p.addEventListener("click", () => {
       p.textContent = p.textContent.toUpperCase();
     });
@@ -41,7 +40,7 @@ class HelloWorld extends HTMLElement {
     if (value === this.#name) return;
     this.#name = value;
     this.setAttribute("name", value);
-    if (this.p) this.p.textContent = `Hello, ${this.name}!`;
+    this.#p.textContent = `Hello, ${this.name}!`;
   }
 }
 
