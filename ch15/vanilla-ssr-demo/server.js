@@ -43,9 +43,7 @@ app.get("/radio-group", (c) => {
   const name = c.req.query("name");
   const value = c.req.query("value");
   const values = c.req.query("values");
-  return c.html(`
-    ${radioGroupSSR({ labels, name, value, values })}
-  `);
+  return c.html(radioGroupSSR({ labels, name, value, values }));
 });
 
 serve(app, (info) => {
