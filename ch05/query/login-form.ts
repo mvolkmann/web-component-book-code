@@ -3,11 +3,11 @@ import { customElement, property, query, state } from "lit/decorators.js";
 
 @customElement("login-form")
 export class LoginForm extends LitElement {
-  @property() username = "";
-  @property() password = "";
   @query("#username") userNameInput?: HTMLInputElement;
   @query("#password") passwordInput?: HTMLInputElement;
   @state() errorMessage = "";
+  @state() password = "";
+  @state() username = "";
 
   static styles = css`
     .error-message {
