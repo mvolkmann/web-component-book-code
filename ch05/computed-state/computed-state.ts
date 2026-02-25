@@ -34,34 +34,39 @@ export class ComputedState extends LitElement {
     }
   }
 
-  render() {
+  makeSlider(
+    label: string,
+    name: string,
+    property: number,
+    handler: (e: Event) => void,
+  ) {
     return html`
       <div>
-        <label for="width">Width</label>
+        <label for="width">${label}</label>
         <input
-          id="width"
+          id=${name}
           type="range"
           min="1"
           max="10"
-          .value=${this.width}
-          @input=${this.handleWidthInput}
+          .value=${property}
+          @input=${handler}
         />
-        <span>${this.width}</span>
+        <span>${property}</span>
       </div>
+    `;
+  }
+
+  render() {
+    return html`
+      ${this.makeSlider("Width", "width", this.width, this.handleWidthInput)}
+      ${this.makeSlider(
+        "Height",
+        "height",
+        this.height,
+        this.handleHeightInput,
+      )}
       <div>
-        <label for="height">Height</label>
-        <input
-          id="height"
-          type="range"
-          min="1"
-          max="10"
-          .value=${this.height}
-          @input=${this.handleHeightInput}
-        />
-        <span>${this.height}</span>
-      </div>
-      <div>
-        <label for="area">Area</label>
+        <label>Area</label>
         <span>${this.area}</span>
       </div>
     `;
