@@ -1,8 +1,8 @@
 import { css, html, LitElement } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 
-@customElement("computed-state")
-export class ComputedState extends LitElement {
+@customElement("area-calculator")
+export class AreaCalculator extends LitElement {
   @property({ type: Number }) height = 1;
   @property({ type: Number }) width = 1;
   @state() area = 0;
@@ -28,18 +28,14 @@ export class ComputedState extends LitElement {
     this.width = Number((e.target as HTMLInputElement).value);
   }
 
-  updated(changedProperties: Map<string, unknown>) {
-    if (changedProperties.has("height") || changedProperties.has("width")) {
+  updated(changedProps: Map<string, unknown>) {
+    if (changedProps.has("height") || changedProps.has("width")) {
       this.area = this.height * this.width;
     }
   }
 
-  makeSlider(
-    label: string,
-    name: string,
-    property: number,
-    handler: (e: Event) => void,
-  ) {
+  makeSlider(label: string, property: number, handler: (e: Event) => void) {
+    const name = label.toLowerCase();
     return html`
       <div>
         <label for="width">${label}</label>
@@ -58,13 +54,8 @@ export class ComputedState extends LitElement {
 
   render() {
     return html`
-      ${this.makeSlider("Width", "width", this.width, this.handleWidthInput)}
-      ${this.makeSlider(
-        "Height",
-        "height",
-        this.height,
-        this.handleHeightInput,
-      )}
+      ${this.makeSlider("Width", this.width, this.handleWidthInput)}
+      ${this.makeSlider("Height", this.height, this.handleHeightInput)}
       <div>
         <label>Area</label>
         <span>${this.area}</span>
