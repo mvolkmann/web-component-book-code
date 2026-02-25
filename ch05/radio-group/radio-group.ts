@@ -69,7 +69,7 @@ export class RadioGroup extends LitElement {
                   name=${this.name}
                   value=${v}
                   .checked=${v === this.value}
-                  @Change="{this.handleChange}"
+                  @change=${this.handleChange}
                 />
                 <label for=${v}>${labelArray[index]}</label>
               </div>
