@@ -3,7 +3,12 @@ import { customElement, property } from "lit/decorators.js";
 
 @customElement("radio-group")
 export class RadioGroup extends LitElement {
+  static formAssociated = true;
+
   static styles = css`
+    :host {
+      display: block;
+    }
     fieldset {
       border-color: var(--border-color, "black");
       display: inline-flex;
@@ -27,7 +32,6 @@ export class RadioGroup extends LitElement {
         }
       }
     }
-
     input {
       margin: 0;
     }

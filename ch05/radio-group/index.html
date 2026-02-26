@@ -7,20 +7,25 @@
         --direction: column;
         --gap: 0;
         --legend-color: blue;
+        margin-bottom: 0.5rem;
       }
     </style>
     <script src="radio-group.ts" type="module"></script>
   </head>
   <body>
-    <radio-group
-      name="color"
-      labels="Red,Green,Blue"
-      legend="Color"
-      value="blue"
-      values="red,green,blue"
-    >
-      <div slot="before">Select a color for your new car.</div>
-      <div slot="after">Don't choose a color you will regret.</div>
-    </radio-group>
+    <form>
+      <radio-group
+        name="color"
+        labels="Red,Green,Blue"
+        legend="Color"
+        value="red"
+        values="red,green,blue"
+      >
+        <div slot="before">Select a color for your new car.</div>
+        <div slot="after">Don't choose a color you will regret.</div>
+      </radio-group>
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+    </form>
   </body>
 </html>
