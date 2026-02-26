@@ -3,7 +3,7 @@ import { customElement, query, state } from "lit/decorators.js";
 
 @customElement("login-form")
 export class LoginForm extends LitElement {
-  @query("#username") userNameInput?: HTMLInputElement;
+  @query("#username") usernameInput?: HTMLInputElement;
   @query("#password") passwordInput?: HTMLInputElement;
   @state() errorMessage = "";
 
@@ -30,8 +30,13 @@ export class LoginForm extends LitElement {
   `;
 
   private onSubmit(event: Event) {
-    const { value } = this.passwordInput!;
-    if (value === "password") {
+    const username = this.usernameInput!.value;
+    const password = this.passwordInput!.value;
+    if (username === "username") {
+      event.preventDefault();
+      this.errorMessage = "Username not allowed!";
+      this.usernameInput?.focus();
+    } else if (password === "password") {
       event.preventDefault();
       this.errorMessage = "Password not allowed!";
       this.passwordInput?.focus();
