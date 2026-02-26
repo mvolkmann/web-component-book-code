@@ -3,8 +3,8 @@ import { customElement, query, state } from "lit/decorators.js";
 
 @customElement("change-password")
 export class ChangePassword extends LitElement {
-  @query("#confirm") confirmInput?: HTMLInputElement;
-  @query("#password") passwordInput?: HTMLInputElement;
+  @query("#confirm") confirmInput!: HTMLInputElement;
+  @query("#password") passwordInput!: HTMLInputElement;
   @state() errorMessage = "";
 
   static styles = css`
@@ -30,18 +30,21 @@ export class ChangePassword extends LitElement {
   `;
 
   private onSubmit(event: Event) {
-    const password = this.passwordInput!.value;
-    const confirm = this.confirmInput!.value;
+    const password = this.passwordInput.value;
+    const confirm = this.confirmInput.value;
     if (confirm !== password) {
       event.preventDefault();
-      this.errorMessage = "Passwords do not match.";
-      this.confirmInput?.focus();
+      this.confirmInput.setCustomValidity("Passwords do not match.");
     }
   }
 
   render() {
     return html`
       <form @submit=${this.onSubmit} method="POST" action="/login">
+        <div>
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" required />
+        </div>
         <div>
           <label for="password">New Password</label>
           <input
