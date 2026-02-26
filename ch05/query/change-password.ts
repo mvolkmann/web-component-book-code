@@ -27,10 +27,8 @@ export class ChangePassword extends LitElement {
   private validatePasswords(event: Event) {
     const password = this.passwordInput.value;
     const confirm = this.confirmInput.value;
-    if (confirm !== password) {
-      event.preventDefault();
-      this.confirmInput.setCustomValidity("Passwords do not match.");
-    }
+    const message = confirm === password ? "" : "Passwords do not match.";
+    this.confirmInput.setCustomValidity(message);
   }
 
   render() {
