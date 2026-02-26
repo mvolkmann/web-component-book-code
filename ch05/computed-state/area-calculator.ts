@@ -38,7 +38,7 @@ export class AreaCalculator extends LitElement {
     const name = label.toLowerCase();
     return html`
       <div>
-        <label for="width">${label}</label>
+        <label for="${name}">${label}</label>
         <input
           id=${name}
           type="range"
