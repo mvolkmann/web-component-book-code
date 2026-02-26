@@ -5,13 +5,8 @@ import { customElement, query, state } from "lit/decorators.js";
 export class ChangePassword extends LitElement {
   @query("#confirm") confirmInput!: HTMLInputElement;
   @query("#password") passwordInput!: HTMLInputElement;
-  @state() errorMessage = "";
 
   static styles = css`
-    .error-message {
-      color: red;
-      font-weight: bold;
-    }
     form {
       display: inline-flex;
       flex-direction: column;
@@ -59,7 +54,6 @@ export class ChangePassword extends LitElement {
           <label for="confirm">Confirm Password</label>
           <input id="confirm" type="password" required />
         </div>
-        <div class="error-message">${this.errorMessage}</div>
         <button type="submit">Submit</button>
       </form>
     `;
