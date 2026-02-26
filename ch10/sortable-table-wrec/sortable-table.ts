@@ -119,12 +119,12 @@ class SortableTable extends Wrec {
 
   sortIndicator(sortProperty: string, descending: boolean, property: string) {
     if (property !== sortProperty) return "";
-    return this.descending ? "▼" : "▲";
+    return descending ? "▼" : "▲";
   }
 
   updateSort(property: string) {
-    this.sortProperty = property;
     const same = property === this.sortProperty;
+    this.sortProperty = property;
     this.descending = same ? !this.descending : false;
   }
 }
