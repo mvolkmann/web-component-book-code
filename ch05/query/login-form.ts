@@ -40,14 +40,11 @@ export class LoginForm extends LitElement {
   }
 
   private validate(event: Event) {
-    if (this.username === "") {
-      this.errorMessage = "Username is required.";
-      this.userNameInput?.focus();
-    } else if (this.password === "") {
-      this.errorMessage = "Password is required.";
-      this.passwordInput?.focus();
-    } else if (this.password.length < 8) {
+    if (this.password.length < 8) {
       this.errorMessage = "Password must be at least 8 characters.";
+      this.passwordInput?.focus();
+    } else if (this.password === this.username) {
+      this.errorMessage = "Password cannot be the same as username.";
       this.passwordInput?.focus();
     } else {
       this.errorMessage = "";
@@ -64,6 +61,7 @@ export class LoginForm extends LitElement {
           <input
             id="username"
             name="username"
+            required
             .value=${this.username}
             @input=${this.handleUsernameInput}
           />
@@ -73,6 +71,8 @@ export class LoginForm extends LitElement {
           <input
             id="password"
             name="password"
+            required
+            minlength="8"
             type="password"
             .value=${this.password}
             @input=${this.handlePasswordInput}
