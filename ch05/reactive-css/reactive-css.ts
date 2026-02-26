@@ -3,13 +3,11 @@ import { customElement, property } from "lit/decorators.js";
 
 @customElement("reactive-css")
 export class ReactiveCSS extends LitElement {
-  static styles = [
-    css`
-      p {
-        font-size: var(--font-size);
-      }
-    `,
-  ];
+  static styles = css`
+    p {
+      font-size: var(--font-size);
+    }
+  `;
 
   @property() size = 18;
 

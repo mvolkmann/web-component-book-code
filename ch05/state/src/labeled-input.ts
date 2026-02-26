@@ -5,15 +5,13 @@ import { MyContext, myContext } from "./my-context.js";
 
 @customElement("labeled-input")
 export class LabeledInput extends LitElement {
-  static styles = [
-    css`
-      :host {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-    `,
-  ];
+  static styles = css`
+    :host {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  `;
 
   @property({ type: String }) id = "";
   @property({ type: String }) label = "";

@@ -3,37 +3,35 @@ import { customElement, property } from "lit/decorators.js";
 
 @customElement("radio-group")
 export class RadioGroup extends LitElement {
-  styles = [
-    css`
-      fieldset {
-        border-color: var(--border-color, "black");
-        display: inline-flex;
-        flex-direction: column;
-        align-items: start;
-        gap: 0.5rem;
+  static styles = css`
+    fieldset {
+      border-color: var(--border-color, "black");
+      display: inline-flex;
+      flex-direction: column;
+      align-items: start;
+      gap: 0.5rem;
 
-        > legend {
-          color: var(--legend-color, "black");
-        }
+      > legend {
+        color: var(--legend-color, "black");
+      }
+
+      > div {
+        display: flex;
+        flex-direction: var(--direction, row);
+        gap: var(--gap, 1rem);
 
         > div {
           display: flex;
-          flex-direction: var(--direction, row);
-          gap: var(--gap, 1rem);
-
-          > div {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-          }
+          align-items: center;
+          gap: 0.25rem;
         }
       }
+    }
 
-      input {
-        margin: 0;
-      }
-    `,
-  ];
+    input {
+      margin: 0;
+    }
+  `;
 
   @property({ type: String, reflect: true }) labels = "";
   @property({ type: String, reflect: true }) legend = "";
