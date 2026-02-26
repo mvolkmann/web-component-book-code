@@ -140,5 +140,10 @@ export class SortableTable extends LitElement {
     const same = property === this.sortProperty;
     this.sortProperty = property;
     this.descending = same ? !this.descending : false;
+    this.dispatchEvent(
+      new CustomEvent("sort", {
+        detail: { property, descending: this.descending },
+      }),
+    );
   }
 }
