@@ -62,7 +62,7 @@ export class SortableTable extends LitElement {
         data-property="${property}"
         role="button"
         title="${`sort by ${heading}`}"
-        onClick="this.updateSort('${property}')"
+        @click=${() => this.updateSort(property)}
       >
         <span>${heading}</span>
         <span class="sort-indicator">
