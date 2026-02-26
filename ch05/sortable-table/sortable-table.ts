@@ -66,7 +66,11 @@ export class SortableTable extends LitElement {
       >
         <span>${heading}</span>
         <span class="sort-indicator">
-          this.sortIndicator(this.sortProperty, this.descending, '${property}')
+          ${this.sortIndicator(
+            this.sortProperty,
+            this.descending,
+            "${property}",
+          )}
         </span>
       </th>
     `;
@@ -90,7 +94,7 @@ export class SortableTable extends LitElement {
           </tr>
         </thead>
         <tbody>
-          this.makeRows(this.sortedData, this.propertyArray)
+          ${this.makeRows(this.sortedData, this.propertyArray)}
         </tbody>
       </table>
       <slot name="footnote"></slot>
@@ -116,6 +120,24 @@ export class SortableTable extends LitElement {
   sortIndicator(sortProperty: string, descending: boolean, property: string) {
     if (property !== sortProperty) return "";
     return this.descending ? "▼" : "▲";
+  }
+
+  updated(changedProps: Map<string, unknown>) {
+    if (changedProps.has("properties")) {
+      this.propertyArray = this.properties.split(",");
+    }
+
+    if (
+      changedProps.has("data") ||
+      changedProps.has("sortProperty") ||
+      changedProps.has("descending")
+    ) {
+      this.sortedData = this.sort(
+        this.data,
+        this.sortProperty,
+        this.descending,
+      );
+    }
   }
 
   updateSort(property: string) {
