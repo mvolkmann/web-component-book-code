@@ -6,6 +6,8 @@ export class LoginForm extends LitElement {
   @query("#username") userNameInput?: HTMLInputElement;
   @query("#password") passwordInput?: HTMLInputElement;
   @state() errorMessage = "";
+  @state() password = "";
+  @state() username = "";
 
   static styles = css`
     .error-message {
@@ -29,30 +31,60 @@ export class LoginForm extends LitElement {
     }
   `;
 
+  private handlePasswordInput(e: Event) {
+    this.password = (e.target as HTMLInputElement).value;
+  }
+
+  private handleUsernameInput(e: Event) {
+    this.username = (e.target as HTMLInputElement).value;
+  }
+
   private onSubmit(event: Event) {
-    const { value } = this.passwordInput!;
-    if (value === "password") {
+    const form = event.target as HTMLFormElement;
+    if (!form.checkValidity()) {
       event.preventDefault();
-      this.errorMessage = "Password not allowed!";
-      this.passwordInput?.focus();
+      form.reportValidity();
+      return;
     }
+
+    /*
+    if (this.password.length < 8) {
+      this.errorMessage = "Password must be at least 8 characters.";
+      this.passwordInput?.focus();
+    } else if (this.password === this.username) {
+      this.errorMessage = "Password cannot be the same as username.";
+      this.passwordInput?.focus();
+    } else {
+      this.errorMessage = "";
+    }
+    if (this.errorMessage) event.preventDefault();
+    */
   }
 
   render() {
     return html`
+      <h1>Login</h1>
       <form @submit=${this.onSubmit} method="POST" action="/login">
         <div>
           <label for="username">Username</label>
-          <input id="username" name="username" type="text" required />
+          <input
+            id="username"
+            name="username"
+            required
+            .value=${this.username}
+            @input=${this.handleUsernameInput}
+          />
         </div>
         <div>
           <label for="password">Password</label>
           <input
             id="password"
             name="password"
-            type="password"
             required
             minlength="8"
+            type="password"
+            .value=${this.password}
+            @input=${this.handlePasswordInput}
           />
         </div>
         <div class="error-message">${this.errorMessage}</div>
