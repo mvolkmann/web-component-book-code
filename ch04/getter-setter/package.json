@@ -1,5 +1,5 @@
 {
-  "name": "time-method",
+  "name": "getter-setter",
   "scripts": {
     "start": "vite-node ./demo.ts"
   },
