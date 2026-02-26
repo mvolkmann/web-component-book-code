@@ -24,7 +24,7 @@ export class ChangePassword extends LitElement {
     }
   `;
 
-  private onSubmit(event: Event) {
+  private validatePasswords(event: Event) {
     const password = this.passwordInput.value;
     const confirm = this.confirmInput.value;
     if (confirm !== password) {
@@ -35,7 +35,7 @@ export class ChangePassword extends LitElement {
 
   render() {
     return html`
-      <form @submit=${this.onSubmit} method="POST" action="/change-password">
+      <form method="POST" action="/change-password">
         <div>
           <label for="username">Username</label>
           <input id="username" name="username" type="text" required />
@@ -48,11 +48,17 @@ export class ChangePassword extends LitElement {
             type="password"
             required
             minlength="8"
+            @change=${this.validatePasswords}
           />
         </div>
         <div>
           <label for="confirm">Confirm Password</label>
-          <input id="confirm" type="password" required />
+          <input
+            id="confirm"
+            type="password"
+            required
+            @change=${this.validatePasswords}
+          />
         </div>
         <button type="submit">Submit</button>
       </form>
