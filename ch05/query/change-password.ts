@@ -35,7 +35,7 @@ export class ChangePassword extends LitElement {
 
   render() {
     return html`
-      <form @submit=${this.onSubmit} method="POST" action="/login">
+      <form @submit=${this.onSubmit} method="POST" action="/change-password">
         <div>
           <label for="username">Username</label>
           <input id="username" name="username" type="text" required />
