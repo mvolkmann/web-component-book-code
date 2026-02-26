@@ -118,7 +118,7 @@ export class SortableTable extends LitElement {
     return descending ? "▼" : "▲";
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  willUpdate(changedProps: Map<string, unknown>) {
     if (changedProps.has("properties")) {
       this.propertyArray = this.properties.split(",");
     }

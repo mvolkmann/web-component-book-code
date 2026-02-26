@@ -28,7 +28,7 @@ export class AreaCalculator extends LitElement {
     this.width = Number((e.target as HTMLInputElement).value);
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  willUpdate(changedProps: Map<string, unknown>) {
     if (changedProps.has("height") || changedProps.has("width")) {
       this.area = this.height * this.width;
     }
