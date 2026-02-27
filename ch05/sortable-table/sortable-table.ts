@@ -42,14 +42,14 @@ export class SortableTable extends LitElement {
     }
   `;
 
-  makeHeadings(headings: string, propertyArray: string[]) {
-    return headings
+  makeHeadings() {
+    return this.headings
       .split(",")
-      .map((heading, i) => this.makeTh(heading, propertyArray[i]));
+      .map((heading, i) => this.makeTh(heading, this.propertyArray[i]));
   }
 
-  makeRows(sortedData: LooseObject[], propertyArray: string[]) {
-    return sortedData.map((obj) => this.makeTr(obj, propertyArray));
+  makeRows() {
+    return this.sortedData.map((obj) => this.makeTr(obj));
   }
 
   makeTd(value: unknown) {
@@ -65,17 +65,15 @@ export class SortableTable extends LitElement {
         @click=${() => this.updateSort(property)}
       >
         <span>${heading}</span>
-        <span class="sort-indicator">
-          ${this.sortIndicator(this.sortProperty, this.descending, property)}
-        </span>
+        <span class="sort-indicator"> ${this.sortIndicator(property)} </span>
       </th>
     `;
   }
 
-  makeTr(obj: LooseObject, propertyArray: string[]) {
+  makeTr(obj: LooseObject) {
     return html`
       <tr>
-        ${propertyArray.map((propName) => this.makeTd(obj[propName]))}
+        ${this.propertyArray.map((propName) => this.makeTd(obj[propName]))}
       </tr>
     `;
   }
@@ -86,21 +84,22 @@ export class SortableTable extends LitElement {
       <table>
         <thead>
           <tr>
-            ${this.makeHeadings(this.headings, this.propertyArray)}
+            ${this.makeHeadings()}
           </tr>
         </thead>
         <tbody>
-          ${this.makeRows(this.sortedData, this.propertyArray)}
+          ${this.makeRows()}
         </tbody>
       </table>
       <slot name="footnote"></slot>
     `;
   }
 
-  sort(data: LooseObject[], sortProperty: string, descending: boolean) {
-    if (!sortProperty) return data;
+  sort() {
+    const sortProperty = this.sortProperty;
+    if (!sortProperty) return this.data;
 
-    return data.toSorted((a: LooseObject, b: LooseObject) => {
+    return this.data.toSorted((a: LooseObject, b: LooseObject) => {
       const aValue = a[sortProperty];
       const bValue = b[sortProperty];
       const compare =
@@ -109,13 +108,13 @@ export class SortableTable extends LitElement {
           : typeof aValue === "number"
             ? aValue - (bValue as number)
             : 0;
-      return descending ? -compare : compare;
+      return this.descending ? -compare : compare;
     });
   }
 
-  sortIndicator(sortProperty: string, descending: boolean, property: string) {
-    if (property !== sortProperty) return "";
-    return descending ? "▼" : "▲";
+  sortIndicator(property: string) {
+    if (property !== this.sortProperty) return "";
+    return this.descending ? "▼" : "▲";
   }
 
   willUpdate(changedProps: Map<string, unknown>) {
@@ -128,11 +127,7 @@ export class SortableTable extends LitElement {
       changedProps.has("sortProperty") ||
       changedProps.has("descending")
     ) {
-      this.sortedData = this.sort(
-        this.data,
-        this.sortProperty,
-        this.descending,
-      );
+      this.sortedData = this.sort();
     }
   }
 
