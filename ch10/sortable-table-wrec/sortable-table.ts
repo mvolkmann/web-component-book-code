@@ -64,6 +64,7 @@ class SortableTable extends Wrec {
   `;
 
   makeHeadings(headings: string, propertyArray: string[]) {
+    if (propertyArray.length === 0) return "";
     return headings
       .split(",")
       .map((heading, i) => this.makeTh(heading, propertyArray[i]));
@@ -124,8 +125,10 @@ class SortableTable extends Wrec {
 
   updateSort(property: string) {
     const same = property === this.sortProperty;
-    this.sortProperty = property;
-    this.descending = same ? !this.descending : false;
+    this.batchSet({
+      sortProperty: property,
+      descending: same ? !this.descending : false,
+    });
   }
 }
 

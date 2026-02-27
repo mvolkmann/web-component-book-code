@@ -33,10 +33,10 @@ export class RadioGroup extends HTMLElement {
   }
 
   connectedCallback() {
-    if (!this.labels) this.labels = this.getAttribute("labels");
-    if (!this.name) this.name = this.getAttribute("name");
-    if (!this.#value) this.#value = this.getAttribute("value");
-    if (!this.values) this.values = this.getAttribute("values");
+    this.labels = this.getAttribute("labels");
+    this.name = this.getAttribute("name");
+    this.#value = this.getAttribute("value");
+    this.values = this.getAttribute("values");
 
     this.render();
 

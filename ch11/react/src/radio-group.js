@@ -33,9 +33,10 @@ export class RadioGroup extends HTMLElement {
   }
 
   connectedCallback() {
+    this.name = this.getAttribute("name");
+    this.#value = this.getAttribute("value");
+    // React sets these properties and removes the attributes before this.
     if (!this.labels) this.labels = this.getAttribute("labels");
-    if (!this.name) this.name = this.getAttribute("name");
-    if (!this.#value) this.#value = this.getAttribute("value");
     if (!this.values) this.values = this.getAttribute("values");
 
     this.render();
@@ -76,6 +77,7 @@ export class RadioGroup extends HTMLElement {
   }
 
   makeButtons() {
+    console.log("radio-group.js makeButtons: entered");
     const labelArray = this.labels.split(",");
     const valueArray = this.values.split(",").map((value) => value.trim());
     return valueArray
