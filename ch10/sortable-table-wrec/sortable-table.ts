@@ -73,6 +73,10 @@ class SortableTable extends Wrec {
     return sortedData.map((obj) => this.makeTr(obj, propertyArray));
   }
 
+  makeTd(value: unknown) {
+    return html`<td>${value}</td>`;
+  }
+
   makeTh(heading: string, property: string) {
     return html`
       <th
@@ -92,7 +96,7 @@ class SortableTable extends Wrec {
   makeTr(obj: LooseObject, propertyArray: string[]) {
     return html`
       <tr>
-        ${propertyArray.map((propName) => `<td>${obj[propName]}</td>`)}
+        ${propertyArray.map((propName) => this.makeTd(obj[propName]))}
       </tr>
     `;
   }
