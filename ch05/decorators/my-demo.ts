@@ -18,7 +18,7 @@ export class MyDemo extends LitElement {
   @property({ type: Boolean }) showYellow = false;
   @query("#scroll-container") scrollContainer!: HTMLDivElement;
   // Adding "declare" here prevents the error "Property 'buttons' has
-  // no initializer and is not definitely assigned in the constructor."
+  // no initializer and isn't definitely assigned in the constructor."
   @queryAll("button") declare buttons: HTMLButtonElement[];
   @queryAssignedElements() declare assignedElements: HTMLElement[];
   @queryAssignedNodes() declare assignedNodes: Node[];
