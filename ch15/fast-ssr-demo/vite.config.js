@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 
 const clientConfig = defineConfig({
   build: {
+    emptyOutDir: false,
     outDir: "public",
     rollupOptions: {
       input: "src/hello-world.ts",
