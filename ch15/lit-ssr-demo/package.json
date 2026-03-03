@@ -6,8 +6,7 @@
     "build:server": "vite build --config vite.config.server.ts",
     "build": "npm run build:client && npm run build:server",
     "clean": "rm -rf dist",
-    "start": "node dist/server.js",
-    "preview": "vite preview"
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.9",
