@@ -1,23 +1,10 @@
 import { defineConfig } from "vite";
 
-const clientConfig = defineConfig({
-  build: {
-    emptyOutDir: false,
-    outDir: "public",
-    rollupOptions: {
-      input: "src/hello-world.ts",
-      output: {
-        entryFileNames: "[name].js",
-      },
-    },
-  },
-});
-
-const serverConfig = defineConfig({
+export default defineConfig({
   build: {
     outDir: "dist",
     rollupOptions: {
-      input: "src/server.ts",
+      input: ["src/hello-world.ts", "src/server.ts"],
       output: {
         format: "esm",
       },
@@ -35,8 +22,4 @@ const serverConfig = defineConfig({
     },
     target: "node24",
   },
-});
-
-export default defineConfig(({ mode }) => {
-  return mode === "client" ? clientConfig : serverConfig;
 });

@@ -2,6 +2,13 @@
 <html lang="en">
   <head>
     <title>FAST SSR Demo</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "@microsoft/fast-element": "https://cdn.jsdelivr.net/npm/@microsoft/fast-element/dist/fast-element.min.js"
+        }
+      }
+    </script>
     <script type="module" src="/hello-world.js"></script>
     <script type="module">
       // Listen for Greet button clicks.
@@ -10,8 +17,9 @@
         // Get HTML from the greet endpoint.
         const res = await fetch("/greet?name=Mark");
         const html = await res.text();
-        // Insert the HTML after the Greet button.
-        button.insertAdjacentHTML("afterend", html);
+        // Insert the HTML in the div that follows the button.
+        const div = document.getElementById("greetings");
+        div.setHTMLUnsafe(html);
       });
     </script>
   </head>
@@ -21,5 +29,6 @@
     <hello-world name="Mark"></hello-world>
 
     <button>Greet</button>
+    <div id="greetings"></div>
   </body>
 </html>
