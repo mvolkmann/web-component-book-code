@@ -1,7 +1,7 @@
 {
   "name": "fast-ssr-demo",
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && cp node_modules/@microsoft/fast-element/dist/fast-element.min.js dist",
     "clean": "rm -rf dist",
     "dev": "node dist/server.js"
   },
