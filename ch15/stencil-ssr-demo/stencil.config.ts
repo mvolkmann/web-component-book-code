@@ -26,4 +26,7 @@ export const config: Config = {
   testing: {
     browserHeadless: 'shell',
   },
+  devServer: {
+    openBrowser: false,
+  },
 };

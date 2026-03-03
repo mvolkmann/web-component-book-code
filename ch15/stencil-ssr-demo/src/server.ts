@@ -12,7 +12,7 @@ app.use('/*', serveStatic({ root: './dist' }));
 app.get('/greet', async (c: Context) => {
   const name = c.req.query('name');
   const template = html`
-    <p>The following are server-side rendered Stencil components.</p>
+    <p>The following components are server-side rendered:</p>
     <hello-world></hello-world>
     <hello-world name=${name}></hello-world>
   `;

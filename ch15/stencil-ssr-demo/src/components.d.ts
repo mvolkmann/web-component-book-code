@@ -66,17 +66,27 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+
+    interface HelloWorldAttributes {
+        "name": string;
+    }
+    interface MyComponentAttributes {
+        "first": string;
+        "middle": string;
+        "last": string;
+    }
+
     interface IntrinsicElements {
-        "hello-world": HelloWorld;
-        "my-component": MyComponent;
+        "hello-world": Omit<HelloWorld, keyof HelloWorldAttributes> & { [K in keyof HelloWorld & keyof HelloWorldAttributes]?: HelloWorld[K] } & { [K in keyof HelloWorld & keyof HelloWorldAttributes as `attr:${K}`]?: HelloWorldAttributes[K] } & { [K in keyof HelloWorld & keyof HelloWorldAttributes as `prop:${K}`]?: HelloWorld[K] };
+        "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "hello-world": LocalJSX.HelloWorld & JSXBase.HTMLAttributes<HTMLHelloWorldElement>;
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "hello-world": LocalJSX.IntrinsicElements["hello-world"] & JSXBase.HTMLAttributes<HTMLHelloWorldElement>;
+            "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }
 }
