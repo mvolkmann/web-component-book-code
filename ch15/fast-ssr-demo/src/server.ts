@@ -6,7 +6,7 @@ import { streamHTML } from "./stream.js";
 const html = String.raw;
 const app = new Hono();
 
-app.use("/*", serveStatic({ root: "./public" }));
+app.use("/*", serveStatic({ root: "./dist" }));
 
 // This returns HTML that includes server-side rendered FAST components.
 app.get("/greet", async (c: Context) => {

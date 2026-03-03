@@ -1,14 +1,14 @@
-i<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
-    <title>Stencil SSR Demo</title>
-    <script type="module" src="/build/stencil-ssr-demo.esm.js"></script>
+    <title>FAST SSR Demo</title>
+    <script type="module" src="/hello-world.js"></script>
     <script type="module">
       // Listen for Greet button clicks.
       const button = document.querySelector("button");
       button.addEventListener("click", async () => {
         // Get HTML from the greet endpoint.
-        const res = await fetch("http://localhost:3000/greet?name=Mark");
+        const res = await fetch("/greet?name=Mark");
         const html = await res.text();
         // Insert the HTML after the Greet button.
         button.insertAdjacentHTML("afterend", html);
