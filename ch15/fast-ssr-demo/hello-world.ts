@@ -6,7 +6,4 @@ export class HelloWorld extends FASTElement {
   @attr name: string = "World";
 }
 
-HelloWorld.define({
-  name: "hello-world",
-  template,
-});
+HelloWorld.define({ name: "hello-world", template });
