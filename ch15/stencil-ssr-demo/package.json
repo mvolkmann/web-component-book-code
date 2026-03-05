@@ -13,10 +13,6 @@
       "import": "./dist/stencil-ssr-demo/stencil-ssr-demo.esm.js",
       "require": "./dist/stencil-ssr-demo/stencil-ssr-demo.cjs.js"
     },
-    "./my-component": {
-      "types": "./dist/components/my-component.d.ts",
-      "import": "./dist/components/my-component.js"
-    },
     "./loader": {
       "types": "./loader/index.d.ts",
       "import": "./loader/index.js",
