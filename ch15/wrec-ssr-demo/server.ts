@@ -1,3 +1,4 @@
+import "./dom-setup.js";
 import { type Context, Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";

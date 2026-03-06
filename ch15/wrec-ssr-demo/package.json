@@ -5,8 +5,7 @@
     "build:server": "vite build --ssr",
     "build": "npm run build:client && npm run build:server",
     "clean": "rm -rf dist",
-    "dev": "node --import ./dom-setup.js dist/server.js",
-    "dev-save": "node dist/server.js"
+    "dev": "node dist/server.js"
   },
   "type": "module",
   "devDependencies": {

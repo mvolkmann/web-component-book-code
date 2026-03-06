@@ -7,7 +7,7 @@ export default defineConfig(({ isSsrBuild }) => {
       build: {
         emptyOutDir: false,
         rollupOptions: {
-          input: "server.ts",
+          input: ["dom-setup.js", "server.ts"],
           output: {
             format: "es",
           },
