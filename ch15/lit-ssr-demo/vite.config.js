@@ -10,6 +10,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         "hello-world": "src/hello-world.ts",
+        index: "src/index.js",
       },
       output: {
         // Default is "assets/{name}-{hash}.js" which we do not want.

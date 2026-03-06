@@ -2,16 +2,8 @@
 <html lang="en">
   <head>
     <title>Lit SSR Demo</title>
+    <script type="module" src="./index.js"></script>
     <script type="module" src="./hello-world.js"></script>
-    <script type="module">
-      const button = document.querySelector("button");
-      button.addEventListener("click", async () => {
-        const res = await fetch("greet?name=SSR");
-        const html = await res.text();
-        const target = document.getElementById("ssr-content");
-        target.setHTMLUnsafe(html);
-      });
-    </script>
   </head>
   <body>
     <p>The following components are client-side rendered:</p>
