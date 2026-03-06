@@ -1,4 +1,3 @@
-import path from "path";
 import { defineConfig } from "vite";
 
 export default defineConfig(({ isSsrBuild }) => {
@@ -7,7 +6,8 @@ export default defineConfig(({ isSsrBuild }) => {
       build: {
         emptyOutDir: false,
         rollupOptions: {
-          input: ["server.ts", "wrec-ssr.js"],
+          external: "linkedom",
+          input: "server.ts",
           output: {
             format: "es",
           },
