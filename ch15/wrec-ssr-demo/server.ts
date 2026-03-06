@@ -1,3 +1,4 @@
+import "./dom-setup.js";
 import { type Context, Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
@@ -11,10 +12,9 @@ app.use("/*", serveStatic({ root: "./dist" }));
 // This returns HTML that includes server-side rendered FAST components.
 app.get("/greet", async (c: Context) => {
   const name = c.req.query("name");
-  const template = html`
+  let template = html`
     <p>The following components are server-side rendered:</p>
-    <hello-world></hello-world>
-    <hello-world name=${name}></hello-world>
+    ${HelloWorld.ssr()} ${HelloWorld.ssr({ name: "SSR" })}
   `;
   return c.html(template);
 });
