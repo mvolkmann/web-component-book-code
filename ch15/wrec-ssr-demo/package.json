@@ -1,7 +1,9 @@
 {
   "name": "wrec-ssr-demo",
   "scripts": {
-    "build": "vite build",
+    "build:client": "vite build --config vite.config.client.js",
+    "build:server": "vite build --config vite.config.server.js",
+    "build": "npm run build:client && npm run build:server",
     "clean": "rm -rf dist",
     "dev": "node dist/server.js"
   },
