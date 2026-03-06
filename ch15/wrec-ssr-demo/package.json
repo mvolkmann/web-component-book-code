@@ -1,0 +1,17 @@
+{
+  "name": "wrec-ssr-demo",
+  "scripts": {
+    "build": "vite build",
+    "clean": "rm -rf dist",
+    "dev": "node dist/server.js"
+  },
+  "type": "module",
+  "devDependencies": {
+    "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.11",
+    "hono": "^4.12.5",
+    "wrec": "^0.20.14"
+  }
+}
