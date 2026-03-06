@@ -8,7 +8,8 @@
       button.addEventListener("click", async () => {
         const res = await fetch("greet?name=SSR");
         const html = await res.text();
-        document.getElementById("greetings").innerHTML = html;
+        const target = document.getElementById("ssr-content");
+        target.setHTMLUnsafe(html);
       });
     </script>
   </head>
@@ -16,8 +17,7 @@
     <p>The following components are client-side rendered:</p>
     <hello-world></hello-world>
     <hello-world name="CSR"></hello-world>
-
     <button>Greet</button>
-    <div id="greetings"></div>
+    <div id="ssr-content"></div>
   </body>
 </html>
