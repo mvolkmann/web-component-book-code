@@ -28,12 +28,11 @@
     "loader/"
   ],
   "scripts": {
-    "build": "stencil build",
+    "build": "stencil build && vite build",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
-    "build:server": "vite build",
     "dev": "node dist/server.mjs"
   },
   "devDependencies": {

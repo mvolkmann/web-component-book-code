@@ -4813,52 +4813,8 @@ class HelloWorld {
     }; }
 }
 
-function format(first, middle, last) {
-    return (first || '') + (middle ? ` ${middle}` : '') + (last ? ` ${last}` : '');
-}
-
-const myComponentCss = () => `:host{display:block}`;
-
-class MyComponent {
-    constructor(hostRef) {
-        registerInstance(this, hostRef);
-    }
-    /**
-     * The first name
-     */
-    first;
-    /**
-     * The middle name
-     */
-    middle;
-    /**
-     * The last name
-     */
-    last;
-    getText() {
-        return format(this.first, this.middle, this.last);
-    }
-    render() {
-        return hAsync("div", { key: '87518bde3acc437e7c1d21ced9ee6f7c0fe47553' }, "Hello, World! I'm ", this.getText());
-    }
-    static get style() { return myComponentCss(); }
-    static get cmpMeta() { return {
-        "$flags$": 521,
-        "$tagName$": "my-component",
-        "$members$": {
-            "first": [1],
-            "middle": [1],
-            "last": [1]
-        },
-        "$listeners$": undefined,
-        "$lazyBundleId$": "-",
-        "$attrsToReflect$": []
-    }; }
-}
-
 registerComponents([
   HelloWorld,
-  MyComponent,
 ]);
 
 exports.hydrateApp = hydrateApp;

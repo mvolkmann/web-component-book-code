@@ -10,8 +10,8 @@
         // Get HTML from the greet endpoint.
         const res = await fetch('http://localhost:3000/greet?name=SSR');
         const html = await res.text();
-        // Insert the HTML after the Greet button.
-        button.insertAdjacentHTML('afterend', html);
+        const target = document.getElementById('ssr-content');
+        target.setHTMLUnsafe(html);
       });
     </script>
   </head>
@@ -21,5 +21,6 @@
     <hello-world name="CSR"></hello-world>
 
     <button>Greet</button>
+    <div id="ssr-content"></div>
   </body>
 </html>
