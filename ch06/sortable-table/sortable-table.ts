@@ -73,9 +73,7 @@ export class SortableTable extends LitElement {
   makeTr(obj: LooseObject) {
     return html`
       <tr>
-        ${this.propertyArray
-          .map((propName) => this.makeTd(obj[propName]))
-          .join("")}
+        ${this.propertyArray.map((propName) => this.makeTd(obj[propName]))}
       </tr>
     `;
   }
