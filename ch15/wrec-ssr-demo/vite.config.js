@@ -6,7 +6,6 @@ export default defineConfig(({ isSsrBuild }) => {
       build: {
         emptyOutDir: false,
         rollupOptions: {
-          external: "linkedom",
           input: "server.ts",
           output: {
             format: "es",

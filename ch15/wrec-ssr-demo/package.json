@@ -1,9 +1,7 @@
 {
   "name": "wrec-ssr-demo",
   "scripts": {
-    "build:client": "vite build",
-    "build:server": "vite build --ssr",
-    "build": "npm run build:client && npm run build:server",
+    "build": "vite build && vite build --ssr",
     "clean": "rm -rf dist",
     "dev": "node dist/server.js"
   },
@@ -14,6 +12,6 @@
   "dependencies": {
     "@hono/node-server": "^1.19.11",
     "hono": "^4.12.5",
-    "wrec": "^0.20.17"
+    "wrec": "^0.20.19"
   }
 }
