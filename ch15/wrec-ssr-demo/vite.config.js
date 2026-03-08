@@ -6,6 +6,7 @@ export default defineConfig(({ isSsrBuild }) => {
       build: {
         emptyOutDir: false,
         rollupOptions: {
+          external: ["node-parse-html", "xss"],
           input: "server.ts",
           output: {
             format: "es",
