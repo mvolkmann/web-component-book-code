@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script type="module">
+      /*
+      const btn = document.getElementById("download-button");
+      const fns = {
+        lit: () => import("lit"),
+        //"@lit/decorators.js": () => import("@lit/decorators.js"),
+        "@stencil/core": () => import("@stencil/core"),
+        "@microsoft/fast-element": () => import("@microsoft/fast-element"),
+        "solid-element": () => import("solid-element"),
+        wrec: () => import("wrec"),
+      };
+      async function download(event) {
+        const name = event.target.textContent;
+        console.log("importing", name);
+        const result = await fns[name]();
+        console.log("imported", result);
+      }
+      const buttons = document.querySelectorAll("button");
+      for (const button of buttons) {
+        button.addEventListener("click", download);
+      }
+      */
+      import { LitElement } from "lit";
+      import { Wrec } from "wrec";
+      console.log("index.html : Wrec =", Wrec);
+    </script>
+  </head>
+  <body>
+    <h1>Download Sizes</h1>
+    <!-- <button>lit</button>
+    <button>@lit/decorators.js</button>
+    <button>@stencil/core</button>
+    <button>@microsoft/fast-element</button>
+    <button>solid-element</button>
+    <button>wrec</button> -->
+  </body>
+</html>

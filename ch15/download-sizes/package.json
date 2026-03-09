@@ -1,0 +1,21 @@
+{
+  "name": "download-sizes",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "type": "module",
+  "dependencies": {
+    "@microsoft/fast-element": "^2.10.1",
+    "@stencil/core": "^4.43.2",
+    "babel-preset-solid": "^1.9.10",
+    "lit": "^3.3.2",
+    "solid-element": "^1.9.1",
+    "vite": "^7.3.1",
+    "wrec": "^0.21.4"
+  },
+  "devDependencies": {
+    "rollup-plugin-visualizer": "^7.0.1"
+  }
+}
