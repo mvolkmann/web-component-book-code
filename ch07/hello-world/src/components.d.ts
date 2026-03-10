@@ -6,87 +6,88 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface GoogleButton {
+    }
     interface HelloWorld {
         /**
           * @default 'World'
          */
         "name": string;
     }
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface RadioGroup {
+        "labels": string;
+        "legend": string;
+        "name": string;
+        "value": string;
+        "values": string;
     }
 }
 declare global {
+    interface HTMLGoogleButtonElement extends Components.GoogleButton, HTMLStencilElement {
+    }
+    var HTMLGoogleButtonElement: {
+        prototype: HTMLGoogleButtonElement;
+        new (): HTMLGoogleButtonElement;
+    };
     interface HTMLHelloWorldElement extends Components.HelloWorld, HTMLStencilElement {
     }
     var HTMLHelloWorldElement: {
         prototype: HTMLHelloWorldElement;
         new (): HTMLHelloWorldElement;
     };
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLRadioGroupElement extends Components.RadioGroup, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLRadioGroupElement: {
+        prototype: HTMLRadioGroupElement;
+        new (): HTMLRadioGroupElement;
     };
     interface HTMLElementTagNameMap {
+        "google-button": HTMLGoogleButtonElement;
         "hello-world": HTMLHelloWorldElement;
-        "my-component": HTMLMyComponentElement;
+        "radio-group": HTMLRadioGroupElement;
     }
 }
 declare namespace LocalJSX {
+    interface GoogleButton {
+    }
     interface HelloWorld {
         /**
           * @default 'World'
          */
         "name"?: string;
     }
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface RadioGroup {
+        "labels"?: string;
+        "legend"?: string;
+        "name"?: string;
+        "value"?: string;
+        "values"?: string;
     }
 
     interface HelloWorldAttributes {
         "name": string;
     }
-    interface MyComponentAttributes {
-        "first": string;
-        "middle": string;
-        "last": string;
+    interface RadioGroupAttributes {
+        "labels": string;
+        "legend": string;
+        "name": string;
+        "value": string;
+        "values": string;
     }
 
     interface IntrinsicElements {
+        "google-button": GoogleButton;
         "hello-world": Omit<HelloWorld, keyof HelloWorldAttributes> & { [K in keyof HelloWorld & keyof HelloWorldAttributes]?: HelloWorld[K] } & { [K in keyof HelloWorld & keyof HelloWorldAttributes as `attr:${K}`]?: HelloWorldAttributes[K] } & { [K in keyof HelloWorld & keyof HelloWorldAttributes as `prop:${K}`]?: HelloWorld[K] };
-        "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
+        "radio-group": Omit<RadioGroup, keyof RadioGroupAttributes> & { [K in keyof RadioGroup & keyof RadioGroupAttributes]?: RadioGroup[K] } & { [K in keyof RadioGroup & keyof RadioGroupAttributes as `attr:${K}`]?: RadioGroupAttributes[K] } & { [K in keyof RadioGroup & keyof RadioGroupAttributes as `prop:${K}`]?: RadioGroup[K] };
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "google-button": LocalJSX.IntrinsicElements["google-button"] & JSXBase.HTMLAttributes<HTMLGoogleButtonElement>;
             "hello-world": LocalJSX.IntrinsicElements["hello-world"] & JSXBase.HTMLAttributes<HTMLHelloWorldElement>;
-            "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "radio-group": LocalJSX.IntrinsicElements["radio-group"] & JSXBase.HTMLAttributes<HTMLRadioGroupElement>;
         }
     }
 }

@@ -13,10 +13,6 @@
       "import": "./dist/hello-world/hello-world.esm.js",
       "require": "./dist/hello-world/hello-world.cjs.js"
     },
-    "./my-component": {
-      "import": "./dist/components/my-component.js",
-      "types": "./dist/components/my-component.d.ts"
-    },
     "./loader": {
       "import": "./loader/index.js",
       "require": "./loader/index.cjs",
