@@ -6,6 +6,16 @@
     <title>Stencil Component Starter</title>
 
     <script type="module" src="/build/my-components.esm.js"></script>
+    <script type="module">
+      const radioGroup = document.querySelector('radio-group');
+      radioGroup.addEventListener('valueChanged', event => {
+        const color = event.detail;
+        const elements = document.querySelectorAll('hello-world');
+        for (const element of elements) {
+          element.style.color = color;
+        }
+      });
+    </script>
   </head>
   <body>
     <hello-world></hello-world>

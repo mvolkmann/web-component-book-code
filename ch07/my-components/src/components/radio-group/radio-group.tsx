@@ -1,4 +1,4 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Prop, Watch } from '@stencil/core';
 
 @Component({
   tag: 'radio-group',
@@ -12,9 +12,17 @@ export class RadioGroup {
   @Prop({ mutable: true }) value: string;
   @Prop() values: string;
 
-  private handleChange = (event: Event) => {
-    this.value = (event.target as HTMLInputElement).value;
+  @Event() valueChanged: EventEmitter<string>;
+
+  handleChange = (event: Event) => {
+    const { value } = event.target as HTMLInputElement;
+    if (value !== this.value) this.value = value;
   };
+
+  @Watch('value')
+  dispatch() {
+    this.valueChanged.emit(this.value);
+  }
 
   render() {
     const labelArray = this.labels.split(',');

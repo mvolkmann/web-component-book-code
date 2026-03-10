@@ -14,20 +14,6 @@ export namespace Components {
          */
         "name": string;
     }
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
-    }
     interface RadioGroup {
         "labels": string;
         "legend": string;
@@ -35,6 +21,10 @@ export namespace Components {
         "value": string;
         "values": string;
     }
+}
+export interface RadioGroupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLRadioGroupElement;
 }
 declare global {
     interface HTMLGoogleButtonElement extends Components.GoogleButton, HTMLStencilElement {
@@ -49,13 +39,18 @@ declare global {
         prototype: HTMLHelloWorldElement;
         new (): HTMLHelloWorldElement;
     };
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLRadioGroupElementEventMap {
+        "valueChanged": string;
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
-    };
     interface HTMLRadioGroupElement extends Components.RadioGroup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLRadioGroupElementEventMap>(type: K, listener: (this: HTMLRadioGroupElement, ev: RadioGroupCustomEvent<HTMLRadioGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLRadioGroupElementEventMap>(type: K, listener: (this: HTMLRadioGroupElement, ev: RadioGroupCustomEvent<HTMLRadioGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLRadioGroupElement: {
         prototype: HTMLRadioGroupElement;
@@ -64,7 +59,6 @@ declare global {
     interface HTMLElementTagNameMap {
         "google-button": HTMLGoogleButtonElement;
         "hello-world": HTMLHelloWorldElement;
-        "my-component": HTMLMyComponentElement;
         "radio-group": HTMLRadioGroupElement;
     }
 }
@@ -77,35 +71,17 @@ declare namespace LocalJSX {
          */
         "name"?: string;
     }
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
-    }
     interface RadioGroup {
         "labels"?: string;
         "legend"?: string;
         "name"?: string;
+        "onValueChanged"?: (event: RadioGroupCustomEvent<string>) => void;
         "value"?: string;
         "values"?: string;
     }
 
     interface HelloWorldAttributes {
         "name": string;
-    }
-    interface MyComponentAttributes {
-        "first": string;
-        "middle": string;
-        "last": string;
     }
     interface RadioGroupAttributes {
         "labels": string;
@@ -118,7 +94,6 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "google-button": GoogleButton;
         "hello-world": Omit<HelloWorld, keyof HelloWorldAttributes> & { [K in keyof HelloWorld & keyof HelloWorldAttributes]?: HelloWorld[K] } & { [K in keyof HelloWorld & keyof HelloWorldAttributes as `attr:${K}`]?: HelloWorldAttributes[K] } & { [K in keyof HelloWorld & keyof HelloWorldAttributes as `prop:${K}`]?: HelloWorld[K] };
-        "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
         "radio-group": Omit<RadioGroup, keyof RadioGroupAttributes> & { [K in keyof RadioGroup & keyof RadioGroupAttributes]?: RadioGroup[K] } & { [K in keyof RadioGroup & keyof RadioGroupAttributes as `attr:${K}`]?: RadioGroupAttributes[K] } & { [K in keyof RadioGroup & keyof RadioGroupAttributes as `prop:${K}`]?: RadioGroup[K] };
     }
 }
@@ -128,7 +103,6 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "google-button": LocalJSX.IntrinsicElements["google-button"] & JSXBase.HTMLAttributes<HTMLGoogleButtonElement>;
             "hello-world": LocalJSX.IntrinsicElements["hello-world"] & JSXBase.HTMLAttributes<HTMLHelloWorldElement>;
-            "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "radio-group": LocalJSX.IntrinsicElements["radio-group"] & JSXBase.HTMLAttributes<HTMLRadioGroupElement>;
         }
     }
