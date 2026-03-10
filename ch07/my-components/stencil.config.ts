@@ -4,7 +4,7 @@ export const config: Config = {
   devServer: {
     openBrowser: false,
   },
-  namespace: 'hello-world',
+  namespace: 'my-components',
   outputTargets: [
     {
       type: 'dist',
