@@ -82,4 +82,17 @@ export class RadioGroup extends LitElement {
       </fieldset>
     `;
   }
+
+  updated(changedProperties: Map<string, any>) {
+    for (const [name, oldValue] of changedProperties) {
+      const newValue = this[name as keyof this];
+      this.dispatchEvent(
+        new CustomEvent("value-changed", {
+          detail: { name, value: newValue, oldValue },
+          bubbles: true,
+          composed: true,
+        }),
+      );
+    }
+  }
 }
