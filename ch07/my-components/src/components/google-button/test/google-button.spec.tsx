@@ -10,7 +10,7 @@ describe('google-button', () => {
     expect(page.root).toEqualHtml(`
       <google-button>
         <mock:shadow-root>
-          <slot></slot>
+          <button>Google It</button>
         </mock:shadow-root>
       </google-button>
     `);

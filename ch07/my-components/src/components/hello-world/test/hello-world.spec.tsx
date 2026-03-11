@@ -8,9 +8,9 @@ describe('hello-world', () => {
       html: `<hello-world></hello-world>`,
     });
     expect(page.root).toEqualHtml(`
-      <hello-world>
+      <hello-world name="World">
         <mock:shadow-root>
-          <slot></slot>
+          <p>Hello, World!</p>
         </mock:shadow-root>
       </hello-world>
     `);
