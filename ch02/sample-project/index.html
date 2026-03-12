@@ -16,6 +16,10 @@
         import(/* @vite-ignore */ `${path}/${component}/${component}.js`);
       }
     </script>
+    <!--
+    This uses the autoloader to import components on demand.
+    <script type="module" src="/web-awesome/webawesome.loader.js"></script>
+    -->
     <script type="module" src="script.js"></script>
   </head>
   <body>
