@@ -12,8 +12,40 @@ describe('radio-group', () => {
         values="red,green,blue"
       ></radio-group>
     `);
-
     const element = await page.find('radio-group');
     expect(element).toHaveClass('hydrated');
+
+    const data = await page.evaluate(async () => {
+      const element = document.querySelector('radio-group');
+      const { shadowRoot } = element;
+      const inputElements = shadowRoot.querySelectorAll('input[type="radio"]');
+      const values = [...(inputElements as any)].map(input => input.value);
+      const labelElements = shadowRoot.querySelectorAll('label');
+      const labels = [...(labelElements as any)].map(label => label.textContent);
+      const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+      await sleep(1000);
+      const slotBefore = shadowRoot.querySelector('slot[name="before"]') as HTMLSlotElement;
+      const slotAfter = shadowRoot.querySelector('slot[name="after"]') as HTMLSlotElement;
+      //TODO: Why is this not getting the text content of the slots?
+      const slotText = (slot: HTMLSlotElement) =>
+        slot
+          .assignedNodes()
+          .map(node => node.textContent)
+          .join('')
+          .trim();
+      return {
+        after: slotText(slotAfter),
+        before: slotText(slotBefore),
+        labels,
+        values,
+      };
+    });
+
+    console.log('radio-group.e2e.ts : data =', data);
+    const { after, before, labels, values } = data;
+    expect(after).toBe("Don't choose a color you will regret.");
+    expect(before).toBe('Select a color for your new car.');
+    expect(labels.join(',')).toBe('Red,Green,Blue');
+    expect(values.join(',')).toBe('red,green,blue');
   });
 });

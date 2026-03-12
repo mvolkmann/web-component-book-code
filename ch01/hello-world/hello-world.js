@@ -8,15 +8,15 @@ class HelloWorld extends HTMLElement {
     const name = this.getAttribute("name") ?? "World";
     this.shadowRoot.innerHTML = `
       <style>
-        div {
+        button {
           color: blue;
         }
       </style>
-      <div>Hello, ${name}!</div>
+      <button>Hello, ${name}!</button>
     `;
     this.addEventListener("click", () => {
-      const div = this.shadowRoot.querySelector("div");
-      const { style } = div;
+      const button = this.shadowRoot.querySelector("button");
+      const { style } = button;
       style.color = style.color === "red" ? "blue" : "red";
     });
   }
