@@ -31,6 +31,7 @@
     "build": "stencil build",
     "coverage": "stencil test --spec --e2e --coverage",
     "docs": "stencil build --docs",
+    "format": "prettier --write 'src/**/*.{css,html,js,ts,tsx}'",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.e2e": "stencil test --e2e -- --watch",
@@ -44,6 +45,7 @@
     "@types/node": "^22.13.5",
     "jest": "^29.7.0",
     "jest-cli": "^29.7.0",
+    "prettier": "^3.8.1",
     "puppeteer": "^24.3.0"
   },
   "license": "MIT"

@@ -15,15 +15,37 @@
           element.style.color = color;
         }
       });
+
+      const table = document.querySelector('sortable-table');
+      if (table) {
+        table.data = [
+          { make: 'BMW', model: 'Z3', year: 2002 },
+          { make: 'MINI', model: 'Cooper', year: 2015 },
+          { make: 'Subaru', model: 'Forester', year: 2025 },
+          { make: 'Toyota', model: 'RAV4', year: 2010 },
+        ];
+        table.addEventListener('tableSorted', event => {
+          const { descending, property } = event.detail;
+          const order = descending ? 'descending' : 'ascending';
+          console.log(`sorted on ${property} ${order}`);
+        });
+      }
     </script>
   </head>
   <body>
     <hello-world></hello-world>
     <hello-world name="Mark"></hello-world>
+
     <google-button></google-button>
+
     <radio-group labels="Red,Green,Blue" legend="Color" name="color" value="blue" values="red,green,blue">
       <div slot="before">Choose a primary color.</div>
       <div slot="after">This will be the most used color.</div>
     </radio-group>
+
+    <sortable-table headings="Make,Model,Year" properties="make,model,year" title="My Cars table">
+      <h2>My Cars</h2>
+      <p slot="footnote">Some of these cars are no longer owned.</p>
+    </sortable-table>
   </body>
 </html>

@@ -23,10 +23,26 @@ export namespace Components {
         "value": string;
         "values": string;
     }
+    interface SortableTable {
+        /**
+          * @default []
+         */
+        "data": LooseObject[];
+        /**
+          * @default false
+         */
+        "descending": boolean;
+        "headings": string;
+        "properties": string;
+    }
 }
 export interface RadioGroupCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLRadioGroupElement;
+}
+export interface SortableTableCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSortableTableElement;
 }
 declare global {
     interface HTMLGoogleButtonElement extends Components.GoogleButton, HTMLStencilElement {
@@ -64,11 +80,29 @@ declare global {
         prototype: HTMLRadioGroupElement;
         new (): HTMLRadioGroupElement;
     };
+    interface HTMLSortableTableElementEventMap {
+        "tableSorted": SortDetail;
+    }
+    interface HTMLSortableTableElement extends Components.SortableTable, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSortableTableElementEventMap>(type: K, listener: (this: HTMLSortableTableElement, ev: SortableTableCustomEvent<HTMLSortableTableElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSortableTableElementEventMap>(type: K, listener: (this: HTMLSortableTableElement, ev: SortableTableCustomEvent<HTMLSortableTableElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSortableTableElement: {
+        prototype: HTMLSortableTableElement;
+        new (): HTMLSortableTableElement;
+    };
     interface HTMLElementTagNameMap {
         "google-button": HTMLGoogleButtonElement;
         "google-button2": HTMLGoogleButton2Element;
         "hello-world": HTMLHelloWorldElement;
         "radio-group": HTMLRadioGroupElement;
+        "sortable-table": HTMLSortableTableElement;
     }
 }
 declare namespace LocalJSX {
@@ -90,6 +124,19 @@ declare namespace LocalJSX {
         "value"?: string;
         "values"?: string;
     }
+    interface SortableTable {
+        /**
+          * @default []
+         */
+        "data"?: LooseObject[];
+        /**
+          * @default false
+         */
+        "descending"?: boolean;
+        "headings"?: string;
+        "onTableSorted"?: (event: SortableTableCustomEvent<SortDetail>) => void;
+        "properties"?: string;
+    }
 
     interface HelloWorldAttributes {
         "name": string;
@@ -101,12 +148,18 @@ declare namespace LocalJSX {
         "value": string;
         "values": string;
     }
+    interface SortableTableAttributes {
+        "descending": boolean;
+        "headings": string;
+        "properties": string;
+    }
 
     interface IntrinsicElements {
         "google-button": GoogleButton;
         "google-button2": GoogleButton2;
         "hello-world": Omit<HelloWorld, keyof HelloWorldAttributes> & { [K in keyof HelloWorld & keyof HelloWorldAttributes]?: HelloWorld[K] } & { [K in keyof HelloWorld & keyof HelloWorldAttributes as `attr:${K}`]?: HelloWorldAttributes[K] } & { [K in keyof HelloWorld & keyof HelloWorldAttributes as `prop:${K}`]?: HelloWorld[K] };
         "radio-group": Omit<RadioGroup, keyof RadioGroupAttributes> & { [K in keyof RadioGroup & keyof RadioGroupAttributes]?: RadioGroup[K] } & { [K in keyof RadioGroup & keyof RadioGroupAttributes as `attr:${K}`]?: RadioGroupAttributes[K] } & { [K in keyof RadioGroup & keyof RadioGroupAttributes as `prop:${K}`]?: RadioGroup[K] };
+        "sortable-table": Omit<SortableTable, keyof SortableTableAttributes> & { [K in keyof SortableTable & keyof SortableTableAttributes]?: SortableTable[K] } & { [K in keyof SortableTable & keyof SortableTableAttributes as `attr:${K}`]?: SortableTableAttributes[K] } & { [K in keyof SortableTable & keyof SortableTableAttributes as `prop:${K}`]?: SortableTable[K] };
     }
 }
 export { LocalJSX as JSX };
@@ -117,6 +170,7 @@ declare module "@stencil/core" {
             "google-button2": LocalJSX.IntrinsicElements["google-button2"] & JSXBase.HTMLAttributes<HTMLGoogleButton2Element>;
             "hello-world": LocalJSX.IntrinsicElements["hello-world"] & JSXBase.HTMLAttributes<HTMLHelloWorldElement>;
             "radio-group": LocalJSX.IntrinsicElements["radio-group"] & JSXBase.HTMLAttributes<HTMLRadioGroupElement>;
+            "sortable-table": LocalJSX.IntrinsicElements["sortable-table"] & JSXBase.HTMLAttributes<HTMLSortableTableElement>;
         }
     }
 }

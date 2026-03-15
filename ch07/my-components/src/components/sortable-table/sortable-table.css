@@ -1,0 +1,26 @@
+:host {
+  display: inline-block;
+}
+.sort-indicator {
+  color: white;
+  display: inline-block;
+  line-height: 1rem;
+  margin-left: 0.5rem;
+  width: 1rem;
+}
+table {
+  border-collapse: collapse;
+}
+td,
+th {
+  border: 2px solid gray;
+  padding: 0.5rem;
+}
+th {
+  background-color: cornflowerblue;
+  color: white;
+  cursor: pointer;
+  > span {
+    pointer-events: none;
+  }
+}
