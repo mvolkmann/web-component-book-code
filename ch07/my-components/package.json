@@ -29,6 +29,7 @@
   ],
   "scripts": {
     "build": "stencil build",
+    "coverage": "stencil test --spec --e2e --coverage",
     "docs": "stencil build --docs",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",

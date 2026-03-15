@@ -26,8 +26,6 @@ describe('radio-group', () => {
       const values = [...(inputElements as any)].map(input => input.value);
       const labelElements = shadowRoot.querySelectorAll('label');
       const labels = [...(labelElements as any)].map(label => label.textContent);
-      const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-      await sleep(1000);
       const slotBefore = shadowRoot.querySelector('slot[name="before"]') as HTMLSlotElement;
       const slotAfter = shadowRoot.querySelector('slot[name="after"]') as HTMLSlotElement;
       const slotText = (slot: HTMLSlotElement) =>
