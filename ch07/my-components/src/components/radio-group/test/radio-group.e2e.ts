@@ -50,4 +50,6 @@ describe('radio-group', () => {
     expect(labels).toEqual(['Red', 'Green', 'Blue']);
     expect(values).toEqual(['red', 'green', 'blue']);
   });
+
+  //TODO: Add a test that clicks a radio button to get 100% test coverage.
 });
