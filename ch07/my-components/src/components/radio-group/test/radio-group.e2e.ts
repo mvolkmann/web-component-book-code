@@ -10,7 +10,10 @@ describe('radio-group', () => {
         name="color"
         value="blue"
         values="red,green,blue"
-      ></radio-group>
+      >
+        <div slot="before">Choose a primary color.</div>
+        <div slot="after">This will be the most used color.</div>
+      </radio-group>
     `);
     const element = await page.find('radio-group');
     expect(element).toHaveClass('hydrated');

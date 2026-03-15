@@ -9,11 +9,11 @@
 
 | Property | Attribute | Description | Type     | Default     |
 | -------- | --------- | ----------- | -------- | ----------- |
-| `labels` | `labels`  |             | `string` | `''`        |
-| `legend` | `legend`  |             | `string` | `''`        |
+| `labels` | `labels`  |             | `string` | `undefined` |
+| `legend` | `legend`  |             | `string` | `undefined` |
 | `name`   | `name`    |             | `string` | `undefined` |
 | `value`  | `value`   |             | `string` | `undefined` |
-| `values` | `values`  |             | `string` | `''`        |
+| `values` | `values`  |             | `string` | `undefined` |
 
 
 ## Events

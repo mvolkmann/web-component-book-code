@@ -21,6 +21,9 @@
     <hello-world></hello-world>
     <hello-world name="Mark"></hello-world>
     <google-button></google-button>
-    <radio-group labels="Red,Green,Blue" legend="Color" name="color" value="blue" values="red,green,blue"></radio-group>
+    <radio-group labels="Red,Green,Blue" legend="Color" name="color" value="blue" values="red,green,blue">
+      <div slot="before">Choose a primary color.</div>
+      <div slot="after">This will be the most used color.</div>
+    </radio-group>
   </body>
 </html>
