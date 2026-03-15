@@ -14,10 +14,10 @@ export class RadioGroup {
 
   @Event() valueChanged: EventEmitter<string>;
 
-  handleChange = (event: Event) => {
+  handleChange(event: Event) {
     const { value } = event.target as HTMLInputElement;
     if (value !== this.value) this.value = value;
-  };
+  }
 
   @Watch('value')
   dispatch() {

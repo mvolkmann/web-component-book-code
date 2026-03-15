@@ -9,7 +9,7 @@ import { Component, h } from '@stencil/core';
   styleUrl: 'google-button2.css',
   shadow: true,
 })
-export class GoogleButton {
+export class GoogleButton2 {
   render() {
     return (
       <a href="https://google.com" target="_blank">

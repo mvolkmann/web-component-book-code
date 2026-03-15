@@ -1,20 +1,25 @@
 import { newE2EPage } from '@stencil/core/testing';
 
+async function getPage() {
+  const page = await newE2EPage();
+  await page.setContent(`
+    <radio-group
+      labels="Red,Green,Blue"
+      legend="Color"
+      name="color"
+      value="blue"
+      values="red,green,blue"
+    >
+      <div slot="before">Choose a primary color.</div>
+      <div slot="after">This will be the most used color.</div>
+    </radio-group>
+  `);
+  return page;
+}
+
 describe('radio-group', () => {
   it('renders', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <radio-group
-        labels="Red,Green,Blue"
-        legend="Color"
-        name="color"
-        value="blue"
-        values="red,green,blue"
-      >
-        <div slot="before">Choose a primary color.</div>
-        <div slot="after">This will be the most used color.</div>
-      </radio-group>
-    `);
+    const page = await getPage();
     const element = await page.find('radio-group');
     expect(element).toHaveClass('hydrated');
 
@@ -51,5 +56,14 @@ describe('radio-group', () => {
     expect(values).toEqual(['red', 'green', 'blue']);
   });
 
-  //TODO: Add a test that clicks a radio button to get 100% test coverage.
+  it('can click a radio button', async () => {
+    const page = await getPage();
+    const radio = await page.find('radio-group >>> #green');
+    let checked = await radio.getProperty('checked');
+    expect(checked).toBe(false);
+    await radio.click();
+    await page.waitForChanges();
+    checked = await radio.getProperty('checked');
+    expect(checked).toBe(true);
+  });
 });

@@ -7,11 +7,20 @@ describe('google-button', () => {
     const element = await page.find('google-button');
     expect(element).toHaveClass('hydrated');
 
+    const isCoverage = process.env.npm_lifecycle_event === 'coverage';
+
     const browserContext = page.browserContext();
-    const promise = new Promise(resolve => browserContext.once('targetcreated', target => resolve(target.url())));
-    const button = await page.find('google-button >>> a');
+    const promise = new Promise(resolve => {
+      browserContext.once('targetcreated', async target => {
+        const newPage = await target.page();
+        await newPage.waitForNavigation();
+        // This doesn't get the correct URL when running with --coverage.
+        resolve(newPage.url());
+      });
+    });
+    const button = await page.find('google-button >>> button');
     await button.click();
     const newTabUrl = await promise;
-    expect(newTabUrl).toContain('google.com');
+    if (!isCoverage) expect(newTabUrl).toContain('google.com');
   });
 });

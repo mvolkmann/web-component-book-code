@@ -8,6 +8,8 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface GoogleButton {
     }
+    interface GoogleButton2 {
+    }
     interface HelloWorld {
         /**
           * @default 'World'
@@ -32,6 +34,12 @@ declare global {
     var HTMLGoogleButtonElement: {
         prototype: HTMLGoogleButtonElement;
         new (): HTMLGoogleButtonElement;
+    };
+    interface HTMLGoogleButton2Element extends Components.GoogleButton2, HTMLStencilElement {
+    }
+    var HTMLGoogleButton2Element: {
+        prototype: HTMLGoogleButton2Element;
+        new (): HTMLGoogleButton2Element;
     };
     interface HTMLHelloWorldElement extends Components.HelloWorld, HTMLStencilElement {
     }
@@ -58,12 +66,15 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "google-button": HTMLGoogleButtonElement;
+        "google-button2": HTMLGoogleButton2Element;
         "hello-world": HTMLHelloWorldElement;
         "radio-group": HTMLRadioGroupElement;
     }
 }
 declare namespace LocalJSX {
     interface GoogleButton {
+    }
+    interface GoogleButton2 {
     }
     interface HelloWorld {
         /**
@@ -93,6 +104,7 @@ declare namespace LocalJSX {
 
     interface IntrinsicElements {
         "google-button": GoogleButton;
+        "google-button2": GoogleButton2;
         "hello-world": Omit<HelloWorld, keyof HelloWorldAttributes> & { [K in keyof HelloWorld & keyof HelloWorldAttributes]?: HelloWorld[K] } & { [K in keyof HelloWorld & keyof HelloWorldAttributes as `attr:${K}`]?: HelloWorldAttributes[K] } & { [K in keyof HelloWorld & keyof HelloWorldAttributes as `prop:${K}`]?: HelloWorld[K] };
         "radio-group": Omit<RadioGroup, keyof RadioGroupAttributes> & { [K in keyof RadioGroup & keyof RadioGroupAttributes]?: RadioGroup[K] } & { [K in keyof RadioGroup & keyof RadioGroupAttributes as `attr:${K}`]?: RadioGroupAttributes[K] } & { [K in keyof RadioGroup & keyof RadioGroupAttributes as `prop:${K}`]?: RadioGroup[K] };
     }
@@ -102,6 +114,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "google-button": LocalJSX.IntrinsicElements["google-button"] & JSXBase.HTMLAttributes<HTMLGoogleButtonElement>;
+            "google-button2": LocalJSX.IntrinsicElements["google-button2"] & JSXBase.HTMLAttributes<HTMLGoogleButton2Element>;
             "hello-world": LocalJSX.IntrinsicElements["hello-world"] & JSXBase.HTMLAttributes<HTMLHelloWorldElement>;
             "radio-group": LocalJSX.IntrinsicElements["radio-group"] & JSXBase.HTMLAttributes<HTMLRadioGroupElement>;
         }
