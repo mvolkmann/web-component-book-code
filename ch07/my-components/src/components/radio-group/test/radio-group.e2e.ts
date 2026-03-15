@@ -49,7 +49,7 @@ describe('radio-group', () => {
     expect(legend).toBe('Color');
     expect(after).toBe('This will be the most used color.');
     expect(before).toBe('Choose a primary color.');
-    expect(labels.join(',')).toBe('Red,Green,Blue');
-    expect(values.join(',')).toBe('red,green,blue');
+    expect(labels).toEqual(['Red', 'Green', 'Blue']);
+    expect(values).toEqual(['red', 'green', 'blue']);
   });
 });
