@@ -1,8 +1,14 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { RadioGroup } from '../radio-group';
 
+const normalize = (str: string) =>
+  str
+    .split('\n')
+    .map(line => line.trim())
+    .join('\n');
+
 describe('radio-group', () => {
-  it.skip('renders', async () => {
+  it('renders', async () => {
     const page = await newSpecPage({
       components: [RadioGroup],
       html: `
@@ -12,7 +18,10 @@ describe('radio-group', () => {
           name="color"
           value="blue"
           values="red,green,blue"
-        ></radio-group>
+        >
+          <div slot="before">Choose a primary color.</div>
+          <div slot="after">This will be the most used color.</div>
+        </radio-group>
       `,
     });
 
@@ -39,9 +48,13 @@ describe('radio-group', () => {
             <slot name="after"></slot>
           </fieldset>
         </template>
+        <div slot="before">Choose a primary color.</div>
+        <div slot="after">This will be the most used color.</div>
       </radio-group>
     `;
-    //TODO: Why does this fail? It should not compare whitespace!
-    expect(page.root).toEqualHtml(expected.trim());
+    // This fails due to whitespace differences, but the
+    // documentation says it doesn't compare whitespace!
+    //expect(page.root).toEqualHtml(expected.trim());
+    expect(normalize(page.root.outerHTML)).toEqualHtml(normalize(expected));
   });
 });

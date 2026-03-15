@@ -21,6 +21,7 @@ describe('radio-group', () => {
     const data = await page.evaluate(async () => {
       const element = document.querySelector('radio-group');
       const { shadowRoot } = element;
+      const legend = shadowRoot.querySelector('fieldset > legend');
       const inputElements = shadowRoot.querySelectorAll('input[type="radio"]');
       const values = [...(inputElements as any)].map(input => input.value);
       const labelElements = shadowRoot.querySelectorAll('label');
@@ -29,7 +30,6 @@ describe('radio-group', () => {
       await sleep(1000);
       const slotBefore = shadowRoot.querySelector('slot[name="before"]') as HTMLSlotElement;
       const slotAfter = shadowRoot.querySelector('slot[name="after"]') as HTMLSlotElement;
-      //TODO: Why is this not getting the text content of the slots?
       const slotText = (slot: HTMLSlotElement) =>
         slot
           .assignedNodes()
@@ -40,11 +40,13 @@ describe('radio-group', () => {
         after: slotText(slotAfter),
         before: slotText(slotBefore),
         labels,
+        legend: legend.textContent,
         values,
       };
     });
 
-    const { after, before, labels, values } = data;
+    const { after, before, labels, legend, values } = data;
+    expect(legend).toBe('Color');
     expect(after).toBe('This will be the most used color.');
     expect(before).toBe('Choose a primary color.');
     expect(labels.join(',')).toBe('Red,Green,Blue');
