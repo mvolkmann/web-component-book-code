@@ -1,8 +1,10 @@
-button {
+a {
   background-color: #4285f4; /* Google blue */
   border: none;
   border-radius: 0.5rem;
   color: #fbbc05; /* Google yellow */
+  display: inline-block;
   font-weight: bold;
   padding: 0.5rem;
+  text-decoration: none;
 }
