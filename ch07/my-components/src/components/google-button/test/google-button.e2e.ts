@@ -7,8 +7,6 @@ describe('google-button', () => {
     const element = await page.find('google-button');
     expect(element).toHaveClass('hydrated');
 
-    const isCoverage = process.env.npm_lifecycle_event === 'coverage';
-
     const browserContext = page.browserContext();
     const promise = new Promise(resolve => {
       browserContext.once('targetcreated', async target => {
@@ -21,6 +19,8 @@ describe('google-button', () => {
     const button = await page.find('google-button >>> button');
     await button.click();
     const newTabUrl = await promise;
+
+    const isCoverage = process.env.npm_lifecycle_event === 'coverage';
     if (!isCoverage) expect(newTabUrl).toContain('google.com');
   });
 });

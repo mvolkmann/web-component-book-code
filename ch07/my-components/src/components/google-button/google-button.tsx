@@ -7,7 +7,6 @@ import { Component, h } from '@stencil/core';
 })
 export class GoogleButton {
   private handleClick() {
-    console.log('google-button.tsx handleClick: entered');
     window.open('https://google.com', '_blank');
   }
 
