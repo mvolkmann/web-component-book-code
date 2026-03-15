@@ -1,6 +1,24 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { RadioGroup } from '../radio-group';
 
+function getPage() {
+  return newSpecPage({
+    components: [RadioGroup],
+    html: `
+      <radio-group
+        labels="Red,Green,Blue"
+        legend="Color"
+        name="color"
+        value="blue"
+        values="red,green,blue"
+      >
+        <div slot="before">Choose a primary color.</div>
+        <div slot="after">This will be the most used color.</div>
+      </radio-group>
+    `,
+  });
+}
+
 const normalize = (str: string) =>
   str
     .split('\n')
@@ -9,22 +27,7 @@ const normalize = (str: string) =>
 
 describe('radio-group', () => {
   it('renders', async () => {
-    const page = await newSpecPage({
-      components: [RadioGroup],
-      html: `
-        <radio-group
-          labels="Red,Green,Blue"
-          legend="Color"
-          name="color"
-          value="blue"
-          values="red,green,blue"
-        >
-          <div slot="before">Choose a primary color.</div>
-          <div slot="after">This will be the most used color.</div>
-        </radio-group>
-      `,
-    });
-
+    const page = await getPage();
     const expected = `
       <radio-group labels="Red,Green,Blue" legend="Color" name="color" value="blue" values="red,green,blue">
         <template shadowrootmode="open">
@@ -56,5 +59,19 @@ describe('radio-group', () => {
     // documentation says it doesn't compare whitespace!
     //expect(page.root).toEqualHtml(expected.trim());
     expect(normalize(page.root.outerHTML)).toEqualHtml(normalize(expected));
+  });
+
+  it('can click', async () => {
+    const page = await getPage();
+    const radioGroup = page.root;
+    const radioButton = radioGroup.shadowRoot.querySelector('#green') as HTMLInputElement;
+    expect(radioButton.checked).toBe(false);
+    radioButton.click();
+    await page.waitForChanges();
+    //TODO: This does not work. It's related to because spec tests run in
+    // MockDoc (a simulated DOM) rather than a real browser.
+    // Radio buttons and checkboxes do not have built-in "native" behavior.
+    // THIS SUCKS!
+    expect(radioButton.checked).toBe(true);
   });
 });

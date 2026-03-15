@@ -58,12 +58,12 @@ describe('radio-group', () => {
 
   it('can click a radio button', async () => {
     const page = await getPage();
-    const radio = await page.find('radio-group >>> #green');
-    let checked = await radio.getProperty('checked');
+    const radioButton = await page.find('radio-group >>> #green');
+    let checked = await radioButton.getProperty('checked');
     expect(checked).toBe(false);
-    await radio.click();
+    await radioButton.click();
     await page.waitForChanges();
-    checked = await radio.getProperty('checked');
+    checked = await radioButton.getProperty('checked');
     expect(checked).toBe(true);
   });
 });
