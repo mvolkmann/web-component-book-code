@@ -44,10 +44,9 @@ describe('radio-group', () => {
       };
     });
 
-    console.log('radio-group.e2e.ts : data =', data);
     const { after, before, labels, values } = data;
-    expect(after).toBe("Don't choose a color you will regret.");
-    expect(before).toBe('Select a color for your new car.');
+    expect(after).toBe('This will be the most used color.');
+    expect(before).toBe('Choose a primary color.');
     expect(labels.join(',')).toBe('Red,Green,Blue');
     expect(values.join(',')).toBe('red,green,blue');
   });
