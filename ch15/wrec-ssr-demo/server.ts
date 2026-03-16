@@ -8,7 +8,7 @@ const app = new Hono();
 
 app.use("/*", serveStatic({ root: "./dist" }));
 
-// This returns HTML that includes server-side rendered FAST components.
+// This returns HTML that includes server-side rendered wrec components.
 app.get("/greet", async (c: Context) => {
   const name = c.req.query("name");
   let template = html`
