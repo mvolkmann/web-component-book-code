@@ -30,9 +30,15 @@ describe('radio-group', () => {
       const inputElements = shadowRoot.querySelectorAll('input[type="radio"]');
       const values = [...(inputElements as any)].map(input => input.value);
       const labelElements = shadowRoot.querySelectorAll('label');
-      const labels = [...(labelElements as any)].map(label => label.textContent);
-      const slotBefore = shadowRoot.querySelector('slot[name="before"]') as HTMLSlotElement;
-      const slotAfter = shadowRoot.querySelector('slot[name="after"]') as HTMLSlotElement;
+      const labels = [...(labelElements as any)].map(
+        label => label.textContent,
+      );
+      const slotBefore = shadowRoot.querySelector(
+        'slot[name="before"]',
+      ) as HTMLSlotElement;
+      const slotAfter = shadowRoot.querySelector(
+        'slot[name="after"]',
+      ) as HTMLSlotElement;
       const slotText = (slot: HTMLSlotElement) =>
         slot
           .assignedNodes()

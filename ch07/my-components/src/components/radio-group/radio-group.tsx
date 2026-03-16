@@ -34,7 +34,14 @@ export class RadioGroup {
         <div>
           {valueArray.map((v, index) => (
             <div>
-              <input type="radio" id={v} name={this.name} value={v} checked={v === this.value} onChange={this.handleChange} />
+              <input
+                type="radio"
+                id={v}
+                name={this.name}
+                value={v}
+                checked={v === this.value}
+                onChange={this.handleChange}
+              />
               <label htmlFor={v}>{labelArray[index]}</label>
             </div>
           ))}

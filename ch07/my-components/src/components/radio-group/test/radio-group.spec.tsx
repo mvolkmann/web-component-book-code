@@ -64,7 +64,9 @@ describe('radio-group', () => {
   it('can click', async () => {
     const page = await getPage();
     const radioGroup = page.root;
-    const radioButton = radioGroup.shadowRoot.querySelector('#green') as HTMLInputElement;
+    const radioButton = radioGroup.shadowRoot.querySelector(
+      '#green',
+    ) as HTMLInputElement;
     expect(radioButton.checked).toBe(false);
     radioButton.click();
     await page.waitForChanges();
