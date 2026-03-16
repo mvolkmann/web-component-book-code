@@ -64,9 +64,9 @@ export class SortableTable {
   makeTh(heading: string, property: string) {
     return (
       <th
-        data-property="{property}"
+        data-property={property}
         role="button"
-        title="sort by {heading}"
+        title={`sort by ${heading}`}
         onClick={() => this.updateSort(property)}
       >
         <span>{heading}</span>
