@@ -163,4 +163,26 @@ describe('sortable-table', () => {
 
     expect(instance.sortIndicator('model')).toBe('');
   });
+
+
+  it('sorts when a heading is clicked', async () => {
+    const page = await getPage();
+    const element = page.root as HTMLSortableTableElement;
+    const emitSpy = jest.spyOn(page.rootInstance.tableSorted, 'emit');
+
+    element.data = [
+      { make: 'Ford', model: 'Mustang', year: 1967 },
+      { make: 'Audi', model: 'A4', year: 2008 },
+    ];
+    await page.waitForChanges();
+
+    const makeHeading = element.shadowRoot?.querySelector('th[data-property="make"]') as HTMLTableCellElement;
+    makeHeading.dispatchEvent(new MouseEvent('click', { bubbles: true, composed: true }));
+    await page.waitForChanges();
+
+    expect(page.rootInstance.sortProperty).toBe('make');
+    expect(page.rootInstance.descending).toBe(false);
+    expect(emitSpy).toHaveBeenCalledWith({ property: 'make', descending: false });
+    expect(element.shadowRoot?.querySelector('.sort-indicator')?.textContent).toBe('▲');
+  });
 });
