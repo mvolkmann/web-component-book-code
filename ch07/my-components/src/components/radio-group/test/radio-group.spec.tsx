@@ -61,19 +61,39 @@ describe('radio-group', () => {
     expect(normalize(page.root.outerHTML)).toEqualHtml(normalize(expected));
   });
 
-  it('can click', async () => {
+  it('updates value when a radio button changes', async () => {
     const page = await getPage();
-    const radioGroup = page.root;
-    const radioButton = radioGroup.shadowRoot.querySelector(
+    const radioGroup = page.root as HTMLRadioGroupElement;
+    expect(radioGroup.value).toBe('blue');
+
+    const { shadowRoot } = radioGroup;
+    const greenButton = shadowRoot!.querySelector('#green') as HTMLInputElement;
+    greenButton.checked = true;
+    greenButton.dispatchEvent(new Event('change', { bubbles: true }));
+    await page.waitForChanges();
+    expect(radioGroup.value).toBe('green');
+
+    const updated = radioGroup.shadowRoot!.querySelector(
       '#green',
     ) as HTMLInputElement;
-    expect(radioButton.checked).toBe(false);
-    radioButton.click();
+    expect(updated.checked).toBe(true);
+  });
+
+  it('does not change value when the selected value is the same', async () => {
+    const page = await getPage();
+    const radioGroup = page.root as HTMLRadioGroupElement;
+    const instance = page.rootInstance;
+
+    const emitSpy = jest.spyOn(instance.valueChanged, 'emit');
+
+    const blueButton = radioGroup.shadowRoot!.querySelector(
+      '#blue',
+    ) as HTMLInputElement;
+    blueButton.checked = true;
+    blueButton.dispatchEvent(new Event('change', { bubbles: true }));
     await page.waitForChanges();
-    //TODO: This does not work. It's related to because spec tests run in
-    // MockDoc (a simulated DOM) rather than a real browser.
-    // Radio buttons and checkboxes do not have built-in "native" behavior.
-    // THIS SUCKS!
-    expect(radioButton.checked).toBe(true);
+
+    expect(radioGroup.value).toBe('blue');
+    expect(emitSpy).not.toHaveBeenCalled();
   });
 });

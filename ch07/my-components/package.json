@@ -34,8 +34,8 @@
     "format": "prettier --write 'src/**/*.{css,html,js,ts,tsx}'",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
-    "test.e2e": "stencil test --e2e -- --watch",
-    "test.spec": "stencil test --spec -- --watch",
+    "test.e2e": "stencil test --e2e",
+    "test.spec": "stencil test --spec",
     "test.watch": "stencil test --spec --e2e -- --watch",
     "generate": "stencil generate"
   },

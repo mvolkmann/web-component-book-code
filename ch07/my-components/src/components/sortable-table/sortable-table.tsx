@@ -1,4 +1,13 @@
-import { Component, Event, EventEmitter, h, Prop, State, Watch } from '@stencil/core';
+import {
+  Component,
+  Event,
+  EventEmitter,
+  Fragment,
+  h,
+  Prop,
+  State,
+  Watch,
+} from '@stencil/core';
 
 type LooseObject = Record<string, unknown>;
 
@@ -39,7 +48,9 @@ export class SortableTable {
   }
 
   makeHeadings() {
-    return this.headings.split(',').map((heading, i) => this.makeTh(heading, this.propertyArray[i]));
+    return this.headings
+      .split(',')
+      .map((heading, i) => this.makeTh(heading, this.propertyArray[i]));
   }
 
   makeRows() {
@@ -52,7 +63,12 @@ export class SortableTable {
 
   makeTh(heading: string, property: string) {
     return (
-      <th data-property="{property}" role="button" title="sort by {heading}" onClick={() => this.updateSort(property)}>
+      <th
+        data-property="{property}"
+        role="button"
+        title="sort by {heading}"
+        onClick={() => this.updateSort(property)}
+      >
         <span>{heading}</span>
         <span class="sort-indicator">{this.sortIndicator(property)}</span>
       </th>
@@ -60,12 +76,14 @@ export class SortableTable {
   }
 
   makeTr(obj: LooseObject) {
-    return <tr>{this.propertyArray.map(propName => this.makeTd(obj[propName]))}</tr>;
+    return (
+      <tr>{this.propertyArray.map(propName => this.makeTd(obj[propName]))}</tr>
+    );
   }
 
   render() {
     return (
-      <>
+      <Fragment>
         <slot></slot>
         <table>
           <thead>
@@ -74,7 +92,7 @@ export class SortableTable {
           <tbody>{this.makeRows()}</tbody>
         </table>
         <slot name="footnote"></slot>
-      </>
+      </Fragment>
     );
   }
 
@@ -85,7 +103,12 @@ export class SortableTable {
     return this.data.toSorted((a: LooseObject, b: LooseObject) => {
       const aValue = a[sortProperty];
       const bValue = b[sortProperty];
-      const compare = typeof aValue === 'string' ? aValue.localeCompare(bValue as string) : typeof aValue === 'number' ? aValue - (bValue as number) : 0;
+      const compare =
+        typeof aValue === 'string'
+          ? aValue.localeCompare(bValue as string)
+          : typeof aValue === 'number'
+            ? aValue - (bValue as number)
+            : 0;
       return this.descending ? -compare : compare;
     });
   }
