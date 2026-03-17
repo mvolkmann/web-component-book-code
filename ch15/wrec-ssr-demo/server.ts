@@ -1,4 +1,4 @@
-import { type Context, Hono } from "hono";
+import { Context, Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
 import HelloWorld from "./hello-world";
