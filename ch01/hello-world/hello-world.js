@@ -12,7 +12,7 @@ class HelloWorld extends HTMLElement {
           color: blue;
         }
       </style>
-      <button>Hello, ${name}!</button>
+      <button type="button">Hello, ${name}!</button>
     `;
     this.addEventListener("click", () => {
       const button = this.shadowRoot.querySelector("button");

@@ -19,6 +19,8 @@ export class GoogleButton extends LitElement {
   }
 
   render() {
-    return html`<button @click=${this.handleClick}>Google It</button>`;
+    return html`
+      <button type="button" @click=${this.handleClick}>Google It</button>
+    `;
   }
 }

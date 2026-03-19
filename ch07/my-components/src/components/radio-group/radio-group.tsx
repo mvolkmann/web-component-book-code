@@ -25,7 +25,7 @@ export class RadioGroup {
   }
 
   render() {
-    const labelArray = this.labels.split(',');
+    const labelArray = this.labels.split(',').map(value => value.trim());
     const valueArray = this.values.split(',').map(value => value.trim());
     return (
       <fieldset>

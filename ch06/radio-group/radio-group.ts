@@ -52,7 +52,9 @@ export class RadioGroup extends LitElement {
   }
 
   render() {
-    const labelArray = this.labels.split(",");
+    const labelArray = this.labels
+      .split(",")
+      .map((value: string) => value.trim());
     const valueArray = this.values
       .split(",")
       .map((value: string) => value.trim());
