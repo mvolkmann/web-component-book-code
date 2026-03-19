@@ -11,6 +11,10 @@ export class GoogleButton {
   };
 
   render() {
-    return <button onClick={this.handleClick}>Google It</button>;
+    return (
+      <button type="button" onClick={this.handleClick}>
+        Google It
+      </button>
+    );
   }
 }
