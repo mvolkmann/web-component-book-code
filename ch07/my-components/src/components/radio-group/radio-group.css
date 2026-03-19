@@ -1,9 +1,5 @@
 :host {
   display: block;
-  > div {
-    display: flex;
-    gap: 0.5rem;
-  }
 }
 
 fieldset {
