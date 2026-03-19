@@ -6,35 +6,110 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    /**
+     * @summary Renders a button that opens Google in a new browser tab.
+     * @element google-button
+     */
     interface GoogleButton {
     }
+    /**
+     * @summary Renders a link-based variant of the Google button example.
+     * @element google-button2
+     */
     interface GoogleButton2 {
     }
+    /**
+     * @summary Displays a greeting for the provided name.
+     * @element hello-world
+     * @attr name - The name to include in the greeting.
+     */
     interface HelloWorld {
         /**
+          * The name to include in the greeting.
+          * @type {string}
           * @default 'World'
          */
         "name": string;
     }
+    /**
+     * @summary Renders a radio group from comma-delimited labels and values.
+     * @element radio-group
+     * @attr labels - A comma-delimited list of labels to display.
+     * @attr legend - The legend displayed above the radio options.
+     * @attr name - The shared name attribute for each radio input.
+     * @attr value - The currently selected value.
+     * @attr values - A comma-delimited list of option values.
+     * @fires valueChanged - Emitted whenever the selected value changes.
+     * @cssprop --border-color - Sets the fieldset border color.
+     * @cssprop --legend-color - Sets the legend text color.
+     * @cssprop --direction - Controls the radio option layout direction.
+     * @cssprop --gap - Sets the spacing between radio options.
+     */
     interface RadioGroup {
+        /**
+          * A comma-delimited list of labels to display.
+          * @type {string}
+         */
         "labels": string;
+        /**
+          * The legend displayed above the radio options.
+          * @type {string}
+         */
         "legend": string;
+        /**
+          * The shared name attribute for each radio input.
+          * @type {string}
+         */
         "name": string;
+        /**
+          * The currently selected value.
+          * @type {string}
+         */
         "value": string;
+        /**
+          * A comma-delimited list of option values.
+          * @type {string}
+         */
         "values": string;
     }
+    /**
+     * @summary Demonstrates updating CSS from reactive component state.
+     * @element reactive-css
+     * @cssprop --font-size - Controls the paragraph font size.
+     */
     interface ReactiveCss {
     }
+    /**
+     * @summary Renders a table whose rows can be sorted by clicking the headings.
+     * @element sortable-table
+     * @attr descending - Whether the active sort direction is descending.
+     * @attr headings - A comma-delimited list of column headings.
+     * @attr properties - A comma-delimited list of object property names to display.
+     * @prop data - The row data to render in the table.
+     * @fires tableSorted - Emitted after the table sort changes.
+     */
     interface SortableTable {
         /**
+          * The row data to render in the table.
+          * @type {LooseObject[]}
           * @default []
          */
         "data": LooseObject[];
         /**
+          * Whether the current sort direction is descending.
+          * @type {boolean}
           * @default false
          */
         "descending": boolean;
+        /**
+          * A comma-delimited list of column headings.
+          * @type {string}
+         */
         "headings": string;
+        /**
+          * A comma-delimited list of object property names to display.
+          * @type {string}
+         */
         "properties": string;
     }
 }
@@ -47,18 +122,31 @@ export interface SortableTableCustomEvent<T> extends CustomEvent<T> {
     target: HTMLSortableTableElement;
 }
 declare global {
+    /**
+     * @summary Renders a button that opens Google in a new browser tab.
+     * @element google-button
+     */
     interface HTMLGoogleButtonElement extends Components.GoogleButton, HTMLStencilElement {
     }
     var HTMLGoogleButtonElement: {
         prototype: HTMLGoogleButtonElement;
         new (): HTMLGoogleButtonElement;
     };
+    /**
+     * @summary Renders a link-based variant of the Google button example.
+     * @element google-button2
+     */
     interface HTMLGoogleButton2Element extends Components.GoogleButton2, HTMLStencilElement {
     }
     var HTMLGoogleButton2Element: {
         prototype: HTMLGoogleButton2Element;
         new (): HTMLGoogleButton2Element;
     };
+    /**
+     * @summary Displays a greeting for the provided name.
+     * @element hello-world
+     * @attr name - The name to include in the greeting.
+     */
     interface HTMLHelloWorldElement extends Components.HelloWorld, HTMLStencilElement {
     }
     var HTMLHelloWorldElement: {
@@ -68,6 +156,20 @@ declare global {
     interface HTMLRadioGroupElementEventMap {
         "valueChanged": string;
     }
+    /**
+     * @summary Renders a radio group from comma-delimited labels and values.
+     * @element radio-group
+     * @attr labels - A comma-delimited list of labels to display.
+     * @attr legend - The legend displayed above the radio options.
+     * @attr name - The shared name attribute for each radio input.
+     * @attr value - The currently selected value.
+     * @attr values - A comma-delimited list of option values.
+     * @fires valueChanged - Emitted whenever the selected value changes.
+     * @cssprop --border-color - Sets the fieldset border color.
+     * @cssprop --legend-color - Sets the legend text color.
+     * @cssprop --direction - Controls the radio option layout direction.
+     * @cssprop --gap - Sets the spacing between radio options.
+     */
     interface HTMLRadioGroupElement extends Components.RadioGroup, HTMLStencilElement {
         addEventListener<K extends keyof HTMLRadioGroupElementEventMap>(type: K, listener: (this: HTMLRadioGroupElement, ev: RadioGroupCustomEvent<HTMLRadioGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -82,6 +184,11 @@ declare global {
         prototype: HTMLRadioGroupElement;
         new (): HTMLRadioGroupElement;
     };
+    /**
+     * @summary Demonstrates updating CSS from reactive component state.
+     * @element reactive-css
+     * @cssprop --font-size - Controls the paragraph font size.
+     */
     interface HTMLReactiveCssElement extends Components.ReactiveCss, HTMLStencilElement {
     }
     var HTMLReactiveCssElement: {
@@ -91,6 +198,15 @@ declare global {
     interface HTMLSortableTableElementEventMap {
         "tableSorted": SortDetail;
     }
+    /**
+     * @summary Renders a table whose rows can be sorted by clicking the headings.
+     * @element sortable-table
+     * @attr descending - Whether the active sort direction is descending.
+     * @attr headings - A comma-delimited list of column headings.
+     * @attr properties - A comma-delimited list of object property names to display.
+     * @prop data - The row data to render in the table.
+     * @fires tableSorted - Emitted after the table sort changes.
+     */
     interface HTMLSortableTableElement extends Components.SortableTable, HTMLStencilElement {
         addEventListener<K extends keyof HTMLSortableTableElementEventMap>(type: K, listener: (this: HTMLSortableTableElement, ev: SortableTableCustomEvent<HTMLSortableTableElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -115,37 +231,120 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    /**
+     * @summary Renders a button that opens Google in a new browser tab.
+     * @element google-button
+     */
     interface GoogleButton {
     }
+    /**
+     * @summary Renders a link-based variant of the Google button example.
+     * @element google-button2
+     */
     interface GoogleButton2 {
     }
+    /**
+     * @summary Displays a greeting for the provided name.
+     * @element hello-world
+     * @attr name - The name to include in the greeting.
+     */
     interface HelloWorld {
         /**
+          * The name to include in the greeting.
+          * @type {string}
           * @default 'World'
          */
         "name"?: string;
     }
+    /**
+     * @summary Renders a radio group from comma-delimited labels and values.
+     * @element radio-group
+     * @attr labels - A comma-delimited list of labels to display.
+     * @attr legend - The legend displayed above the radio options.
+     * @attr name - The shared name attribute for each radio input.
+     * @attr value - The currently selected value.
+     * @attr values - A comma-delimited list of option values.
+     * @fires valueChanged - Emitted whenever the selected value changes.
+     * @cssprop --border-color - Sets the fieldset border color.
+     * @cssprop --legend-color - Sets the legend text color.
+     * @cssprop --direction - Controls the radio option layout direction.
+     * @cssprop --gap - Sets the spacing between radio options.
+     */
     interface RadioGroup {
+        /**
+          * A comma-delimited list of labels to display.
+          * @type {string}
+         */
         "labels"?: string;
+        /**
+          * The legend displayed above the radio options.
+          * @type {string}
+         */
         "legend"?: string;
+        /**
+          * The shared name attribute for each radio input.
+          * @type {string}
+         */
         "name"?: string;
+        /**
+          * Emitted whenever the selected value changes.
+          * @type {EventEmitter<string>}
+         */
         "onValueChanged"?: (event: RadioGroupCustomEvent<string>) => void;
+        /**
+          * The currently selected value.
+          * @type {string}
+         */
         "value"?: string;
+        /**
+          * A comma-delimited list of option values.
+          * @type {string}
+         */
         "values"?: string;
     }
+    /**
+     * @summary Demonstrates updating CSS from reactive component state.
+     * @element reactive-css
+     * @cssprop --font-size - Controls the paragraph font size.
+     */
     interface ReactiveCss {
     }
+    /**
+     * @summary Renders a table whose rows can be sorted by clicking the headings.
+     * @element sortable-table
+     * @attr descending - Whether the active sort direction is descending.
+     * @attr headings - A comma-delimited list of column headings.
+     * @attr properties - A comma-delimited list of object property names to display.
+     * @prop data - The row data to render in the table.
+     * @fires tableSorted - Emitted after the table sort changes.
+     */
     interface SortableTable {
         /**
+          * The row data to render in the table.
+          * @type {LooseObject[]}
           * @default []
          */
         "data"?: LooseObject[];
         /**
+          * Whether the current sort direction is descending.
+          * @type {boolean}
           * @default false
          */
         "descending"?: boolean;
+        /**
+          * A comma-delimited list of column headings.
+          * @type {string}
+         */
         "headings"?: string;
+        /**
+          * Emitted after the table sort changes.
+          * @type {EventEmitter<SortDetail>}
+         */
         "onTableSorted"?: (event: SortableTableCustomEvent<SortDetail>) => void;
+        /**
+          * A comma-delimited list of object property names to display.
+          * @type {string}
+         */
         "properties"?: string;
     }
 
@@ -178,11 +377,52 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            /**
+             * @summary Renders a button that opens Google in a new browser tab.
+             * @element google-button
+             */
             "google-button": LocalJSX.IntrinsicElements["google-button"] & JSXBase.HTMLAttributes<HTMLGoogleButtonElement>;
+            /**
+             * @summary Renders a link-based variant of the Google button example.
+             * @element google-button2
+             */
             "google-button2": LocalJSX.IntrinsicElements["google-button2"] & JSXBase.HTMLAttributes<HTMLGoogleButton2Element>;
+            /**
+             * @summary Displays a greeting for the provided name.
+             * @element hello-world
+             * @attr name - The name to include in the greeting.
+             */
             "hello-world": LocalJSX.IntrinsicElements["hello-world"] & JSXBase.HTMLAttributes<HTMLHelloWorldElement>;
+            /**
+             * @summary Renders a radio group from comma-delimited labels and values.
+             * @element radio-group
+             * @attr labels - A comma-delimited list of labels to display.
+             * @attr legend - The legend displayed above the radio options.
+             * @attr name - The shared name attribute for each radio input.
+             * @attr value - The currently selected value.
+             * @attr values - A comma-delimited list of option values.
+             * @fires valueChanged - Emitted whenever the selected value changes.
+             * @cssprop --border-color - Sets the fieldset border color.
+             * @cssprop --legend-color - Sets the legend text color.
+             * @cssprop --direction - Controls the radio option layout direction.
+             * @cssprop --gap - Sets the spacing between radio options.
+             */
             "radio-group": LocalJSX.IntrinsicElements["radio-group"] & JSXBase.HTMLAttributes<HTMLRadioGroupElement>;
+            /**
+             * @summary Demonstrates updating CSS from reactive component state.
+             * @element reactive-css
+             * @cssprop --font-size - Controls the paragraph font size.
+             */
             "reactive-css": LocalJSX.IntrinsicElements["reactive-css"] & JSXBase.HTMLAttributes<HTMLReactiveCssElement>;
+            /**
+             * @summary Renders a table whose rows can be sorted by clicking the headings.
+             * @element sortable-table
+             * @attr descending - Whether the active sort direction is descending.
+             * @attr headings - A comma-delimited list of column headings.
+             * @attr properties - A comma-delimited list of object property names to display.
+             * @prop data - The row data to render in the table.
+             * @fires tableSorted - Emitted after the table sort changes.
+             */
             "sortable-table": LocalJSX.IntrinsicElements["sortable-table"] & JSXBase.HTMLAttributes<HTMLSortableTableElement>;
         }
     }

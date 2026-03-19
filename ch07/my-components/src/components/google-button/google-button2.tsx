@@ -4,12 +4,20 @@ import { Component, h } from '@stencil/core';
 // an anchor element instead of a button element.
 // That removes the need for event handling, but the
 // point of this book example is to demonstrate event handling.
+/**
+ * @summary Renders a link-based variant of the Google button example.
+ * @element google-button2
+ */
 @Component({
   tag: 'google-button2',
   styleUrl: 'google-button2.css',
   shadow: true,
 })
 export class GoogleButton2 {
+  /**
+   * Renders the link markup.
+   * @returns The component markup.
+   */
   render() {
     return (
       <a href="https://google.com" target="_blank">
