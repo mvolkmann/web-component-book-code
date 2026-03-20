@@ -32,6 +32,7 @@ import {
 })
 export class RadioGroup {
   @AttachInternals() internals: ElementInternals;
+  #formData = new FormData();
 
   /**
    * A comma-delimited list of labels to display.
@@ -66,7 +67,10 @@ export class RadioGroup {
   @Event() valueChanged: EventEmitter<string>;
 
   componentWillLoad() {
-    this.internals.setFormValue(this.value);
+    //this.internals.setFormValue(this.value);
+    this.#formData.set(this.name, this.value);
+    this.#formData.set('timestamp', Date.now().toString());
+    this.internals.setFormValue(this.#formData);
   }
 
   /**
@@ -77,7 +81,10 @@ export class RadioGroup {
     const { value } = event.target as HTMLInputElement;
     if (value !== this.value) {
       this.value = value;
-      this.internals.setFormValue(this.value);
+      //this.internals.setFormValue(this.value);
+      this.#formData.set(this.name, this.value);
+      this.#formData.set('timestamp', Date.now().toString());
+      this.internals.setFormValue(this.#formData);
     }
   };
 
