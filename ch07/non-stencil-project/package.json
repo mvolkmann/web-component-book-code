@@ -1,0 +1,10 @@
+{
+  "name": "non-stencil-project",
+  "scripts": {
+    "dev": "vite"
+  },
+  "type": "commonjs",
+  "devDependencies": {
+    "vite": "^8.0.1"
+  }
+}

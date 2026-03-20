@@ -7,9 +7,9 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default   |
-| -------- | --------- | ----------- | -------- | --------- |
-| `name`   | `name`    |             | `string` | `'World'` |
+| Property | Attribute | Description                          | Type     | Default   |
+| -------- | --------- | ------------------------------------ | -------- | --------- |
+| `name`   | `name`    | The name to include in the greeting. | `string` | `'World'` |
 
 
 ----------------------------------------------
