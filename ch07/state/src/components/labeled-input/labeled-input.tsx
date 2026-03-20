@@ -11,12 +11,7 @@ export class LabeledInput {
   @Prop() label: string = '';
   @Prop() name: string = '';
 
-  componentWillLoad() {
-    this.#require('id');
-    this.#require('label');
-  }
-
-  private handleChange = (event: Event) => {
+  #handleChange = (event: Event) => {
     const input = event.target as HTMLInputElement;
     store.name = input.value;
   };
@@ -25,20 +20,8 @@ export class LabeledInput {
     return (
       <div>
         <label htmlFor={this.id}>{this.label}</label>
-        <input
-          id={this.id}
-          name={this.name}
-          type="text"
-          value={store.name}
-          onChange={this.handleChange}
-        />
+        <input id={this.id} name={this.name} type="text" value={store.name} onChange={this.#handleChange} />
       </div>
     );
-  }
-
-  #require(attrName: string) {
-    if (!this[attrName]) {
-      console.error(`required attribute "${attrName}" is missing or empty`);
-    }
   }
 }

@@ -4,6 +4,7 @@ import { customElement, property } from "lit/decorators.js";
 @customElement("radio-group")
 export class RadioGroup extends LitElement {
   static formAssociated = true;
+  #internals = this.attachInternals();
 
   static styles = css`
     :host {
@@ -43,12 +44,19 @@ export class RadioGroup extends LitElement {
   @property({ type: String, reflect: true }) value = "";
   @property({ type: String, reflect: true }) values = "";
 
-  formResetCallback() {
-    this.value = this.values.split(",")[0];
+  connectedCallback() {
+    super.connectedCallback();
+    this.#internals.setFormValue(this.value);
   }
 
-  private handleChange(event: Event) {
+  formResetCallback() {
+    this.value = this.values.split(",")[0];
+    this.#internals.setFormValue(this.value);
+  }
+
+  #handleChange(event: Event) {
     this.value = (event.target as HTMLInputElement).value;
+    this.#internals.setFormValue(this.value);
   }
 
   render() {
@@ -73,7 +81,7 @@ export class RadioGroup extends LitElement {
                   name=${this.name}
                   value=${v}
                   .checked=${v === this.value}
-                  @change=${this.handleChange}
+                  @change=${this.#handleChange}
                 />
                 <label for=${v}>${labelArray[index]}</label>
               </div>
