@@ -41,16 +41,19 @@
 
     <google-button></google-button>
 
-    <radio-group
-      labels="Red,Green,Blue"
-      legend="Color"
-      name="color"
-      value="blue"
-      values="red,green,blue"
-    >
-      <div slot="before">Choose a primary color.</div>
-      <div slot="after">This will be the most used color.</div>
-    </radio-group>
+    <form method="post" action="/missing-endpoint">
+      <radio-group
+        labels="Red,Green,Blue"
+        legend="Color"
+        name="color"
+        value="blue"
+        values="red,green,blue"
+      >
+        <div slot="before">Choose a primary color.</div>
+        <div slot="after">This will be the most used color.</div>
+      </radio-group>
+      <button>Submit</button>
+    </form>
 
     <reactive-css></reactive-css>
 

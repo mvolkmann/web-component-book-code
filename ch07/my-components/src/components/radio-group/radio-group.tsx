@@ -1,4 +1,12 @@
-import { Component, Event, EventEmitter, h, Prop, Watch } from '@stencil/core';
+import {
+  AttachInternals,
+  Component,
+  Event,
+  EventEmitter,
+  h,
+  Prop,
+  Watch,
+} from '@stencil/core';
 
 /**
  * @summary Renders a radio group from comma-delimited labels and values.
@@ -20,8 +28,11 @@ import { Component, Event, EventEmitter, h, Prop, Watch } from '@stencil/core';
   tag: 'radio-group',
   styleUrl: 'radio-group.css',
   shadow: true,
+  formAssociated: true,
 })
 export class RadioGroup {
+  @AttachInternals() internals: ElementInternals;
+
   /**
    * A comma-delimited list of labels to display.
    * @type {string}
@@ -54,13 +65,20 @@ export class RadioGroup {
    */
   @Event() valueChanged: EventEmitter<string>;
 
+  componentWillLoad() {
+    this.internals.setFormValue(this.value);
+  }
+
   /**
    * Updates the selected value from the changed radio input.
    * @param event The change event from a radio input.
    */
   private handleChange = (event: Event) => {
     const { value } = event.target as HTMLInputElement;
-    if (value !== this.value) this.value = value;
+    if (value !== this.value) {
+      this.value = value;
+      this.internals.setFormValue(this.value);
+    }
   };
 
   /**

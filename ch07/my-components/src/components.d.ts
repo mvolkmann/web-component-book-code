@@ -272,6 +272,14 @@ declare namespace LocalJSX {
      */
     interface RadioGroup {
         /**
+          * If `true`, the user cannot interact with the element.
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        /**
           * A comma-delimited list of labels to display.
           * @type {string}
          */
