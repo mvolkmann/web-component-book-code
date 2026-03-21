@@ -13,6 +13,9 @@
       "import": "./dist/my-components/my-components.esm.js",
       "require": "./dist/my-components/my-components.cjs.js"
     },
+    "./dist/components/*": {
+      "import": "./dist/components/*"
+    },
     "./loader": {
       "import": "./loader/index.js",
       "require": "./loader/index.cjs",
