@@ -1,17 +1,22 @@
-import { attr, css, FASTElement, html } from "@microsoft/fast-element";
+import {
+  attr,
+  css,
+  customElement,
+  FASTElement,
+  html,
+} from "@microsoft/fast-element";
 
 const template = html`<p>Hello, ${(x) => x.name}!</p>`;
 
-export class HelloWorld extends FASTElement {
-  @attr name: string = "World";
-}
-
-HelloWorld.define({
+@customElement({
   name: "hello-world",
   template,
   styles: css`
     :host {
       color: blue;
     }
-  }`,
-});
+  `,
+})
+export class HelloWorld extends FASTElement {
+  @attr name: string = "World";
+}
