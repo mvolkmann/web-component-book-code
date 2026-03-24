@@ -1,7 +1,7 @@
 import { css, customElement, FASTElement, html } from "@microsoft/fast-element";
 
 // x is set to a GoogleButton instance.
-const template = html`
+const template = html<GoogleButton>`
   <button type="button" @click=${(x) => x.handleClick()}>Google It</button>
 `;
 

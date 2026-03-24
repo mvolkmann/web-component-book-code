@@ -6,7 +6,7 @@ import {
   html,
 } from "@microsoft/fast-element";
 
-const template = html`<p>Hello, ${(x) => x.name}!</p>`;
+const template = html<HelloWorld>`<p>Hello, ${(x) => x.name}!</p>`;
 
 @customElement({
   name: "hello-world",
