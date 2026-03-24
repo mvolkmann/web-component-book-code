@@ -6,4 +6,4 @@ for vanilla web components using Declarative Shadow DOM (DSD).
 To run this:
 
 - `npm install`
-- `npm dev`
+- `npm run dev`
