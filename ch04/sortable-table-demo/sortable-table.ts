@@ -135,7 +135,6 @@ class SortableTable extends HTMLElement {
   #makeTh(heading: string, property: string) {
     const th = document.createElement("th");
     th.setAttribute("data-property", property);
-    th.setAttribute("role", "button");
     th.setAttribute("title", `sort by ${heading}`);
     th.addEventListener("click", this.#sort.bind(this));
 
@@ -180,6 +179,7 @@ class SortableTable extends HTMLElement {
 
     // Clear sort indicator from previously selected header.
     if (this.#sortHeader) {
+      this.#sortHeader.removeAttribute("aria-sort");
       const sortIndicator = this.#sortHeader.querySelector(".sort-indicator");
       if (sortIndicator) sortIndicator.textContent = "";
     }
@@ -192,6 +192,10 @@ class SortableTable extends HTMLElement {
 
     this.#sortHeader = th;
     this.#sortDescending = descending;
+    this.#sortHeader.setAttribute(
+      "aria-sort",
+      descending ? "descending" : "ascending",
+    );
 
     this.dispatchEvent(
       new CustomEvent("sort", {
