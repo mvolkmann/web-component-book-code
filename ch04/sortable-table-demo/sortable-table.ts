@@ -62,7 +62,7 @@ class SortableTable extends HTMLElement {
   }
 
   connectedCallback() {
-    this.shadowRoot!.appendChild(template.content.cloneNode(true));
+    this.shadowRoot!.replaceChildren(template.content.cloneNode(true));
     if (!this.hasAttribute("title")) {
       this.setAttribute("title", "sortable-table");
     }
