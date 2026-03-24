@@ -30,10 +30,20 @@ template.innerHTML = html`
     th {
       background-color: cornflowerblue;
       color: white;
+    }
+    th > button {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+
+      background: none;
+      border: none;
+      color: inherit;
       cursor: pointer;
-      > span {
-        pointer-events: none;
-      }
+      font: inherit;
+      padding: 0;
+      width: 100%;
     }
   </style>
   <slot></slot>
@@ -162,7 +172,8 @@ class SortableTable2 extends HTMLElement {
 
   #handleSort(event: Event) {
     this.#sortByClick = true;
-    const th = event.target! as HTMLTableCellElement;
+    const button = event.currentTarget as HTMLButtonElement;
+    const th = button.closest("th") as HTMLTableCellElement;
     const property = th.getAttribute("data-property")!;
     const sameProperty = property === this.#sortProperty;
     this.sortProperty = property;
@@ -178,17 +189,23 @@ class SortableTable2 extends HTMLElement {
 
   #makeTh(heading: string, index: number) {
     const th = document.createElement("th");
+    th.setAttribute("scope", "col");
     th.setAttribute("data-property", this.#propertyArray[index]);
-    th.setAttribute("title", `sort by ${heading}`);
-    th.addEventListener("click", this.#handleSort.bind(this));
+    const button = document.createElement("button");
+    button.type = "button";
+    button.setAttribute("title", `sort by ${heading}`);
+    button.addEventListener("click", this.#handleSort.bind(this));
 
     let span = document.createElement("span");
     span.textContent = heading;
-    th.appendChild(span);
+    button.appendChild(span);
 
     span = document.createElement("span");
     span.classList.add("sort-indicator");
-    th.appendChild(span);
+    span.setAttribute("aria-hidden", "true");
+    button.appendChild(span);
+
+    th.appendChild(button);
 
     return th;
   }
