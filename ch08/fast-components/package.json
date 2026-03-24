@@ -1,0 +1,15 @@
+{
+  "name": "fast-components",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "type": "commonjs",
+  "devDependencies": {
+    "vite": "^8.0.2"
+  },
+  "dependencies": {
+    "@microsoft/fast-components": "^2.30.6"
+  }
+}

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <style>
+      fast-combobox {
+        background-color: transparent;
+        border: 0;
+
+        > fast-option:not(:last-child) {
+          border-bottom: 1px solid orange;
+        }
+      }
+
+      fast-combobox::part(control) {
+        background: #f4f8ff;
+        border: 2px solid #3b82f6;
+        border-radius: 0.75rem;
+        padding: 0.25rem 0.5rem;
+      }
+
+      fast-combobox::part(selected-value) {
+        color: #0f172a;
+        font-size: 1rem;
+      }
+
+      fast-combobox::part(indicator) {
+        color: #2563eb;
+      }
+
+      fast-combobox::part(listbox) {
+        border: 0;
+        border-radius: 0.75rem;
+        box-shadow: 0 10px 25px rgb(0 0 0 / 0.15);
+        background-color: transparent;
+      }
+
+      fast-option {
+        background: cornflowerblue;
+        border-radius: 0;
+      }
+
+      fast-option::part(content) {
+        color: white;
+      }
+    </style>
+    <script type="module" src="./main.ts"></script>
+    <script type="module">
+      const combobox = document.getElementById("fruit");
+      console.log("index.html : combobox =", combobox);
+      combobox.addEventListener("change", () => {
+        alert(`You selected ${combobox.value}.`);
+      });
+    </script>
+  </head>
+  <body>
+    <fast-combobox id="fruit" placeholder="Choose a fruit">
+      <fast-option value="apple">Apple</fast-option>
+      <fast-option value="banana">Banana</fast-option>
+      <fast-option value="orange">Orange</fast-option>
+    </fast-combobox>
+  </body>
+</html>
