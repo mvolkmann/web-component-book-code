@@ -22,8 +22,8 @@ const template = html<RadioGroup>`
               type="radio"
               id=${p => p.value}
               name=${(p, e) => e.parent.name}
-              value=${p => p.value}
               :checked=${(p, e) => p.value === e.parent.value}
+              :value=${p => p.value}
               @change=${(p, e) => e.parent.handleChange(p.value)}
             />
             <label for=${p => p.value}>${x => x.label}</label>

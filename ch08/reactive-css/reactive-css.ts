@@ -12,7 +12,7 @@ const template = html<ReactiveCSS>`
     type="range"
     min="8"
     max="64"
-    value="${x => x.size}"
+    :value="${x => x.size}"
     @input=${(x, c) => x.handleInput(c.event)}
     ${ref("slider")}
   />
