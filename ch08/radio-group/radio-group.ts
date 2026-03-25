@@ -10,23 +10,23 @@ import {
 // x is set to a RadioGroup instance.
 const template = html<RadioGroup>`
   <fieldset>
-    <legend>${(x) => x.legend}</legend>
+    <legend>${x => x.legend}</legend>
     <slot name="before"></slot>
     <div>
       ${repeat(
-        (x) => x.pairs,
+        x => x.pairs,
         html`
           <div>
             <!-- p is short for pair and e is short for component. -->
             <input
               type="radio"
-              id=${(p) => p.value}
+              id=${p => p.value}
               name=${(p, e) => e.parent.name}
-              value=${(p) => p.value}
+              value=${p => p.value}
               :checked=${(p, e) => p.value === e.parent.value}
               @change=${(p, e) => e.parent.handleChange(p.value)}
             />
-            <label for=${(p) => p.value}>${(x) => x.label}</label>
+            <label for=${p => p.value}>${x => x.label}</label>
           </div>
         `,
       )}

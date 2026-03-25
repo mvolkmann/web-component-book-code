@@ -9,8 +9,8 @@ import {
 } from "@microsoft/fast-element";
 
 const template = html<HelloWorld2>`
-  <p style="font-weight: ${(x) => (x.bold ? "bold" : "normal")}">
-    Hello, ${(x) => x.name}!
+  <p style="font-weight: ${x => (x.bold ? "bold" : "normal")}">
+    Hello, ${x => x.name}!
   </p>
 `;
 
