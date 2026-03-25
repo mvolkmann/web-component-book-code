@@ -20,11 +20,21 @@ const template = html<MyMath>`
 })
 export class MyMath extends FASTElement {
   @attr n: number = 1;
-  @observable double: number;
-  @observable triple: number;
+  //@observable double: number;
+  //@observable triple: number;
 
+  /*
   nChanged(_oldValue: number, newValue: number) {
     this.double = newValue * 2;
     this.triple = newValue * 3;
+  }
+  */
+
+  get double() {
+    return this.n * 2;
+  }
+
+  get triple() {
+    return this.n * 3;
   }
 }
