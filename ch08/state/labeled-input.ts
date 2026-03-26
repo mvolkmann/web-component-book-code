@@ -14,7 +14,7 @@ const template = html<LabeledInput>`
     id=${x => x.inputId}
     name=${x => x.name}
     type="text"
-    :value=${x => x.getName()}
+    :value=${x => x.name}
     @change=${x => x.handleChange()}
     ${ref("input")}
   />
@@ -34,10 +34,9 @@ const template = html<LabeledInput>`
 export class LabeledInput extends FASTElement {
   @attr({ attribute: "input-id" }) inputId: string;
   @attr label: string;
-  @attr name: string;
   input: HTMLInputElement;
 
-  getName() {
+  get name() {
     return myState.current.name;
   }
 

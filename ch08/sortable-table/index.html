@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script type="module" src="./sortable-table.ts"></script>
+    <script type="module">
+      const table = document.querySelector("sortable-table");
+      if (table) {
+        table.data = [
+          { make: "BMW", model: "Z3", year: 2002 },
+          { make: "MINI", model: "Cooper", year: 2015 },
+          { make: "Subaru", model: "Forester", year: 2025 },
+          { make: "Toyota", model: "RAV4", year: 2010 },
+        ];
+        table.addEventListener("tableSorted", event => {
+          const { descending, property } = event.detail;
+          const order = descending ? "descending" : "ascending";
+          console.log(`sorted on ${property} ${order}`);
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <sortable-table
+      headings="Make,Model,Year"
+      properties="make,model,year"
+      title="My Cars table"
+    >
+      <h2>My Cars</h2>
+      <p slot="footnote">Some of these cars are no longer owned.</p>
+    </sortable-table>
+  </body>
+</html>
