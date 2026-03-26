@@ -115,7 +115,6 @@ export class SortableTable extends FASTElement {
   @observable data: Array<LooseObject> = [];
   @observable descending = false;
   @observable sortProperty = "";
-  @observable propertyArray: string[] = [];
 
   get headingPairs() {
     return this.headings
@@ -129,9 +128,14 @@ export class SortableTable extends FASTElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.#syncProperties();
   }
 
+  get propertyArray() {
+    return this.properties
+      .split(",")
+      .map(property => property.trim())
+      .filter(Boolean);
+  }
   get sortedData() {
     const sortProperty = this.sortProperty;
     if (!sortProperty) return this.data;
@@ -149,9 +153,6 @@ export class SortableTable extends FASTElement {
       return this.descending ? -compare : compare;
     });
   }
-  propertiesChanged() {
-    this.#syncProperties();
-  }
 
   #sort() {
     const sortProperty = this.sortProperty;
@@ -168,13 +169,6 @@ export class SortableTable extends FASTElement {
             : 0;
       return this.descending ? -compare : compare;
     });
-  }
-
-  #syncProperties() {
-    this.propertyArray = this.properties
-      .split(",")
-      .map(property => property.trim())
-      .filter(Boolean);
   }
 
   updateSort(property: string) {
