@@ -114,7 +114,6 @@ export class SortableTable extends FASTElement {
 
   @observable data: Array<LooseObject> = [];
   @observable descending = false;
-  @observable sortedData: Array<LooseObject> = [];
   @observable sortProperty = "";
   @observable propertyArray: string[] = [];
 
@@ -131,20 +130,27 @@ export class SortableTable extends FASTElement {
   connectedCallback() {
     super.connectedCallback();
     this.#syncProperties();
-    this.#syncSortedData();
   }
 
-  dataChanged() {
-    this.#syncSortedData();
-  }
+  get sortedData() {
+    const sortProperty = this.sortProperty;
+    if (!sortProperty) return this.data;
 
-  descendingChanged() {
-    this.#syncSortedData();
-  }
+    return this.data.toSorted((a: LooseObject, b: LooseObject) => {
+      const aValue = a[sortProperty];
+      const bValue = b[sortProperty];
+      const compare =
+        typeof aValue === "string"
+          ? aValue.localeCompare(bValue as string)
+          : typeof aValue === "number"
+            ? aValue - (bValue as number)
+            : 0;
 
+      return this.descending ? -compare : compare;
+    });
+  }
   propertiesChanged() {
     this.#syncProperties();
-    this.#syncSortedData();
   }
 
   #sort() {
@@ -164,19 +170,11 @@ export class SortableTable extends FASTElement {
     });
   }
 
-  sortPropertyChanged() {
-    this.#syncSortedData();
-  }
-
   #syncProperties() {
     this.propertyArray = this.properties
       .split(",")
       .map(property => property.trim())
       .filter(Boolean);
-  }
-
-  #syncSortedData() {
-    this.sortedData = this.#sort();
   }
 
   updateSort(property: string) {
