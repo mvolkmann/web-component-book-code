@@ -170,9 +170,8 @@ export class SortableTable extends FASTElement {
   }
 
   updateSort(property: string) {
-    const same = property === this.sortProperty;
+    this.descending = property === this.sortProperty ? !this.descending : false;
     this.sortProperty = property;
-    this.descending = same ? !this.descending : false;
     this.dispatchEvent(
       new CustomEvent("sort", {
         detail: { property, descending: this.descending },
