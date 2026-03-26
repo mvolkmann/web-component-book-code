@@ -14,10 +14,6 @@ export namespace Components {
         /**
           * @default ''
          */
-        "id": string;
-        /**
-          * @default ''
-         */
         "label": string;
         /**
           * @default ''
@@ -59,10 +55,6 @@ declare namespace LocalJSX {
         /**
           * @default ''
          */
-        "id"?: string;
-        /**
-          * @default ''
-         */
         "label"?: string;
         /**
           * @default ''
@@ -71,7 +63,6 @@ declare namespace LocalJSX {
     }
 
     interface LabeledInputAttributes {
-        "id": string;
         "label": string;
         "name": string;
     }

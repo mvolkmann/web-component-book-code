@@ -1,4 +1,4 @@
-import { Component, h, Prop } from '@stencil/core';
+import { Component, Element, h, Prop } from '@stencil/core';
 import store from '../../app-store';
 
 @Component({
@@ -7,7 +7,7 @@ import store from '../../app-store';
   shadow: true,
 })
 export class LabeledInput {
-  @Prop() id: string = '';
+  @Element() el!: HTMLElement;
   @Prop() label: string = '';
   @Prop() name: string = '';
 
@@ -19,8 +19,8 @@ export class LabeledInput {
   render() {
     return (
       <div>
-        <label htmlFor={this.id}>{this.label}</label>
-        <input id={this.id} name={this.name} type="text" value={store.name} onChange={this.#handleChange} />
+        <label htmlFor={this.el.id}>{this.label}</label>
+        <input id={this.el.id} name={this.name} type="text" value={store.name} onChange={this.#handleChange} />
       </div>
     );
   }
