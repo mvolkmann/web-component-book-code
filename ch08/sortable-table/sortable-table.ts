@@ -106,7 +106,7 @@ const headingTemplate = html<HeadingPair, SortableTable>`
   </th>
 `;
 
-const cellTemplate = html<CellData>` <td>${cell => cell.value}</td> `;
+const cellTemplate = html<CellData>`<td>${cell => cell.value}</td>`;
 
 const rowTemplate = html<RowData>`
   <tr>
