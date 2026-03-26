@@ -104,7 +104,7 @@ const template = html<SortableTable>`
 
 @customElement({ name: "sortable-table", template, styles })
 export class SortableTable extends FASTElement {
-  @observable data: Array<LooseObject> = [];
+  @attr data: Array<LooseObject> = [];
   @attr headings = "";
   @attr properties = "";
 
@@ -121,6 +121,25 @@ export class SortableTable extends FASTElement {
         property: this.propertyArray[index],
       }))
       .filter(pair => pair.heading && pair.property);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.#syncProperties();
+    this.#syncSortedData();
+  }
+
+  dataChanged() {
+    this.#syncSortedData();
+  }
+
+  descendingChanged() {
+    this.#syncSortedData();
+  }
+
+  propertiesChanged() {
+    this.#syncProperties();
+    this.#syncSortedData();
   }
 
   #sort() {
@@ -143,25 +162,6 @@ export class SortableTable extends FASTElement {
   sortIndicator(property: string) {
     if (property !== this.sortProperty) return "";
     return this.descending ? "▼" : "▲";
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.#syncProperties();
-    this.#syncSortedData();
-  }
-
-  dataChanged() {
-    this.#syncSortedData();
-  }
-
-  descendingChanged() {
-    this.#syncSortedData();
-  }
-
-  propertiesChanged() {
-    this.#syncProperties();
-    this.#syncSortedData();
   }
 
   sortPropertyChanged() {
