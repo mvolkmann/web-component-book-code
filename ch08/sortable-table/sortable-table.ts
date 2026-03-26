@@ -24,6 +24,15 @@ type RowData = {
   cells: CellData[];
 };
 
+function getSortIndicator(
+  property: string,
+  sortedProperty: string,
+  descending: boolean,
+): string {
+  if (property !== sortedProperty) return "";
+  return descending ? "▼" : "▲";
+}
+
 const styles = css`
   :host {
     display: inline-block;
@@ -82,11 +91,11 @@ const headingTemplate = html<HeadingPair, SortableTable>`
       <span>${pair => pair.heading}</span>
       <span class="sort-indicator">
         ${(pair, c) =>
-          pair.property === c.parent.sortProperty
-            ? c.parent.descending
-              ? "▼"
-              : "▲"
-            : ""}
+          getSortIndicator(
+            pair.property,
+            c.parent.sortProperty,
+            c.parent.descending,
+          )}
       </span>
     </button>
   </th>
