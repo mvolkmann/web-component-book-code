@@ -24,15 +24,6 @@ type RowData = {
   cells: CellData[];
 };
 
-function getSortIndicator(
-  property: string,
-  sortedProperty: string,
-  descending: boolean,
-): string {
-  if (property !== sortedProperty) return "";
-  return descending ? "▼" : "▲";
-}
-
 const styles = css`
   :host {
     display: inline-block;
@@ -73,14 +64,28 @@ const styles = css`
   }
 `;
 
+function getAriaSort(
+  property: string,
+  sortedProperty: string,
+  descending: boolean,
+) {
+  if (property !== sortedProperty) return undefined;
+  return descending ? "descending" : "ascending";
+}
+
+function getSortIndicator(
+  property: string,
+  sortedProperty: string,
+  descending: boolean,
+) {
+  if (property !== sortedProperty) return "";
+  return descending ? "▼" : "▲";
+}
+
 const headingTemplate = html<HeadingPair, SortableTable>`
   <th
-    aria-sort="${(pair, c) =>
-      pair.property === c.parent.sortProperty
-        ? c.parent.descending
-          ? "descending"
-          : "ascending"
-        : undefined}"
+    aria-sort=${(pair, c) =>
+      getAriaSort(pair.property, c.parent.sortProperty, c.parent.descending)}
     data-property="${pair => pair.property}"
     title="${pair => `sort by ${pair.heading}`}"
   >
