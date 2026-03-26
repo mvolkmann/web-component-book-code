@@ -19,8 +19,19 @@ th {
 th {
   background-color: cornflowerblue;
   color: white;
-  cursor: pointer;
-  > span {
-    pointer-events: none;
+
+  > button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+    width: 100%;
   }
 }

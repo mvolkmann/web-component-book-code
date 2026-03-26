@@ -93,7 +93,7 @@ export class SortableTable {
   @Watch('sortProperty')
   @Watch('descending')
   resort() {
-    this.sortedData = this.sort();
+    this.sortedData = this.#sort();
   }
 
   /**
@@ -132,13 +132,20 @@ export class SortableTable {
   makeTh(heading: string, property: string) {
     return (
       <th
+        aria-sort={
+          property === this.sortProperty
+            ? this.descending
+              ? 'descending'
+              : 'ascending'
+            : undefined
+        }
         data-property={property}
-        role="button"
         title={`sort by ${heading}`}
-        onClick={() => this.updateSort(property)}
       >
-        <span>{heading}</span>
-        <span class="sort-indicator">{this.sortIndicator(property)}</span>
+        <button type="button" onClick={() => this.updateSort(property)}>
+          <span>{heading}</span>
+          <span class="sort-indicator">{this.sortIndicator(property)}</span>
+        </button>
       </th>
     );
   }
@@ -177,7 +184,7 @@ export class SortableTable {
    * Returns the table data in its current sorted order.
    * @returns The sorted row data.
    */
-  sort() {
+  #sort() {
     const sortProperty = this.sortProperty;
     if (!sortProperty) return this.data;
 
