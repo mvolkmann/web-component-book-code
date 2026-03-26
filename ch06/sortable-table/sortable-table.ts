@@ -1,4 +1,4 @@
-import { css, html, LitElement } from "lit";
+import { css, html, LitElement, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 
 type LooseObject = Record<string, unknown>;
@@ -35,9 +35,20 @@ export class SortableTable extends LitElement {
     th {
       background-color: cornflowerblue;
       color: white;
-      cursor: pointer;
-      > span {
-        pointer-events: none;
+
+      > button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+
+        background: none;
+        border: none;
+        color: inherit;
+        cursor: pointer;
+        font: inherit;
+        padding: 0;
+        width: 100%;
       }
     }
   `;
@@ -59,13 +70,18 @@ export class SortableTable extends LitElement {
   makeTh(heading: string, property: string) {
     return html`
       <th
+        aria-sort="${property === this.sortProperty
+          ? this.descending
+            ? "descending"
+            : "ascending"
+          : nothing}"
         data-property="${property}"
-        role="button"
         title="${`sort by ${heading}`}"
-        @click=${() => this.updateSort(property)}
       >
-        <span>${heading}</span>
-        <span class="sort-indicator"> ${this.sortIndicator(property)} </span>
+        <button type="button" @click=${() => this.updateSort(property)}>
+          <span>${heading}</span>
+          <span class="sort-indicator"> ${this.sortIndicator(property)} </span>
+        </button>
       </th>
     `;
   }
@@ -95,7 +111,7 @@ export class SortableTable extends LitElement {
     `;
   }
 
-  sort() {
+  #sort() {
     const sortProperty = this.sortProperty;
     if (!sortProperty) return this.data;
 
@@ -127,7 +143,7 @@ export class SortableTable extends LitElement {
       changedProps.has("sortProperty") ||
       changedProps.has("descending")
     ) {
-      this.sortedData = this.sort();
+      this.sortedData = this.#sort();
     }
   }
 
