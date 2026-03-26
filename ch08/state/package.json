@@ -1,0 +1,15 @@
+{
+  "name": "state",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.3.0"
+  },
+  "dependencies": {
+    "@microsoft/fast-element": "^2.9.1",
+    "@microsoft/fast-foundation": "^2.50.0"
+  }
+}
