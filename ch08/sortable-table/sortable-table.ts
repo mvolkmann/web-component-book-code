@@ -126,20 +126,14 @@ export class SortableTable extends FASTElement {
   @observable sortProperty = "";
 
   get headingPairs(): HeadingPair[] {
-    return this.headings
-      .split(",")
-      .map((heading, index) => ({
-        heading: heading.trim(),
-        property: this.propertyArray[index],
-      }))
-      .filter(pair => pair.heading && pair.property);
+    return this.headings.split(",").map((heading, index) => ({
+      heading: heading.trim(),
+      property: this.propertyArray[index],
+    }));
   }
 
   get propertyArray(): string[] {
-    return this.properties
-      .split(",")
-      .map(property => property.trim())
-      .filter(Boolean);
+    return this.properties.split(",").map(property => property.trim());
   }
 
   get rows(): RowData[] {
