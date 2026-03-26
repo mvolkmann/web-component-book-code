@@ -60,9 +60,24 @@ const template = html<SortableTable>`
         ${repeat(
           x => x.headingPairs,
           html<{ heading: string; property: string }, SortableTable>`
-            <th>
-              <button @click=${(pair, c) => c.parent.updateSort(pair.property)}>
-                ${pair => pair.heading}
+            <th
+              aria-sort="${(pair, c) =>
+                pair.property === c.parent.sortProperty
+                  ? c.parent.descending
+                    ? "descending"
+                    : "ascending"
+                  : undefined}"
+              data-property="${pair => pair.property}"
+              title="${pair => `sort by ${pair.heading}`}"
+            >
+              <button
+                type="button"
+                @click=${(pair, c) => c.parent.updateSort(pair.property)}
+              >
+                <span>${pair => pair.heading}</span>
+                <span class="sort-indicator">
+                  ${(pair, c) => c.parent.sortIndicator(pair.property)}
+                </span>
               </button>
             </th>
           `,
@@ -108,25 +123,6 @@ export class SortableTable extends FASTElement {
 
   makeTd(value: unknown) {
     return html`<td>${value}</td>`;
-  }
-
-  makeTh(heading: string, property: string) {
-    return html`
-      <th
-        aria-sort="${property === this.sortProperty
-          ? this.descending
-            ? "descending"
-            : "ascending"
-          : undefined}"
-        data-property="${property}"
-        title="${`sort by ${heading}`}"
-      >
-        <button type="button" @click=${() => this.updateSort(property)}>
-          <span>${heading}</span>
-          <span class="sort-indicator"> ${this.sortIndicator(property)} </span>
-        </button>
-      </th>
-    `;
   }
 
   makeTr(obj: LooseObject) {
