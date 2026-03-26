@@ -16,7 +16,7 @@
           { make: "Subaru", model: "Forester", year: 2025 },
           { make: "Toyota", model: "RAV4", year: 2010 },
         ];
-        table.addEventListener("tableSorted", event => {
+        table.addEventListener("sort", event => {
           const { descending, property } = event.detail;
           const order = descending ? "descending" : "ascending";
           console.log(`sorted on ${property} ${order}`);
