@@ -5,7 +5,7 @@ import {
   FASTElement,
   html,
   observable,
-  repeat,
+  type ViewTemplate,
 } from "@microsoft/fast-element";
 
 type LooseObject = Record<string, unknown>;
@@ -66,9 +66,17 @@ const template = html<SortableTable>`
   <slot name="footnote"></slot>
 `;
 
+function composeTemplates<T>(templates: Array<ViewTemplate<T>>) {
+  const strings = new Array(templates.length + 1).fill(
+    "",
+  ) as unknown as TemplateStringsArray;
+  Object.defineProperty(strings, "raw", { value: strings });
+  return html<T>(strings, ...templates);
+}
+
 @customElement({ name: "sortable-table", template, styles })
 export class SortableTable extends FASTElement {
-  @attr data: Array<LooseObject> = [];
+  @observable data: Array<LooseObject> = [];
   @attr headings = "";
   @attr properties = "";
 
@@ -78,23 +86,17 @@ export class SortableTable extends FASTElement {
   @observable propertyArray: string[] = [];
 
   makeHeadings() {
-    console.log(
-      "sortable-table.ts makeHeadings: this.headings =",
-      this.headings,
+    return composeTemplates(
+      this.headings
+        .split(",")
+        .map((heading, i) =>
+          this.makeTh(heading.trim(), this.propertyArray[i]),
+        ),
     );
-    const result = this.headings
-      .split(",")
-      .map((heading, i) => this.makeTh(heading, this.propertyArray[i]));
-    console.log("sortable-table.ts makeHeadings: result =", result);
-    return result;
   }
 
   makeRows() {
-    console.log(
-      "sortable-table.ts makeRows: this.sortedData =",
-      this.sortedData,
-    );
-    return this.sortedData.map(obj => this.makeTr(obj));
+    return composeTemplates(this.sortedData.map(obj => this.makeTr(obj)));
   }
 
   makeTd(value: unknown) {
@@ -121,27 +123,13 @@ export class SortableTable extends FASTElement {
   }
 
   makeTr(obj: LooseObject) {
+    const cells = composeTemplates(
+      this.propertyArray.map(propName => this.makeTd(obj[propName])),
+    );
     return html`
       <tr>
-        ${this.propertyArray.map(propName => this.makeTd(obj[propName]))}
+        ${cells}
       </tr>
-    `;
-  }
-
-  render() {
-    return html`
-      <slot></slot>
-      <table>
-        <thead>
-          <tr>
-            ${this.makeHeadings()}
-          </tr>
-        </thead>
-        <tbody>
-          ${this.makeRows()}
-        </tbody>
-      </table>
-      <slot name="footnote"></slot>
     `;
   }
 
@@ -167,18 +155,38 @@ export class SortableTable extends FASTElement {
     return this.descending ? "▼" : "▲";
   }
 
-  willUpdate(changedProps: Map<string, unknown>) {
-    if (changedProps.has("properties")) {
-      this.propertyArray = this.properties.split(",");
-    }
+  connectedCallback() {
+    super.connectedCallback();
+    this.#syncProperties();
+    this.#syncSortedData();
+  }
 
-    if (
-      changedProps.has("data") ||
-      changedProps.has("sortProperty") ||
-      changedProps.has("descending")
-    ) {
-      this.sortedData = this.#sort();
-    }
+  dataChanged() {
+    this.#syncSortedData();
+  }
+
+  descendingChanged() {
+    this.#syncSortedData();
+  }
+
+  propertiesChanged() {
+    this.#syncProperties();
+    this.#syncSortedData();
+  }
+
+  sortPropertyChanged() {
+    this.#syncSortedData();
+  }
+
+  #syncProperties() {
+    this.propertyArray = this.properties
+      .split(",")
+      .map(property => property.trim())
+      .filter(Boolean);
+  }
+
+  #syncSortedData() {
+    this.sortedData = this.#sort();
   }
 
   updateSort(property: string) {
