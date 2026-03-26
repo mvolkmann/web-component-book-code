@@ -5,6 +5,7 @@ import {
   FASTElement,
   html,
   observable,
+  repeat,
   type ViewTemplate,
 } from "@microsoft/fast-element";
 
@@ -56,7 +57,16 @@ const template = html<SortableTable>`
   <table>
     <thead>
       <tr>
-        ${x => x.makeHeadings()}
+        ${repeat(
+          x => x.headingPairs,
+          html<{ heading: string; property: string }, SortableTable>`
+            <th>
+              <button @click=${(pair, c) => c.parent.updateSort(pair.property)}>
+                ${pair => pair.heading}
+              </button>
+            </th>
+          `,
+        )}
       </tr>
     </thead>
     <tbody>
@@ -85,14 +95,11 @@ export class SortableTable extends FASTElement {
   @observable sortProperty = "";
   @observable propertyArray: string[] = [];
 
-  makeHeadings() {
-    return composeTemplates(
-      this.headings
-        .split(",")
-        .map((heading, i) =>
-          this.makeTh(heading.trim(), this.propertyArray[i]),
-        ),
-    );
+  get headingPairs() {
+    return this.headings.split(",").map((heading, index) => ({
+      heading: heading.trim(),
+      property: this.propertyArray[index],
+    }));
   }
 
   makeRows() {
@@ -126,11 +133,9 @@ export class SortableTable extends FASTElement {
     const cells = composeTemplates(
       this.propertyArray.map(propName => this.makeTd(obj[propName])),
     );
-    return html`
-      <tr>
-        ${cells}
-      </tr>
-    `;
+    return html`<tr>
+      ${cells}
+    </tr>`;
   }
 
   #sort() {
