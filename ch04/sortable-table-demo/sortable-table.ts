@@ -1,5 +1,10 @@
 type LooseObject = Record<string, unknown>;
 
+export type SortDetail = {
+  property: string;
+  descending: boolean;
+};
+
 const template = document.createElement("template");
 const html = String.raw;
 template.innerHTML = html`
@@ -55,7 +60,7 @@ template.innerHTML = html`
   <slot name="footnote"></slot>
 `;
 
-class SortableTable extends HTMLElement {
+export class SortableTable extends HTMLElement {
   #data: LooseObject[] = [];
   #headings: string = "";
   #properties: string = "";
@@ -216,7 +221,7 @@ class SortableTable extends HTMLElement {
     );
 
     this.dispatchEvent(
-      new CustomEvent("sort", {
+      new CustomEvent<SortDetail>("sort", {
         bubbles: true,
         composed: true,
         detail: { property, descending },

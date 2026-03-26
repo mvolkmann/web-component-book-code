@@ -12,27 +12,7 @@
     </style>
     <script src="sortable-table.ts" type="module"></script>
     <script src="sortable-table2.ts" type="module"></script>
-    <script type="module">
-      function configureTable(elementName) {
-        const table = document.querySelector(elementName);
-        if (!table) return;
-        table.data = [
-          { make: "BMW", model: "Z3", year: 2002 },
-          { make: "MINI", model: "Cooper", year: 2015 },
-          { make: "Subaru", model: "Forester", year: 2025 },
-          { make: "Toyota", model: "RAV4", year: 2010 },
-        ];
-        table.addEventListener("sort", (event) => {
-          const { property, descending } = event.detail;
-          console.log(
-            `The table is now sorted by ${property}`,
-            `${descending ? "descending" : "ascending"}.`,
-          );
-        });
-      }
-      configureTable("sortable-table");
-      configureTable("sortable-table2");
-    </script>
+    <script src="setup.ts" type="module"></script>
   </head>
   <body>
     <sortable-table
