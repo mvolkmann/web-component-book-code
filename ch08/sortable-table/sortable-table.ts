@@ -75,7 +75,12 @@ const template = html<SortableTable>`
               >
                 <span>${pair => pair.heading}</span>
                 <span class="sort-indicator">
-                  ${(pair, c) => c.parent.sortIndicator(pair.property)}
+                  ${(pair, c) =>
+                    pair.property === c.parent.sortProperty
+                      ? c.parent.descending
+                        ? "▼"
+                        : "▲"
+                      : ""}
                 </span>
               </button>
             </th>
@@ -104,10 +109,10 @@ const template = html<SortableTable>`
 
 @customElement({ name: "sortable-table", template, styles })
 export class SortableTable extends FASTElement {
-  @attr data: Array<LooseObject> = [];
   @attr headings = "";
   @attr properties = "";
 
+  @observable data: Array<LooseObject> = [];
   @observable descending = false;
   @observable sortedData: Array<LooseObject> = [];
   @observable sortProperty = "";
@@ -157,11 +162,6 @@ export class SortableTable extends FASTElement {
             : 0;
       return this.descending ? -compare : compare;
     });
-  }
-
-  sortIndicator(property: string) {
-    if (property !== this.sortProperty) return "";
-    return this.descending ? "▼" : "▲";
   }
 
   sortPropertyChanged() {
