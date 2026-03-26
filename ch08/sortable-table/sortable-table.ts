@@ -8,7 +8,21 @@ import {
   repeat,
 } from "@microsoft/fast-element";
 
+type CellData = {
+  property: string;
+  value: unknown;
+};
+
+type HeadingPair = {
+  heading: string;
+  property: string;
+};
+
 type LooseObject = Record<string, unknown>;
+
+type RowData = {
+  cells: CellData[];
+};
 
 const styles = css`
   :host {
@@ -50,58 +64,53 @@ const styles = css`
   }
 `;
 
+const headingTemplate = html<HeadingPair, SortableTable>`
+  <th
+    aria-sort="${(pair, c) =>
+      pair.property === c.parent.sortProperty
+        ? c.parent.descending
+          ? "descending"
+          : "ascending"
+        : undefined}"
+    data-property="${pair => pair.property}"
+    title="${pair => `sort by ${pair.heading}`}"
+  >
+    <button
+      type="button"
+      @click=${(pair, c) => c.parent.updateSort(pair.property)}
+    >
+      <span>${pair => pair.heading}</span>
+      <span class="sort-indicator">
+        ${(pair, c) =>
+          pair.property === c.parent.sortProperty
+            ? c.parent.descending
+              ? "▼"
+              : "▲"
+            : ""}
+      </span>
+    </button>
+  </th>
+`;
+
+const cellTemplate = html<CellData>` <td>${cell => cell.value}</td> `;
+
+const rowTemplate = html<RowData>`
+  <tr>
+    ${repeat(row => row.cells, cellTemplate)}
+  </tr>
+`;
+
 // x is set to a SortableTable instance.
 const template = html<SortableTable>`
   <slot></slot>
   <table>
     <thead>
       <tr>
-        ${repeat(
-          x => x.headingPairs,
-          html<{ heading: string; property: string }, SortableTable>`
-            <th
-              aria-sort="${(pair, c) =>
-                pair.property === c.parent.sortProperty
-                  ? c.parent.descending
-                    ? "descending"
-                    : "ascending"
-                  : undefined}"
-              data-property="${pair => pair.property}"
-              title="${pair => `sort by ${pair.heading}`}"
-            >
-              <button
-                type="button"
-                @click=${(pair, c) => c.parent.updateSort(pair.property)}
-              >
-                <span>${pair => pair.heading}</span>
-                <span class="sort-indicator">
-                  ${(pair, c) =>
-                    pair.property === c.parent.sortProperty
-                      ? c.parent.descending
-                        ? "▼"
-                        : "▲"
-                      : ""}
-                </span>
-              </button>
-            </th>
-          `,
-        )}
+        ${repeat(x => x.headingPairs, headingTemplate)}
       </tr>
     </thead>
     <tbody>
-      ${repeat(
-        x => x.sortedData,
-        html<LooseObject, SortableTable>`
-          <tr>
-            ${repeat(
-              (_, c) => c.parent.propertyArray,
-              html<string, LooseObject>`
-                <td>${(propName, c) => c.parent[propName]}</td>
-              `,
-            )}
-          </tr>
-        `,
-      )}
+      ${repeat(x => x.rows, rowTemplate)}
     </tbody>
   </table>
   <slot name="footnote"></slot>
@@ -116,7 +125,7 @@ export class SortableTable extends FASTElement {
   @observable descending = false;
   @observable sortProperty = "";
 
-  get headingPairs() {
+  get headingPairs(): HeadingPair[] {
     return this.headings
       .split(",")
       .map((heading, index) => ({
@@ -126,13 +135,23 @@ export class SortableTable extends FASTElement {
       .filter(pair => pair.heading && pair.property);
   }
 
-  get propertyArray() {
+  get propertyArray(): string[] {
     return this.properties
       .split(",")
       .map(property => property.trim())
       .filter(Boolean);
   }
-  get sortedData() {
+
+  get rows(): RowData[] {
+    return this.sortedData.map(row => ({
+      cells: this.propertyArray.map(property => ({
+        property,
+        value: row[property],
+      })),
+    }));
+  }
+
+  get sortedData(): Array<LooseObject> {
     const sortProperty = this.sortProperty;
     if (!sortProperty) return this.data;
 
