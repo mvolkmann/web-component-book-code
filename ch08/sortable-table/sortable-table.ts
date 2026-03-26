@@ -126,10 +126,6 @@ export class SortableTable extends FASTElement {
       .filter(pair => pair.heading && pair.property);
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-  }
-
   get propertyArray() {
     return this.properties
       .split(",")
@@ -150,23 +146,6 @@ export class SortableTable extends FASTElement {
             ? aValue - (bValue as number)
             : 0;
 
-      return this.descending ? -compare : compare;
-    });
-  }
-
-  #sort() {
-    const sortProperty = this.sortProperty;
-    if (!sortProperty) return this.data;
-
-    return this.data.toSorted((a: LooseObject, b: LooseObject) => {
-      const aValue = a[sortProperty];
-      const bValue = b[sortProperty];
-      const compare =
-        typeof aValue === "string"
-          ? aValue.localeCompare(bValue as string)
-          : typeof aValue === "number"
-            ? aValue - (bValue as number)
-            : 0;
       return this.descending ? -compare : compare;
     });
   }
