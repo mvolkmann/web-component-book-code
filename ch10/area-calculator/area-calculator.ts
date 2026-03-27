@@ -10,7 +10,7 @@ function makeSlider(label: string, property: string) {
         type="range"
         min="1"
         max="10"
-        value="this.${property}"
+        value:input="this.${property}"
       />
       <span>this.${property}</span>
     </div>
