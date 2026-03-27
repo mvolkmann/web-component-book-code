@@ -17,14 +17,14 @@ const template = html<RadioGroup>`
         x => x.pairs,
         html`
           <div>
-            <!-- p is short for pair and e is short for component. -->
+            <!-- p is short for pair and c is short for context. -->
             <input
               type="radio"
               id=${p => p.value}
-              name=${(p, e) => e.parent.name}
-              :checked=${(p, e) => p.value === e.parent.value}
+              name=${(p, c) => c.parent.name}
+              :checked=${(p, c) => p.value === c.parent.value}
               :value=${p => p.value}
-              @change=${(p, e) => e.parent.handleChange(p.value)}
+              @change=${(p, c) => c.parent.handleChange(p.value)}
             />
             <label for=${p => p.value}>${x => x.label}</label>
           </div>
