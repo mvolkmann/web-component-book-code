@@ -1,12 +1,11 @@
 import { css, html, Wrec } from "wrec";
 
 function makeSlider(label: string, property: string) {
-  const name = label.toLowerCase();
   return html`
     <div>
-      <label for="${name}">${label}</label>
+      <label for="${property}">${label}</label>
       <input
-        id="${name}"
+        id="${property}"
         type="range"
         min="1"
         max="10"
@@ -23,6 +22,7 @@ class AreaCalculator extends Wrec {
     height: { type: Number, value: 1 },
     area: { type: Number, computed: "this.width * this.height" },
   };
+
   static css = css`
     div {
       display: flex;
