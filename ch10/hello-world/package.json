@@ -1,0 +1,14 @@
+{
+  "name": "hello-world",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^8.0.3"
+  },
+  "dependencies": {
+    "wrec": "^0.22.9"
+  }
+}
