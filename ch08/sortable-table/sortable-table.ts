@@ -6,6 +6,7 @@ import {
   html,
   observable,
   repeat,
+  when,
 } from "@microsoft/fast-element";
 
 type CellData = {
@@ -128,6 +129,10 @@ const template = html<SortableTable>`
     </tbody>
   </table>
   <slot name="footnote"></slot>
+  ${when(
+    x => x.headingPairs.length <= 1,
+    html`<p>A table should contain more than one column.</p>`,
+  )}
 `;
 
 @customElement({ name: "sortable-table", template, styles })
