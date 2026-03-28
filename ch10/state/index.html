@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 1rem;
+      }
+    </style>
+    <script type="module">
+      import { WrecState } from "wrec";
+      import "./hello-world.js";
+      import "./labeled-input.js";
+
+      const state = new WrecState("demo", false, { name: "World" });
+      const li = document.querySelector("labeled-input");
+      li.useState(state, { name: "value" });
+      const hw = document.querySelector("hello-world");
+      hw.useState(state);
+
+      const button = document.querySelector("button");
+      button.addEventListener("click", () => {
+        state.name = "World";
+      });
+    </script>
+  </head>
+  <body>
+    <labeled-input id="name" label="Name"></labeled-input>
+    <hello-world></hello-world>
+    <button>Reset</button>
+  </body>
+</html>
