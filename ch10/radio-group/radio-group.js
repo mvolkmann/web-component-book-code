@@ -70,20 +70,21 @@ class RadioGroup extends Wrec {
   makeButtons(labels, values) {
     const labelArray = labels.split(",");
     const valueArray = values.split(",").map((value) => value.trim());
-    // prettier-ignore
-    return valueArray.map((value, index) => html`
-      <div>
-        <input
-          checked="this.value === '${value}'"
-          id=${value}
-          name=${this.name}
-          onChange="handleChange"
-          type="radio"
-          value=${value}
-        />
-        <label for=${value}>${labelArray[index]}</label>
-      </div>
-    `);
+    return valueArray.map(
+      (value, index) => html`
+        <div>
+          <input
+            checked="this.value === '${value}'"
+            id=${value}
+            name=${this.name}
+            onChange="handleChange"
+            type="radio"
+            value=${value}
+          />
+          <label for=${value}>${labelArray[index]}</label>
+        </div>
+      `,
+    );
   }
 
   propertyChangedCallback(propName) {
