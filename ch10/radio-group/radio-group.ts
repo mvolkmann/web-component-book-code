@@ -7,7 +7,7 @@ class RadioGroup extends Wrec {
     labels: { type: String },
     legend: { type: String },
     name: { type: String },
-    value: { type: String },
+    value: { type: String, dispatch: true },
     values: { type: String },
   };
 
@@ -49,16 +49,13 @@ class RadioGroup extends Wrec {
     </fieldset>
   `;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.#fixValue();
-  }
-
   // This handles the case when the specified value
   // is not in the list of values.
   #fixValue() {
-    const values = this.values.split(",");
-    if (!this.value || !values.includes(this.value)) this.value = values[0];
+    requestAnimationFrame(() => {
+      const values = this.values.split(",");
+      if (!this.value || !values.includes(this.value)) this.value = values[0];
+    });
   }
 
   handleChange(event: Event) {
@@ -67,6 +64,7 @@ class RadioGroup extends Wrec {
   }
 
   makeButtons(labels: string, values: string) {
+    this.#fixValue();
     const labelArray = labels.split(",");
     const valueArray = values.split(",").map((value) => value.trim());
     return valueArray.map(
@@ -87,7 +85,7 @@ class RadioGroup extends Wrec {
   }
 
   propertyChangedCallback(propName: string) {
-    if (propName === "value" || propName === "values") this.#fixValue();
+    if (propName === "value") this.#fixValue();
   }
 }
 

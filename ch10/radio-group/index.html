@@ -11,9 +11,24 @@
         margin-bottom: 0.5rem;
       }
     </style>
+    <script src="hello-world.ts" type="module"></script>
     <script src="radio-group.ts" type="module"></script>
+    <script type="module">
+      const radioGroup = document.querySelector("radio-group");
+      radioGroup.addEventListener("change", (event) => {
+        const { property, value } = event.detail;
+        if (property === "value") {
+          const elements = document.querySelectorAll("hello-world");
+          for (const element of elements) {
+            element.style.color = value;
+          }
+        }
+      });
+    </script>
   </head>
   <body>
+    <hello-world></hello-world>
+    <hello-world name="Mark"></hello-world>
     <form action="https://httpbin.org/post" method="post">
       <radio-group
         labels="Red,Green,Blue"
@@ -26,8 +41,8 @@
         <div slot="after">Don't choose a color you will regret.</div>
       </radio-group>
       <div>
-        <button type="reset">Reset</button>
         <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
       </div>
     </form>
   </body>
