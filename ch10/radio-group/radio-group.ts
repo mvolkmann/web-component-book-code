@@ -61,11 +61,12 @@ class RadioGroup extends Wrec {
     if (!this.value || !values.includes(this.value)) this.value = values[0];
   }
 
-  handleChange(event) {
-    this.value = event.target.value;
+  handleChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.value = input.value;
   }
 
-  makeButtons(labels, values) {
+  makeButtons(labels: string, values: string) {
     const labelArray = labels.split(",");
     const valueArray = values.split(",").map((value) => value.trim());
     return valueArray.map(
@@ -85,7 +86,7 @@ class RadioGroup extends Wrec {
     );
   }
 
-  propertyChangedCallback(propName) {
+  propertyChangedCallback(propName: string) {
     if (propName === "value" || propName === "values") this.#fixValue();
   }
 }
