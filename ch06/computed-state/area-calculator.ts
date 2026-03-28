@@ -35,12 +35,11 @@ export class AreaCalculator extends LitElement {
   }
 
   makeSlider(label: string, property: number, handler: (e: Event) => void) {
-    const name = label.toLowerCase();
     return html`
       <div>
-        <label for="${name}">${label}</label>
+        <label for="${property}">${label}</label>
         <input
-          id=${name}
+          id=${property}
           type="range"
           min="1"
           max="10"
