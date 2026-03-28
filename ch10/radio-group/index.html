@@ -1,0 +1,23 @@
+<html lang="en">
+  <head>
+    <script src="radio-group.js" type="module"></script>
+  </head>
+  <body>
+    <form action="https://httpbin.org/post" method="post">
+      <radio-group
+        labels="Red,Green,Blue"
+        legend="Color"
+        name="color"
+        value="blue"
+        values="red,green,blue"
+      >
+        <div slot="before">Select a color for your new bike.</div>
+        <div slot="after">Don't choose a color you will regret.</div>
+      </radio-group>
+      <div>
+        <button type="reset">Reset</button>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </body>
+</html>
