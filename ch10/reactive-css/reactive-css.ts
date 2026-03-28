@@ -12,7 +12,7 @@ class ReactiveCSS extends Wrec {
   `;
 
   static html = html`
-    <input type="range" value:input="this.size" />
+    <input type="range" min="8" max="64" value:input="this.size" />
     <p>My size is reactive!</p>
   `;
 }
