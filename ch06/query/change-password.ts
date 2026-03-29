@@ -33,7 +33,7 @@ export class ChangePassword extends LitElement {
 
   render() {
     return html`
-      <form method="POST" action="/change-password">
+      <form method="POST" action="https://httpbin.org/post">
         <div>
           <label for="username">Username</label>
           <input id="username" name="username" type="text" required />
