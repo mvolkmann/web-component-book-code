@@ -5,18 +5,20 @@ type LooseObject = Record<string, unknown>;
 class SortableTable extends Wrec {
   static properties = {
     data: { type: Array<LooseObject> },
-    descending: { type: Boolean, dispatch: true },
-    headings: { type: String },
+    descending: { type: Boolean, dispatch: true, usedBy: ["makeHeadings"] },
+    headings: { type: String, usedBy: ["makeHeadings"] },
     properties: { type: String, value: "" },
     propertyArray: {
       type: Array<string>,
       computed: "this.properties.split(',')",
+      usedBy: ["makeHeadings", "makeRows"],
     },
     sortedData: {
       computed: "this.sort(this.data, this.sortProperty, this.descending)",
       type: Array<LooseObject>,
+      usedBy: ["makeRows"],
     },
-    sortProperty: { type: String, dispatch: true },
+    sortProperty: { type: String, dispatch: true, usedBy: ["makeHeadings"] },
   };
 
   static css = css`
@@ -64,11 +66,11 @@ class SortableTable extends Wrec {
     <table>
       <thead>
         <tr>
-          this.makeHeadings(this.headings, this.propertyArray)
+          this.makeHeadings()
         </tr>
       </thead>
       <tbody>
-        this.makeRows(this.sortedData, this.propertyArray)
+        this.makeRows()
       </tbody>
     </table>
     <slot name="footnote"></slot>
@@ -86,15 +88,20 @@ class SortableTable extends Wrec {
       : undefined;
   }
 
-  makeHeadings(headings: string, propertyArray: string[]) {
-    if (propertyArray.length === 0) return "";
-    return headings
+  makeHeadings() {
+    if (this.propertyArray.length === 0) return "";
+    return this.headings
       .split(",")
-      .map((heading, i) => this.makeTh(heading, propertyArray[i]));
+      .map((heading: string, i: number) =>
+        this.makeTh(heading, this.propertyArray[i]),
+      );
   }
 
-  makeRows(sortedData: LooseObject[], propertyArray: string[]) {
-    return sortedData.map((obj) => this.makeTr(obj, propertyArray));
+  makeRows() {
+    const { propertyArray, sortedData } = this;
+    return sortedData.map((obj: LooseObject) =>
+      this.makeTr(obj, propertyArray),
+    );
   }
 
   makeTd(value: unknown) {
@@ -102,6 +109,8 @@ class SortableTable extends Wrec {
   }
 
   makeTh(heading: string, property: string) {
+    const sortIndicator =
+      property !== this.sortProperty ? "" : this.descending ? "▼" : "▲";
     return html`
       <th
         aria-sort="this.getAriaSort('${property}', this.sortProperty, this.descending)"
@@ -110,10 +119,7 @@ class SortableTable extends Wrec {
       >
         <button type="button" onClick="this.updateSort('${property}')">
           <span>${heading}</span>
-          <span class="sort-indicator">
-            this.sortIndicator(this.sortProperty, this.descending,
-            '${property}')
-          </span>
+          <span class="sort-indicator">${sortIndicator}</span>
         </button>
       </th>
     `;
@@ -141,11 +147,6 @@ class SortableTable extends Wrec {
             : 0;
       return descending ? -compare : compare;
     });
-  }
-
-  sortIndicator(sortProperty: string, descending: boolean, property: string) {
-    if (property !== sortProperty) return "";
-    return descending ? "▼" : "▲";
   }
 
   updateSort(property: string) {
