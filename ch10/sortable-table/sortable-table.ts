@@ -76,14 +76,6 @@ class SortableTable extends Wrec {
     <slot name="footnote"></slot>
   `;
 
-  getAriaSort(property: string): string | undefined {
-    return property === this.sortProperty
-      ? this.descending
-        ? "descending"
-        : "ascending"
-      : undefined;
-  }
-
   makeHeadings() {
     if (this.propertyArray.length === 0) return "";
     return this.headings
@@ -102,11 +94,17 @@ class SortableTable extends Wrec {
   }
 
   makeTh(heading: string, property: string) {
+    const ariaSort =
+      property !== this.sortProperty
+        ? undefined
+        : this.descending
+          ? "descending"
+          : "ascending";
     const sortIndicator =
       property !== this.sortProperty ? "" : this.descending ? "▼" : "▲";
     return html`
       <th
-        aria-sort="this.getAriaSort('${property}')"
+        ${ariaSort ? `aria-sort="${ariaSort}"` : ""}
         data-property="${property}"
         title="${`sort by ${heading}`}"
       >
