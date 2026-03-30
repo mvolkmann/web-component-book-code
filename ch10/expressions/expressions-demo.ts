@@ -3,8 +3,8 @@ import { css, html, Wrec } from "wrec";
 class ExpressionsDemo extends Wrec {
   static properties = {
     color: { type: String, value: "red" },
-    height: { type: Number, value: 100 },
-    width: { type: Number, value: 200 },
+    height: { type: Number, value: 100, usedBy: "getArea" },
+    width: { type: Number, value: 200, usedBy: "getArea" },
   };
 
   static css = css`
@@ -22,6 +22,7 @@ class ExpressionsDemo extends Wrec {
     .rectangle {
       display: block;
       background-color: this.color;
+      border: 3px solid black;
       height: this.height + "px";
       width: this.width + "px";
     }
@@ -43,11 +44,26 @@ class ExpressionsDemo extends Wrec {
       <span>this.width</span>
     </div>
     <div class="row">
+      <label>Area</label>
+      <!--span>this.width * this.height</span-->
+      <!--span>this.getArea(this.width, this.height)</span-->
+      <span>this.getArea()</span>
+    </div>
+    <div class="row">
       <label>Color</label>
       <input type="color" value="this.color" />
     </div>
     <div class="rectangle"></div>
   `;
+
+  /*
+  getArea(width: number, height: number) {
+    return width * height;
+  }
+  */
+  getArea() {
+    return this.width * this.height;
+  }
 }
 
 ExpressionsDemo.define("expressions-demo");
