@@ -5,6 +5,8 @@ class ExpressionsDemo extends Wrec {
     color: { type: String, value: "red" },
     height: { type: Number, value: 100, usedBy: "getArea" },
     width: { type: Number, value: 200, usedBy: "getArea" },
+    max: { type: Number, value: 800 },
+    //area: { type: Number, computed: "this.width * this.height" },
   };
 
   static css = css`
@@ -35,12 +37,12 @@ class ExpressionsDemo extends Wrec {
   static html = html`
     <div class="row">
       <label>Height </label>
-      <input type="range" max="600" value:input="this.height" />
+      <input type="range" max="this.max" value:input="this.height" />
       <span>this.height</span>
     </div>
     <div class="row">
       <label>Width</label>
-      <input type="range" max="600" value:input="this.width" />
+      <input type="range" max="this.max" value:input="this.width" />
       <span>this.width</span>
     </div>
     <div class="row">
@@ -48,6 +50,7 @@ class ExpressionsDemo extends Wrec {
       <!--span>this.width * this.height</span-->
       <!--span>this.getArea(this.width, this.height)</span-->
       <span>this.getArea()</span>
+      <!--span>this.area</~span-->
     </div>
     <div class="row">
       <label>Color</label>
@@ -61,6 +64,7 @@ class ExpressionsDemo extends Wrec {
     return width * height;
   }
   */
+
   getArea() {
     return this.width * this.height;
   }
