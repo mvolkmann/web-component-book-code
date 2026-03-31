@@ -12,6 +12,6 @@
   "dependencies": {
     "@hono/node-server": "^1.19.11",
     "hono": "^4.12.8",
-    "wrec": "^0.22.5"
+    "wrec": "^0.24.6"
   }
 }
