@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["linkedom"]
+  "cSpell.words": ["linkedom"],
+  "oxc.requireConfig": true
 }
