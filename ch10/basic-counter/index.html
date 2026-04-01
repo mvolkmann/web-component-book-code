@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script type="module" src="./basic-counter.ts"></script>
+    <script>
+      window.onload = () => {
+        document.body.addEventListener("change", (e) => {
+          const { property, oldValue, value } = e.detail;
+          console.log(`${property} changed from ${oldValue} to ${value}`);
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <basic-counter label="Score" count="1"></basic-counter>
+  </body>
+</html>
