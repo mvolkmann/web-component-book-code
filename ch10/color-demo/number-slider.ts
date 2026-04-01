@@ -17,11 +17,9 @@ class NumberSlider extends Wrec {
       align-items: center;
       gap: 0.5rem;
     }
-
     input[type="range"] {
       width: 7rem;
     }
-
     label {
       font-weight: bold;
       text-align: right;

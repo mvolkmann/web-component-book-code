@@ -20,13 +20,11 @@ class ColorPicker extends Wrec {
       display: flex;
       gap: 0.5rem;
     }
-
     #sliders {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
-
     #swatch {
       background-color: this.color;
       height: 5rem;
@@ -44,7 +42,7 @@ class ColorPicker extends Wrec {
     </div>
   `;
 
-  static makeSlider(label) {
+  static makeSlider(label: string) {
     return html`
       <number-slider
         label=${label}
