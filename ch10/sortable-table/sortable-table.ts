@@ -72,7 +72,6 @@ class SortableTable extends Wrec {
   static html = html`
     <slot></slot>
     <table>
-      <div>wrec-lint should flag this!</div>
       <thead>
         <tr>
           this.makeHeadings()
