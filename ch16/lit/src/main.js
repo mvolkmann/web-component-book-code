@@ -1,1 +1,1 @@
-import './traffic-light.js';
+import './app.js';
