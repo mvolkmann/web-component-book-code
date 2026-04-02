@@ -3,20 +3,108 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Traffic Light Web Component</title>
+    <title>Traffic Light Cycle App</title>
     <script type="module" src="./traffic-light.js"></script>
+    <script type="module" src="./app.js"></script>
     <style>
+      :root {
+        color-scheme: light;
+        --bg-top: #e6eef5;
+        --bg-bottom: #fff5db;
+        --card: rgb(255 255 255 / 0.82);
+        --text: #102033;
+        --muted: #4f6174;
+        --border: rgb(16 32 51 / 0.12);
+      }
+
       body {
         margin: 0;
         min-height: 100vh;
         display: grid;
         place-items: center;
-        background: #f4f4f4;
-        font-family: sans-serif;
+        background:
+          radial-gradient(circle at top, rgb(255 255 255 / 0.75), transparent 32%),
+          linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+        color: var(--text);
+        font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+      }
+
+      main {
+        width: min(92vw, 420px);
+        padding: 32px 28px;
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        background: var(--card);
+        box-shadow:
+          0 22px 60px rgb(16 32 51 / 0.12),
+          inset 0 1px 0 rgb(255 255 255 / 0.8);
+        backdrop-filter: blur(14px);
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        line-height: 1;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .stage {
+        margin: 28px 0 24px;
+        display: grid;
+        justify-items: center;
+        gap: 18px;
+      }
+
+      .state-readout {
+        display: grid;
+        gap: 6px;
+        text-align: center;
+      }
+
+      .label {
+        font-size: 0.78rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .value {
+        font-size: clamp(1.9rem, 6vw, 2.6rem);
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .schedule {
+        padding-top: 18px;
+        border-top: 1px solid var(--border);
+        font-size: 0.95rem;
       }
     </style>
   </head>
   <body>
-    <traffic-light state="stop"></traffic-light>
+    <main>
+      <h1>Traffic Flow</h1>
+      <p>
+        This app starts at stop, switches to go after three seconds, then yield
+        after two seconds, then back to stop after one second.
+      </p>
+
+      <section class="stage" aria-live="polite">
+        <traffic-light state="stop"></traffic-light>
+        <div class="state-readout">
+          <span class="label">Current State</span>
+          <strong class="value" data-state-label>Stop</strong>
+        </div>
+      </section>
+
+      <p class="schedule">Timing pattern: stop 3s, go 2s, yield 1s, repeat.</p>
+    </main>
   </body>
 </html>
