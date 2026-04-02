@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> <title>Stencil Traffic Light</title> <style>:root {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #f4f4f5;
+        background: linear-gradient(180deg, #dbeafe, #eff6ff 45%, #e0f2fe);
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+      }
+
+      main {
+        display: grid;
+        gap: 1rem;
+        justify-items: center;
+        padding: 2rem;
+      }
+
+      p {
+        margin: 0;
+        color: #1f2937;
+      }</style> <link rel="modulepreload" href="/build/p-BgqOKcIz.js"></head> <body> <main> <traffic-light state="stop"></traffic-light> <p>Click the light to cycle through stop, yield, and go.</p> </main> <script type="module" data-stencil data-resources-url="/build/" data-stencil-namespace="trafficlight">import{p as t,b as a}from"/build/p-BgqOKcIz.js";export{s as setNonce}from"/build/p-BgqOKcIz.js";import{g as e}from"/build/p-DQuL1Twl.js";(()=>{const a=import.meta.url,s={};return""!==a&&(s.resourcesUrl=new URL(".",a).href),t(s)})().then((async t=>(await e(),a([["p-27339c2c",[[1,"traffic-light",{state:[1537],next:[64]},null,{state:[{validateState:0}]}]]]],t))));
+</script> <script nomodule="" src="/build/trafficlight.js" data-stencil></script> </body></html>

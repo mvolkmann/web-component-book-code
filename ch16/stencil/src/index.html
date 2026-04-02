@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Stencil Traffic Light</title>
+    <style>
+      :root {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #f4f4f5;
+        background: linear-gradient(180deg, #dbeafe, #eff6ff 45%, #e0f2fe);
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+      }
+
+      main {
+        display: grid;
+        gap: 1rem;
+        justify-items: center;
+        padding: 2rem;
+      }
+
+      p {
+        margin: 0;
+        color: #1f2937;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <traffic-light state="stop"></traffic-light>
+      <p>Click the light to cycle through stop, yield, and go.</p>
+    </main>
+    <script type="module" src="/build/trafficlight.esm.js"></script>
+    <script nomodule src="/build/trafficlight.js"></script>
+  </body>
+</html>
