@@ -4,7 +4,7 @@ import "./traffic-light"; // register custom element
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 class LightController extends Wrec {
-  static properties = { tl: { type: HTMLElement, value: null } };
+  static properties = { tl: { type: HTMLElement } };
   static html = html`<traffic-light ref="tl"></traffic-light>`;
 
   async connectedCallback() {
