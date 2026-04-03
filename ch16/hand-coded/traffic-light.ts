@@ -35,11 +35,8 @@ class TrafficLight extends Wrec {
       padding: 0.5rem;
     }
     div {
-      --size: 3rem;
-      border: none;
+      --size: 4rem;
       border-radius: 50%;
-      font-weight: bold;
-      padding: 0.5rem;
       height: var(--size);
       width: var(--size);
 
