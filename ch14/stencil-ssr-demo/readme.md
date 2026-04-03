@@ -62,7 +62,7 @@ If your Stencil project is built with the [`dist`](https://stenciljs.com/docs/di
 For example, given your Stencil project namespace is called `my-design-system`, to use `my-component` on any website, inject this into your HTML:
 
 ```html
-<script type="module" src="https://unpkg.com/my-design-system"></script>
+<script src="https://unpkg.com/my-design-system" type="module"></script>
 <!--
 To avoid unpkg.com redirects to the actual file, you can also directly import:
 https://unpkg.com/foobar-design-system@0.0.1/dist/foobar-design-system/foobar-design-system.esm.js
@@ -95,11 +95,7 @@ function App() {
   return (
     <>
       <div>
-        <my-component
-          first="Stencil"
-          middle="'Don't call me a framework'"
-          last="JS"
-        ></my-component>
+        <my-component first="Stencil" middle="'Don't call me a framework'" last="JS"></my-component>
       </div>
     </>
   );

@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Traffic Light Cycle App</title>
-    <script type="module" src="./traffic-light.js"></script>
-    <script type="module" src="./app.js"></script>
+    <script src="./traffic-light.js"></script>
+    <script src="./app.js" type="module"></script>
     <style>
       :root {
         color-scheme: light;
@@ -23,7 +23,11 @@
         display: grid;
         place-items: center;
         background:
-          radial-gradient(circle at top, rgb(255 255 255 / 0.75), transparent 32%),
+          radial-gradient(
+            circle at top,
+            rgb(255 255 255 / 0.75),
+            transparent 32%
+          ),
           linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
         color: var(--text);
         font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;

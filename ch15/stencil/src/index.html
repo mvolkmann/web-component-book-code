@@ -12,7 +12,11 @@
         font-family: "Avenir Next", "Segoe UI", sans-serif;
         color: #f8fafc;
         background:
-          radial-gradient(circle at top, rgb(56 189 248 / 0.28), transparent 42%),
+          radial-gradient(
+            circle at top,
+            rgb(56 189 248 / 0.28),
+            transparent 42%
+          ),
           linear-gradient(180deg, #08111f 0%, #132238 48%, #0f172a 100%);
       }
 
@@ -74,15 +78,15 @@
         <p>Sequence: stop for 3s, go for 2s, yield for 1s, then repeat.</p>
       </section>
     </main>
-    <script type="module" src="/build/trafficlight.esm.js"></script>
+    <script src="/build/trafficlight.esm.js" type="module"></script>
     <script nomodule src="/build/trafficlight.js"></script>
     <script>
-      const trafficLight = document.querySelector('#traffic-light');
-      const status = document.querySelector('#status');
+      const trafficLight = document.querySelector("#traffic-light");
+      const status = document.querySelector("#status");
       const cycle = [
-        { state: 'go', delay: 3000 },
-        { state: 'yield', delay: 2000 },
-        { state: 'stop', delay: 1000 }
+        { state: "go", delay: 3000 },
+        { state: "yield", delay: 2000 },
+        { state: "stop", delay: 1000 },
       ];
 
       const setState = (state) => {
@@ -101,7 +105,7 @@
         }, step.delay);
       };
 
-      setState('stop');
+      setState("stop");
       advance();
     </script>
   </body>
