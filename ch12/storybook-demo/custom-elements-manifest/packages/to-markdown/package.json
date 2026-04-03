@@ -1,0 +1,63 @@
+{
+  "name": "@custom-elements-manifest/to-markdown",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/open-wc/custom-elements-manifest.git",
+    "directory": "packages/to-markdown"
+  },
+  "author": "open-wc",
+  "homepage": "https://github.com/open-wc/custom-elements-manifest",
+  "types": "types/main.d.ts",
+  "bugs": {
+    "url": "https://github.com/open-wc/custom-elements-manifest"
+  },
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "npm run build:browser && npm run build:cjs",
+    "build:browser": "esbuild index.js --outfile=dist/browser.js --format=esm --bundle --minify",
+    "build:cjs": "esbuild index.js --outfile=dist/index.cjs --format=cjs --bundle",
+    "test": "asdgf"
+  },
+  "files": [
+    "*.d.ts",
+    "*.js",
+    "lib/**/*",
+    "dist/**/*"
+  ],
+  "keywords": [
+    "custom-elements",
+    "custom-elements-json",
+    "custom-elements-manifest",
+    "customelements",
+    "webcomponents",
+    "customelementsjson",
+    "customelementsmanifest",
+    "markdown",
+    "md"
+  ],
+  "contributors": [
+    "Pascal Schilp <pascalschilp@gmail.com>",
+    "Benny Powers <web@bennypowers.com>"
+  ],
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./dist/index.cjs",
+      "browser": "./dist/browser.js"
+    }
+  },
+  "dependencies": {
+    "mdast-builder": "^1.1.1",
+    "mdast-util-from-markdown": "^1.0.4",
+    "mdast-util-gfm": "^1.0.0",
+    "mdast-util-to-markdown": "^1.0.1",
+    "remark-gfm": "^1.0.0",
+    "remark-stringify": "^9.0.1",
+    "unified": "^9.2.1"
+  }
+}
