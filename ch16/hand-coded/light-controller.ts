@@ -10,13 +10,15 @@ class LightController extends Wrec {
   async connectedCallback() {
     // Wait for wrec to finish build the DOM.
     await super.connectedCallback();
+
     const trafficLight = this.shadowRoot?.querySelector(
       "traffic-light",
     ) as TrafficLight;
     if (!trafficLight) return;
+
     while (true) {
-      const { state } = trafficLight;
-      const seconds = state === "stop" ? 3 : state === "yield" ? 1 : 2;
+      const s = trafficLight.state;
+      const seconds = s === "stop" ? 3 : s === "yield" ? 1 : 2;
       await sleep(seconds * 1000);
       trafficLight.next();
     }
