@@ -1,26 +1,22 @@
 import { html, Wrec } from "wrec";
 import "./traffic-light"; // register custom element
-import type TrafficLight from "./traffic-light";
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 class LightController extends Wrec {
-  static html = html`<traffic-light></traffic-light>`;
+  static properties = { tl: { type: HTMLElement, value: null } };
+  static html = html`<traffic-light ref="tl"></traffic-light>`;
 
   async connectedCallback() {
-    // Wait for wrec to finish build the DOM.
+    // Wait for wrec to finish building the DOM.
     await super.connectedCallback();
 
-    const trafficLight = this.shadowRoot?.querySelector(
-      "traffic-light",
-    ) as TrafficLight;
-    if (!trafficLight) return;
-
+    const { tl } = this;
     while (true) {
-      const s = trafficLight.state;
-      const seconds = s === "stop" ? 3 : s === "yield" ? 1 : 2;
+      const { state } = tl;
+      const seconds = state === "stop" ? 3 : state === "yield" ? 1 : 2;
       await sleep(seconds * 1000);
-      trafficLight.next();
+      tl.next();
     }
   }
 }
