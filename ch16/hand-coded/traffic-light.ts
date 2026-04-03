@@ -1,22 +1,11 @@
 import { css, html, Wrec } from "wrec";
 
-/**
- * This web component emulates a U.S. traffic light
- * with red, yellow, and green lights.
- * The `state` attribute specifies the initial state.
- * To advance to the next state, click the component
- * or call the next() method on an instance.
- * To get the current state, access the `state` property of an instance.
- * @attr {string} state - initial traffic light state.
- * @prop {State} [state="stop"] - current traffic light state
- */
 class TrafficLight extends Wrec {
   static properties = {
     state: {
       type: String,
       value: "stop",
       values: ["stop", "yield", "go"],
-      dispatch: true,
       usedBy: "classes",
     },
   };
@@ -57,7 +46,6 @@ class TrafficLight extends Wrec {
   `;
 
   static html = html`
-    <style></style>
     <button aria-label="traffic light" onClick="next" type="button">
       <div class="this.classes('stop')"></div>
       <div class="this.classes('yield')"></div>
