@@ -4,7 +4,7 @@ import { SortableTable } from "./stencil/components";
 const data = [
   { make: "Ford", model: "Mustang", year: 1967 },
   { make: "Audi", model: "A4", year: 2008 },
-  { make: "BMW", model: "M3", year: 1999 },
+  { make: "BMW", model: "Z3", year: 1999 },
 ];
 
 export default function App() {
