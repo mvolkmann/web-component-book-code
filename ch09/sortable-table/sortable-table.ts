@@ -142,7 +142,7 @@ class SortableTable extends Wrec {
           ? aValue.localeCompare(bValue as string)
           : typeof aValue === "number"
             ? aValue - (bValue as number)
-            : 0;
+            : 0; // not sorting
       return descending ? -compare : compare;
     });
   }
