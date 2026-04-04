@@ -9,13 +9,13 @@
     "start": "node dist/server.js"
   },
   "dependencies": {
-    "@hono/node-server": "^1.19.9",
+    "@hono/node-server": "^1.19.12",
     "@lit-labs/ssr": "^4.0.0",
-    "hono": "^4.12.2",
+    "hono": "^4.12.10",
     "lit": "^3.3.2"
   },
   "devDependencies": {
-    "typescript": "~5.9.3",
-    "vite": "^7.3.1"
+    "typescript": "~6.0.2",
+    "vite": "^8.0.3"
   }
 }
