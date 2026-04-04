@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // This updates the wrec version in all package.json files
 // in subdirectories and reinstalls their dependencies.
+// To run this, enter `node update-wrec-version.js <version>`.
 
 import { readdir, readFile, rm, writeFile } from "fs/promises";
 import { join, relative } from "path";
@@ -128,7 +129,9 @@ async function main() {
   }
 
   if (updatedCount === 0) {
-    console.log(`All ${matchedCount} package(s) are already using wrec ${version}.`);
+    console.log(
+      `All ${matchedCount} package(s) are already using wrec ${version}.`,
+    );
     return;
   }
 
