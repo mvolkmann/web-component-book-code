@@ -24,7 +24,6 @@
     "@wc-toolkit/storybook-helpers": "^10.2.1",
     "chromatic": "^16.1.0",
     "gh-pages": "^6.3.0",
-    "lit": "^3.3.2",
     "playwright": "^1.59.1",
     "storybook": "^10.3.4",
     "storybook-addon-test-codegen": "^3.0.1",
