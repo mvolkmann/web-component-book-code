@@ -64,4 +64,3 @@ class TrafficLight extends Wrec {
 }
 
 TrafficLight.define("traffic-light");
-export default TrafficLight;
