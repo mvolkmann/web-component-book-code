@@ -1,9 +1,11 @@
+// This works in Chrome, Edge, and Safari.
 class MyScope extends HTMLElement {
   constructor() {
     super();
 
     // Create a new custom element registry
     // that will be scoped to this element.
+    // This constructor is not yet supported in Firefox.
     const registry = new CustomElementRegistry();
 
     // Find a custom element class that is registered in the global scope.
@@ -30,6 +32,9 @@ class MyScope extends HTMLElement {
       <!-- This custom element name is not known in this scope. -->
       <hello-world name="Venus"></hello-world>
     `;
+
+    // For more detail, including more ways to use a CustomElementRegistry,
+    // see https://developer.chrome.com/blog/scoped-registries.
   }
 }
 
