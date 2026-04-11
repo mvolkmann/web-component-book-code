@@ -1,0 +1,14 @@
+{
+  "name": "scoped-custom-elements",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite"
+  },
+  "type": "module",
+  "dependencies": {
+    "wrec": "^0.29.3"
+  },
+  "devDependencies": {
+    "vite": "^8.0.8"
+  }
+}
