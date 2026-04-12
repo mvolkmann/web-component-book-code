@@ -7,7 +7,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "wrec": "0.29.3"
+    "wrec": "0.30.1"
   },
   "devDependencies": {
     "vite": "^7.1.11"
