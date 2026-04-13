@@ -8,24 +8,24 @@ class SortableTable extends Wrec {
     descending: {
       type: Boolean,
       dispatch: true,
-      usedBy: ["makeHeadings", "sort"]
+      usedBy: ["makeHeadings", "sort"],
     },
     headings: { type: String, usedBy: "makeHeadings" },
     properties: { type: String, value: "" },
     propertyArray: {
       type: Array<string>,
       computed: "this.properties.split(',')",
-      usedBy: ["makeHeadings", "makeRows"]
+      usedBy: ["makeHeadings", "makeRows"],
     },
     sortedData: {
       type: Array<LooseObject>,
       computed: "this.sort()",
-      usedBy: "makeRows"
+      usedBy: "makeRows",
     },
     sortProperty: {
       type: String,
       dispatch: true,
-      usedBy: ["makeHeadings", "sort"]
+      usedBy: ["makeHeadings", "sort"],
     },
   };
 
