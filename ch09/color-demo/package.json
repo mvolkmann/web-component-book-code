@@ -5,7 +5,6 @@
     "dev": "vite",
     "preview": "vite preview"
   },
-  "type": "commonjs",
   "devDependencies": {
     "vite": "^8.0.3"
   },

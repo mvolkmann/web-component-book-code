@@ -1,0 +1,12 @@
+{
+  "name": "form-controls",
+  "scripts": {
+    "dev": "vite"
+  },
+  "dependencies": {
+    "wrec": "^0.30.3"
+  },
+  "devDependencies": {
+    "vite": "^8.0.8"
+  }
+}

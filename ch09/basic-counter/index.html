@@ -2,13 +2,11 @@
 <html lang="en">
   <head>
     <script src="./basic-counter.ts" type="module"></script>
-    <script>
-      window.onload = () => {
-        document.body.addEventListener("change", (e) => {
-          const { property, oldValue, value } = e.detail;
-          console.log(`${property} changed from ${oldValue} to ${value}`);
-        });
-      };
+    <script type="module">
+      document.body.addEventListener("change", (e) => {
+        const { property, oldValue, value } = e.detail;
+        console.log(`${property} changed from ${oldValue} to ${value}`);
+      });
     </script>
   </head>
   <body>
