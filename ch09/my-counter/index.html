@@ -1,0 +1,15 @@
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <script src="./my-counter.ts" type="module"></script>
+      <script type="module">
+        document.body.addEventListener('change', e => {
+          const {property, oldValue, value} = e.detail;
+          console.log(`${property} changed from ${oldValue} to ${value}`);
+        });
+      </script>
+    </head>
+    <body>
+      <my-counter count="1"></-counter>
+    </body>
+  </html>
