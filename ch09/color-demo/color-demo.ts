@@ -5,6 +5,7 @@ import "./number-slider";
 class ColorDemo extends Wrec {
   static properties = {
     color: { type: String },
+    disablePicker: { type: Boolean },
     size: { type: Number, value: 18 },
   };
 
@@ -28,8 +29,17 @@ class ColorDemo extends Wrec {
     <form method="post" action="https://httpbin.org/post">
       <color-picker
         color="this.color"
+        disabled="this.disablePicker"
         form-assoc="red: r, green: g, blue: b"
       ></color-picker>
+      <div>
+        <label>Disable Picker</label>
+        <input
+          type="checkbox"
+          checked="this.disablePicker"
+          onChange="this.disablePicker = !this.disablePicker"
+        />
+      </div>
       <number-slider
         label="Size"
         max="48"
