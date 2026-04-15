@@ -34,11 +34,7 @@ class ColorDemo extends Wrec {
       ></color-picker>
       <div>
         <label>Disable Picker</label>
-        <input
-          type="checkbox"
-          checked="this.disablePicker"
-          onChange="this.disablePicker = !this.disablePicker"
-        />
+        <input type="checkbox" checked="this.disablePicker" />
       </div>
       <number-slider
         label="Size"
