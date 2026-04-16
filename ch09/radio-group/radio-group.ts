@@ -54,13 +54,10 @@ class RadioGroup extends Wrec {
   #fixValue() {
     requestAnimationFrame(() => {
       const values = this.values.split(",");
-      if (!this.value || !values.includes(this.value)) this.value = values[0];
+      if (!this.value || !values.includes(this.value)) {
+        this.value = values[0];
+      }
     });
-  }
-
-  handleChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.value = input.value;
   }
 
   makeButtons() {
@@ -73,10 +70,9 @@ class RadioGroup extends Wrec {
       (value: string, index: number) => html`
         <div>
           <input
-            checked="this.value === '${value}'"
+            checked="this.value"
             id=${value}
             name=${this.name}
-            onChange="handleChange"
             type="radio"
             value=${value}
           />

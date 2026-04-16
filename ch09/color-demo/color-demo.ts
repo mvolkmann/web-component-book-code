@@ -33,7 +33,7 @@ class ColorDemo extends Wrec {
         form-assoc="red: r, green: g, blue: b"
       ></color-picker>
       <div>
-        <label>Disable Picker</label>
+        <label>Lock in color</label>
         <input type="checkbox" checked="this.disablePicker" />
       </div>
       <number-slider
