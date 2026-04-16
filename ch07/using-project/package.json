@@ -1,0 +1,9 @@
+{
+  "name": "using-project",
+  "scripts": {
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "vite": "^8.0.8"
+  }
+}
