@@ -16,7 +16,7 @@ export class AppRoot {
     );
   }
 
-  #reset() {
+  #reset = () => {
     store.name = 'World';
-  }
+  };
 }
