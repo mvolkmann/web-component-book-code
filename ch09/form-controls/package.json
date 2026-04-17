@@ -4,7 +4,7 @@
     "dev": "vite"
   },
   "dependencies": {
-    "wrec": "0.31.4"
+    "wrec": "0.31.6"
   },
   "devDependencies": {
     "vite": "^8.0.8"
