@@ -1,4 +1,4 @@
-import { css, html, Wrec } from "wrec";
+import { html, Wrec } from "wrec";
 
 export type Address = {
   city: string;
@@ -24,8 +24,6 @@ export class ContactPerson extends Wrec {
   };
 
   declare person: Person;
-
-  static css = css``;
 
   static html = html`
     <div class="row">this.getFullName()</div>

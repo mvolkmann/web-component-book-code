@@ -1,5 +1,6 @@
 import { ContactPerson, Person } from "./contact-person.js";
 import { WrecState } from "wrec";
+import { FavoriteColors } from "./favorite-colors.js";
 
 const person: Person = {
   firstName: "Richard",
@@ -16,13 +17,22 @@ const person: Person = {
 
 const contactPerson = document.querySelector("contact-person") as ContactPerson;
 //contactPerson.person = person;
+const favoriteColors = document.querySelector(
+  "favorite-colors",
+) as FavoriteColors;
 
-const state = new WrecState("demo", false, { person });
-contactPerson.useState(state);
+const state = new WrecState("demo", false, {
+  colors: ["black", "white"],
+  person,
+});
+contactPerson.useState(state, { person: "person" });
+favoriteColors.useState(state, { colors: "colors" });
 
 const button = document.querySelector("button");
 button?.addEventListener("click", () => {
   const person = state.person as Person;
   person.firstName = "John";
   person.address.zip = "98765";
+
+  state.colors = ["yellow", "orange"];
 });
