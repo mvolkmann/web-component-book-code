@@ -10,15 +10,15 @@
   },
   "type": "module",
   "devDependencies": {
-    "@html-eslint/eslint-plugin": "^0.58.1",
-    "eslint": "^10.1.0",
+    "@html-eslint/eslint-plugin": "^0.59.0",
+    "eslint": "^10.2.1",
     "postcss-lit": "^1.4.1",
-    "stylelint": "^17.6.0",
+    "stylelint": "^17.8.0",
     "stylelint-config-standard": "^40.0.0",
     "typescript-eslint": "^8.58.2",
     "vite": "^8.0.8"
   },
   "dependencies": {
-    "wrec": "0.35.2"
+    "wrec": "0.35.4"
   }
 }
