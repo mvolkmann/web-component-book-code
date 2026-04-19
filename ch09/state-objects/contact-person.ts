@@ -22,7 +22,6 @@ export class ContactPerson extends Wrec {
       usedBy: ["get city", "get state", "get street", "get zip", "getFullName"],
     },
   };
-
   declare person: Person;
 
   static html = html`
