@@ -1,6 +1,6 @@
 import { css, html, Wrec } from "wrec";
 
-class TrafficLight extends Wrec {
+export default class TrafficLight extends Wrec {
   static properties = {
     state: {
       type: String,
@@ -9,6 +9,7 @@ class TrafficLight extends Wrec {
       usedBy: "classes",
     },
   };
+  declare state: string;
 
   static css = css`
     :host {
