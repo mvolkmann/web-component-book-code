@@ -21,7 +21,7 @@ const favoriteColors = document.querySelector(
   "favorite-colors",
 ) as FavoriteColors;
 
-const state = new WrecState("demo", false, {
+const state = new WrecState("demo", {
   colors: ["black", "white"],
   person,
 });
