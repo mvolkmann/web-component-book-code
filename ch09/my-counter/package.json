@@ -11,6 +11,6 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "wrec": "0.39.4"
+    "wrec": "0.40.0"
   }
 }
