@@ -21,6 +21,7 @@ class AreaCalculator extends Wrec {
     width: { type: Number, value: 1 },
     height: { type: Number, value: 1 },
     area: { type: Number, computed: "this.width * this.height" },
+    foo: { type: Number, computed: "this.foo * 2" },
   };
   static context = { makeSlider };
 
