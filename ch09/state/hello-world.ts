@@ -6,12 +6,12 @@ class HelloWorld extends Wrec {
   };
 
   static css = css`
-    h1 {
+    p {
       color: blue;
     }
   `;
 
-  static html = html`<h1>Hello, <span>this.name</span>!</h1>`;
+  static html = html`<p>Hello, <span>this.name</span>!</p>`;
 }
 
 HelloWorld.define("hello-world");

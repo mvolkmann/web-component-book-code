@@ -7,7 +7,7 @@ class HelloWorld extends Wrec {
   declare name: string;
 
   static css = css`
-    :host {
+    p {
       color: blue;
     }
   `;
