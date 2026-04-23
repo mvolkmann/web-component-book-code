@@ -78,7 +78,6 @@ class SortableTable extends Wrec {
 
   static html = html`
     <slot></slot>
-    <div>this.descend</div>
     <table>
       <thead>
         <tr>
