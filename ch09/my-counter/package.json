@@ -1,16 +1,9 @@
 {
   "name": "my-counter",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "wrec": "0.40.1"
+    "wrec": "0.40.2"
   }
 }
