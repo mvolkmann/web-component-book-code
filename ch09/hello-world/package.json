@@ -1,21 +1,9 @@
 {
   "name": "hello-world",
   "scripts": {
-    "build": "vite build",
-    "dev": "vite",
-    "preview": "vite preview",
-    "lint:js": "eslint . --ext .js,.ts",
-    "lint:styles": "stylelint \"**/*.{css,js,ts}\"",
-    "lint": "npm run lint:js && npm run lint:styles"
+    "dev": "vite"
   },
-  "type": "module",
   "devDependencies": {
-    "@html-eslint/eslint-plugin": "^0.59.0",
-    "eslint": "^10.2.1",
-    "postcss-lit": "^1.4.1",
-    "stylelint": "^17.8.0",
-    "stylelint-config-standard": "^40.0.0",
-    "typescript-eslint": "^8.58.2",
     "vite": "^8.0.8"
   },
   "dependencies": {
