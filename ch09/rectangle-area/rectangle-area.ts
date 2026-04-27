@@ -5,7 +5,7 @@ class RectangleArea extends Wrec {
   static properties = {
     width: { type: Number, value: 10, usedBy: "getArea" },
     height: { type: Number, value: 5, usedBy: "getArea" },
-    //area: {type: Number, computed: 'this.width * this.height'}
+    area: { type: Number, computed: "this.width * this.height" },
   };
 
   static css = css`
