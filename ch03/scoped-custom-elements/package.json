@@ -6,7 +6,7 @@
   },
   "type": "module",
   "dependencies": {
-    "wrec": "0.40.1"
+    "wrec": "0.40.3"
   },
   "devDependencies": {
     "vite": "^8.0.8"

@@ -4,6 +4,6 @@
     "dev": "vite"
   },
   "dependencies": {
-    "wrec": "0.40.2"
+    "wrec": "0.40.3"
   }
 }
