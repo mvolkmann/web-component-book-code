@@ -9,18 +9,20 @@
 
 import type { EventName, StencilReactComponent } from '@stencil/react-output-target/runtime';
 import { createComponent } from '@stencil/react-output-target/runtime';
+import React from 'react';
+
 import { type RadioGroupCustomEvent, type SortableTableCustomEvent } from "my-components";
+import type { Components } from "my-components/dist/components";
 import { GoogleButton as GoogleButtonElement, defineCustomElement as defineGoogleButton } from "my-components/dist/components/google-button.js";
 import { GoogleButton2 as GoogleButton2Element, defineCustomElement as defineGoogleButton2 } from "my-components/dist/components/google-button2.js";
 import { HelloWorld as HelloWorldElement, defineCustomElement as defineHelloWorld } from "my-components/dist/components/hello-world.js";
 import { RadioGroup as RadioGroupElement, defineCustomElement as defineRadioGroup } from "my-components/dist/components/radio-group.js";
 import { ReactiveCss as ReactiveCssElement, defineCustomElement as defineReactiveCss } from "my-components/dist/components/reactive-css.js";
 import { SortableTable as SortableTableElement, defineCustomElement as defineSortableTable } from "my-components/dist/components/sortable-table.js";
-import React from 'react';
 
 export type GoogleButtonEvents = NonNullable<unknown>;
 
-export const GoogleButton: StencilReactComponent<GoogleButtonElement, GoogleButtonEvents> = /*@__PURE__*/ createComponent<GoogleButtonElement, GoogleButtonEvents>({
+export const GoogleButton: StencilReactComponent<GoogleButtonElement, GoogleButtonEvents, Components.GoogleButton> = /*@__PURE__*/ createComponent<GoogleButtonElement, GoogleButtonEvents, Components.GoogleButton>({
     tagName: 'google-button',
     elementClass: GoogleButtonElement,
     // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
@@ -31,7 +33,7 @@ export const GoogleButton: StencilReactComponent<GoogleButtonElement, GoogleButt
 
 export type GoogleButton2Events = NonNullable<unknown>;
 
-export const GoogleButton2: StencilReactComponent<GoogleButton2Element, GoogleButton2Events> = /*@__PURE__*/ createComponent<GoogleButton2Element, GoogleButton2Events>({
+export const GoogleButton2: StencilReactComponent<GoogleButton2Element, GoogleButton2Events, Components.GoogleButton2> = /*@__PURE__*/ createComponent<GoogleButton2Element, GoogleButton2Events, Components.GoogleButton2>({
     tagName: 'google-button2',
     elementClass: GoogleButton2Element,
     // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
@@ -42,7 +44,7 @@ export const GoogleButton2: StencilReactComponent<GoogleButton2Element, GoogleBu
 
 export type HelloWorldEvents = NonNullable<unknown>;
 
-export const HelloWorld: StencilReactComponent<HelloWorldElement, HelloWorldEvents> = /*@__PURE__*/ createComponent<HelloWorldElement, HelloWorldEvents>({
+export const HelloWorld: StencilReactComponent<HelloWorldElement, HelloWorldEvents, Components.HelloWorld> = /*@__PURE__*/ createComponent<HelloWorldElement, HelloWorldEvents, Components.HelloWorld>({
     tagName: 'hello-world',
     elementClass: HelloWorldElement,
     // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
@@ -53,7 +55,7 @@ export const HelloWorld: StencilReactComponent<HelloWorldElement, HelloWorldEven
 
 export type RadioGroupEvents = { onValueChanged: EventName<RadioGroupCustomEvent<string>> };
 
-export const RadioGroup: StencilReactComponent<RadioGroupElement, RadioGroupEvents> = /*@__PURE__*/ createComponent<RadioGroupElement, RadioGroupEvents>({
+export const RadioGroup: StencilReactComponent<RadioGroupElement, RadioGroupEvents, Components.RadioGroup> = /*@__PURE__*/ createComponent<RadioGroupElement, RadioGroupEvents, Components.RadioGroup>({
     tagName: 'radio-group',
     elementClass: RadioGroupElement,
     // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
@@ -64,7 +66,7 @@ export const RadioGroup: StencilReactComponent<RadioGroupElement, RadioGroupEven
 
 export type ReactiveCssEvents = NonNullable<unknown>;
 
-export const ReactiveCss: StencilReactComponent<ReactiveCssElement, ReactiveCssEvents> = /*@__PURE__*/ createComponent<ReactiveCssElement, ReactiveCssEvents>({
+export const ReactiveCss: StencilReactComponent<ReactiveCssElement, ReactiveCssEvents, Components.ReactiveCss> = /*@__PURE__*/ createComponent<ReactiveCssElement, ReactiveCssEvents, Components.ReactiveCss>({
     tagName: 'reactive-css',
     elementClass: ReactiveCssElement,
     // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
@@ -75,7 +77,7 @@ export const ReactiveCss: StencilReactComponent<ReactiveCssElement, ReactiveCssE
 
 export type SortableTableEvents = { onTableSorted: EventName<SortableTableCustomEvent<SortDetail>> };
 
-export const SortableTable: StencilReactComponent<SortableTableElement, SortableTableEvents> = /*@__PURE__*/ createComponent<SortableTableElement, SortableTableEvents>({
+export const SortableTable: StencilReactComponent<SortableTableElement, SortableTableEvents, Components.SortableTable> = /*@__PURE__*/ createComponent<SortableTableElement, SortableTableEvents, Components.SortableTable>({
     tagName: 'sortable-table',
     elementClass: SortableTableElement,
     // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.

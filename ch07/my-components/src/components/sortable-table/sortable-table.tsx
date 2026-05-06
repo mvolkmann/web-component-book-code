@@ -139,7 +139,6 @@ export class SortableTable {
               : 'ascending'
             : undefined
         }
-        data-property={property}
         title={`sort by ${heading}`}
       >
         <button type="button" onClick={() => this.updateSort(property)}>
