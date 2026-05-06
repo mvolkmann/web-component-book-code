@@ -1,5 +1,5 @@
 import { Component, Element, h, Prop } from '@stencil/core';
-import store from '../../app-store';
+import state from '../../app-store';
 
 @Component({
   tag: 'labeled-input',
@@ -13,14 +13,14 @@ export class LabeledInput {
 
   #handleChange = (event: Event) => {
     const input = event.target as HTMLInputElement;
-    store.name = input.value;
+    state.name = input.value;
   };
 
   render() {
     return (
       <div>
         <label htmlFor={this.el.id}>{this.label}</label>
-        <input id={this.el.id} name={this.name} type="text" value={store.name} onChange={this.#handleChange} />
+        <input id={this.el.id} name={this.name} type="text" value={state.name} onChange={this.#handleChange} />
       </div>
     );
   }

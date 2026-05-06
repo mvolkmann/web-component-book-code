@@ -1,5 +1,5 @@
 import { Component, h } from '@stencil/core';
-import store from '../../app-store';
+import state from '../../app-store';
 
 @Component({
   tag: 'app-root',
@@ -17,6 +17,6 @@ export class AppRoot {
   }
 
   #reset = () => {
-    store.name = 'World';
+    state.name = 'World';
   };
 }
