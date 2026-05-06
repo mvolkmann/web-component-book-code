@@ -1,5 +1,5 @@
 import { Component, h } from '@stencil/core';
-import store from '../../app-store';
+import state from '../../app-store';
 
 @Component({
   tag: 'hello-world',
@@ -8,6 +8,6 @@ import store from '../../app-store';
 })
 export class HelloWorld {
   render() {
-    return <p>Hello, {store.name}!</p>;
+    return <p>Hello, {state.name}!</p>;
   }
 }
