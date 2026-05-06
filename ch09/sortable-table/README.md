@@ -1,4 +1,4 @@
-# sortable-table-wrec
+# sortable-table
 
 This project implements the web component `sortable-table`
 using the wrec library.
