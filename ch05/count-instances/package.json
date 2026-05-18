@@ -4,6 +4,6 @@
     "start": "vite-node ./demo.ts"
   },
   "dependencies": {
-    "vite-node": "^5.2.0"
+    "vite-node": "^5.3.0"
   }
 }
