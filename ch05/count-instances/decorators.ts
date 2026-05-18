@@ -6,15 +6,15 @@ export function countInstances<Value extends new (...args: any[]) => {}>(
     throw new Error("This decorator can only be applied to a class.");
   }
   return class extends target {
-    private static _instanceCount = 0;
+    static #instanceCount = 0;
 
     constructor(...args: any[]) {
       super(...args);
-      (this.constructor as any)._instanceCount++;
+      (this.constructor as any).#instanceCount++;
     }
 
     static get instanceCount() {
-      return this._instanceCount;
+      return this.#instanceCount;
     }
   };
 }
