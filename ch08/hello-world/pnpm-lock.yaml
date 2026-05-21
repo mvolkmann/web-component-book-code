@@ -11,6 +11,9 @@ importers:
       '@microsoft/fast-element':
         specifier: ^2.10.2
         version: 2.10.4
+      '@microsoft/fast-html':
+        specifier: 1.0.0-alpha.52
+        version: 1.0.0-alpha.52(@microsoft/fast-element@2.10.4)
     devDependencies:
       vite:
         specifier: ^8.0.8
@@ -29,6 +32,11 @@ packages:
 
   '@microsoft/fast-element@2.10.4':
     resolution: {integrity: sha512-OkHIlMztq7+PgkRF1LscgBd/MVzMhGrWPkJRDvOEqdqEdZOKocKvaKcUKZubIBz4RpLIrhLD3lOJzCsspk6jXg==}
+
+  '@microsoft/fast-html@1.0.0-alpha.52':
+    resolution: {integrity: sha512-i8yvrfj/UIJ9ZR7ok6mc88grga24bLvng/8NS+mFeuFwa3zS7xIxBnfYgWV2qja7r3XIC/pFa0o2lmT44tRowg==}
+    peerDependencies:
+      '@microsoft/fast-element': ^2.10.4
 
   '@napi-rs/wasm-runtime@1.1.4':
     resolution: {integrity: sha512-3NQNNgA1YSlJb/kMH1ildASP9HW7/7kYnRI2szWJaofaS1hWmbGI4H+d3+22aGzXXN9IJ+n+GiFVcGipJP18ow==}
@@ -326,6 +334,10 @@ snapshots:
     optional: true
 
   '@microsoft/fast-element@2.10.4': {}
+
+  '@microsoft/fast-html@1.0.0-alpha.52(@microsoft/fast-element@2.10.4)':
+    dependencies:
+      '@microsoft/fast-element': 2.10.4
 
   '@napi-rs/wasm-runtime@1.1.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
     dependencies:
