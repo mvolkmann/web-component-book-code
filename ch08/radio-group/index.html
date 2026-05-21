@@ -2,6 +2,13 @@
 <html lang="en">
   <head>
     <script src="./radio-group.ts" type="module"></script>
+    <script type="module">
+      const rg = document.querySelector("radio-group");
+      rg.addEventListener("value-change", (e) => {
+        const { oldValue, value } = e.detail;
+        console.log(`changed from ${oldValue} to ${value}`);
+      });
+    </script>
   </head>
   <body>
     <radio-group

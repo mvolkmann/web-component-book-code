@@ -1,0 +1,7 @@
+{
+  "rules": {
+    "jsxSingleQuote": false,
+    "singleQuote": false,
+    "printWidth": 80
+  }
+}

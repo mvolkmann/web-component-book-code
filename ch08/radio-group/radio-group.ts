@@ -1,32 +1,28 @@
-import {
-  attr,
-  css,
-  customElement,
-  FASTElement,
-  html,
-  repeat,
-} from "@microsoft/fast-element";
+import { attr, css, customElement, FASTElement, html, repeat } from "@microsoft/fast-element";
+import { twoWay } from "@microsoft/fast-element/binding/two-way.js";
 
 // x is set to a RadioGroup instance.
 const template = html<RadioGroup>`
   <fieldset>
-    <legend>${x => x.legend}</legend>
+    <legend>${(x) => x.legend}</legend>
     <slot name="before"></slot>
     <div>
       ${repeat(
-        x => x.pairs,
+        (x) => x.pairs,
         html`
           <div>
             <!-- p is short for pair and c is short for context. -->
             <input
               type="radio"
-              id=${p => p.value}
+              id=${(p) => p.value}
               name=${(p, c) => c.parent.name}
               :checked=${(p, c) => p.value === c.parent.value}
-              :value=${p => p.value}
-              @change=${(p, c) => c.parent.handleChange(p.value)}
+              :value=${twoWay((p, c) => {
+                c.parent.value; // makes FAST observe the value property
+                return p.value;
+              })}
             />
-            <label for=${p => p.value}>${x => x.label}</label>
+            <label for=${(p) => p.value}>${(x) => x.label}</label>
           </div>
         `,
       )}
@@ -72,11 +68,11 @@ const styles = css`
 
 @customElement({ name: "radio-group", template, styles })
 export class RadioGroup extends FASTElement {
-  @attr labels: string;
-  @attr legend: string;
-  @attr name: string;
-  @attr value: string;
-  @attr values: string;
+  @attr labels!: string;
+  @attr legend!: string;
+  @attr name!: string;
+  @attr value!: string;
+  @attr values!: string;
 
   get pairs() {
     const labelArray = this.labels.split(",");
@@ -87,7 +83,14 @@ export class RadioGroup extends FASTElement {
     }));
   }
 
-  handleChange(newValue: string) {
-    this.value = newValue;
+  valueChanged(oldValue: string, value: string) {
+    if (value === oldValue) return;
+    this.dispatchEvent(
+      new CustomEvent("value-change", {
+        detail: { oldValue, value },
+        bubbles: true,
+        composed: true,
+      }),
+    );
   }
 }
