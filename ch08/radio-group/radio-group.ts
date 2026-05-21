@@ -1,5 +1,4 @@
 import { attr, css, customElement, FASTElement, html, repeat } from "@microsoft/fast-element";
-import { twoWay } from "@microsoft/fast-element/binding/two-way.js";
 
 // x is set to a RadioGroup instance.
 const template = html<RadioGroup>`
@@ -17,10 +16,9 @@ const template = html<RadioGroup>`
               id=${(p) => p.value}
               name=${(p, c) => c.parent.name}
               :checked=${(p, c) => p.value === c.parent.value}
-              :value=${twoWay((p, c) => {
-                c.parent.value; // makes FAST observe the value property
-                return p.value;
-              })}
+              @change=${(p, c) => {
+                c.parent.value = p.value;
+              }}
             />
             <label for=${(p) => p.value}>${(x) => x.label}</label>
           </div>

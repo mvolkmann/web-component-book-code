@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script src="./number-slider.ts" type="module"></script>
+    <script type="module">
+      const slider = document.querySelector("number-slider");
+      const output = document.querySelector("output");
+
+      slider.addEventListener("value-change", (event) => {
+        output.value = event.detail.value;
+      });
+    </script>
+  </head>
+  <body>
+    <form method="post" action="https://httpbin.org/post">
+      <number-slider
+        label="Size"
+        label-width="3rem"
+        max="48"
+        min="12"
+        name="size"
+        value="18"
+      ></number-slider>
+      <output>18</output>
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+    </form>
+  </body>
+</html>
