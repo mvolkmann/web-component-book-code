@@ -1,21 +1,14 @@
-import {
-  attr,
-  css,
-  customElement,
-  FASTElement,
-  html,
-  ref,
-} from "@microsoft/fast-element";
+import { attr, css, customElement, FASTElement, html, ref } from "@microsoft/fast-element";
 import { myState } from "./my-state.js";
 
 const template = html<LabeledInput>`
-  <label for=${x => x.inputId}>${x => x.label}</label>
+  <label for=${(x) => x.inputId}>${(x) => x.label}</label>
   <input
-    id=${x => x.inputId}
-    name=${x => x.name}
+    id=${(x) => x.inputId}
+    name=${(x) => x.name}
     type="text"
-    :value=${x => x.name}
-    @change=${x => x.handleChange()}
+    :value=${(x) => x.name}
+    @change=${(x) => x.handleChange()}
     ${ref("input")}
   />
 `;
