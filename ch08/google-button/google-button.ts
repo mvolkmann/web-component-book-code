@@ -2,7 +2,7 @@ import { css, customElement, FASTElement, html } from "@microsoft/fast-element";
 
 // x is set to a GoogleButton instance.
 const template = html<GoogleButton>`
-  <button type="button" @click=${x => x.handleClick()}>Google It</button>
+  <button type="button" @click=${(x) => x.handleClick()}>Google It</button>
 `;
 
 @customElement({
@@ -21,6 +21,6 @@ const template = html<GoogleButton>`
 })
 export class GoogleButton extends FASTElement {
   handleClick() {
-    window.open("https://google.com", "_blank");
+    window.open("https://google.com", "_blank", "noopener,noreferrer");
   }
 }

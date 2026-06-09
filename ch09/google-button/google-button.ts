@@ -12,12 +12,10 @@ class GoogleButton extends Wrec {
     }
   `;
 
-  static html = html`
-    <button type="button" onClick="handleClick">Google It</button>
-  `;
+  static html = html` <button type="button" onClick="handleClick">Google It</button> `;
 
   handleClick() {
-    window.open("https://google.com", "_blank");
+    window.open("https://google.com", "_blank", "noopener,noreferrer");
   }
 }
 
