@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       wrec:
-        specifier: 0.42.1
-        version: 0.42.1
+        specifier: 0.43.0
+        version: 0.43.0
     devDependencies:
       vite:
         specifier: ^8.0.16
@@ -352,8 +352,8 @@ packages:
       yaml:
         optional: true
 
-  wrec@0.42.1:
-    resolution: {integrity: sha512-A46OqhxKtHi8PmpDxXfIvLXTPgGnZZje+Anb6D2HngvZ6QZulxZeVYa9BA45lSX+/EWtLuM2Hb6Z6gR3un5gDg==}
+  wrec@0.43.0:
+    resolution: {integrity: sha512-O5/j9t64iSOpSbUrHJnlq1neQu4P7GsB9bj/mcYaIOlRU9QEQblhtxJsk+ZR1VhyMUtd1ww/Qq+BfSdEfjuXIA==}
     hasBin: true
 
   xss@1.0.15:
@@ -604,7 +604,7 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  wrec@0.42.1:
+  wrec@0.43.0:
     dependencies:
       node-html-parser: 7.1.0
       typescript: 6.0.3

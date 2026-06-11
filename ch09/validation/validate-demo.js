@@ -44,6 +44,7 @@ class ValidateDemo extends Wrec {
     message: {
       type: String,
       value: "",
+      reflect: false,
     },
   };
 
