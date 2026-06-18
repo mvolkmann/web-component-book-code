@@ -11,6 +11,7 @@ class HelloWorld extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
     this.shadowRoot?.replaceChildren(this.#p);
+    this.name = this.#name;
   }
 
   attributeChangedCallback(attrName, _oldValue, newValue) {
@@ -37,10 +38,10 @@ class HelloWorld extends HTMLElement {
   }
 
   set name(value) {
+    this.#p.textContent = `Hello, ${value}!`;
     if (value === this.#name) return;
     this.#name = value;
     this.setAttribute("name", value);
-    this.#p.textContent = `Hello, ${this.#name}!`;
   }
 }
 
