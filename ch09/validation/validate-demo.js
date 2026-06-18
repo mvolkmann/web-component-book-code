@@ -93,7 +93,7 @@ class ValidateDemo extends Wrec {
 
   async connectedCallback() {
     await super.connectedCallback();
-    this.addEventListener("validation", this.handleValidation);
+    this.addEventListener("validation", (event) => this.handleValidation(event));
   }
 
   handleValidation(event) {
