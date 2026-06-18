@@ -26,15 +26,8 @@ class HelloWorld extends HTMLElement {
     return ["color", "name"];
   }
 
-  attributeChangedCallback(attrName, _oldValue, newValue) {
-    if (attrName === "color") {
-      this.color = newValue;
-    } else if (attrName === "name") {
-      this.name = newValue;
-    }
-  }
-
-  connectedCallback() {
+  constructor() {
+    super();
     this.attachShadow({ mode: "open" });
     const style = document.createElement("style");
     style.textContent = `
@@ -47,12 +40,15 @@ class HelloWorld extends HTMLElement {
     `;
     this.#p.setAttribute("part", "greeting");
     this.#p.textContent = `Hello, ${this.#name}!`;
-    this.shadowRoot?.replaceChildren(
-      style,
-      createSlot("before"),
-      this.#p,
-      createSlot(),
-    );
+    this.shadowRoot?.replaceChildren(style, createSlot("before"), this.#p, createSlot());
+  }
+
+  attributeChangedCallback(attrName, _oldValue, newValue) {
+    if (attrName === "color") {
+      this.color = newValue;
+    } else if (attrName === "name") {
+      this.name = newValue;
+    }
   }
 
   get color() {
