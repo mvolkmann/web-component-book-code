@@ -77,7 +77,6 @@ export class RadioGroup extends HTMLElement {
   }
 
   makeButtons() {
-    console.log("radio-group.js makeButtons: entered");
     const labelArray = this.labels.split(",");
     const valueArray = this.values.split(",").map((value) => value.trim());
     return valueArray

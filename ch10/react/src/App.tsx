@@ -7,6 +7,11 @@ function App() {
   let helloWorldRef = useRef<HTMLElement | null>(null);
   let radioGroupRef = useRef<HTMLElement | null>(null);
 
+  function updateColor(color: string) {
+    const { current } = helloWorldRef;
+    if (current) (current as any).color = color;
+  }
+
   useEffect(() => {
     const { current } = radioGroupRef;
     const color = current ? (current as any).value : "black";
@@ -16,11 +21,6 @@ function App() {
   function handleChange(event: Event) {
     const { value } = event.target as HTMLInputElement;
     updateColor(value);
-  }
-
-  function updateColor(color: string) {
-    const { current } = helloWorldRef;
-    if (current) (current as any).color = color;
   }
 
   return (
