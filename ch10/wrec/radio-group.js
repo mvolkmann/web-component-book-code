@@ -25,7 +25,6 @@ class RadioGroup extends Wrec {
 
   handleChange(event) {
     this.value = event.target.value;
-    console.log("radio-group.js handleChange: this.value =", this.value);
   }
 
   makeButtons(labels, values) {

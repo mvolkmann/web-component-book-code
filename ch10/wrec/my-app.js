@@ -10,7 +10,7 @@ class MyApp extends Wrec {
   static css = css`
     :host {
       font-family: sans-serif;
-      padding: 1rem;
+      margin: 1rem;
     }
   `;
 

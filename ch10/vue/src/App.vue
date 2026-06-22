@@ -24,8 +24,8 @@ function updateColor(color) {
   <hello-world name="Mark" ref="helloWorldElement"></hello-world>
   <radio-group
     name="color"
-    labels="Red, Green, Blue"
-    values="red, green, blue"
+    labels="Red,Green,Blue"
+    values="red,green,blue"
     :value="initialColor"
     @change="handleChange"
   ></radio-group>
