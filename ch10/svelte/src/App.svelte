@@ -14,7 +14,7 @@
     updateColor(color);
   });
 
-  function handleEvent(event: CustomEvent) {
+  function handleChange(event: CustomEvent) {
     updateColor(event.detail.value);
   }
 
@@ -31,6 +31,6 @@
     labels="Red,Green,Blue"
     value={initialColor}
     values="red,green,blue"
-    on:change={handleEvent}
+    on:change={handleChange}
   ></radio-group>
 </main>
