@@ -11,17 +11,16 @@
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "view": "wca view --format vscode *.{js,ts}"
   },
-  "devDependencies": {
-    "@custom-elements-manifest/analyzer": "^0.11.0",
-    "@custom-elements-manifest/to-markdown": "^0.1.0",
-    "cem-plugin-wrec": "^0.2.2",
-    "vite": "^8.0.8",
-    "web-component-analyzer": "^2.0.0"
-  },
-  "customElements": "custom-elements.json",
   "dependencies": {
     "api-viewer-element": "^0.6.4",
     "lit": "^3.3.2",
     "wrec": "0.40.3"
-  }
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.11.0",
+    "@custom-elements-manifest/to-markdown": "^0.1.0",
+    "cem-plugin-wrec": "^0.2.2",
+    "vite": "^8.0.8"
+  },
+  "customElements": "custom-elements.json"
 }
