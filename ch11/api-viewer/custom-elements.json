@@ -1,0 +1,238 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/hello-world.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "This displays a greeting message for a given name in a specified color.",
+          "name": "HelloWorld",
+          "cssProperties": [
+            {
+              "description": "color of border that surrounds the component",
+              "name": "--border-color",
+              "default": "gray"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "greeting message",
+              "name": "greeting"
+            }
+          ],
+          "slots": [
+            {
+              "description": "for content after the greeting",
+              "name": ""
+            },
+            {
+              "description": "for content before the greeting",
+              "name": "before"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "#color",
+              "privacy": "private",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"black\""
+            },
+            {
+              "kind": "field",
+              "name": "#name",
+              "privacy": "private",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"World\""
+            },
+            {
+              "kind": "field",
+              "name": "#p",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "description": "current text color",
+              "default": "black"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "current name to greet",
+              "default": "World"
+            },
+            {
+              "kind": "field",
+              "name": "textContent",
+              "default": "`Hello, ${this.#name}!`"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "description": "initial text color"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "initial name to greet"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hello-world",
+          "customElement": true,
+          "summary": "This displays a greeting message."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "hello-world",
+          "declaration": {
+            "name": "HelloWorld",
+            "module": "src/hello-world.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/radio-group.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "This displays a set of related radio buttons.",
+          "name": "RadioGroup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "labels",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "comma-separated list of radio button labels"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "name associated with the selected radio button"
+            },
+            {
+              "kind": "field",
+              "name": "values",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "comma-separated list of radio button values"
+            },
+            {
+              "kind": "field",
+              "name": "#value",
+              "privacy": "private",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "value of the selected radio button"
+            },
+            {
+              "kind": "method",
+              "name": "makeButtons"
+            },
+            {
+              "kind": "method",
+              "name": "render"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "value of the selected radio button"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "comma-separated list of radio button labels",
+              "name": "labels"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "name associated with the selected radio button",
+              "name": "name"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "comma-separated list of radio button values",
+              "name": "values"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "radio-group",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "RadioGroup",
+          "declaration": {
+            "name": "RadioGroup",
+            "module": "src/radio-group.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "radio-group",
+          "declaration": {
+            "name": "RadioGroup",
+            "module": "src/radio-group.js"
+          }
+        }
+      ]
+    }
+  ]
+}

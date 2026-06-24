@@ -1,0 +1,15 @@
+{
+  "name": "api-viewer",
+  "scripts": {
+    "cem": "cem analyze",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "api-viewer-element": "1.0.0-pre.10"
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.11.0",
+    "vite": "^8.0.16"
+  },
+  "customElements": "custom-elements.json"
+}

@@ -15,10 +15,10 @@ class HelloWorld extends HTMLElement {
   }
 
   attributeChangedCallback(attrName, _oldValue, newValue) {
-    if (attrName === "name") {
-      this.name = newValue;
-    } else if (attrName === "color") {
-      this.color = newValue;
+    if (attrName === "color") {
+      this.color = newValue ?? "black";
+    } else if (attrName === "name") {
+      this.name = newValue ?? "World";
     }
   }
 

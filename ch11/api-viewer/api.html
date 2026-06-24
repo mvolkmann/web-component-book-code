@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script type="module">
+      import "api-viewer-element";
+      import "./src/hello-world.js";
+      import "./src/radio-group.js";
+    </script>
+  </head>
+  <body>
+    <api-viewer src="./custom-elements.json">
+      <template data-element="radio-group" data-target="host">
+        (3)
+        <radio-group
+          labels="Spring,Summer,Fall,Winter"
+          name="season"
+          values="spr,sum,fal,wtr"
+          value="sum"
+        ></radio-group>
+      </template>
+    </api-viewer>
+  </body>
+</html>
