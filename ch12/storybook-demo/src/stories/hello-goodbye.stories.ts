@@ -4,9 +4,14 @@ import { expect, userEvent } from "storybook/test";
 import { HelloGoodbye } from "../hello-goodbye.ts";
 import "../hello-goodbye.ts";
 
+type StoryArgs = {
+  name: string;
+  salutation: string;
+};
+
 const component = "hello-goodbye";
-let { args, argTypes, template } = getStorybookHelpers(component);
-const meta: Meta = {
+let { args, argTypes, template } = getStorybookHelpers<StoryArgs>(component);
+const meta: Meta<StoryArgs> = {
   component,
   args,
   argTypes,
@@ -14,13 +19,11 @@ const meta: Meta = {
 };
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<StoryArgs>;
 
 export const Primary: Story = {
   play: async ({ canvasElement }) => {
-    const helloGoodbye = canvasElement.querySelector(
-      "hello-goodbye",
-    ) as HelloGoodbye;
+    const helloGoodbye = canvasElement.querySelector("hello-goodbye") as HelloGoodbye;
     expect(helloGoodbye).toBeInTheDocument();
     if (!helloGoodbye) return;
 
@@ -40,5 +43,5 @@ export const Primary: Story = {
 };
 
 export const Named: Story = {
-  args: { name: "Earth" } as Partial<Meta>,
+  args: { name: "Earth" },
 };

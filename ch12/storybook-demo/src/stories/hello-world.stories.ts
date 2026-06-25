@@ -4,32 +4,23 @@ import { expect } from "storybook/test";
 import { HelloWorld } from "../hello-world.ts";
 import "../hello-world.ts";
 
+type StoryArgs = {
+  name: string;
+};
+
 const component = "hello-world";
-let { args, argTypes, template } = getStorybookHelpers(component);
+let { args, argTypes, template } = getStorybookHelpers<StoryArgs>(component);
 //const defaultName = "World";
-const meta: Meta = {
+const meta: Meta<StoryArgs> = {
   component,
-  /*
-  args: {
-    name: defaultName,
-  },
-  argTypes: {
-    name: {
-      control: "text", // the default
-      table: {
-        defaultValue: { summary: defaultName },
-      },
-      description: "name to greet",
-    },
-  },
-  */
   args,
   argTypes,
+  // Renders the component using the current story arguments.
   render: (args) => template(args),
 };
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<StoryArgs>;
 
 export const Primary: Story = {
   play: ({ canvasElement }) => {
@@ -62,5 +53,5 @@ export const Primary: Story = {
 };
 
 export const Named: Story = {
-  args: { name: "Earth" } as Partial<Meta>,
+  args: { name: "Earth" },
 };
