@@ -1,5 +1,6 @@
 {
   "name": "storybook-demo",
+  "type": "module",
   "scripts": {
     "cem-local": "node ./custom-elements-manifest/packages/analyzer/cem.js analyze",
     "cem": "cem analyze --exclude 'coverage/**' 'custom-elements-manifest/**' 'src/stories/**' 'storybook-static/**'",
