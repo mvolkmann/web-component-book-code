@@ -1,5 +1,4 @@
 /** @type { import('@storybook/web-components-vite').Preview } */
-import React from "react";
 import {
   Controls,
   Description,
