@@ -7,12 +7,11 @@ type StoryArgs = {
 };
 
 const component = "my-counter";
-let { args, argTypes, template } = getStorybookHelpers<StoryArgs>(component);
+let { args, argTypes } = getStorybookHelpers<StoryArgs>(component);
 const meta: Meta<StoryArgs> = {
   component,
   args,
   argTypes,
-  render: (args) => template(args),
 };
 export default meta;
 

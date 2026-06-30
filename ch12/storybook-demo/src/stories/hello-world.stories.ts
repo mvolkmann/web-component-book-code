@@ -15,8 +15,6 @@ const meta: Meta<StoryArgs> = {
   component,
   args,
   argTypes,
-  // Renders the component using the current story arguments.
-  render: (args) => template(args),
 };
 export default meta;
 

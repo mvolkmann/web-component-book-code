@@ -18,11 +18,6 @@ const meta: Meta<StoryArgs> = {
       options: ["stop", "yield", "go"],
     },
   },
-  render: ({ state }) => {
-    const trafficLight = document.createElement("traffic-light");
-    trafficLight.setAttribute("state", state);
-    return trafficLight;
-  },
 };
 export default meta;
 
