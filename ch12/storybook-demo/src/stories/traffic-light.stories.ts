@@ -1,33 +1,35 @@
+import { expect, userEvent } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/web-components-vite";
-import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
 import { TrafficLight } from "../traffic-light.ts";
 import "../traffic-light.js";
-import { expect, userEvent } from "storybook/test";
 
 type StoryArgs = {
   state: "go" | "stop" | "yield";
 };
 
-const component = "traffic-light";
-const { args, argTypes, template } = getStorybookHelpers<StoryArgs>(component);
-
-// The control type is inferred to be "text", but we want "radio".
-const { state } = argTypes;
-state.control = "radio";
-state.options = ["stop", "yield", "go"];
-
-//const defaultState = "stop";
 const meta: Meta<StoryArgs> = {
-  component,
-  args,
-  argTypes,
-  render: (args) => template(args),
+  component: "traffic-light",
+  args: {
+    state: "stop",
+  },
+  argTypes: {
+    state: {
+      control: "radio",
+      options: ["stop", "yield", "go"],
+    },
+  },
+  render: ({ state }) => {
+    const trafficLight = document.createElement("traffic-light");
+    trafficLight.setAttribute("state", state);
+    return trafficLight;
+  },
 };
 export default meta;
 
 type Story = StoryObj<StoryArgs>;
 
 export const Primary: Story = {
+  // Verifies the traffic light's default state and state transitions.
   play: async ({ canvasElement }) => {
     const trafficLight = canvasElement.querySelector("traffic-light") as TrafficLight;
     expect(trafficLight).toBeInTheDocument();
