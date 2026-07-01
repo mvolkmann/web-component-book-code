@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/web-components-vite";
-import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
 import { expect, userEvent } from "storybook/test";
 import { HelloGoodbye } from "../hello-goodbye.ts";
 import "../hello-goodbye.ts";
@@ -9,12 +8,16 @@ type StoryArgs = {
   salutation: string;
 };
 
-const component = "hello-goodbye";
-let { args, argTypes, template } = getStorybookHelpers<StoryArgs>(component);
 const meta: Meta<StoryArgs> = {
-  component,
-  args,
-  argTypes,
+  component: "hello-goodbye",
+  args: {
+    name: "World",
+    salutation: "Hello",
+  },
+  argTypes: {
+    name: { control: "text" },
+    salutation: { control: "text" },
+  },
 };
 export default meta;
 
