@@ -1,17 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/web-components-vite";
-import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
 import "../my-counter.js";
 
 type StoryArgs = {
   count: number;
 };
 
-const component = "my-counter";
-let { args, argTypes } = getStorybookHelpers<StoryArgs>(component);
 const meta: Meta<StoryArgs> = {
-  component,
-  args,
-  argTypes,
+  component: "my-counter",
+  args: {
+    count: 3,
+  },
+  argTypes: {
+    count: { control: "number" },
+  },
 };
 export default meta;
 

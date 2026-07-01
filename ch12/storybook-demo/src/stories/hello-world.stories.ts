@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/web-components-vite";
-import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
 import { expect } from "storybook/test";
 import { HelloWorld } from "../hello-world.ts";
 import "../hello-world.ts";
@@ -8,24 +7,27 @@ type StoryArgs = {
   name: string;
 };
 
-const component = "hello-world";
-let { args, argTypes, template } = getStorybookHelpers<StoryArgs>(component);
-//const defaultName = "World";
 const meta: Meta<StoryArgs> = {
-  component,
-  args,
-  argTypes,
+  component: "hello-world",
+  args: {
+    name: "World",
+  },
+  argTypes: {
+    name: { control: "text" },
+  },
 };
 export default meta;
 
 type Story = StoryObj<StoryArgs>;
 
 export const Primary: Story = {
+  // Verifies that the greeting responds to attribute and property changes.
   play: ({ canvasElement }) => {
     const helloWorld = canvasElement.querySelector("hello-world") as HelloWorld;
     expect(helloWorld).toBeInTheDocument();
     if (!helloWorld) return;
 
+    // Verifies that the component renders a greeting for the given name.
     function verifyText(name: string) {
       const p = helloWorld!.shadowRoot?.querySelector("p");
       expect(p).toBeInTheDocument();
