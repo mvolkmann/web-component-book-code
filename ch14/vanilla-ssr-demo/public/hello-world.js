@@ -40,7 +40,7 @@ class HelloWorld extends HTMLElement {
     if (value === this.#name) return;
     this.#name = value;
     this.setAttribute("name", value);
-    this.#p.textContent = `Hello, ${this.name}!`;
+    if (this.#p) this.#p.textContent = `Hello, ${this.name}!`;
   }
 }
 
