@@ -6,7 +6,7 @@ import { renderToString } from "../hydrate";
 const html = String.raw;
 const app = new Hono();
 
-app.use("/*", serveStatic({ root: "./dist" }));
+app.use("/*", serveStatic({ root: "./www" }));
 
 // This returns HTML that includes server-side rendered Stencil components.
 app.get("/greet", async (c: Context) => {
