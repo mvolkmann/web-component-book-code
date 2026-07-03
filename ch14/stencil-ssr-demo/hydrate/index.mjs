@@ -133,7 +133,7 @@ const NAMESPACE = 'stencil-ssr-demo';
 const BUILD = /* stencil-ssr-demo */ { hotModuleReplacement: false, hydratedSelectorName: "hydrated", prop: true, propChangeCallback: false, slotRelocation: true, updatable: true};
 
 /*
- Stencil Hydrate Platform v4.43.2 | MIT Licensed | https://stenciljs.com
+ Stencil Hydrate Platform v4.43.5 | MIT Licensed | https://stenciljs.com
  */
 var __create = Object.create;
 var __defProp = Object.defineProperty;
@@ -168,7 +168,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   __defProp(target, "default", { value: mod, enumerable: true }) ,
   mod
 ));
-var __publicField = (obj, key, value) => __defNormalProp(obj, key + "" , value);
+var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 var __accessCheck = (obj, member, msg) => member.has(obj) || __typeError("Cannot " + msg);
 var __privateGet = (obj, member, getter) => (__accessCheck(obj, member, "read from private field"), getter ? getter.call(obj) : member.get(obj));
 var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
@@ -419,9 +419,9 @@ function getPropertyDescriptor(obj, memberName, getOnly) {
 
 // src/utils/es2022-rewire-class-members.ts
 var reWireGetterSetter = (instance, hostRef) => {
-  var _a;
+  var _a2;
   const cmpMeta = hostRef.$cmpMeta$;
-  const members = Object.entries((_a = cmpMeta.$members$) != null ? _a : {});
+  const members = Object.entries((_a2 = cmpMeta.$members$) != null ? _a2 : {});
   members.map(([memberName, [memberFlags]]) => {
     if ((memberFlags & 31 /* Prop */ || memberFlags & 32 /* State */)) {
       const ogValue = instance[memberName];
@@ -472,10 +472,10 @@ function createStyleSheetIfNeededAndSupported(styles2) {
 // src/utils/shadow-root.ts
 var globalStyleSheet;
 function createShadowRoot(cmpMeta) {
-  var _a;
+  var _a2;
   const opts = { mode: "open" };
   const shadowRoot = this.attachShadow(opts);
-  if (globalStyleSheet === void 0) globalStyleSheet = (_a = createStyleSheetIfNeededAndSupported()) != null ? _a : null;
+  if (globalStyleSheet === void 0) globalStyleSheet = (_a2 = createStyleSheetIfNeededAndSupported()) != null ? _a2 : null;
   if (globalStyleSheet) {
     {
       shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, globalStyleSheet];
@@ -611,8 +611,8 @@ function dispatchSlotChangeEvent(elm) {
   elm.dispatchEvent(new CustomEvent("slotchange", { bubbles: false, cancelable: false, composed: false }));
 }
 function findSlotFromSlottedNode(slottedNode, parentHost) {
-  var _a;
-  parentHost = parentHost || ((_a = slottedNode["s-ol"]) == null ? void 0 : _a.parentElement);
+  var _a2;
+  parentHost = parentHost || ((_a2 = slottedNode["s-ol"]) == null ? void 0 : _a2.parentElement);
   if (!parentHost) return { slotNode: null, slotName: "" };
   const slotName = slottedNode["s-sn"] = getSlotName(slottedNode) || "";
   const childNodes = internalCall(parentHost, "childNodes");
@@ -646,8 +646,8 @@ var uniqueTime = (key, measureText) => {
 
 // src/utils/query-nonce-meta-tag-content.ts
 function queryNonceMetaTagContent(doc) {
-  var _a, _b, _c;
-  return (_c = (_b = (_a = doc.head) == null ? void 0 : _a.querySelector('meta[name="csp-nonce"]')) == null ? void 0 : _b.getAttribute("content")) != null ? _c : void 0;
+  var _a2, _b, _c;
+  return (_c = (_b = (_a2 = doc.head) == null ? void 0 : _a2.querySelector('meta[name="csp-nonce"]')) == null ? void 0 : _b.getAttribute("content")) != null ? _c : void 0;
 }
 
 // src/runtime/styles.ts
@@ -660,7 +660,7 @@ var registerStyle = (scopeId2, cssText, allowCS) => {
   styles.set(scopeId2, style);
 };
 var addStyle = (styleContainerNode, cmpMeta, mode) => {
-  var _a;
+  var _a2;
   const scopeId2 = getScopeId(cmpMeta);
   const style = styles.get(scopeId2);
   if (!win.document) {
@@ -681,7 +681,7 @@ var addStyle = (styleContainerNode, cmpMeta, mode) => {
       } else if (!appliedStyles.has(scopeId2)) {
         styleElm = win.document.createElement("style");
         styleElm.textContent = style;
-        const nonce = (_a = plt.$nonce$) != null ? _a : queryNonceMetaTagContent(win.document);
+        const nonce = (_a2 = plt.$nonce$) != null ? _a2 : queryNonceMetaTagContent(win.document);
         if (nonce != null) {
           styleElm.setAttribute("nonce", nonce);
         }
@@ -822,7 +822,7 @@ var isHost = (node) => node && node.$tag$ === Host;
 
 // src/runtime/client-hydrate.ts
 var initializeClientHydrate = (hostElm, tagName, hostId, hostRef) => {
-  var _a, _b, _c, _d;
+  var _a2, _b, _c, _d;
   const endHydrate = createTime("hydrateClient", tagName);
   const shadowRoot = hostElm.shadowRoot;
   const childRenderNodes = [];
@@ -859,7 +859,7 @@ var initializeClientHydrate = (hostElm, tagName, hostId, hostRef) => {
       if (childRenderNode.$tag$ === "slot") {
         node["s-cr"] = hostElm["s-cr"];
       }
-    } else if (((_a = childRenderNode.$tag$) == null ? void 0 : _a.toString().includes("-")) && childRenderNode.$tag$ !== "slot-fb" && !childRenderNode.$elm$.shadowRoot) {
+    } else if (((_a2 = childRenderNode.$tag$) == null ? void 0 : _a2.toString().includes("-")) && childRenderNode.$tag$ !== "slot-fb" && !childRenderNode.$elm$.shadowRoot) {
       const cmpMeta = getHostRef(childRenderNode.$elm$);
       if (cmpMeta) {
         const scopeId3 = getScopeId(
@@ -1191,10 +1191,10 @@ function addSlot(slotName, slotId, childVNode, node, parentVNode, childRenderNod
   parentVNode.$children$[childVNode.$index$] = childVNode;
 }
 var addSlottedNodes = (slottedNodes, slotNodeId, slotName, slotNode, hostId) => {
-  var _a, _b;
+  var _a2, _b;
   let slottedNode = slotNode.nextSibling;
   slottedNodes[slotNodeId] = slottedNodes[slotNodeId] || [];
-  if (!slottedNode || ((_a = slottedNode.nodeValue) == null ? void 0 : _a.startsWith(SLOT_NODE_ID + "."))) return;
+  if (!slottedNode || ((_a2 = slottedNode.nodeValue) == null ? void 0 : _a2.startsWith(SLOT_NODE_ID + "."))) return;
   do {
     if (slottedNode && ((slottedNode["getAttribute"] && slottedNode.getAttribute("slot") || slottedNode["s-sn"]) === slotName || slotName === "" && !slottedNode["s-sn"] && (!slottedNode["getAttribute"] || !slottedNode.getAttribute("slot")) && (slottedNode.nodeType === 8 /* CommentNode */ || slottedNode.nodeType === 3 /* TextNode */))) {
       slottedNode["s-sn"] = slotName;
@@ -1718,11 +1718,19 @@ var RemoteValue = class _RemoteValue {
 };
 
 // src/utils/serialize.ts
+function decodeBase64Unicode(base64) {
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i2 = 0; i2 < binary.length; i2++) {
+    bytes[i2] = binary.charCodeAt(i2);
+  }
+  return new TextDecoder().decode(bytes);
+}
 function deserializeProperty(value) {
   if (typeof value !== "string" || !value.startsWith(SERIALIZED_PREFIX)) {
     return value;
   }
-  return RemoteValue.fromLocalValue(JSON.parse(atob(value.slice(SERIALIZED_PREFIX.length))));
+  return RemoteValue.fromLocalValue(JSON.parse(decodeBase64Unicode(value.slice(SERIALIZED_PREFIX.length))));
 }
 
 // src/runtime/parse-property-value.ts
@@ -1794,7 +1802,7 @@ var useNativeShadowDom = false;
 var checkSlotFallbackVisibility = false;
 var checkSlotRelocate = false;
 var createElm = (oldParentVNode, newParentVNode, childIndex) => {
-  var _a;
+  var _a2;
   const newVNode2 = newParentVNode.$children$[childIndex];
   let i2 = 0;
   let elm;
@@ -1851,7 +1859,7 @@ var createElm = (oldParentVNode, newParentVNode, childIndex) => {
       elm["s-sr"] = true;
       elm["s-cr"] = contentRef;
       elm["s-sn"] = newVNode2.$name$ || "";
-      elm["s-rf"] = (_a = newVNode2.$attrs$) == null ? void 0 : _a.ref;
+      elm["s-rf"] = (_a2 = newVNode2.$attrs$) == null ? void 0 : _a2.ref;
       patchSlotNode(elm);
       oldVNode = oldParentVNode && oldParentVNode.$children$ && oldParentVNode.$children$[childIndex];
       if (oldVNode && oldVNode.$tag$ === newVNode2.$tag$ && oldParentVNode.$elm$) {
@@ -2156,12 +2164,12 @@ var insertBefore = (parent, newNode, reference, isInitialLoad) => {
   }
 };
 function addRemoveSlotScopedClass(reference, slotNode, newParent, oldParent) {
-  var _a, _b;
+  var _a2, _b;
   let scopeId2;
   if (reference && typeof slotNode["s-sn"] === "string" && !!slotNode["s-sr"] && reference.parentNode && reference.parentNode["s-sc"] && (scopeId2 = slotNode["s-si"] || reference.parentNode["s-sc"])) {
     const scopeName = slotNode["s-sn"];
     const hostName = slotNode["s-hn"];
-    (_a = newParent.classList) == null ? void 0 : _a.add(scopeId2 + "-s");
+    (_a2 = newParent.classList) == null ? void 0 : _a2.add(scopeId2 + "-s");
     if (oldParent && ((_b = oldParent.classList) == null ? void 0 : _b.contains(scopeId2 + "-s"))) {
       let child = (oldParent.__childNodes || oldParent.childNodes)[0];
       let found = false;
@@ -2177,7 +2185,7 @@ function addRemoveSlotScopedClass(reference, slotNode, newParent, oldParent) {
   }
 }
 var renderVdom = (hostRef, renderFnResults, isInitialLoad = false) => {
-  var _a, _d, _e;
+  var _a2, _d, _e;
   const hostElm = hostRef.$hostElement$;
   const cmpMeta = hostRef.$cmpMeta$;
   const oldVNode = hostRef.$vnode$ || newVNode(null, null);
@@ -2225,7 +2233,7 @@ var renderVdom = (hostRef, renderFnResults, isInitialLoad = false) => {
         const nodeToRelocate = relocateData.$nodeToRelocate$;
         const slotRefNode = relocateData.$slotRefNode$;
         if (nodeToRelocate.nodeType === 1 /* ElementNode */ && isInitialLoad) {
-          nodeToRelocate["s-ih"] = (_a = nodeToRelocate.hidden) != null ? _a : false;
+          nodeToRelocate["s-ih"] = (_a2 = nodeToRelocate.hidden) != null ? _a2 : false;
         }
         if (slotRefNode) {
           const parentNodeRef = slotRefNode.parentNode;
@@ -2284,14 +2292,14 @@ var renderVdom = (hostRef, renderFnResults, isInitialLoad = false) => {
   contentRef = void 0;
 };
 var slotReferenceDebugNode = (slotVNode) => {
-  var _a;
-  return (_a = win.document) == null ? void 0 : _a.createComment(
+  var _a2;
+  return (_a2 = win.document) == null ? void 0 : _a2.createComment(
     `<slot${slotVNode.$name$ ? ' name="' + slotVNode.$name$ + '"' : ""}> (host=${hostTagName.toLowerCase()})`
   );
 };
 var originalLocationDebugNode = (nodeToRelocate) => {
-  var _a;
-  return (_a = win.document) == null ? void 0 : _a.createComment(
+  var _a2;
+  return (_a2 = win.document) == null ? void 0 : _a2.createComment(
     `org-location for ` + (nodeToRelocate.localName ? `<${nodeToRelocate.localName}> (host=${nodeToRelocate["s-hn"]})` : `[${nodeToRelocate.textContent}]`)
   );
 };
@@ -2361,7 +2369,7 @@ var enqueue = (maybePromise, fn) => isPromisey(maybePromise) ? maybePromise.then
 }) : fn();
 var isPromisey = (maybePromise) => maybePromise instanceof Promise || maybePromise && maybePromise.then && typeof maybePromise.then === "function";
 var updateComponent = async (hostRef, instance, isInitialLoad) => {
-  var _a;
+  var _a2;
   const elm = hostRef.$hostElement$;
   const endUpdate = createTime("update", hostRef.$cmpMeta$.$tagName$);
   const rc = elm["s-rc"];
@@ -2393,7 +2401,7 @@ var updateComponent = async (hostRef, instance, isInitialLoad) => {
   endRender();
   endUpdate();
   {
-    const childrenPromises = (_a = elm["s-p"]) != null ? _a : [];
+    const childrenPromises = (_a2 = elm["s-p"]) != null ? _a2 : [];
     const postUpdate = () => postUpdateComponent(hostRef);
     if (childrenPromises.length === 0) {
       postUpdate();
@@ -2461,13 +2469,13 @@ var postUpdateComponent = (hostRef) => {
   }
 };
 var appDidLoad = (who) => {
-  var _a;
+  var _a2;
   if (BUILD.asyncQueue) {
     plt.$flags$ |= 2 /* appLoaded */;
   }
   nextTick(() => emitEvent(win, "appload", { detail: { namespace: NAMESPACE } }));
   {
-    if ((_a = plt.$orgLocNodes$) == null ? void 0 : _a.size) {
+    if ((_a2 = plt.$orgLocNodes$) == null ? void 0 : _a2.size) {
       plt.$orgLocNodes$.clear();
     }
   }
@@ -2483,8 +2491,8 @@ var safeCall = (instance, method, arg, elm) => {
   return void 0;
 };
 var addHydratedFlag = (elm) => {
-  var _a;
-  return elm.classList.add((_a = BUILD.hydratedSelectorName) != null ? _a : "hydrated") ;
+  var _a2;
+  return elm.classList.add((_a2 = BUILD.hydratedSelectorName) != null ? _a2 : "hydrated") ;
 };
 var serverSideConnected = (elm) => {
   const children = elm.children;
@@ -2537,10 +2545,10 @@ var setValue = (ref, propName, newVal, cmpMeta) => {
 
 // src/runtime/proxy-component.ts
 var proxyComponent = (Cstr, cmpMeta, flags) => {
-  var _a;
+  var _a2;
   const prototype = Cstr.prototype;
   if (cmpMeta.$members$ || BUILD.propChangeCallback) {
-    const members = Object.entries((_a = cmpMeta.$members$) != null ? _a : {});
+    const members = Object.entries((_a2 = cmpMeta.$members$) != null ? _a2 : {});
     members.map(([memberName, [memberFlags]]) => {
       if ((memberFlags & 31 /* Prop */ || memberFlags & 32 /* State */)) {
         const { get: origGetter, set: origSetter } = getPropertyDescriptor(prototype, memberName) || {};
@@ -2761,7 +2769,7 @@ var insertVdomAnnotations = (doc, staticComponents) => {
     const orgLocationNodes = [];
     parseVNodeAnnotations(doc, doc.body, docData, orgLocationNodes);
     orgLocationNodes.forEach((orgLocationNode) => {
-      var _a;
+      var _a2;
       if (orgLocationNode != null && orgLocationNode["s-nr"]) {
         const nodeRef = orgLocationNode["s-nr"];
         let hostId = nodeRef["s-host-id"];
@@ -2779,7 +2787,7 @@ var insertVdomAnnotations = (doc, staticComponents) => {
             }
           } else if (nodeRef.nodeType === 3 /* TextNode */) {
             if (hostId === 0) {
-              const textContent = (_a = nodeRef.nodeValue) == null ? void 0 : _a.trim();
+              const textContent = (_a2 = nodeRef.nodeValue) == null ? void 0 : _a2.trim();
               if (textContent === "") {
                 orgLocationNode.remove();
                 return;
@@ -2809,7 +2817,7 @@ var insertVdomAnnotations = (doc, staticComponents) => {
   }
 };
 var parseVNodeAnnotations = (doc, node, docData, orgLocationNodes) => {
-  var _a;
+  var _a2;
   if (node == null) {
     return;
   }
@@ -2817,7 +2825,7 @@ var parseVNodeAnnotations = (doc, node, docData, orgLocationNodes) => {
     orgLocationNodes.push(node);
   }
   if (node.nodeType === 1 /* ElementNode */) {
-    const childNodes = [...Array.from(node.childNodes), ...Array.from(((_a = node.shadowRoot) == null ? void 0 : _a.childNodes) || [])];
+    const childNodes = [...Array.from(node.childNodes), ...Array.from(((_a2 = node.shadowRoot) == null ? void 0 : _a2.childNodes) || [])];
     childNodes.forEach((childNode) => {
       const hostRef = getHostRef(childNode);
       if (hostRef != null && !docData.staticComponents.has(childNode.nodeName.toLowerCase())) {
@@ -3043,8 +3051,35 @@ var unescape = (s, { windowsPathsNoEscape = false } = {}) => {
 };
 
 // node_modules/minimatch/dist/esm/ast.js
+var _a;
 var types = /* @__PURE__ */ new Set(["!", "?", "+", "*", "@"]);
 var isExtglobType = (c) => types.has(c);
+var isExtglobAST = (c) => isExtglobType(c.type);
+var adoptionMap = /* @__PURE__ */ new Map([
+  ["!", ["@"]],
+  ["?", ["?", "@"]],
+  ["@", ["@"]],
+  ["*", ["*", "+", "?", "@"]],
+  ["+", ["+", "@"]]
+]);
+var adoptionWithSpaceMap = /* @__PURE__ */ new Map([
+  ["!", ["?"]],
+  ["@", ["?"]],
+  ["+", ["?", "*"]]
+]);
+var adoptionAnyMap = /* @__PURE__ */ new Map([
+  ["!", ["?", "@"]],
+  ["?", ["?", "@"]],
+  ["@", ["?", "@"]],
+  ["*", ["*", "+", "?", "@"]],
+  ["+", ["+", "@", "?", "*"]]
+]);
+var usurpMap = /* @__PURE__ */ new Map([
+  ["!", /* @__PURE__ */ new Map([["!", "@"]])],
+  ["?", /* @__PURE__ */ new Map([["*", "*"], ["+", "*"]])],
+  ["@", /* @__PURE__ */ new Map([["!", "!"], ["?", "?"], ["@", "@"], ["*", "*"], ["+", "+"]])],
+  ["+", /* @__PURE__ */ new Map([["?", "*"], ["*", "*"]])]
+]);
 var startNoTraversal = "(?!(?:^|/)\\.\\.?(?:$|/))";
 var startNoDot = "(?!\\.)";
 var addPatternStart = /* @__PURE__ */ new Set(["[", "."]);
@@ -3054,8 +3089,8 @@ var regExpEscape = (s) => s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 var qmark = "[^/]";
 var star = qmark + "*?";
 var starNoEmpty = qmark + "+?";
-var _root, _hasMagic, _uflag, _parts, _parent, _parentIndex, _negs, _filledNegs, _options, _toString, _emptyExt, _AST_instances, fillNegs_fn, _AST_static, parseAST_fn, partsToRegExp_fn, parseGlob_fn;
-var _AST = class _AST {
+var _root, _hasMagic, _uflag, _parts, _parent, _parentIndex, _negs, _filledNegs, _options, _toString, _emptyExt, _AST_instances, fillNegs_fn, _AST_static, parseAST_fn, canAdoptWithSpace_fn, canAdopt_fn, canAdoptType_fn, adoptWithSpace_fn, adopt_fn, canUsurpType_fn, canUsurp_fn, usurp_fn, flatten_fn, partsToRegExp_fn, parseGlob_fn;
+var AST = class {
   constructor(type, parent, options = {}) {
     __privateAdd(this, _AST_instances);
     __publicField(this, "type");
@@ -3108,44 +3143,44 @@ var _AST = class _AST {
     for (const p of parts) {
       if (p === "")
         continue;
-      if (typeof p !== "string" && !(p instanceof _AST && __privateGet(p, _parent) === this)) {
+      if (typeof p !== "string" && !(p instanceof _a && __privateGet(p, _parent) === this)) {
         throw new Error("invalid part: " + p);
       }
       __privateGet(this, _parts).push(p);
     }
   }
   toJSON() {
-    var _a;
+    var _a2;
     const ret = this.type === null ? __privateGet(this, _parts).slice().map((p) => typeof p === "string" ? p : p.toJSON()) : [this.type, ...__privateGet(this, _parts).map((p) => p.toJSON())];
     if (this.isStart() && !this.type)
       ret.unshift([]);
-    if (this.isEnd() && (this === __privateGet(this, _root) || __privateGet(__privateGet(this, _root), _filledNegs) && ((_a = __privateGet(this, _parent)) == null ? void 0 : _a.type) === "!")) {
+    if (this.isEnd() && (this === __privateGet(this, _root) || __privateGet(__privateGet(this, _root), _filledNegs) && ((_a2 = __privateGet(this, _parent)) == null ? void 0 : _a2.type) === "!")) {
       ret.push({});
     }
     return ret;
   }
   isStart() {
-    var _a;
+    var _a2;
     if (__privateGet(this, _root) === this)
       return true;
-    if (!((_a = __privateGet(this, _parent)) == null ? void 0 : _a.isStart()))
+    if (!((_a2 = __privateGet(this, _parent)) == null ? void 0 : _a2.isStart()))
       return false;
     if (__privateGet(this, _parentIndex) === 0)
       return true;
     const p = __privateGet(this, _parent);
     for (let i2 = 0; i2 < __privateGet(this, _parentIndex); i2++) {
       const pp = __privateGet(p, _parts)[i2];
-      if (!(pp instanceof _AST && pp.type === "!")) {
+      if (!(pp instanceof _a && pp.type === "!")) {
         return false;
       }
     }
     return true;
   }
   isEnd() {
-    var _a, _b, _c;
+    var _a2, _b, _c;
     if (__privateGet(this, _root) === this)
       return true;
-    if (((_a = __privateGet(this, _parent)) == null ? void 0 : _a.type) === "!")
+    if (((_a2 = __privateGet(this, _parent)) == null ? void 0 : _a2.type) === "!")
       return true;
     if (!((_b = __privateGet(this, _parent)) == null ? void 0 : _b.isEnd()))
       return false;
@@ -3161,16 +3196,16 @@ var _AST = class _AST {
       this.push(part.clone(this));
   }
   clone(parent) {
-    const c = new _AST(this.type, parent);
+    const c = new _a(this.type, parent);
     for (const p of __privateGet(this, _parts)) {
       c.copyIn(p);
     }
     return c;
   }
   static fromGlob(pattern, options = {}) {
-    var _a;
-    const ast = new _AST(null, void 0, options);
-    __privateMethod(_a = _AST, _AST_static, parseAST_fn).call(_a, pattern, ast, 0, options);
+    var _a2;
+    const ast = new _a(null, void 0, options);
+    __privateMethod(_a2 = _a, _AST_static, parseAST_fn).call(_a2, pattern, ast, 0, options, 0);
     return ast;
   }
   // returns the regular expression if there's magic, or the unescaped
@@ -3263,15 +3298,17 @@ var _AST = class _AST {
   // is ^(?!\.), we can just prepend (?!\.) to the pattern (either root
   // or start or whatever) and prepend ^ or / at the Regexp construction.
   toRegExpSource(allowDot) {
-    var _a;
+    var _a2;
     const dot = allowDot != null ? allowDot : !!__privateGet(this, _options).dot;
-    if (__privateGet(this, _root) === this)
+    if (__privateGet(this, _root) === this) {
+      __privateMethod(this, _AST_instances, flatten_fn).call(this);
       __privateMethod(this, _AST_instances, fillNegs_fn).call(this);
-    if (!this.type) {
+    }
+    if (!isExtglobAST(this)) {
       const noEmpty = this.isStart() && this.isEnd();
       const src = __privateGet(this, _parts).map((p) => {
-        var _a2;
-        const [re, _, hasMagic, uflag] = typeof p === "string" ? __privateMethod(_a2 = _AST, _AST_static, parseGlob_fn).call(_a2, p, __privateGet(this, _hasMagic), noEmpty) : p.toRegExpSource(allowDot);
+        var _a3;
+        const [re, _, hasMagic, uflag] = typeof p === "string" ? __privateMethod(_a3 = _a, _AST_static, parseGlob_fn).call(_a3, p, __privateGet(this, _hasMagic), noEmpty) : p.toRegExpSource(allowDot);
         __privateSet(this, _hasMagic, __privateGet(this, _hasMagic) || hasMagic);
         __privateSet(this, _uflag, __privateGet(this, _uflag) || uflag);
         return re;
@@ -3294,7 +3331,7 @@ var _AST = class _AST {
         }
       }
       let end = "";
-      if (this.isEnd() && __privateGet(__privateGet(this, _root), _filledNegs) && ((_a = __privateGet(this, _parent)) == null ? void 0 : _a.type) === "!") {
+      if (this.isEnd() && __privateGet(__privateGet(this, _root), _filledNegs) && ((_a2 = __privateGet(this, _parent)) == null ? void 0 : _a2.type) === "!") {
         end = "(?:$|\\/)";
       }
       const final2 = start2 + src + end;
@@ -3310,9 +3347,10 @@ var _AST = class _AST {
     let body = __privateMethod(this, _AST_instances, partsToRegExp_fn).call(this, dot);
     if (this.isStart() && this.isEnd() && !body && this.type !== "!") {
       const s = this.toString();
-      __privateSet(this, _parts, [s]);
-      this.type = null;
-      __privateSet(this, _hasMagic, void 0);
+      const me = this;
+      __privateSet(me, _parts, [s]);
+      me.type = null;
+      __privateSet(me, _hasMagic, void 0);
       return [s, unescape(this.toString()), false, false];
     }
     let bodyDotAllowed = !repeated || allowDot || dot || !startNoDot ? "" : __privateMethod(this, _AST_instances, partsToRegExp_fn).call(this, true);
@@ -3381,8 +3419,9 @@ fillNegs_fn = function() {
   return this;
 };
 _AST_static = new WeakSet();
-parseAST_fn = function(str, ast, pos, opt) {
-  var _a, _b;
+parseAST_fn = function(str, ast, pos, opt, extDepth) {
+  var _a2, _b, _c, _d, _e;
+  const maxDepth = (_a2 = opt.maxExtglobRecursion) != null ? _a2 : 2;
   let escaping = false;
   let inBrace = false;
   let braceStart = -1;
@@ -3414,11 +3453,12 @@ parseAST_fn = function(str, ast, pos, opt) {
         acc2 += c;
         continue;
       }
-      if (!opt.noext && isExtglobType(c) && str.charAt(i3) === "(") {
+      const doRecurse = !opt.noext && isExtglobType(c) && str.charAt(i3) === "(" && extDepth <= maxDepth;
+      if (doRecurse) {
         ast.push(acc2);
         acc2 = "";
-        const ext2 = new _AST(c, ast);
-        i3 = __privateMethod(_a = _AST, _AST_static, parseAST_fn).call(_a, str, ext2, i3, opt);
+        const ext2 = new _a(c, ast);
+        i3 = __privateMethod(_b = _a, _AST_static, parseAST_fn).call(_b, str, ext2, i3, opt, extDepth + 1);
         ast.push(ext2);
         continue;
       }
@@ -3428,7 +3468,7 @@ parseAST_fn = function(str, ast, pos, opt) {
     return i3;
   }
   let i2 = pos + 1;
-  let part = new _AST(null, ast);
+  let part = new _a(null, ast);
   const parts = [];
   let acc = "";
   while (i2 < str.length) {
@@ -3455,19 +3495,22 @@ parseAST_fn = function(str, ast, pos, opt) {
       acc += c;
       continue;
     }
-    if (isExtglobType(c) && str.charAt(i2) === "(") {
+    const doRecurse = isExtglobType(c) && str.charAt(i2) === "(" && /* c8 ignore start - the maxDepth is sufficient here */
+    (extDepth <= maxDepth || ast && __privateMethod(_c = ast, _AST_instances, canAdoptType_fn).call(_c, c));
+    if (doRecurse) {
+      const depthAdd = ast && __privateMethod(_d = ast, _AST_instances, canAdoptType_fn).call(_d, c) ? 0 : 1;
       part.push(acc);
       acc = "";
-      const ext2 = new _AST(c, part);
+      const ext2 = new _a(c, part);
       part.push(ext2);
-      i2 = __privateMethod(_b = _AST, _AST_static, parseAST_fn).call(_b, str, ext2, i2, opt);
+      i2 = __privateMethod(_e = _a, _AST_static, parseAST_fn).call(_e, str, ext2, i2, opt, extDepth + depthAdd);
       continue;
     }
     if (c === "|") {
       part.push(acc);
       acc = "";
       parts.push(part);
-      part = new _AST(null, ast);
+      part = new _a(null, ast);
       continue;
     }
     if (c === ")") {
@@ -3486,6 +3529,100 @@ parseAST_fn = function(str, ast, pos, opt) {
   __privateSet(ast, _parts, [str.substring(pos - 1)]);
   return i2;
 };
+canAdoptWithSpace_fn = function(child) {
+  return __privateMethod(this, _AST_instances, canAdopt_fn).call(this, child, adoptionWithSpaceMap);
+};
+canAdopt_fn = function(child, map2 = adoptionMap) {
+  if (!child || typeof child !== "object" || child.type !== null || __privateGet(child, _parts).length !== 1 || this.type === null) {
+    return false;
+  }
+  const gc = __privateGet(child, _parts)[0];
+  if (!gc || typeof gc !== "object" || gc.type === null) {
+    return false;
+  }
+  return __privateMethod(this, _AST_instances, canAdoptType_fn).call(this, gc.type, map2);
+};
+canAdoptType_fn = function(c, map2 = adoptionAnyMap) {
+  var _a2;
+  return !!((_a2 = map2.get(this.type)) == null ? void 0 : _a2.includes(c));
+};
+adoptWithSpace_fn = function(child, index) {
+  const gc = __privateGet(child, _parts)[0];
+  const blank = new _a(null, gc, this.options);
+  __privateGet(blank, _parts).push("");
+  gc.push(blank);
+  __privateMethod(this, _AST_instances, adopt_fn).call(this, child, index);
+};
+adopt_fn = function(child, index) {
+  const gc = __privateGet(child, _parts)[0];
+  __privateGet(this, _parts).splice(index, 1, ...__privateGet(gc, _parts));
+  for (const p of __privateGet(gc, _parts)) {
+    if (typeof p === "object")
+      __privateSet(p, _parent, this);
+  }
+  __privateSet(this, _toString, void 0);
+};
+canUsurpType_fn = function(c) {
+  const m = usurpMap.get(this.type);
+  return !!(m == null ? void 0 : m.has(c));
+};
+canUsurp_fn = function(child) {
+  if (!child || typeof child !== "object" || child.type !== null || __privateGet(child, _parts).length !== 1 || this.type === null || __privateGet(this, _parts).length !== 1) {
+    return false;
+  }
+  const gc = __privateGet(child, _parts)[0];
+  if (!gc || typeof gc !== "object" || gc.type === null) {
+    return false;
+  }
+  return __privateMethod(this, _AST_instances, canUsurpType_fn).call(this, gc.type);
+};
+usurp_fn = function(child) {
+  const m = usurpMap.get(this.type);
+  const gc = __privateGet(child, _parts)[0];
+  const nt = m == null ? void 0 : m.get(gc.type);
+  if (!nt)
+    return false;
+  __privateSet(this, _parts, __privateGet(gc, _parts));
+  for (const p of __privateGet(this, _parts)) {
+    if (typeof p === "object")
+      __privateSet(p, _parent, this);
+  }
+  this.type = nt;
+  __privateSet(this, _toString, void 0);
+  __privateSet(this, _emptyExt, false);
+};
+flatten_fn = function() {
+  var _a2, _b;
+  if (!isExtglobAST(this)) {
+    for (const p of __privateGet(this, _parts)) {
+      if (typeof p === "object")
+        __privateMethod(_a2 = p, _AST_instances, flatten_fn).call(_a2);
+    }
+  } else {
+    let iterations = 0;
+    let done = false;
+    do {
+      done = true;
+      for (let i2 = 0; i2 < __privateGet(this, _parts).length; i2++) {
+        const c = __privateGet(this, _parts)[i2];
+        if (typeof c === "object") {
+          __privateMethod(_b = c, _AST_instances, flatten_fn).call(_b);
+          if (__privateMethod(this, _AST_instances, canAdopt_fn).call(this, c)) {
+            done = false;
+            __privateMethod(this, _AST_instances, adopt_fn).call(this, c, i2);
+          } else if (__privateMethod(this, _AST_instances, canAdoptWithSpace_fn).call(this, c)) {
+            done = false;
+            __privateMethod(this, _AST_instances, adoptWithSpace_fn).call(this, c, i2);
+          } else if (__privateMethod(this, _AST_instances, canUsurp_fn).call(this, c)) {
+            done = false;
+            __privateMethod(this, _AST_instances, usurp_fn).call(this, c);
+          }
+        }
+      }
+    } while (!done && ++iterations < 10);
+  }
+  __privateSet(this, _toString, void 0);
+};
 partsToRegExp_fn = function(dot) {
   return __privateGet(this, _parts).map((p) => {
     if (typeof p === "string") {
@@ -3500,11 +3637,13 @@ parseGlob_fn = function(glob, hasMagic, noEmpty = false) {
   let escaping = false;
   let re = "";
   let uflag = false;
+  let inStar = false;
   for (let i2 = 0; i2 < glob.length; i2++) {
     const c = glob.charAt(i2);
     if (escaping) {
       escaping = false;
       re += (reSpecials.has(c) ? "\\" : "") + c;
+      inStar = false;
       continue;
     }
     if (c === "\\") {
@@ -3522,16 +3661,19 @@ parseGlob_fn = function(glob, hasMagic, noEmpty = false) {
         uflag = uflag || needUflag;
         i2 += consumed - 1;
         hasMagic = hasMagic || magic;
+        inStar = false;
         continue;
       }
     }
     if (c === "*") {
-      if (noEmpty && glob === "*")
-        re += starNoEmpty;
-      else
-        re += star;
+      if (inStar)
+        continue;
+      inStar = true;
+      re += noEmpty && /^[*]+$/.test(glob) ? starNoEmpty : star;
       hasMagic = true;
       continue;
+    } else {
+      inStar = false;
     }
     if (c === "?") {
       re += qmark;
@@ -3542,8 +3684,8 @@ parseGlob_fn = function(glob, hasMagic, noEmpty = false) {
   }
   return [re, unescape(glob), !!hasMagic, uflag];
 };
-__privateAdd(_AST, _AST_static);
-var AST = _AST;
+__privateAdd(AST, _AST_static);
+_a = AST;
 
 // node_modules/minimatch/dist/esm/escape.js
 var escape = (s, { windowsPathsNoEscape = false } = {}) => {
@@ -3682,28 +3824,33 @@ var match = (list, pattern, options = {}) => {
 minimatch.match = match;
 var globMagic = /[?*]|[+@!]\(.*?\)|\[|\]/;
 var regExpEscape2 = (s) => s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+var _Minimatch_instances, matchGlobstar_fn, matchGlobStarBodySections_fn, matchOne_fn;
 var Minimatch = class {
-  options;
-  set;
-  pattern;
-  windowsPathsNoEscape;
-  nonegate;
-  negate;
-  comment;
-  empty;
-  preserveMultipleSlashes;
-  partial;
-  globSet;
-  globParts;
-  nocase;
-  isWindows;
-  platform;
-  windowsNoMagicRoot;
-  regexp;
   constructor(pattern, options = {}) {
+    __privateAdd(this, _Minimatch_instances);
+    __publicField(this, "options");
+    __publicField(this, "set");
+    __publicField(this, "pattern");
+    __publicField(this, "windowsPathsNoEscape");
+    __publicField(this, "nonegate");
+    __publicField(this, "negate");
+    __publicField(this, "comment");
+    __publicField(this, "empty");
+    __publicField(this, "preserveMultipleSlashes");
+    __publicField(this, "partial");
+    __publicField(this, "globSet");
+    __publicField(this, "globParts");
+    __publicField(this, "nocase");
+    __publicField(this, "isWindows");
+    __publicField(this, "platform");
+    __publicField(this, "windowsNoMagicRoot");
+    __publicField(this, "maxGlobstarRecursion");
+    __publicField(this, "regexp");
+    var _a2;
     assertValidPattern(pattern);
     options = options || {};
     this.options = options;
+    this.maxGlobstarRecursion = (_a2 = options.maxGlobstarRecursion) != null ? _a2 : 200;
     this.pattern = pattern;
     this.platform = options.platform || defaultPlatform;
     this.isWindows = this.platform === "win32";
@@ -3971,10 +4118,11 @@ var Minimatch = class {
     for (let i2 = 0; i2 < globParts.length - 1; i2++) {
       for (let j = i2 + 1; j < globParts.length; j++) {
         const matched = this.partsMatch(globParts[i2], globParts[j], !this.preserveMultipleSlashes);
-        if (!matched)
-          continue;
-        globParts[i2] = matched;
-        globParts[j] = [];
+        if (matched) {
+          globParts[i2] = [];
+          globParts[j] = matched;
+          break;
+        }
       }
     }
     return globParts.filter((gs) => gs.length);
@@ -4035,7 +4183,8 @@ var Minimatch = class {
   // out of pattern, then that's fine, as long as all
   // the parts match.
   matchOne(file, pattern, partial = false) {
-    const options = this.options;
+    let fileStartIndex = 0;
+    let patternStartIndex = 0;
     if (this.isWindows) {
       const fileDrive = typeof file[0] === "string" && /^[a-z]:$/i.test(file[0]);
       const fileUNC = !fileDrive && file[0] === "" && file[1] === "" && file[2] === "?" && /^[a-z]:$/i.test(file[3]);
@@ -4044,14 +4193,14 @@ var Minimatch = class {
       const fdi = fileUNC ? 3 : fileDrive ? 0 : void 0;
       const pdi = patternUNC ? 3 : patternDrive ? 0 : void 0;
       if (typeof fdi === "number" && typeof pdi === "number") {
-        const [fd, pd] = [file[fdi], pattern[pdi]];
+        const [fd, pd] = [
+          file[fdi],
+          pattern[pdi]
+        ];
         if (fd.toLowerCase() === pd.toLowerCase()) {
           pattern[pdi] = fd;
-          if (pdi > fdi) {
-            pattern = pattern.slice(pdi);
-          } else if (fdi > pdi) {
-            file = file.slice(fdi);
-          }
+          patternStartIndex = pdi;
+          fileStartIndex = fdi;
         }
       }
     }
@@ -4059,71 +4208,10 @@ var Minimatch = class {
     if (optimizationLevel >= 2) {
       file = this.levelTwoFileOptimize(file);
     }
-    this.debug("matchOne", this, { file, pattern });
-    this.debug("matchOne", file.length, pattern.length);
-    for (var fi = 0, pi = 0, fl = file.length, pl = pattern.length; fi < fl && pi < pl; fi++, pi++) {
-      this.debug("matchOne loop");
-      var p = pattern[pi];
-      var f = file[fi];
-      this.debug(pattern, p, f);
-      if (p === false) {
-        return false;
-      }
-      if (p === GLOBSTAR) {
-        this.debug("GLOBSTAR", [pattern, p, f]);
-        var fr = fi;
-        var pr = pi + 1;
-        if (pr === pl) {
-          this.debug("** at the end");
-          for (; fi < fl; fi++) {
-            if (file[fi] === "." || file[fi] === ".." || !options.dot && file[fi].charAt(0) === ".")
-              return false;
-          }
-          return true;
-        }
-        while (fr < fl) {
-          var swallowee = file[fr];
-          this.debug("\nglobstar while", file, fr, pattern, pr, swallowee);
-          if (this.matchOne(file.slice(fr), pattern.slice(pr), partial)) {
-            this.debug("globstar found match!", fr, fl, swallowee);
-            return true;
-          } else {
-            if (swallowee === "." || swallowee === ".." || !options.dot && swallowee.charAt(0) === ".") {
-              this.debug("dot detected!", file, fr, pattern, pr);
-              break;
-            }
-            this.debug("globstar swallow a segment, and continue");
-            fr++;
-          }
-        }
-        if (partial) {
-          this.debug("\n>>> no match, partial?", file, fr, pattern, pr);
-          if (fr === fl) {
-            return true;
-          }
-        }
-        return false;
-      }
-      let hit;
-      if (typeof p === "string") {
-        hit = f === p;
-        this.debug("string match", p, f, hit);
-      } else {
-        hit = p.test(f);
-        this.debug("pattern match", p, f, hit);
-      }
-      if (!hit)
-        return false;
+    if (pattern.includes(GLOBSTAR)) {
+      return __privateMethod(this, _Minimatch_instances, matchGlobstar_fn).call(this, file, pattern, partial, fileStartIndex, patternStartIndex);
     }
-    if (fi === fl && pi === pl) {
-      return true;
-    } else if (fi === fl) {
-      return partial;
-    } else if (pi === pl) {
-      return fi === fl - 1 && file[fi] === "";
-    } else {
-      throw new Error("wtf?");
-    }
+    return __privateMethod(this, _Minimatch_instances, matchOne_fn).call(this, file, pattern, partial, fileStartIndex, patternStartIndex);
   }
   braceExpand() {
     return braceExpand(this.pattern, this.options);
@@ -4262,6 +4350,135 @@ var Minimatch = class {
     return minimatch.defaults(def).Minimatch;
   }
 };
+_Minimatch_instances = new WeakSet();
+matchGlobstar_fn = function(file, pattern, partial, fileIndex, patternIndex) {
+  const firstgs = pattern.indexOf(GLOBSTAR, patternIndex);
+  const lastgs = pattern.lastIndexOf(GLOBSTAR);
+  const [head, body, tail] = partial ? [
+    pattern.slice(patternIndex, firstgs),
+    pattern.slice(firstgs + 1),
+    []
+  ] : [
+    pattern.slice(patternIndex, firstgs),
+    pattern.slice(firstgs + 1, lastgs),
+    pattern.slice(lastgs + 1)
+  ];
+  if (head.length) {
+    const fileHead = file.slice(fileIndex, fileIndex + head.length);
+    if (!__privateMethod(this, _Minimatch_instances, matchOne_fn).call(this, fileHead, head, partial, 0, 0))
+      return false;
+    fileIndex += head.length;
+  }
+  let fileTailMatch = 0;
+  if (tail.length) {
+    if (tail.length + fileIndex > file.length)
+      return false;
+    let tailStart = file.length - tail.length;
+    if (__privateMethod(this, _Minimatch_instances, matchOne_fn).call(this, file, tail, partial, tailStart, 0)) {
+      fileTailMatch = tail.length;
+    } else {
+      if (file[file.length - 1] !== "" || fileIndex + tail.length === file.length) {
+        return false;
+      }
+      tailStart--;
+      if (!__privateMethod(this, _Minimatch_instances, matchOne_fn).call(this, file, tail, partial, tailStart, 0))
+        return false;
+      fileTailMatch = tail.length + 1;
+    }
+  }
+  if (!body.length) {
+    let sawSome = !!fileTailMatch;
+    for (let i3 = fileIndex; i3 < file.length - fileTailMatch; i3++) {
+      const f = String(file[i3]);
+      sawSome = true;
+      if (f === "." || f === ".." || !this.options.dot && f.startsWith(".")) {
+        return false;
+      }
+    }
+    return partial || sawSome;
+  }
+  const bodySegments = [[[], 0]];
+  let currentBody = bodySegments[0];
+  let nonGsParts = 0;
+  const nonGsPartsSums = [0];
+  for (const b of body) {
+    if (b === GLOBSTAR) {
+      nonGsPartsSums.push(nonGsParts);
+      currentBody = [[], 0];
+      bodySegments.push(currentBody);
+    } else {
+      currentBody[0].push(b);
+      nonGsParts++;
+    }
+  }
+  let i2 = bodySegments.length - 1;
+  const fileLength = file.length - fileTailMatch;
+  for (const b of bodySegments) {
+    b[1] = fileLength - (nonGsPartsSums[i2--] + b[0].length);
+  }
+  return !!__privateMethod(this, _Minimatch_instances, matchGlobStarBodySections_fn).call(this, file, bodySegments, fileIndex, 0, partial, 0, !!fileTailMatch);
+};
+matchGlobStarBodySections_fn = function(file, bodySegments, fileIndex, bodyIndex, partial, globStarDepth, sawTail) {
+  const bs = bodySegments[bodyIndex];
+  if (!bs) {
+    for (let i2 = fileIndex; i2 < file.length; i2++) {
+      sawTail = true;
+      const f = file[i2];
+      if (f === "." || f === ".." || !this.options.dot && f.startsWith(".")) {
+        return false;
+      }
+    }
+    return sawTail;
+  }
+  const [body, after] = bs;
+  while (fileIndex <= after) {
+    const m = __privateMethod(this, _Minimatch_instances, matchOne_fn).call(this, file.slice(0, fileIndex + body.length), body, partial, fileIndex, 0);
+    if (m && globStarDepth < this.maxGlobstarRecursion) {
+      const sub = __privateMethod(this, _Minimatch_instances, matchGlobStarBodySections_fn).call(this, file, bodySegments, fileIndex + body.length, bodyIndex + 1, partial, globStarDepth + 1, sawTail);
+      if (sub !== false)
+        return sub;
+    }
+    const f = file[fileIndex];
+    if (f === "." || f === ".." || !this.options.dot && f.startsWith(".")) {
+      return false;
+    }
+    fileIndex++;
+  }
+  return partial || null;
+};
+matchOne_fn = function(file, pattern, partial, fileIndex, patternIndex) {
+  let fi;
+  let pi;
+  let pl;
+  let fl;
+  for (fi = fileIndex, pi = patternIndex, fl = file.length, pl = pattern.length; fi < fl && pi < pl; fi++, pi++) {
+    this.debug("matchOne loop");
+    let p = pattern[pi];
+    let f = file[fi];
+    this.debug(pattern, p, f);
+    if (p === false || p === GLOBSTAR)
+      return false;
+    let hit;
+    if (typeof p === "string") {
+      hit = f === p;
+      this.debug("string match", p, f, hit);
+    } else {
+      hit = p.test(f);
+      this.debug("pattern match", p, f, hit);
+    }
+    if (!hit)
+      return false;
+  }
+  if (fi === fl && pi === pl) {
+    return true;
+  } else if (fi === fl) {
+    return partial;
+  } else if (pi === pl) {
+    return fi === fl - 1 && file[fi] === "";
+  } else {
+    throw new Error("wtf?");
+  }
+};
 minimatch.AST = AST;
 minimatch.Minimatch = Minimatch;
 minimatch.escape = escape;
@@ -4335,7 +4552,7 @@ function proxyHostElement(elm, cstr) {
     const hostRef = getHostRef(elm);
     const members = Object.entries(cmpMeta.$members$);
     members.forEach(([memberName, [memberFlags, metaAttributeName]]) => {
-      var _a, _b;
+      var _a2, _b;
       if (memberFlags & 31 /* Prop */) {
         const attributeName = metaAttributeName || memberName;
         const attrValue = elm.getAttribute(attributeName);
@@ -4343,7 +4560,7 @@ function proxyHostElement(elm, cstr) {
         let attrPropVal;
         const { get: origGetter, set: origSetter } = Object.getOwnPropertyDescriptor(cstr.prototype, memberName) || {};
         if (attrValue != null) {
-          if ((_a = cmpMeta.$deserializers$) == null ? void 0 : _a[memberName]) {
+          if ((_a2 = cmpMeta.$deserializers$) == null ? void 0 : _a2[memberName]) {
             for (const deserializer of cmpMeta.$deserializers$[memberName]) {
               const [[methodName]] = Object.entries(deserializer);
               attrPropVal = cstr.prototype[methodName](attrValue, memberName);
@@ -4376,8 +4593,8 @@ function proxyHostElement(elm, cstr) {
         Object.defineProperty(elm, memberName, getterSetterDescriptor);
         Object.defineProperty(elm, metaAttributeName, getterSetterDescriptor);
         hostRef.$fetchedCbList$.push(() => {
-          var _a2;
-          if (!((_a2 = hostRef == null ? void 0 : hostRef.$instanceValues$) == null ? void 0 : _a2.has(memberName))) {
+          var _a3;
+          if (!((_a3 = hostRef == null ? void 0 : hostRef.$instanceValues$) == null ? void 0 : _a3.has(memberName))) {
             setValue(
               elm,
               memberName,
@@ -4390,11 +4607,11 @@ function proxyHostElement(elm, cstr) {
       } else if (memberFlags & 64 /* Method */) {
         Object.defineProperty(elm, memberName, {
           value(...args) {
-            var _a2;
+            var _a3;
             const ref = getHostRef(this);
-            return (_a2 = ref == null ? void 0 : ref.$onInstancePromise$) == null ? void 0 : _a2.then(() => {
-              var _a3;
-              return (_a3 = ref == null ? void 0 : ref.$lazyInstance$) == null ? void 0 : _a3[memberName](...args);
+            return (_a3 = ref == null ? void 0 : ref.$onInstancePromise$) == null ? void 0 : _a3.then(() => {
+              var _a4;
+              return (_a4 = ref == null ? void 0 : ref.$lazyInstance$) == null ? void 0 : _a4[memberName](...args);
             }).catch((e) => {
               consoleError(e, this);
             });
@@ -4405,8 +4622,8 @@ function proxyHostElement(elm, cstr) {
   }
 }
 function componentOnReady() {
-  var _a;
-  return (_a = getHostRef(this)) == null ? void 0 : _a.$onReadyPromise$;
+  var _a2;
+  return (_a2 = getHostRef(this)) == null ? void 0 : _a2.$onReadyPromise$;
 }
 function forceUpdate2() {
 }
@@ -4914,7 +5131,7 @@ var NAMESPACE = (
 );
 
 /*
- Stencil Hydrate Runner v4.43.2 | MIT Licensed | https://stenciljs.com
+ Stencil Hydrate Runner v4.43.5 | MIT Licensed | https://stenciljs.com
  */
 var __create = Object.create;
 var __defProp = Object.defineProperty;
@@ -6245,11 +6462,11 @@ var fromCodePoint = (
   }
 );
 function replaceCodePoint(codePoint) {
-  var _a2;
+  var _a3;
   if (codePoint >= 55296 && codePoint <= 57343 || codePoint > 1114111) {
     return 65533;
   }
-  return (_a2 = decodeMap.get(codePoint)) !== null && _a2 !== void 0 ? _a2 : codePoint;
+  return (_a3 = decodeMap.get(codePoint)) !== null && _a3 !== void 0 ? _a3 : codePoint;
 }
 
 // node_modules/entities/lib/esm/decode.js
@@ -6446,9 +6663,9 @@ var EntityDecoder = class {
    * @returns The number of characters that were consumed.
    */
   emitNumericEntity(lastCp, expectedLength) {
-    var _a2;
+    var _a3;
     if (this.consumed <= expectedLength) {
-      (_a2 = this.errors) === null || _a2 === void 0 ? void 0 : _a2.absenceOfDigitsInNumericCharacterReference(this.consumed);
+      (_a3 = this.errors) === null || _a3 === void 0 ? void 0 : _a3.absenceOfDigitsInNumericCharacterReference(this.consumed);
       return 0;
     }
     if (lastCp === CharCodes.SEMI) {
@@ -6508,11 +6725,11 @@ var EntityDecoder = class {
    * @returns The number of characters consumed.
    */
   emitNotTerminatedNamedEntity() {
-    var _a2;
+    var _a3;
     const { result, decodeTree } = this;
     const valueLength = (decodeTree[result] & BinTrieFlags.VALUE_LENGTH) >> 14;
     this.emitNamedEntityData(result, valueLength, this.consumed);
-    (_a2 = this.errors) === null || _a2 === void 0 ? void 0 : _a2.missingSemicolonAfterCharacterReference();
+    (_a3 = this.errors) === null || _a3 === void 0 ? void 0 : _a3.missingSemicolonAfterCharacterReference();
     return this.consumed;
   }
   /**
@@ -6540,7 +6757,7 @@ var EntityDecoder = class {
    * @returns The number of characters consumed.
    */
   end() {
-    var _a2;
+    var _a3;
     switch (this.state) {
       case EntityDecoderState.NamedEntity: {
         return this.result !== 0 && (this.decodeMode !== DecodingMode.Attribute || this.result === this.treeIndex) ? this.emitNotTerminatedNamedEntity() : 0;
@@ -6553,7 +6770,7 @@ var EntityDecoder = class {
         return this.emitNumericEntity(0, 3);
       }
       case EntityDecoderState.NumericStart: {
-        (_a2 = this.errors) === null || _a2 === void 0 ? void 0 : _a2.absenceOfDigitsInNumericCharacterReference(this.consumed);
+        (_a3 = this.errors) === null || _a3 === void 0 ? void 0 : _a3.absenceOfDigitsInNumericCharacterReference(this.consumed);
         return 0;
       }
       case EntityDecoderState.EntityStart: {
@@ -7034,8 +7251,8 @@ var TAG_NAME_TO_ID = /* @__PURE__ */ new Map([
   [TAG_NAMES.XMP, TAG_ID.XMP]
 ]);
 function getTagID(tagName) {
-  var _a2;
-  return (_a2 = TAG_NAME_TO_ID.get(tagName)) !== null && _a2 !== void 0 ? _a2 : TAG_ID.UNKNOWN;
+  var _a3;
+  return (_a3 = TAG_NAME_TO_ID.get(tagName)) !== null && _a3 !== void 0 ? _a3 : TAG_ID.UNKNOWN;
 }
 var $ = TAG_ID;
 var SPECIAL_ELEMENTS = {
@@ -7302,8 +7519,8 @@ var Tokenizer = class {
   }
   //Errors
   _err(code, cpOffset = 0) {
-    var _a2, _b;
-    (_b = (_a2 = this.handler).onParseError) === null || _b === void 0 ? void 0 : _b.call(_a2, this.preprocessor.getError(code, cpOffset));
+    var _a3, _b;
+    (_b = (_a3 = this.handler).onParseError) === null || _b === void 0 ? void 0 : _b.call(_a3, this.preprocessor.getError(code, cpOffset));
   }
   // NOTE: `offset` may never run across line boundaries.
   getCurrentLocation(offset) {
@@ -7445,13 +7662,13 @@ var Tokenizer = class {
     this.currentLocation = this.getCurrentLocation(0);
   }
   _leaveAttrName() {
-    var _a2;
+    var _a3;
     var _b;
     const token = this.currentToken;
     if (getTokenAttr(token, this.currentAttr.name) === null) {
       token.attrs.push(this.currentAttr);
       if (token.location && this.currentLocation) {
-        const attrLocations = (_a2 = (_b = token.location).attrs) !== null && _a2 !== void 0 ? _a2 : _b.attrs = /* @__PURE__ */ Object.create(null);
+        const attrLocations = (_a3 = (_b = token.location).attrs) !== null && _a3 !== void 0 ? _a3 : _b.attrs = /* @__PURE__ */ Object.create(null);
         attrLocations[this.currentAttr.name] = this.currentLocation;
         this._leaveAttrValue();
       }
@@ -10799,10 +11016,10 @@ var Parser = class {
   //Errors
   /** @internal */
   _err(token, code, beforeToken) {
-    var _a2;
+    var _a3;
     if (!this.onParseError)
       return;
-    const loc = (_a2 = token.location) !== null && _a2 !== void 0 ? _a2 : BASE_LOC;
+    const loc = (_a3 = token.location) !== null && _a3 !== void 0 ? _a3 : BASE_LOC;
     const err2 = {
       code,
       startLine: loc.startLine,
@@ -10817,18 +11034,18 @@ var Parser = class {
   //Stack events
   /** @internal */
   onItemPush(node, tid, isTop) {
-    var _a2, _b;
-    (_b = (_a2 = this.treeAdapter).onItemPush) === null || _b === void 0 ? void 0 : _b.call(_a2, node);
+    var _a3, _b;
+    (_b = (_a3 = this.treeAdapter).onItemPush) === null || _b === void 0 ? void 0 : _b.call(_a3, node);
     if (isTop && this.openElements.stackTop > 0)
       this._setContextModes(node, tid);
   }
   /** @internal */
   onItemPop(node, isTop) {
-    var _a2, _b;
+    var _a3, _b;
     if (this.options.sourceCodeLocationInfo) {
       this._setEndLocation(node, this.currentToken);
     }
-    (_b = (_a2 = this.treeAdapter).onItemPop) === null || _b === void 0 ? void 0 : _b.call(_a2, node, this.openElements.current);
+    (_b = (_a3 = this.treeAdapter).onItemPop) === null || _b === void 0 ? void 0 : _b.call(_a3, node, this.openElements.current);
     if (isTop) {
       let current;
       let currentTagId;
@@ -12902,9 +13119,9 @@ function eofInBody(p, token) {
   }
 }
 function endTagInText(p, token) {
-  var _a2;
+  var _a3;
   if (token.tagID === TAG_ID.SCRIPT) {
-    (_a2 = p.scriptHandler) === null || _a2 === void 0 ? void 0 : _a2.call(p, p.openElements.current);
+    (_a3 = p.scriptHandler) === null || _a3 === void 0 ? void 0 : _a3.call(p, p.openElements.current);
   }
   p.openElements.pop();
   p.insertionMode = p.originalInsertionMode;
@@ -13566,7 +13783,7 @@ function startTagAfterBody(p, token) {
   }
 }
 function endTagAfterBody(p, token) {
-  var _a2;
+  var _a3;
   if (token.tagID === TAG_ID.HTML) {
     if (!p.fragmentContext) {
       p.insertionMode = InsertionMode.AFTER_AFTER_BODY;
@@ -13574,7 +13791,7 @@ function endTagAfterBody(p, token) {
     if (p.options.sourceCodeLocationInfo && p.openElements.tagIDs[0] === TAG_ID.HTML) {
       p._setEndLocation(p.openElements.items[0], token);
       const bodyElement = p.openElements.items[1];
-      if (bodyElement && !((_a2 = p.treeAdapter.getNodeSourceCodeLocation(bodyElement)) === null || _a2 === void 0 ? void 0 : _a2.endTag)) {
+      if (bodyElement && !((_a3 = p.treeAdapter.getNodeSourceCodeLocation(bodyElement)) === null || _a3 === void 0 ? void 0 : _a3.endTag)) {
         p._setEndLocation(bodyElement, token);
       }
     }
@@ -15438,7 +15655,7 @@ function serializeNodeToHtml(elm, serializationOptions = {}) {
 }
 var shadowRootTag = "mock:shadow-root";
 function* streamToHtml(node, opts, output) {
-  var _a2, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
+  var _a3, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
   const isShadowRoot = node.nodeType === 11 /* DOCUMENT_FRAGMENT_NODE */;
   if (node.nodeType === 1 /* ELEMENT_NODE */ || isShadowRoot) {
     const tagName = isShadowRoot ? shadowRootTag : getTagName(node);
@@ -15447,7 +15664,7 @@ function* streamToHtml(node, opts, output) {
     }
     const ignoreTag = opts.excludeTags != null && opts.excludeTags.includes(tagName);
     if (ignoreTag === false) {
-      const isWithinWhitespaceSensitiveNode = opts.newLines || ((_a2 = opts.indentSpaces) != null ? _a2 : 0) > 0 ? isWithinWhitespaceSensitive(node) : false;
+      const isWithinWhitespaceSensitiveNode = opts.newLines || ((_a3 = opts.indentSpaces) != null ? _a3 : 0) > 0 ? isWithinWhitespaceSensitive(node) : false;
       if (opts.newLines && !isWithinWhitespaceSensitiveNode) {
         yield "\n";
         output.currentLineWidth = 0;
@@ -15966,9 +16183,7 @@ var MockNode2 = class {
     const firstChild = this.firstChild;
     items.forEach((item) => {
       const isNode = typeof item === "object" && item !== null && "nodeType" in item;
-      if (firstChild) {
-        this.insertBefore(isNode ? item : this.ownerDocument.createTextNode(String(item)), firstChild);
-      }
+      this.insertBefore(isNode ? item : this.ownerDocument.createTextNode(String(item)), firstChild);
     });
   }
   cloneNode(deep) {
@@ -16017,8 +16232,8 @@ var MockNode2 = class {
     return null;
   }
   get nodeValue() {
-    var _a2;
-    return (_a2 = this._nodeValue) != null ? _a2 : "";
+    var _a3;
+    return (_a3 = this._nodeValue) != null ? _a3 : "";
   }
   set nodeValue(value) {
     this._nodeValue = value;
@@ -16078,8 +16293,8 @@ var MockNode2 = class {
     return null;
   }
   get textContent() {
-    var _a2;
-    return (_a2 = this._nodeValue) != null ? _a2 : "";
+    var _a3;
+    return (_a3 = this._nodeValue) != null ? _a3 : "";
   }
   set textContent(value) {
     this._nodeValue = String(value);
@@ -16138,9 +16353,9 @@ var MockElement = class extends MockNode2 {
     addEventListener(this, type, handler);
   }
   attachShadow(_opts) {
-    var _a2;
+    var _a3;
     const shadowRoot = this.ownerDocument.createDocumentFragment();
-    shadowRoot.delegatesFocus = (_a2 = _opts.delegatesFocus) != null ? _a2 : false;
+    shadowRoot.delegatesFocus = (_a3 = _opts.delegatesFocus) != null ? _a3 : false;
     this.shadowRoot = shadowRoot;
     return shadowRoot;
   }
@@ -16316,8 +16531,8 @@ var MockElement = class extends MockNode2 {
     });
   }
   set innerHTML(html) {
-    var _a2;
-    if (NON_ESCAPABLE_CONTENT.has((_a2 = this.nodeName) != null ? _a2 : "") === true) {
+    var _a3;
+    if (NON_ESCAPABLE_CONTENT.has((_a3 = this.nodeName) != null ? _a3 : "") === true) {
       setTextContent(this, html);
     } else {
       for (let i = this.childNodes.length - 1; i >= 0; i--) {
@@ -16560,8 +16775,8 @@ var MockElement = class extends MockNode2 {
     this.setAttributeNS(null, "tabindex", value);
   }
   get tagName() {
-    var _a2;
-    return (_a2 = this.nodeName) != null ? _a2 : "";
+    var _a3;
+    return (_a3 = this.nodeName) != null ? _a3 : "";
   }
   set tagName(value) {
     this.nodeName = value;
@@ -16783,11 +16998,11 @@ function getElementsByClassName(elm, classNames, foundElms) {
   }
 }
 function getElementsByTagName(elm, tagName, foundElms) {
-  var _a2;
+  var _a3;
   const children = elm.children;
   for (let i = 0, ii = children.length; i < ii; i++) {
     const childElm = children[i];
-    if (tagName === "*" || ((_a2 = childElm.nodeName) != null ? _a2 : "").toLowerCase() === tagName) {
+    if (tagName === "*" || ((_a3 = childElm.nodeName) != null ? _a3 : "").toLowerCase() === tagName) {
       foundElms.push(childElm);
     }
     getElementsByTagName(childElm, tagName, foundElms);
@@ -16824,8 +17039,8 @@ var MockHTMLElement = class extends MockElement {
     super(ownerDocument, typeof nodeName === "string" ? nodeName.toUpperCase() : null);
   }
   get tagName() {
-    var _a2;
-    return (_a2 = this.nodeName) != null ? _a2 : "";
+    var _a3;
+    return (_a3 = this.nodeName) != null ? _a3 : "";
   }
   set tagName(value) {
     this.nodeName = value;
@@ -17283,10 +17498,10 @@ var MockLabelElement = class extends MockHTMLElement {
     this.setAttributeNS(null, "for", value);
   }
   get control() {
-    var _a2, _b;
+    var _a3, _b;
     const forAttr = this.htmlFor;
     if (forAttr) {
-      return (_b = (_a2 = this.ownerDocument) == null ? void 0 : _a2.getElementById(forAttr)) != null ? _b : null;
+      return (_b = (_a3 = this.ownerDocument) == null ? void 0 : _a3.getElementById(forAttr)) != null ? _b : null;
     }
     const labelableSelector = 'button, input:not([type="hidden"]), meter, output, progress, select, textarea';
     return this.querySelector(labelableSelector);
@@ -19794,18 +20009,34 @@ var RemoteValue = class _RemoteValue {
 };
 
 // src/utils/serialize.ts
+function encodeBase64Unicode(str) {
+  const utf8Bytes = new TextEncoder().encode(str);
+  let binary = "";
+  for (let i = 0; i < utf8Bytes.length; i++) {
+    binary += String.fromCharCode(utf8Bytes[i]);
+  }
+  return btoa(binary);
+}
+function decodeBase64Unicode(base64) {
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return new TextDecoder().decode(bytes);
+}
 function serializeProperty(value) {
   if (["string", "boolean", "undefined"].includes(typeof value) || typeof value === "number" && value !== Infinity && value !== -Infinity && !isNaN(value)) {
     return value;
   }
   const arg = LocalValue.getArgument(value);
-  return SERIALIZED_PREFIX + btoa(JSON.stringify(arg));
+  return SERIALIZED_PREFIX + encodeBase64Unicode(JSON.stringify(arg));
 }
 function deserializeProperty(value) {
   if (typeof value !== "string" || !value.startsWith(SERIALIZED_PREFIX)) {
     return value;
   }
-  return RemoteValue.fromLocalValue(JSON.parse(atob(value.slice(SERIALIZED_PREFIX.length))));
+  return RemoteValue.fromLocalValue(JSON.parse(decodeBase64Unicode(value.slice(SERIALIZED_PREFIX.length))));
 }
 var CAPTURE_EVENT_SUFFIX = "Capture";
 var CAPTURE_EVENT_REGEX = new RegExp(CAPTURE_EVENT_SUFFIX + "$");
@@ -19999,8 +20230,35 @@ var unescape = (s, { windowsPathsNoEscape = false } = {}) => {
 };
 
 // node_modules/minimatch/dist/esm/ast.js
+var _a2;
 var types = /* @__PURE__ */ new Set(["!", "?", "+", "*", "@"]);
 var isExtglobType = (c) => types.has(c);
+var isExtglobAST = (c) => isExtglobType(c.type);
+var adoptionMap = /* @__PURE__ */ new Map([
+  ["!", ["@"]],
+  ["?", ["?", "@"]],
+  ["@", ["@"]],
+  ["*", ["*", "+", "?", "@"]],
+  ["+", ["+", "@"]]
+]);
+var adoptionWithSpaceMap = /* @__PURE__ */ new Map([
+  ["!", ["?"]],
+  ["@", ["?"]],
+  ["+", ["?", "*"]]
+]);
+var adoptionAnyMap = /* @__PURE__ */ new Map([
+  ["!", ["?", "@"]],
+  ["?", ["?", "@"]],
+  ["@", ["?", "@"]],
+  ["*", ["*", "+", "?", "@"]],
+  ["+", ["+", "@", "?", "*"]]
+]);
+var usurpMap = /* @__PURE__ */ new Map([
+  ["!", /* @__PURE__ */ new Map([["!", "@"]])],
+  ["?", /* @__PURE__ */ new Map([["*", "*"], ["+", "*"]])],
+  ["@", /* @__PURE__ */ new Map([["!", "!"], ["?", "?"], ["@", "@"], ["*", "*"], ["+", "+"]])],
+  ["+", /* @__PURE__ */ new Map([["?", "*"], ["*", "*"]])]
+]);
 var startNoTraversal = "(?!(?:^|/)\\.\\.?(?:$|/))";
 var startNoDot = "(?!\\.)";
 var addPatternStart = /* @__PURE__ */ new Set(["[", "."]);
@@ -20010,8 +20268,8 @@ var regExpEscape = (s) => s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 var qmark = "[^/]";
 var star = qmark + "*?";
 var starNoEmpty = qmark + "+?";
-var _root, _hasMagic, _uflag, _parts, _parent, _parentIndex, _negs, _filledNegs, _options, _toString, _emptyExt, _AST_instances, fillNegs_fn, _AST_static, parseAST_fn, partsToRegExp_fn, parseGlob_fn;
-var _AST = class _AST {
+var _root, _hasMagic, _uflag, _parts, _parent, _parentIndex, _negs, _filledNegs, _options, _toString, _emptyExt, _AST_instances, fillNegs_fn, _AST_static, parseAST_fn, canAdoptWithSpace_fn, canAdopt_fn, canAdoptType_fn, adoptWithSpace_fn, adopt_fn, canUsurpType_fn, canUsurp_fn, usurp_fn, flatten_fn, partsToRegExp_fn, parseGlob_fn;
+var AST = class {
   constructor(type, parent, options = {}) {
     __privateAdd(this, _AST_instances);
     __publicField(this, "type");
@@ -20064,44 +20322,44 @@ var _AST = class _AST {
     for (const p of parts) {
       if (p === "")
         continue;
-      if (typeof p !== "string" && !(p instanceof _AST && __privateGet(p, _parent) === this)) {
+      if (typeof p !== "string" && !(p instanceof _a2 && __privateGet(p, _parent) === this)) {
         throw new Error("invalid part: " + p);
       }
       __privateGet(this, _parts).push(p);
     }
   }
   toJSON() {
-    var _a2;
+    var _a3;
     const ret = this.type === null ? __privateGet(this, _parts).slice().map((p) => typeof p === "string" ? p : p.toJSON()) : [this.type, ...__privateGet(this, _parts).map((p) => p.toJSON())];
     if (this.isStart() && !this.type)
       ret.unshift([]);
-    if (this.isEnd() && (this === __privateGet(this, _root) || __privateGet(__privateGet(this, _root), _filledNegs) && ((_a2 = __privateGet(this, _parent)) == null ? void 0 : _a2.type) === "!")) {
+    if (this.isEnd() && (this === __privateGet(this, _root) || __privateGet(__privateGet(this, _root), _filledNegs) && ((_a3 = __privateGet(this, _parent)) == null ? void 0 : _a3.type) === "!")) {
       ret.push({});
     }
     return ret;
   }
   isStart() {
-    var _a2;
+    var _a3;
     if (__privateGet(this, _root) === this)
       return true;
-    if (!((_a2 = __privateGet(this, _parent)) == null ? void 0 : _a2.isStart()))
+    if (!((_a3 = __privateGet(this, _parent)) == null ? void 0 : _a3.isStart()))
       return false;
     if (__privateGet(this, _parentIndex) === 0)
       return true;
     const p = __privateGet(this, _parent);
     for (let i = 0; i < __privateGet(this, _parentIndex); i++) {
       const pp = __privateGet(p, _parts)[i];
-      if (!(pp instanceof _AST && pp.type === "!")) {
+      if (!(pp instanceof _a2 && pp.type === "!")) {
         return false;
       }
     }
     return true;
   }
   isEnd() {
-    var _a2, _b, _c;
+    var _a3, _b, _c;
     if (__privateGet(this, _root) === this)
       return true;
-    if (((_a2 = __privateGet(this, _parent)) == null ? void 0 : _a2.type) === "!")
+    if (((_a3 = __privateGet(this, _parent)) == null ? void 0 : _a3.type) === "!")
       return true;
     if (!((_b = __privateGet(this, _parent)) == null ? void 0 : _b.isEnd()))
       return false;
@@ -20117,16 +20375,16 @@ var _AST = class _AST {
       this.push(part.clone(this));
   }
   clone(parent) {
-    const c = new _AST(this.type, parent);
+    const c = new _a2(this.type, parent);
     for (const p of __privateGet(this, _parts)) {
       c.copyIn(p);
     }
     return c;
   }
   static fromGlob(pattern, options = {}) {
-    var _a2;
-    const ast = new _AST(null, void 0, options);
-    __privateMethod(_a2 = _AST, _AST_static, parseAST_fn).call(_a2, pattern, ast, 0, options);
+    var _a3;
+    const ast = new _a2(null, void 0, options);
+    __privateMethod(_a3 = _a2, _AST_static, parseAST_fn).call(_a3, pattern, ast, 0, options, 0);
     return ast;
   }
   // returns the regular expression if there's magic, or the unescaped
@@ -20219,15 +20477,17 @@ var _AST = class _AST {
   // is ^(?!\.), we can just prepend (?!\.) to the pattern (either root
   // or start or whatever) and prepend ^ or / at the Regexp construction.
   toRegExpSource(allowDot) {
-    var _a2;
+    var _a3;
     const dot = allowDot != null ? allowDot : !!__privateGet(this, _options).dot;
-    if (__privateGet(this, _root) === this)
+    if (__privateGet(this, _root) === this) {
+      __privateMethod(this, _AST_instances, flatten_fn).call(this);
       __privateMethod(this, _AST_instances, fillNegs_fn).call(this);
-    if (!this.type) {
+    }
+    if (!isExtglobAST(this)) {
       const noEmpty = this.isStart() && this.isEnd();
       const src = __privateGet(this, _parts).map((p) => {
-        var _a3;
-        const [re, _, hasMagic, uflag] = typeof p === "string" ? __privateMethod(_a3 = _AST, _AST_static, parseGlob_fn).call(_a3, p, __privateGet(this, _hasMagic), noEmpty) : p.toRegExpSource(allowDot);
+        var _a4;
+        const [re, _, hasMagic, uflag] = typeof p === "string" ? __privateMethod(_a4 = _a2, _AST_static, parseGlob_fn).call(_a4, p, __privateGet(this, _hasMagic), noEmpty) : p.toRegExpSource(allowDot);
         __privateSet(this, _hasMagic, __privateGet(this, _hasMagic) || hasMagic);
         __privateSet(this, _uflag, __privateGet(this, _uflag) || uflag);
         return re;
@@ -20250,7 +20510,7 @@ var _AST = class _AST {
         }
       }
       let end = "";
-      if (this.isEnd() && __privateGet(__privateGet(this, _root), _filledNegs) && ((_a2 = __privateGet(this, _parent)) == null ? void 0 : _a2.type) === "!") {
+      if (this.isEnd() && __privateGet(__privateGet(this, _root), _filledNegs) && ((_a3 = __privateGet(this, _parent)) == null ? void 0 : _a3.type) === "!") {
         end = "(?:$|\\/)";
       }
       const final2 = start2 + src + end;
@@ -20266,9 +20526,10 @@ var _AST = class _AST {
     let body = __privateMethod(this, _AST_instances, partsToRegExp_fn).call(this, dot);
     if (this.isStart() && this.isEnd() && !body && this.type !== "!") {
       const s = this.toString();
-      __privateSet(this, _parts, [s]);
-      this.type = null;
-      __privateSet(this, _hasMagic, void 0);
+      const me = this;
+      __privateSet(me, _parts, [s]);
+      me.type = null;
+      __privateSet(me, _hasMagic, void 0);
       return [s, unescape(this.toString()), false, false];
     }
     let bodyDotAllowed = !repeated || allowDot || dot || !startNoDot ? "" : __privateMethod(this, _AST_instances, partsToRegExp_fn).call(this, true);
@@ -20337,8 +20598,9 @@ fillNegs_fn = function() {
   return this;
 };
 _AST_static = new WeakSet();
-parseAST_fn = function(str, ast, pos, opt) {
-  var _a2, _b;
+parseAST_fn = function(str, ast, pos, opt, extDepth) {
+  var _a3, _b, _c, _d, _e;
+  const maxDepth = (_a3 = opt.maxExtglobRecursion) != null ? _a3 : 2;
   let escaping = false;
   let inBrace = false;
   let braceStart = -1;
@@ -20370,11 +20632,12 @@ parseAST_fn = function(str, ast, pos, opt) {
         acc2 += c;
         continue;
       }
-      if (!opt.noext && isExtglobType(c) && str.charAt(i2) === "(") {
+      const doRecurse = !opt.noext && isExtglobType(c) && str.charAt(i2) === "(" && extDepth <= maxDepth;
+      if (doRecurse) {
         ast.push(acc2);
         acc2 = "";
-        const ext2 = new _AST(c, ast);
-        i2 = __privateMethod(_a2 = _AST, _AST_static, parseAST_fn).call(_a2, str, ext2, i2, opt);
+        const ext2 = new _a2(c, ast);
+        i2 = __privateMethod(_b = _a2, _AST_static, parseAST_fn).call(_b, str, ext2, i2, opt, extDepth + 1);
         ast.push(ext2);
         continue;
       }
@@ -20384,7 +20647,7 @@ parseAST_fn = function(str, ast, pos, opt) {
     return i2;
   }
   let i = pos + 1;
-  let part = new _AST(null, ast);
+  let part = new _a2(null, ast);
   const parts = [];
   let acc = "";
   while (i < str.length) {
@@ -20411,19 +20674,22 @@ parseAST_fn = function(str, ast, pos, opt) {
       acc += c;
       continue;
     }
-    if (isExtglobType(c) && str.charAt(i) === "(") {
+    const doRecurse = isExtglobType(c) && str.charAt(i) === "(" && /* c8 ignore start - the maxDepth is sufficient here */
+    (extDepth <= maxDepth || ast && __privateMethod(_c = ast, _AST_instances, canAdoptType_fn).call(_c, c));
+    if (doRecurse) {
+      const depthAdd = ast && __privateMethod(_d = ast, _AST_instances, canAdoptType_fn).call(_d, c) ? 0 : 1;
       part.push(acc);
       acc = "";
-      const ext2 = new _AST(c, part);
+      const ext2 = new _a2(c, part);
       part.push(ext2);
-      i = __privateMethod(_b = _AST, _AST_static, parseAST_fn).call(_b, str, ext2, i, opt);
+      i = __privateMethod(_e = _a2, _AST_static, parseAST_fn).call(_e, str, ext2, i, opt, extDepth + depthAdd);
       continue;
     }
     if (c === "|") {
       part.push(acc);
       acc = "";
       parts.push(part);
-      part = new _AST(null, ast);
+      part = new _a2(null, ast);
       continue;
     }
     if (c === ")") {
@@ -20442,6 +20708,100 @@ parseAST_fn = function(str, ast, pos, opt) {
   __privateSet(ast, _parts, [str.substring(pos - 1)]);
   return i;
 };
+canAdoptWithSpace_fn = function(child) {
+  return __privateMethod(this, _AST_instances, canAdopt_fn).call(this, child, adoptionWithSpaceMap);
+};
+canAdopt_fn = function(child, map2 = adoptionMap) {
+  if (!child || typeof child !== "object" || child.type !== null || __privateGet(child, _parts).length !== 1 || this.type === null) {
+    return false;
+  }
+  const gc = __privateGet(child, _parts)[0];
+  if (!gc || typeof gc !== "object" || gc.type === null) {
+    return false;
+  }
+  return __privateMethod(this, _AST_instances, canAdoptType_fn).call(this, gc.type, map2);
+};
+canAdoptType_fn = function(c, map2 = adoptionAnyMap) {
+  var _a3;
+  return !!((_a3 = map2.get(this.type)) == null ? void 0 : _a3.includes(c));
+};
+adoptWithSpace_fn = function(child, index) {
+  const gc = __privateGet(child, _parts)[0];
+  const blank = new _a2(null, gc, this.options);
+  __privateGet(blank, _parts).push("");
+  gc.push(blank);
+  __privateMethod(this, _AST_instances, adopt_fn).call(this, child, index);
+};
+adopt_fn = function(child, index) {
+  const gc = __privateGet(child, _parts)[0];
+  __privateGet(this, _parts).splice(index, 1, ...__privateGet(gc, _parts));
+  for (const p of __privateGet(gc, _parts)) {
+    if (typeof p === "object")
+      __privateSet(p, _parent, this);
+  }
+  __privateSet(this, _toString, void 0);
+};
+canUsurpType_fn = function(c) {
+  const m = usurpMap.get(this.type);
+  return !!(m == null ? void 0 : m.has(c));
+};
+canUsurp_fn = function(child) {
+  if (!child || typeof child !== "object" || child.type !== null || __privateGet(child, _parts).length !== 1 || this.type === null || __privateGet(this, _parts).length !== 1) {
+    return false;
+  }
+  const gc = __privateGet(child, _parts)[0];
+  if (!gc || typeof gc !== "object" || gc.type === null) {
+    return false;
+  }
+  return __privateMethod(this, _AST_instances, canUsurpType_fn).call(this, gc.type);
+};
+usurp_fn = function(child) {
+  const m = usurpMap.get(this.type);
+  const gc = __privateGet(child, _parts)[0];
+  const nt = m == null ? void 0 : m.get(gc.type);
+  if (!nt)
+    return false;
+  __privateSet(this, _parts, __privateGet(gc, _parts));
+  for (const p of __privateGet(this, _parts)) {
+    if (typeof p === "object")
+      __privateSet(p, _parent, this);
+  }
+  this.type = nt;
+  __privateSet(this, _toString, void 0);
+  __privateSet(this, _emptyExt, false);
+};
+flatten_fn = function() {
+  var _a3, _b;
+  if (!isExtglobAST(this)) {
+    for (const p of __privateGet(this, _parts)) {
+      if (typeof p === "object")
+        __privateMethod(_a3 = p, _AST_instances, flatten_fn).call(_a3);
+    }
+  } else {
+    let iterations = 0;
+    let done = false;
+    do {
+      done = true;
+      for (let i = 0; i < __privateGet(this, _parts).length; i++) {
+        const c = __privateGet(this, _parts)[i];
+        if (typeof c === "object") {
+          __privateMethod(_b = c, _AST_instances, flatten_fn).call(_b);
+          if (__privateMethod(this, _AST_instances, canAdopt_fn).call(this, c)) {
+            done = false;
+            __privateMethod(this, _AST_instances, adopt_fn).call(this, c, i);
+          } else if (__privateMethod(this, _AST_instances, canAdoptWithSpace_fn).call(this, c)) {
+            done = false;
+            __privateMethod(this, _AST_instances, adoptWithSpace_fn).call(this, c, i);
+          } else if (__privateMethod(this, _AST_instances, canUsurp_fn).call(this, c)) {
+            done = false;
+            __privateMethod(this, _AST_instances, usurp_fn).call(this, c);
+          }
+        }
+      }
+    } while (!done && ++iterations < 10);
+  }
+  __privateSet(this, _toString, void 0);
+};
 partsToRegExp_fn = function(dot) {
   return __privateGet(this, _parts).map((p) => {
     if (typeof p === "string") {
@@ -20456,11 +20816,13 @@ parseGlob_fn = function(glob, hasMagic, noEmpty = false) {
   let escaping = false;
   let re = "";
   let uflag = false;
+  let inStar = false;
   for (let i = 0; i < glob.length; i++) {
     const c = glob.charAt(i);
     if (escaping) {
       escaping = false;
       re += (reSpecials.has(c) ? "\\" : "") + c;
+      inStar = false;
       continue;
     }
     if (c === "\\") {
@@ -20478,16 +20840,19 @@ parseGlob_fn = function(glob, hasMagic, noEmpty = false) {
         uflag = uflag || needUflag;
         i += consumed - 1;
         hasMagic = hasMagic || magic;
+        inStar = false;
         continue;
       }
     }
     if (c === "*") {
-      if (noEmpty && glob === "*")
-        re += starNoEmpty;
-      else
-        re += star;
+      if (inStar)
+        continue;
+      inStar = true;
+      re += noEmpty && /^[*]+$/.test(glob) ? starNoEmpty : star;
       hasMagic = true;
       continue;
+    } else {
+      inStar = false;
     }
     if (c === "?") {
       re += qmark;
@@ -20498,8 +20863,8 @@ parseGlob_fn = function(glob, hasMagic, noEmpty = false) {
   }
   return [re, unescape(glob), !!hasMagic, uflag];
 };
-__privateAdd(_AST, _AST_static);
-var AST = _AST;
+__privateAdd(AST, _AST_static);
+_a2 = AST;
 
 // node_modules/minimatch/dist/esm/escape.js
 var escape = (s, { windowsPathsNoEscape = false } = {}) => {
@@ -20638,28 +21003,33 @@ var match = (list, pattern, options = {}) => {
 minimatch.match = match;
 var globMagic = /[?*]|[+@!]\(.*?\)|\[|\]/;
 var regExpEscape2 = (s) => s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+var _Minimatch_instances, matchGlobstar_fn, matchGlobStarBodySections_fn, matchOne_fn;
 var Minimatch = class {
-  options;
-  set;
-  pattern;
-  windowsPathsNoEscape;
-  nonegate;
-  negate;
-  comment;
-  empty;
-  preserveMultipleSlashes;
-  partial;
-  globSet;
-  globParts;
-  nocase;
-  isWindows;
-  platform;
-  windowsNoMagicRoot;
-  regexp;
   constructor(pattern, options = {}) {
+    __privateAdd(this, _Minimatch_instances);
+    __publicField(this, "options");
+    __publicField(this, "set");
+    __publicField(this, "pattern");
+    __publicField(this, "windowsPathsNoEscape");
+    __publicField(this, "nonegate");
+    __publicField(this, "negate");
+    __publicField(this, "comment");
+    __publicField(this, "empty");
+    __publicField(this, "preserveMultipleSlashes");
+    __publicField(this, "partial");
+    __publicField(this, "globSet");
+    __publicField(this, "globParts");
+    __publicField(this, "nocase");
+    __publicField(this, "isWindows");
+    __publicField(this, "platform");
+    __publicField(this, "windowsNoMagicRoot");
+    __publicField(this, "maxGlobstarRecursion");
+    __publicField(this, "regexp");
+    var _a3;
     assertValidPattern(pattern);
     options = options || {};
     this.options = options;
+    this.maxGlobstarRecursion = (_a3 = options.maxGlobstarRecursion) != null ? _a3 : 200;
     this.pattern = pattern;
     this.platform = options.platform || defaultPlatform;
     this.isWindows = this.platform === "win32";
@@ -20927,10 +21297,11 @@ var Minimatch = class {
     for (let i = 0; i < globParts.length - 1; i++) {
       for (let j = i + 1; j < globParts.length; j++) {
         const matched = this.partsMatch(globParts[i], globParts[j], !this.preserveMultipleSlashes);
-        if (!matched)
-          continue;
-        globParts[i] = matched;
-        globParts[j] = [];
+        if (matched) {
+          globParts[i] = [];
+          globParts[j] = matched;
+          break;
+        }
       }
     }
     return globParts.filter((gs) => gs.length);
@@ -20991,7 +21362,8 @@ var Minimatch = class {
   // out of pattern, then that's fine, as long as all
   // the parts match.
   matchOne(file, pattern, partial = false) {
-    const options = this.options;
+    let fileStartIndex = 0;
+    let patternStartIndex = 0;
     if (this.isWindows) {
       const fileDrive = typeof file[0] === "string" && /^[a-z]:$/i.test(file[0]);
       const fileUNC = !fileDrive && file[0] === "" && file[1] === "" && file[2] === "?" && /^[a-z]:$/i.test(file[3]);
@@ -21000,14 +21372,14 @@ var Minimatch = class {
       const fdi = fileUNC ? 3 : fileDrive ? 0 : void 0;
       const pdi = patternUNC ? 3 : patternDrive ? 0 : void 0;
       if (typeof fdi === "number" && typeof pdi === "number") {
-        const [fd, pd] = [file[fdi], pattern[pdi]];
+        const [fd, pd] = [
+          file[fdi],
+          pattern[pdi]
+        ];
         if (fd.toLowerCase() === pd.toLowerCase()) {
           pattern[pdi] = fd;
-          if (pdi > fdi) {
-            pattern = pattern.slice(pdi);
-          } else if (fdi > pdi) {
-            file = file.slice(fdi);
-          }
+          patternStartIndex = pdi;
+          fileStartIndex = fdi;
         }
       }
     }
@@ -21015,71 +21387,10 @@ var Minimatch = class {
     if (optimizationLevel >= 2) {
       file = this.levelTwoFileOptimize(file);
     }
-    this.debug("matchOne", this, { file, pattern });
-    this.debug("matchOne", file.length, pattern.length);
-    for (var fi = 0, pi = 0, fl = file.length, pl = pattern.length; fi < fl && pi < pl; fi++, pi++) {
-      this.debug("matchOne loop");
-      var p = pattern[pi];
-      var f = file[fi];
-      this.debug(pattern, p, f);
-      if (p === false) {
-        return false;
-      }
-      if (p === GLOBSTAR) {
-        this.debug("GLOBSTAR", [pattern, p, f]);
-        var fr = fi;
-        var pr = pi + 1;
-        if (pr === pl) {
-          this.debug("** at the end");
-          for (; fi < fl; fi++) {
-            if (file[fi] === "." || file[fi] === ".." || !options.dot && file[fi].charAt(0) === ".")
-              return false;
-          }
-          return true;
-        }
-        while (fr < fl) {
-          var swallowee = file[fr];
-          this.debug("\nglobstar while", file, fr, pattern, pr, swallowee);
-          if (this.matchOne(file.slice(fr), pattern.slice(pr), partial)) {
-            this.debug("globstar found match!", fr, fl, swallowee);
-            return true;
-          } else {
-            if (swallowee === "." || swallowee === ".." || !options.dot && swallowee.charAt(0) === ".") {
-              this.debug("dot detected!", file, fr, pattern, pr);
-              break;
-            }
-            this.debug("globstar swallow a segment, and continue");
-            fr++;
-          }
-        }
-        if (partial) {
-          this.debug("\n>>> no match, partial?", file, fr, pattern, pr);
-          if (fr === fl) {
-            return true;
-          }
-        }
-        return false;
-      }
-      let hit;
-      if (typeof p === "string") {
-        hit = f === p;
-        this.debug("string match", p, f, hit);
-      } else {
-        hit = p.test(f);
-        this.debug("pattern match", p, f, hit);
-      }
-      if (!hit)
-        return false;
+    if (pattern.includes(GLOBSTAR)) {
+      return __privateMethod(this, _Minimatch_instances, matchGlobstar_fn).call(this, file, pattern, partial, fileStartIndex, patternStartIndex);
     }
-    if (fi === fl && pi === pl) {
-      return true;
-    } else if (fi === fl) {
-      return partial;
-    } else if (pi === pl) {
-      return fi === fl - 1 && file[fi] === "";
-    } else {
-      throw new Error("wtf?");
-    }
+    return __privateMethod(this, _Minimatch_instances, matchOne_fn).call(this, file, pattern, partial, fileStartIndex, patternStartIndex);
   }
   braceExpand() {
     return braceExpand(this.pattern, this.options);
@@ -21218,6 +21529,135 @@ var Minimatch = class {
     return minimatch.defaults(def).Minimatch;
   }
 };
+_Minimatch_instances = new WeakSet();
+matchGlobstar_fn = function(file, pattern, partial, fileIndex, patternIndex) {
+  const firstgs = pattern.indexOf(GLOBSTAR, patternIndex);
+  const lastgs = pattern.lastIndexOf(GLOBSTAR);
+  const [head, body, tail] = partial ? [
+    pattern.slice(patternIndex, firstgs),
+    pattern.slice(firstgs + 1),
+    []
+  ] : [
+    pattern.slice(patternIndex, firstgs),
+    pattern.slice(firstgs + 1, lastgs),
+    pattern.slice(lastgs + 1)
+  ];
+  if (head.length) {
+    const fileHead = file.slice(fileIndex, fileIndex + head.length);
+    if (!__privateMethod(this, _Minimatch_instances, matchOne_fn).call(this, fileHead, head, partial, 0, 0))
+      return false;
+    fileIndex += head.length;
+  }
+  let fileTailMatch = 0;
+  if (tail.length) {
+    if (tail.length + fileIndex > file.length)
+      return false;
+    let tailStart = file.length - tail.length;
+    if (__privateMethod(this, _Minimatch_instances, matchOne_fn).call(this, file, tail, partial, tailStart, 0)) {
+      fileTailMatch = tail.length;
+    } else {
+      if (file[file.length - 1] !== "" || fileIndex + tail.length === file.length) {
+        return false;
+      }
+      tailStart--;
+      if (!__privateMethod(this, _Minimatch_instances, matchOne_fn).call(this, file, tail, partial, tailStart, 0))
+        return false;
+      fileTailMatch = tail.length + 1;
+    }
+  }
+  if (!body.length) {
+    let sawSome = !!fileTailMatch;
+    for (let i2 = fileIndex; i2 < file.length - fileTailMatch; i2++) {
+      const f = String(file[i2]);
+      sawSome = true;
+      if (f === "." || f === ".." || !this.options.dot && f.startsWith(".")) {
+        return false;
+      }
+    }
+    return partial || sawSome;
+  }
+  const bodySegments = [[[], 0]];
+  let currentBody = bodySegments[0];
+  let nonGsParts = 0;
+  const nonGsPartsSums = [0];
+  for (const b of body) {
+    if (b === GLOBSTAR) {
+      nonGsPartsSums.push(nonGsParts);
+      currentBody = [[], 0];
+      bodySegments.push(currentBody);
+    } else {
+      currentBody[0].push(b);
+      nonGsParts++;
+    }
+  }
+  let i = bodySegments.length - 1;
+  const fileLength = file.length - fileTailMatch;
+  for (const b of bodySegments) {
+    b[1] = fileLength - (nonGsPartsSums[i--] + b[0].length);
+  }
+  return !!__privateMethod(this, _Minimatch_instances, matchGlobStarBodySections_fn).call(this, file, bodySegments, fileIndex, 0, partial, 0, !!fileTailMatch);
+};
+matchGlobStarBodySections_fn = function(file, bodySegments, fileIndex, bodyIndex, partial, globStarDepth, sawTail) {
+  const bs = bodySegments[bodyIndex];
+  if (!bs) {
+    for (let i = fileIndex; i < file.length; i++) {
+      sawTail = true;
+      const f = file[i];
+      if (f === "." || f === ".." || !this.options.dot && f.startsWith(".")) {
+        return false;
+      }
+    }
+    return sawTail;
+  }
+  const [body, after] = bs;
+  while (fileIndex <= after) {
+    const m = __privateMethod(this, _Minimatch_instances, matchOne_fn).call(this, file.slice(0, fileIndex + body.length), body, partial, fileIndex, 0);
+    if (m && globStarDepth < this.maxGlobstarRecursion) {
+      const sub = __privateMethod(this, _Minimatch_instances, matchGlobStarBodySections_fn).call(this, file, bodySegments, fileIndex + body.length, bodyIndex + 1, partial, globStarDepth + 1, sawTail);
+      if (sub !== false)
+        return sub;
+    }
+    const f = file[fileIndex];
+    if (f === "." || f === ".." || !this.options.dot && f.startsWith(".")) {
+      return false;
+    }
+    fileIndex++;
+  }
+  return partial || null;
+};
+matchOne_fn = function(file, pattern, partial, fileIndex, patternIndex) {
+  let fi;
+  let pi;
+  let pl;
+  let fl;
+  for (fi = fileIndex, pi = patternIndex, fl = file.length, pl = pattern.length; fi < fl && pi < pl; fi++, pi++) {
+    this.debug("matchOne loop");
+    let p = pattern[pi];
+    let f = file[fi];
+    this.debug(pattern, p, f);
+    if (p === false || p === GLOBSTAR)
+      return false;
+    let hit;
+    if (typeof p === "string") {
+      hit = f === p;
+      this.debug("string match", p, f, hit);
+    } else {
+      hit = p.test(f);
+      this.debug("pattern match", p, f, hit);
+    }
+    if (!hit)
+      return false;
+  }
+  if (fi === fl && pi === pl) {
+    return true;
+  } else if (fi === fl) {
+    return partial;
+  } else if (pi === pl) {
+    return fi === fl - 1 && file[fi] === "";
+  } else {
+    throw new Error("wtf?");
+  }
+};
 minimatch.AST = AST;
 minimatch.Minimatch = Minimatch;
 minimatch.escape = escape;
@@ -21288,7 +21728,7 @@ var isJsFile = lowerPathParam((p) => p.endsWith(".js") || p.endsWith(".mjs") || 
 
 // src/compiler/html/canonical-link.ts
 var updateCanonicalLink = (doc, href) => {
-  var _a2;
+  var _a3;
   let canonicalLinkElm = doc.head.querySelector('link[rel="canonical"]');
   if (typeof href === "string") {
     if (canonicalLinkElm == null) {
@@ -21301,7 +21741,7 @@ var updateCanonicalLink = (doc, href) => {
     if (canonicalLinkElm != null) {
       const existingHref = canonicalLinkElm.getAttribute("href");
       if (!existingHref) {
-        (_a2 = canonicalLinkElm.parentNode) == null ? void 0 : _a2.removeChild(canonicalLinkElm);
+        (_a3 = canonicalLinkElm.parentNode) == null ? void 0 : _a3.removeChild(canonicalLinkElm);
       }
     }
   }
@@ -21813,7 +22253,7 @@ var serializeCss = (stylesheet, serializeOpts) => {
   return out.join("");
 };
 var serializeCssVisitNode = (opts, node, index, len) => {
-  var _a2;
+  var _a3;
   const nodeType = node.type;
   if (nodeType === 4 /* Declaration */) {
     return serializeCssDeclaration(node, index, len);
@@ -21822,7 +22262,7 @@ var serializeCssVisitNode = (opts, node, index, len) => {
     return serializeCssRule(opts, node);
   }
   if (nodeType === 1 /* Comment */) {
-    if (((_a2 = node.comment) == null ? void 0 : _a2[0]) === "!") {
+    if (((_a3 = node.comment) == null ? void 0 : _a3[0]) === "!") {
       return `/*${node.comment}*/`;
     } else {
       return "";
@@ -21870,10 +22310,10 @@ var serializeCssVisitNode = (opts, node, index, len) => {
   return "";
 };
 var serializeCssRule = (opts, node) => {
-  var _a2, _b;
+  var _a3, _b;
   const decls = node.declarations;
   const usedSelectors = opts.usedSelectors;
-  const selectors = (_b = (_a2 = node.selectors) == null ? void 0 : _a2.slice()) != null ? _b : [];
+  const selectors = (_b = (_a3 = node.selectors) == null ? void 0 : _a3.slice()) != null ? _b : [];
   const hasDecls = decls != null && decls.length > 0;
   const hasNestedRules = node.rules != null && node.rules.length > 0;
   if (!hasDecls && !hasNestedRules) {
@@ -21977,8 +22417,8 @@ var serializeCssKeyframes = (opts, node) => {
   return "@" + (node.vendor || "") + "keyframes " + node.name + "{" + keyframesCss + "}";
 };
 var serializeCssKeyframe = (opts, node) => {
-  var _a2, _b;
-  return ((_b = (_a2 = node.values) == null ? void 0 : _a2.join(",")) != null ? _b : "") + "{" + serializeCssMapVisit(opts, node.declarations) + "}";
+  var _a3, _b;
+  return ((_b = (_a3 = node.values) == null ? void 0 : _a3.join(",")) != null ? _b : "") + "{" + serializeCssMapVisit(opts, node.declarations) + "}";
 };
 var serializeCssFontFace = (opts, node) => {
   const fontCss = serializeCssMapVisit(opts, node.declarations);
@@ -22002,8 +22442,8 @@ var serializeCssContainer = (opts, node) => {
   return "@container " + removeMediaWhitespace(node.media) + "{" + containerCss + "}";
 };
 var serializeCssPage = (opts, node) => {
-  var _a2, _b;
-  const sel = (_b = (_a2 = node.selectors) == null ? void 0 : _a2.join(", ")) != null ? _b : "";
+  var _a3, _b;
+  const sel = (_b = (_a3 = node.selectors) == null ? void 0 : _a3.join(", ")) != null ? _b : "";
   return "@page " + sel + "{" + serializeCssMapVisit(opts, node.declarations) + "}";
 };
 var serializeCssDocument = (opts, node) => {
@@ -22050,10 +22490,10 @@ var removeSelectorWhitespace = (selector) => {
   return rtn;
 };
 var removeMediaWhitespace = (media) => {
-  var _a2;
+  var _a3;
   let rtn = "";
   let char = "";
-  media = (_a2 = media == null ? void 0 : media.trim()) != null ? _a2 : "";
+  media = (_a3 = media == null ? void 0 : media.trim()) != null ? _a3 : "";
   for (let i = 0, l = media.length; i < l; i++) {
     char = media[i];
     if (CSS_WS_REG.test(char)) {
