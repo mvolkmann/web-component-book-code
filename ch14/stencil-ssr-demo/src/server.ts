@@ -1,16 +1,16 @@
-import { type Context, Hono } from 'hono';
-import { serve } from '@hono/node-server';
-import { serveStatic } from '@hono/node-server/serve-static';
-import { renderToString } from '../hydrate';
+import { type Context, Hono } from "hono";
+import { serve } from "@hono/node-server";
+import { serveStatic } from "@hono/node-server/serve-static";
+import { renderToString } from "../hydrate";
 
 const html = String.raw;
 const app = new Hono();
 
-app.use('/*', serveStatic({ root: './dist' }));
+app.use("/*", serveStatic({ root: "./dist" }));
 
 // This returns HTML that includes server-side rendered Stencil components.
-app.get('/greet', async (c: Context) => {
-  const name = c.req.query('name');
+app.get("/greet", async (c: Context) => {
+  const name = c.req.query("name");
   const template = html`
     <p>The following components are server-side rendered:</p>
     <hello-world></hello-world>
@@ -20,6 +20,6 @@ app.get('/greet', async (c: Context) => {
   return c.html(results.html);
 });
 
-serve(app, info => {
-  console.log(`listing on port ${info.port}`);
+serve(app, (info) => {
+  console.log(`listening on port ${info.port}`);
 });
