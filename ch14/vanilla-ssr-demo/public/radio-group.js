@@ -9,7 +9,15 @@ class RadioGroup extends HTMLElement {
 
   constructor() {
     super();
-    if (!this.shadowRoot) this.attachShadow({ mode: "open" });
+    if (!this.shadowRoot) {
+      this.attachShadow({ mode: "open" });
+      this.shadowRoot.innerHTML = content({
+        labels: this.getAttribute("labels"),
+        name: this.getAttribute("name"),
+        value: this.#value,
+        values: this.getAttribute("values"),
+      });
+    }
   }
 
   attributeChangedCallback(attrName, _oldValue, newValue) {
@@ -17,13 +25,6 @@ class RadioGroup extends HTMLElement {
   }
 
   connectedCallback() {
-    this.shadowRoot.innerHTML = content({
-      labels: this.getAttribute("labels"),
-      name: this.getAttribute("name"),
-      value: this.#value,
-      values: this.getAttribute("values"),
-    });
-
     this.shadowRoot.addEventListener("change", (e) => {
       const { labels, value } = e.target;
       const label = labels[0].textContent;
