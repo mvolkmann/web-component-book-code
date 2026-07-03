@@ -3,7 +3,7 @@ import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
 
 import { html } from "lit";
-import { render } from "@lit-labs/ssr";
+import { renderThunked } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
 import "./hello-world.js";
@@ -20,7 +20,7 @@ app.get("/greet", async (c: Context) => {
     <hello-world name=${name}></hello-world>
   `;
   // Generate a stream of HTML from the template.
-  const stream = render(template);
+  const stream = renderThunked(template);
   // Combine chunks of HTML from the stream into a string.
   const string = await collectResult(stream);
   // Send an HTTP response containing the HTML string.
