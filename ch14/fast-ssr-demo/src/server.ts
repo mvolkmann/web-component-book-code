@@ -1,7 +1,8 @@
-import { type Context, Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
-import { streamHTML } from "./stream.js";
+import { type Context, Hono } from "hono";
+import { type AddressInfo } from "node:net";
+import { streamHTML } from "./stream";
 
 const html = String.raw;
 const app = new Hono();
@@ -9,7 +10,7 @@ const app = new Hono();
 app.use("/*", serveStatic({ root: "./dist" }));
 
 // This returns HTML that includes server-side rendered FAST components.
-app.get("/greet", async (c: Context) => {
+app.get("/greet", (c: Context) => {
   const name = c.req.query("name");
   const template = html`
     <p>The following components are server-side rendered:</p>
@@ -19,6 +20,6 @@ app.get("/greet", async (c: Context) => {
   return streamHTML(c, template);
 });
 
-serve(app, (info) => {
+serve(app, (info: AddressInfo) => {
   console.log(`listening on port ${info.port}`);
 });

@@ -1,9 +1,7 @@
 import { type Context } from "hono";
 import { stream } from "hono/streaming";
-// The next import must precede the import that follows it.
-import "@microsoft/fast-ssr/install-dom-shim.js";
 import fastSSR from "@microsoft/fast-ssr";
-import "./hello-world.js";
+import "./hello-world";
 
 const { templateRenderer } = fastSSR();
 
