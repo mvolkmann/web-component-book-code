@@ -13,12 +13,7 @@ function showRelativeTime(dateString) {
 
   // Update the time portion of the date to match the current time.
   const now = new Date();
-  date.setHours(
-    now.getHours(),
-    now.getMinutes(),
-    now.getSeconds(),
-    now.getMilliseconds()
-  );
+  date.setHours(now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
 
   relativeTime.setAttribute("date", date.toISOString());
   relativeTime.style.display = "inline-block";
@@ -40,8 +35,7 @@ const MAX_MESSAGES = 20;
 function updateBadge() {
   buttonBadge.textContent = messages.length;
   const haveMessages = messages.length > 0;
-  buttonBadge.style.display =
-    badgeSwitch.checked && haveMessages ? "flex" : "none";
+  buttonBadge.style.display = badgeSwitch.checked && haveMessages ? "flex" : "none";
   const percentComplete = (100 * messages.length) / MAX_MESSAGES;
   progressBar.setAttribute("value", percentComplete);
   progressRing.setAttribute("value", percentComplete);
@@ -54,10 +48,13 @@ badgeSwitch.addEventListener("change", updateBadge);
 updateBadge();
 
 async function getMessage() {
-  const url = "https://techy-api.vercel.app/api/text";
+  const url = "https://api.adviceslip.com/advice";
   try {
     const response = await fetch(url);
-    if (response.ok) return response.text();
+    if (response.ok) {
+      const json = await response.json();
+      return json.slip.advice;
+    }
     console.error(`API error: ${response.status}`);
   } catch (error) {
     console.error("Failed to fetch message:", error);
