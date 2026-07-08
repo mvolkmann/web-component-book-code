@@ -11,13 +11,16 @@ app.use("/*", serveStatic({ root: "./dist" }));
 
 // This returns HTML that includes server-side rendered FAST components.
 app.get("/greet", (c: Context) => {
-  const name = c.req.query("name");
   const template = html`
     <p>The following components are server-side rendered:</p>
     <hello-world></hello-world>
-    <hello-world name=${name}></hello-world>
+    <hello-world name="{{queryName}}"></hello-world>
   `;
-  return streamHTML(c, template);
+  const state = {
+    name: "World",
+    queryName: c.req.query("name") || "World",
+  };
+  return streamHTML(c, template, state);
 });
 
 serve(app, (info: AddressInfo) => {
