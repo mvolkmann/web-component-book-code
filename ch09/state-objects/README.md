@@ -6,7 +6,7 @@ The steps to run this are:
 
 1. `npm install`
 1. `npm run dev`
-1. Browse localhost:5173.
+1. Browse localhost:5173
 
 Experiment with changing state by opening the DevTools Console
 and entering JavaScript statements like the following:
