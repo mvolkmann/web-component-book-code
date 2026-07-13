@@ -1,3 +1,5 @@
+const html = String.raw;
+
 class WCTwo extends HTMLElement {
   constructor() {
     super();
@@ -5,7 +7,7 @@ class WCTwo extends HTMLElement {
   }
 
   connectedCallback() {
-    this.shadowRoot.innerHTML = /*html*/ `
+    this.shadowRoot.innerHTML = html`
       <link rel="stylesheet" href="share.css" />
       <button>WC Two</button>
     `;
