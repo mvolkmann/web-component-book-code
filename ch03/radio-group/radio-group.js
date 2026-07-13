@@ -137,7 +137,7 @@ class RadioGroup extends HTMLElement {
 
   render() {
     const dom = template.content.cloneNode(true);
-    dom.querySelector("legend").textContent = this.legend + "!";
+    dom.querySelector("legend").textContent = this.legend;
     dom.querySelector("div").innerHTML = this.makeButtons();
     this.shadowRoot.replaceChildren(dom);
 
