@@ -50,6 +50,7 @@ class RadioGroup extends HTMLElement {
   name = "";
   values = "";
   #value = "";
+  #valueArray = [];
 
   static get observedAttributes() {
     return ["labels", "legend", "name", "value", "values"];
@@ -72,18 +73,18 @@ class RadioGroup extends HTMLElement {
     this.legend = this.getAttribute("legend");
     this.name = this.getAttribute("name");
     this.values = this.getAttribute("values");
-    this.value = this.getAttribute("value");
+    this.#valueArray = this.values.split(",").map((value) => value.trim());
     if (!this.name) throw new Error("name is a required attribute");
 
     this.render();
 
+    this.value = this.getAttribute("value");
     this.#connected = true;
   }
 
   #fixValue() {
-    const v = this.#value;
-    if (!this.values.includes(v)) {
-      this.#value = this.values.split(",")[0];
+    if (!this.#valueArray.includes(this.#value)) {
+      this.#value = this.#valueArray[0];
     }
   }
 
@@ -113,8 +114,7 @@ class RadioGroup extends HTMLElement {
   makeButtons() {
     this.#fixValue();
     const labelArray = this.labels.split(",");
-    const valueArray = this.values.split(",").map((value) => value.trim());
-    return valueArray
+    return this.#valueArray
       .map(
         (value, index) =>
           html`<div>
@@ -126,7 +126,7 @@ class RadioGroup extends HTMLElement {
               ${value === this.value ? "checked" : ""}
             />
             <label for="${value}">${labelArray[index]}</label>
-          </div>`
+          </div>`,
       )
       .join("");
   }
