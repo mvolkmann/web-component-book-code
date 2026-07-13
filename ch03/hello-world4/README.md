@@ -1,7 +1,3 @@
 # ch03/hello-world4
 
-To run this:
-
-1. Enter `npm install`.
-2. Enter `npm run dev`.
-3. Browse localhost:5173
+To run this, open the file `index.html` in any modern web browser.

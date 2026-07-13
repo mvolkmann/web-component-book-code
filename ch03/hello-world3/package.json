@@ -1,9 +1,0 @@
-{
-  "name": "hello-world3",
-  "scripts": {
-    "dev": "vite"
-  },
-  "devDependencies": {
-    "vite": "^8.0.8"
-  }
-}
