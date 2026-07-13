@@ -1,9 +1,0 @@
-{
-  "name": "car-table",
-  "scripts": {
-    "dev": "vite"
-  },
-  "devDependencies": {
-    "vite": "^8.0.8"
-  }
-}
