@@ -3,6 +3,10 @@ const html = String.raw;
 const template = document.createElement("template");
 template.innerHTML = html`
   <style>
+    :host {
+      display: block;
+    }
+
     fieldset {
       border-color: var(--border-color, black);
       display: inline-flex;
