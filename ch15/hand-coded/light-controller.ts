@@ -1,11 +1,10 @@
 import { html, Wrec } from "wrec";
-import TrafficLight from "./traffic-light"; // register custom element
+import "./traffic-light";
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 class LightController extends Wrec {
   static properties = { tl: { type: HTMLElement } };
-  declare tl: TrafficLight;
 
   static html = html`<traffic-light ref="tl"></traffic-light>`;
 
