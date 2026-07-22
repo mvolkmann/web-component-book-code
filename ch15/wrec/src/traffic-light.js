@@ -106,9 +106,9 @@ class TrafficLight extends Wrec {
 
   next() {
     const nextByState = {
-      stop: 'yield',
-      yield: 'go',
-      go: 'stop'
+      stop: 'go',
+      yield: 'stop',
+      go: 'yield'
     };
 
     this.state = nextByState[this.state] ?? 'stop';
