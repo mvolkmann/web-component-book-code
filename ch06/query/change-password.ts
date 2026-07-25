@@ -1,5 +1,5 @@
 import { css, html, LitElement } from "lit";
-import { customElement, query, state } from "lit/decorators.js";
+import { customElement, query } from "lit/decorators.js";
 
 @customElement("change-password")
 export class ChangePassword extends LitElement {
@@ -51,12 +51,7 @@ export class ChangePassword extends LitElement {
         </div>
         <div>
           <label for="confirm">Confirm Password</label>
-          <input
-            id="confirm"
-            type="password"
-            required
-            @change=${this.validatePasswords}
-          />
+          <input id="confirm" type="password" required @change=${this.validatePasswords} />
         </div>
         <button type="submit">Submit</button>
       </form>
