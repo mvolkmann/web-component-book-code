@@ -1,6 +1,7 @@
 // VERY IMPORTANT!
 // Ensure the metadata global Symbol exists before any classes are loaded.
-(Symbol as any).metadata ??= Symbol("Symbol.metadata");
+const metadataSymbol = ((Symbol as SymbolConstructor & { metadata?: symbol }).metadata ??=
+  Symbol("Symbol.metadata"));
 
 type ValidationRule = {
   validate: (value: any) => boolean;
@@ -9,16 +10,14 @@ type ValidationRule = {
 
 function fieldOrAccessor({ kind }: DecoratorContext) {
   if (kind !== "field" && kind !== "accessor") {
-    throw new Error(
-      "This decorator can only be applied to a class field or accessor.",
-    );
+    throw new Error("This decorator can only be applied to a class field or accessor.");
   }
 }
 
 function addValidationRule(context: DecoratorContext, rule: ValidationRule) {
   const { metadata } = context;
-  let constraints = metadata["constraints"] as Record<string, ValidationRule[]>;
-  if (!constraints) constraints = metadata.constraints = {};
+  let constraints = metadata!.constraints as Record<string, ValidationRule[]>;
+  if (!constraints) constraints = metadata!.constraints = {};
   const name = String(context.name);
   constraints[name] ??= [];
   constraints[name].push(rule);
@@ -63,8 +62,8 @@ export function regex(pattern: string) {
 }
 
 export function validate(instance: Record<string, any>) {
-  const metadata = instance.constructor[Symbol.metadata] ?? {};
-  const constraints = metadata["constraints"] ?? {};
+  const metadata = (instance.constructor as any)[metadataSymbol] ?? {};
+  const constraints = (metadata.constraints ?? {}) as Record<string, ValidationRule[]>;
   const errors: string[] = [];
   for (const [prop, rules] of Object.entries(constraints)) {
     const value = instance[prop];
