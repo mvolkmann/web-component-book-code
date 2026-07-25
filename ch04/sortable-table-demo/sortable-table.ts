@@ -84,11 +84,7 @@ export class SortableTable extends HTMLElement {
     }
   }
 
-  attributeChangedCallback(
-    attrName: string,
-    _oldValue: string,
-    newValue: string,
-  ) {
+  attributeChangedCallback(attrName: string, _oldValue: string, newValue: string) {
     if (attrName === "headings") {
       this.headings = newValue;
     } else if (attrName === "properties") {
@@ -137,6 +133,11 @@ export class SortableTable extends HTMLElement {
     this.#properties = properties;
     this.setAttribute("properties", properties);
     this.#propertyArray = properties.split(",").map((prop) => prop.trim());
+
+    const headers = this.shadowRoot!.querySelectorAll("table thead th");
+    this.#propertyArray.forEach((property, index) => {
+      headers[index]?.setAttribute("data-property", property);
+    });
 
     // Call the "set data" method.
     this.data = this.data;
@@ -215,10 +216,7 @@ export class SortableTable extends HTMLElement {
 
     this.#sortHeader = th;
     this.#sortDescending = descending;
-    this.#sortHeader.setAttribute(
-      "aria-sort",
-      descending ? "descending" : "ascending",
-    );
+    this.#sortHeader.setAttribute("aria-sort", descending ? "descending" : "ascending");
 
     this.dispatchEvent(
       new CustomEvent<SortDetail>("sort", {
