@@ -5,26 +5,18 @@
       body {
         font-family: sans-serif;
       }
-      .bordered {
-        border: 3px dashed red;
-        padding: 0.5rem;
-      }
     </style>
     <script src="sortable-table.ts" type="module"></script>
-    <script src="sortable-table2.ts" type="module"></script>
+    <!--script src="sortable-table2.ts" type="module"></script-->
     <script src="setup.ts" type="module"></script>
   </head>
   <body>
-    <sortable-table
-      class="bordered"
-      headings="Make,Model,Year"
-      properties="make,model,year"
-      title="My Cars table"
-    >
+    <sortable-table headings="Make,Model,Year" properties="make,model,year" title="My Cars table">
       <h2>My Cars</h2>
       <p slot="footnote">Some of these cars are no longer owned.</p>
     </sortable-table>
 
+    <!--
     <sortable-table2
       headings="Make,Model,Year"
       properties="make,model,year"
@@ -33,5 +25,6 @@
       <h2>My Cars</h2>
       <p slot="footnote">Some of these cars are no longer owned.</p>
     </sortable-table2>
+    -->
   </body>
 </html>

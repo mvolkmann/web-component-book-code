@@ -134,6 +134,7 @@ export class SortableTable extends HTMLElement {
     this.setAttribute("properties", properties);
     this.#propertyArray = properties.split(",").map((prop) => prop.trim());
 
+    // Update the `data-property` attribute for each `th` element`.
     const headers = this.shadowRoot!.querySelectorAll("table thead th");
     this.#propertyArray.forEach((property, index) => {
       headers[index]?.setAttribute("data-property", property);

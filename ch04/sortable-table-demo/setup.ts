@@ -22,4 +22,4 @@ function configureTable(elementName: string) {
 }
 
 configureTable("sortable-table");
-configureTable("sortable-table2");
+//configureTable("sortable-table2");

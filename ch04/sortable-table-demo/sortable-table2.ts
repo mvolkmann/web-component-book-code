@@ -89,11 +89,7 @@ export class SortableTable2 extends HTMLElement {
     this.#headTr = this.shadowRoot!.querySelector("table thead tr")!;
   }
 
-  attributeChangedCallback(
-    attrName: string,
-    _oldValue: string,
-    newValue: string,
-  ) {
+  attributeChangedCallback(attrName: string, _oldValue: string, newValue: string) {
     if (attrName === "descending") {
       this.descending = Boolean(newValue);
     } else if (attrName === "headings") {
@@ -161,6 +157,12 @@ export class SortableTable2 extends HTMLElement {
     this.#properties = properties;
     this.setAttribute("properties", properties);
     this.#propertyArray = properties.split(",").map((prop) => prop.trim());
+
+    // Update the `data-property` attribute for each `th` element`.
+    const headers = this.shadowRoot!.querySelectorAll("table thead th");
+    this.#propertyArray.forEach((property, index) => {
+      headers[index]?.setAttribute("data-property", property);
+    });
 
     // Trigger "set data".
     this.data = this.data;
@@ -260,10 +262,7 @@ export class SortableTable2 extends HTMLElement {
 
     this.#sortHeader = th;
     this.#descending = descending;
-    this.#sortHeader.setAttribute(
-      "aria-sort",
-      descending ? "descending" : "ascending",
-    );
+    this.#sortHeader.setAttribute("aria-sort", descending ? "descending" : "ascending");
 
     // This check satisfies the best practice
     // "Do not dispatch events in response to the host setting a property."
