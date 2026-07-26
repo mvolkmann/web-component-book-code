@@ -1,12 +1,12 @@
-import { Component, h } from '@stencil/core';
+import { Component, h } from "@stencil/core";
 
 /**
  * @summary Renders a button that opens Google in a new browser tab.
  * @element google-button
  */
 @Component({
-  tag: 'google-button',
-  styleUrl: 'google-button.css',
+  tag: "google-button",
+  styleUrl: "google-button.css",
   shadow: true,
 })
 export class GoogleButton {
@@ -14,7 +14,7 @@ export class GoogleButton {
    * Opens Google when the button is clicked.
    */
   private handleClick = () => {
-    window.open('https://google.com', '_blank');
+    window.open("https://google.com", "_blank", "noopener,noreferrer");
   };
 
   /**
