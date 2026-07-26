@@ -11,7 +11,7 @@ describe("google-button browser", () => {
     const openSpy = vi.spyOn(window, "open").mockImplementation(() => null);
     const { root } = await render(<google-button />);
     root.shadowRoot?.querySelector("button")?.click();
-    expect(openSpy).toHaveBeenCalledWith("https://google.com", "_blank");
+    expect(openSpy).toHaveBeenCalledWith("https://google.com", "_blank", "noopener,noreferrer");
     openSpy.mockRestore();
   });
 });
