@@ -10,26 +10,26 @@
 
     <script src="/build/my-components.esm.js" type="module"></script>
     <script type="module">
-      const radioGroup = document.querySelector('radio-group');
-      radioGroup.addEventListener('valueChanged', event => {
+      const radioGroup = document.querySelector("radio-group");
+      radioGroup.addEventListener("valueChanged", (event) => {
         const color = event.detail;
-        const elements = document.querySelectorAll('hello-world');
+        const elements = document.querySelectorAll("hello-world");
         for (const element of elements) {
           element.style.color = color;
         }
       });
 
-      const table = document.querySelector('sortable-table');
+      const table = document.querySelector("sortable-table");
       if (table) {
         table.data = [
-          { make: 'BMW', model: 'Z3', year: 2002 },
-          { make: 'MINI', model: 'Cooper', year: 2015 },
-          { make: 'Subaru', model: 'Forester', year: 2025 },
-          { make: 'Toyota', model: 'RAV4', year: 2010 },
+          { make: "BMW", model: "Z3", year: 2002 },
+          { make: "MINI", model: "Cooper", year: 2015 },
+          { make: "Subaru", model: "Forester", year: 2025 },
+          { make: "Toyota", model: "RAV4", year: 2010 },
         ];
-        table.addEventListener('tableSorted', event => {
+        table.addEventListener("tableSorted", (event) => {
           const { descending, property } = event.detail;
-          const order = descending ? 'descending' : 'ascending';
+          const order = descending ? "descending" : "ascending";
           console.log(`sorted on ${property} ${order}`);
         });
       }
@@ -52,16 +52,12 @@
         <div slot="before">Select a color for your new car.</div>
         <div slot="after">Don't choose a color you will regret.</div>
       </radio-group>
-      <button>Submit</button>
+      <button type="submit">Submit</button>
     </form>
 
     <reactive-css></reactive-css>
 
-    <sortable-table
-      headings="Make,Model,Year"
-      properties="make,model,year"
-      title="My Cars table"
-    >
+    <sortable-table headings="Make,Model,Year" properties="make,model,year" title="My Cars table">
       <h2>My Cars</h2>
       <p slot="footnote">Some of these cars are no longer owned.</p>
     </sortable-table>
