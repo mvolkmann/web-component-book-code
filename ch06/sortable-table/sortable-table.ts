@@ -6,9 +6,9 @@ type LooseObject = Record<string, unknown>;
 @customElement("sortable-table")
 export class SortableTable extends LitElement {
   @property({ type: Array<LooseObject> }) data = [];
-  @property({ type: Boolean }) descending = false;
-  @property({ type: String }) headings = "";
-  @property({ type: String }) properties = "";
+  @property({ type: Boolean, reflect: true }) descending = false;
+  @property({ type: String, reflect: true }) headings = "";
+  @property({ type: String, reflect: true }) properties = "";
   @state() propertyArray: string[] = [];
   @state() sortedData: Array<LooseObject> = [];
   @state() sortProperty = "";
