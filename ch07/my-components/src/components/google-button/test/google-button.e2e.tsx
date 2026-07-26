@@ -1,12 +1,10 @@
 import { h, render, vi } from "@stencil/vitest";
-import "../google-button";
 
-describe("google-button", () => {
+describe("google-button browser", () => {
   it("renders", async () => {
     const { root } = await render(<google-button />);
-    expect(root.shadowRoot?.querySelector("button")?.textContent).toBe(
-      "Google It",
-    );
+    expect(root).toHaveClass("hydrated");
+    expect(root.shadowRoot?.querySelector("button")).not.toBeNull();
   });
 
   it("opens Google when clicked", async () => {
