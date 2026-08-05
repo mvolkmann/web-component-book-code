@@ -5,10 +5,10 @@
     "dev": "vite",
     "preview": "vite preview"
   },
-  "devDependencies": {
-    "vite": "^8.0.8"
-  },
   "dependencies": {
-    "@microsoft/fast-element": "^2.9.1"
+    "@microsoft/fast-element": "^3.0.2"
+  },
+  "devDependencies": {
+    "vite": "^8.2.0"
   }
 }

@@ -6,6 +6,7 @@ import {
   html,
   observable,
   repeat,
+  volatile,
   when,
 } from "@microsoft/fast-element";
 
@@ -65,53 +66,36 @@ const styles = css`
   }
 `;
 
-function getAriaSort(
-  property: string,
-  sortedProperty: string,
-  descending: boolean,
-) {
+function getAriaSort(property: string, sortedProperty: string, descending: boolean) {
   if (property !== sortedProperty) return undefined;
   return descending ? "descending" : "ascending";
 }
 
-function getSortIndicator(
-  property: string,
-  sortedProperty: string,
-  descending: boolean,
-) {
+function getSortIndicator(property: string, sortedProperty: string, descending: boolean) {
   if (property !== sortedProperty) return "";
   return descending ? "▼" : "▲";
 }
 
 const headingTemplate = html<HeadingPair, SortableTable>`
   <th
-    aria-sort=${(pair, c) =>
-      getAriaSort(pair.property, c.parent.sortProperty, c.parent.descending)}
-    data-property="${pair => pair.property}"
-    title="${pair => `sort by ${pair.heading}`}"
+    aria-sort=${(pair, c) => getAriaSort(pair.property, c.parent.sortProperty, c.parent.descending)}
+    data-property="${(pair) => pair.property}"
+    title="${(pair) => `sort by ${pair.heading}`}"
   >
-    <button
-      type="button"
-      @click=${(pair, c) => c.parent.updateSort(pair.property)}
-    >
-      <span>${pair => pair.heading}</span>
+    <button type="button" @click=${(pair, c) => c.parent.updateSort(pair.property)}>
+      <span>${(pair) => pair.heading}</span>
       <span class="sort-indicator">
-        ${(pair, c) =>
-          getSortIndicator(
-            pair.property,
-            c.parent.sortProperty,
-            c.parent.descending,
-          )}
+        ${(pair, c) => getSortIndicator(pair.property, c.parent.sortProperty, c.parent.descending)}
       </span>
     </button>
   </th>
 `;
 
-const cellTemplate = html<CellData>`<td>${cell => cell.value}</td>`;
+const cellTemplate = html<CellData>`<td>${(cell) => cell.value}</td>`;
 
 const rowTemplate = html<RowData>`
   <tr>
-    ${repeat(row => row.cells, cellTemplate)}
+    ${repeat((row) => row.cells, cellTemplate)}
   </tr>
 `;
 
@@ -121,16 +105,16 @@ const template = html<SortableTable>`
   <table>
     <thead>
       <tr>
-        ${repeat(x => x.headingPairs, headingTemplate)}
+        ${repeat((x) => x.headingPairs, headingTemplate)}
       </tr>
     </thead>
     <tbody>
-      ${repeat(x => x.rows, rowTemplate)}
+      ${repeat((x) => x.rows, rowTemplate)}
     </tbody>
   </table>
   <slot name="footnote"></slot>
   ${when(
-    x => x.headingPairs.length <= 1,
+    (x) => x.headingPairs.length <= 1,
     html`<p>A table should contain more than one column.</p>`,
   )}
 `;
@@ -152,18 +136,19 @@ export class SortableTable extends FASTElement {
   }
 
   get propertyArray(): string[] {
-    return this.properties.split(",").map(property => property.trim());
+    return this.properties.split(",").map((property) => property.trim());
   }
 
   get rows(): RowData[] {
-    return this.sortedData.map(row => ({
-      cells: this.propertyArray.map(property => ({
+    return this.sortedData.map((row) => ({
+      cells: this.propertyArray.map((property) => ({
         property,
         value: row[property],
       })),
     }));
   }
 
+  @volatile
   get sortedData(): Array<LooseObject> {
     const sortProperty = this.sortProperty;
     if (!sortProperty) return this.data;

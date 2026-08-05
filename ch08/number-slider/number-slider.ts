@@ -5,8 +5,9 @@ import {
   FASTElement,
   html,
   nullableNumberConverter,
+  twoWay,
 } from "@microsoft/fast-element";
-import { twoWay } from "@microsoft/fast-element/binding/two-way.js";
+//import { twoWay } from "@microsoft/fast-element/binding/two-way.js";
 
 const template = html<NumberSlider>`
   <label for="slider">${(x) => x.label}</label>
