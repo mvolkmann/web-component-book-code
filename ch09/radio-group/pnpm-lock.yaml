@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       wrec:
-        specifier: 0.43.1
-        version: 0.43.1
+        specifier: 0.43.3
+        version: 0.43.3
     devDependencies:
       '@html-eslint/eslint-plugin':
         specifier: ^0.64.0
@@ -1169,8 +1169,8 @@ packages:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
 
-  wrec@0.43.1:
-    resolution: {integrity: sha512-3uvOuuOFP6uYxKZSUiU4FnUrQyVij1nnHt7fxi/sH5TUp8GZNKBXLa3kHHK8/0VW1MOm7OuEtThvQ9+swB0Mzg==}
+  wrec@0.43.3:
+    resolution: {integrity: sha512-8A51z16IICW3svvI9RYV0KocaLkOHshVN9sB3RwOa7YerYpOa7Nh2w1Md2zMFdylYfoBdPlYOo9teY6UiPZ42g==}
     hasBin: true
 
   write-file-atomic@7.0.1:
@@ -2210,7 +2210,7 @@ snapshots:
 
   word-wrap@1.2.5: {}
 
-  wrec@0.43.1:
+  wrec@0.43.3:
     dependencies:
       node-html-parser: 7.1.0
       typescript: 6.0.3

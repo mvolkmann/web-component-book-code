@@ -10,7 +10,7 @@
     "lint": "npm run lint:js && npm run lint:styles"
   },
   "dependencies": {
-    "wrec": "0.43.1"
+    "wrec": "0.43.3"
   },
   "devDependencies": {
     "@html-eslint/eslint-plugin": "^0.64.0",
