@@ -1,15 +1,15 @@
 {
   "name": "traffic-light",
+  "type": "commonjs",
   "scripts": {
     "build": "vite build",
     "dev": "vite",
     "preview": "vite preview"
   },
-  "type": "commonjs",
-  "devDependencies": {
-    "vite": "^8.0.8"
-  },
   "dependencies": {
-    "wrec": "0.40.3"
+    "wrec": "0.43.1"
+  },
+  "devDependencies": {
+    "vite": "^8.2.0"
   }
 }

@@ -74,15 +74,15 @@ class ValidateDemo extends Wrec {
     <form method="post" action="https://httpbin.org/post">
       <div>
         <label for="color">Color</label>
-        <input id=" color" type="string" value="this.color" />
+        <input id="color" name="color" type="string" value="this.color" />
       </div>
       <div>
         <label for="min">Min</label>
-        <input id="min" type="number" value="this.min" />
+        <input id="min" name="min" type="number" value="this.min" />
       </div>
       <div>
         <label for="max">Max</label>
-        <input id="max" type="number" value="this.max" />
+        <input id="max" name="max" type="number" value="this.max" />
       </div>
       <div>
         <button type="submit">Submit</button>

@@ -1,5 +1,6 @@
 {
   "name": "hello-world",
+  "type": "module",
   "scripts": {
     "build": "vite build",
     "dev": "vite",
@@ -8,16 +9,15 @@
     "lint:styles": "stylelint \"**/*.{css,js,ts}\"",
     "lint": "npm run lint:js && npm run lint:styles"
   },
-  "type": "module",
-  "devDependencies": {
-    "@html-eslint/eslint-plugin": "^0.58.1",
-    "eslint": "^10.1.0",
-    "postcss-lit": "^1.4.1",
-    "stylelint": "^17.6.0",
-    "stylelint-config-standard": "^40.0.0",
-    "vite": "^8.0.8"
-  },
   "dependencies": {
-    "wrec": "0.40.3"
+    "wrec": "0.43.1"
+  },
+  "devDependencies": {
+    "@html-eslint/eslint-plugin": "^0.64.0",
+    "eslint": "^10.8.0",
+    "postcss-lit": "^1.4.1",
+    "stylelint": "^17.14.1",
+    "stylelint-config-standard": "^40.0.0",
+    "vite": "^8.2.0"
   }
 }
