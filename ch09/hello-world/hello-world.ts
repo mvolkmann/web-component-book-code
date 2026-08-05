@@ -4,12 +4,16 @@ class HelloWorld extends Wrec {
   static properties = {
     name: { type: String, value: "World" },
   };
+
   static css = css`
-    p {
+    :host {
       color: blue;
     }
   `;
-  static html = html`<p>Hello, <span>this.name</span>!</p>`;
+
+  static html = html`
+    <p>Hello, <span>this.name</span>!</p>
+  `;
 }
 
 HelloWorld.define("hello-world");
