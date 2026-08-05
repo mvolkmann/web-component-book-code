@@ -10,7 +10,9 @@ import {
 //import { twoWay } from "@microsoft/fast-element/binding/two-way.js";
 
 const template = html<NumberSlider>`
-  <label for="slider">${(x) => x.label}</label>
+  <label for="slider" style="width: ${(x) => x.labelWidth}">
+    ${(x) => x.label}
+  </label>
   <input
     id="slider"
     max=${(x) => x.max}
@@ -39,7 +41,6 @@ const styles = css`
   label {
     font-weight: bold;
     text-align: right;
-    width: ${(x) => x.labelWidth};
   }
 `;
 
