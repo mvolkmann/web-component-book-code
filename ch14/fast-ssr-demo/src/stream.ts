@@ -4,7 +4,7 @@ import {
   parse_f_templates,
   render_entry_with_templates,
 } from "@microsoft/fast-build/wasm/microsoft_fast_build.js";
-import { build, renderStream } from "@microsoft/webui";
+import { build, Protocol } from "@microsoft/webui";
 import { fileURLToPath } from "node:url";
 import helloWorldTemplates from "./templates/hello-world.html?raw";
 
@@ -13,7 +13,7 @@ const templates = JSON.stringify({
   [helloWorldTemplate.name]: helloWorldTemplate,
 });
 const webuiAppDir = fileURLToPath(new URL("../src/webui/", import.meta.url));
-const { protocol } = build({ appDir: webuiAppDir });
+const protocol = new Protocol(build({ appDir: webuiAppDir }).protocol);
 
 // Streams server-rendered HTML through WebUI's compiled renderer.
 export function streamHTML(c: Context, html: string, state: object = {}) {
@@ -29,7 +29,7 @@ export function streamHTML(c: Context, html: string, state: object = {}) {
   const chunks: string[] = [];
   const encoder = new TextEncoder();
 
-  renderStream(protocol, { content: renderedHTML }, (chunk) => {
+  protocol.renderStream({ content: renderedHTML }, (chunk) => {
     chunks.push(chunk);
   });
 
