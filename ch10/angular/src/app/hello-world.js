@@ -15,10 +15,10 @@ class HelloWorld extends HTMLElement {
   }
 
   attributeChangedCallback(attrName, _oldValue, newValue) {
-    if (attrName === "color") {
-      this.color = newValue ?? "black";
-    } else if (attrName === "name") {
-      this.name = newValue ?? "World";
+    if (attrName === "name") {
+      this.name = newValue;
+    } else if (attrName === "color") {
+      this.color = newValue;
     }
   }
 
@@ -38,7 +38,7 @@ class HelloWorld extends HTMLElement {
   }
 
   set name(value) {
-    this.#p.textContent = `Hello, ${this.#name}!`;
+    this.#p.textContent = `Hello, ${value}!`;
     if (value === this.#name) return;
     this.#name = value;
     this.setAttribute("name", value);

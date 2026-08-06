@@ -31,17 +31,17 @@ class HelloWorld extends HTMLElement {
   }
 
   set color(value) {
-    this.#p.style.color = this.#color;
     if (value === this.#color) return;
     this.#color = value;
     this.setAttribute("color", value);
+    this.#p.style.color = this.#color;
   }
 
   set name(value) {
+    this.#p.textContent = `Hello, ${value}!`;
     if (value === this.#name) return;
     this.#name = value;
     this.setAttribute("name", value);
-    this.#p.textContent = `Hello, ${this.#name}!`;
   }
 }
 

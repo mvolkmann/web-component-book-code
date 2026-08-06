@@ -38,7 +38,7 @@ class HelloWorld extends HTMLElement {
   }
 
   set name(value) {
-    this.#p.textContent = `Hello, ${this.#name}!`;
+    this.#p.textContent = `Hello, ${value}!`;
     if (value === this.#name) return;
     this.#name = value;
     this.setAttribute("name", value);

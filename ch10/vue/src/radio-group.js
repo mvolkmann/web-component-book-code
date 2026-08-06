@@ -33,7 +33,6 @@ export class RadioGroup extends HTMLElement {
   }
 
   connectedCallback() {
-    // Vue sets these properties and removes the attributes before this.
     if (!this.labels) this.labels = this.getAttribute("labels");
     if (!this.name) this.name = this.getAttribute("name");
     if (!this.#value) this.#value = this.getAttribute("value");
