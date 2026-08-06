@@ -13,7 +13,8 @@ function App() {
   });
 
   function handleChange(event: Event) {
-    updateColor((event as CustomEvent).detail.value);
+    const color = (event as CustomEvent).detail.value;
+    updateColor(color);
   }
 
   function updateColor(color: string) {

@@ -19,8 +19,12 @@ function App() {
   }, []);
 
   function handleChange(event: Event) {
-    const { value } = event.target as HTMLInputElement;
-    updateColor(value);
+    // In React, the event is wrapped in a SyntheticEvent.
+    // We need to get the native event in order to
+    // access the CustomEvent detail.value property.
+    const nativeEvent = event.nativeEvent as CustomEvent<{ value: string }>;
+    const color = nativeEvent.detail.value;
+    updateColor(color);
   }
 
   return (
