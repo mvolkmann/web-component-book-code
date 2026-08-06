@@ -1,17 +1,17 @@
 {
-  "name": "delete-me",
+  "name": "wrec-ssr-demo",
+  "type": "module",
   "scripts": {
     "build": "vite build && vite build --ssr",
     "clean": "rm -rf dist",
     "dev": "node dist/server.js"
   },
-  "type": "module",
-  "devDependencies": {
-    "vite": "^8.0.8"
-  },
   "dependencies": {
-    "@hono/node-server": "^1.19.12",
-    "hono": "^4.12.10",
-    "wrec": "0.40.3"
+    "@hono/node-server": "^2.1.0",
+    "hono": "^4.13.0",
+    "wrec": "0.43.3"
+  },
+  "devDependencies": {
+    "vite": "^8.2.0"
   }
 }
