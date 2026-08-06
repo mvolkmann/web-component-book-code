@@ -1,2 +1,5 @@
 allowBuilds:
   rs-module-lexer: false
+minimumReleaseAge: 2880
+minimumReleaseAgeExclude:
+  - wrec
