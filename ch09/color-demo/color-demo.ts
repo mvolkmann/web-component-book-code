@@ -5,7 +5,7 @@ import "./number-slider";
 class ColorDemo extends Wrec {
   static properties = {
     color: { type: String },
-    disablePicker: { type: Boolean },
+    disablePicker: { type: Boolean }, // not shown in book
     size: { type: Number, value: 18 },
   };
 
@@ -32,17 +32,13 @@ class ColorDemo extends Wrec {
         disabled="this.disablePicker"
         form-assoc="red: r, green: g, blue: b"
       ></color-picker>
+      <!-- This div is not shown in the book.
+           Its purpose is to demonstrate how a component can be disabled. -->
       <div>
         <label>Lock in color</label>
         <input type="checkbox" checked="this.disablePicker" />
       </div>
-      <number-slider
-        label="Size"
-        max="48"
-        min="12"
-        value="this.size"
-        name="size"
-      ></number-slider>
+      <number-slider label="Size" max="48" min="12" value="this.size" name="size"></number-slider>
       <p>This is a test.</p>
       <button type="submit">Submit</button>
       <button type="reset">Reset</button>
