@@ -4,7 +4,7 @@ class RadioGroup extends Wrec {
   static properties = {
     labels: { type: String },
     name: { type: String },
-    value: { type: String },
+    value: { type: String, dispatch: true },
     values: { type: String },
   };
 
@@ -23,10 +23,6 @@ class RadioGroup extends Wrec {
 
   static html = "this.makeButtons(this.labels, this.values)";
 
-  handleChange(event) {
-    this.value = event.target.value;
-  }
-
   makeButtons(labels, values) {
     const labelArray = labels.split(",");
     const valueArray = values.split(",").map((value) => value.trim());
@@ -34,12 +30,11 @@ class RadioGroup extends Wrec {
       (value, index) => html`
         <div>
           <input
-            checked="this.value === '${value}'"
+            type="radio"
             id=${value}
             name=${this.name}
-            onchange="handleChange"
-            type="radio"
             value=${value}
+            checked="this.value"
           />
           <label for=${value}>${labelArray[index]}</label>
         </div>
