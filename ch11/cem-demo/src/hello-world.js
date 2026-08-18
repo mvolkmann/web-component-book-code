@@ -46,9 +46,9 @@ class HelloWorld extends HTMLElement {
 
   attributeChangedCallback(attrName, _oldValue, newValue) {
     if (attrName === "color") {
-      this.color = newValue;
+      this.color = newValue ?? "black";
     } else if (attrName === "name") {
-      this.name = newValue;
+      this.name = newValue ?? "World";
     }
   }
 
