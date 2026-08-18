@@ -39,6 +39,7 @@ class HelloWorld extends HTMLElement {
       }
     `;
     this.#p.setAttribute("part", "greeting");
+    /** @ignore */
     this.#p.textContent = `Hello, ${this.#name}!`;
     this.shadowRoot?.replaceChildren(style, createSlot("before"), this.#p, createSlot());
   }
