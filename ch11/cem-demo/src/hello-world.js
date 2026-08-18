@@ -30,17 +30,17 @@ class HelloWorld extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
     const style = document.createElement("style");
-    style.textContent = `
+    style.append(`
       :host {
         display: inline-block;
         border: 3px solid var(--border-color, gray);
         margin: 0.5rem 0;
         padding: 0.5rem;
       }
-    `;
+    `);
     this.#p.setAttribute("part", "greeting");
-    /** @ignore */
-    this.#p.textContent = `Hello, ${this.#name}!`;
+    //this.#p.textContent = `Hello, ${this.#name}!`;
+    this.#p.append(`Hello, ${this.#name}!`);
     this.shadowRoot?.replaceChildren(style, createSlot("before"), this.#p, createSlot());
   }
 

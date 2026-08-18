@@ -177,12 +177,6 @@
               },
               "description": "current name to greet",
               "default": "World"
-            },
-            {
-              "kind": "field",
-              "name": "textContent",
-              "default": "`Hello, ${this.#name}!`",
-              "ignore": true
             }
           ],
           "attributes": [

@@ -1,4 +1,4 @@
-# `hello-lit.ts`:
+# `src/hello-lit.ts`:
 
 ## class: `HelloLit`, `hello-lit`
 
@@ -8,12 +8,6 @@
 | ------------ | ------ | ------- |
 | `LitElement` |        | lit     |
 
-### Static Fields
-
-| Name     | Privacy | Type | Default                                                                                                                                                  | Description | Inherited From |
-| -------- | ------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------- |
-| `styles` |         |      | `` css` :host { display: inline-block; border: 3px solid var(--border-color, gray); margin: 0.5rem 0; padding: 0.5rem; } p { color: var(--color); } ` `` |             |                |
-
 ### Fields
 
 | Name    | Privacy | Type     | Default | Description           | Inherited From |
@@ -21,18 +15,12 @@
 | `color` |         | `string` | `black` | current text color    |                |
 | `name`  |         | `string` | `World` | current name to greet |                |
 
-### Methods
-
-| Name     | Privacy | Description | Parameters | Return | Inherited From |
-| -------- | ------- | ----------- | ---------- | ------ | -------------- |
-| `render` |         |             |            |        |                |
-
 ### Attributes
 
 | Name    | Field | Inherited From |
 | ------- | ----- | -------------- |
-| `color` |       |                |
-| `name`  |       |                |
+| `color` | color |                |
+| `name`  | name  |                |
 
 ### CSS Properties
 
@@ -57,11 +45,12 @@
 
 ## Exports
 
-| Kind | Name       | Declaration | Module       | Package |
-| ---- | ---------- | ----------- | ------------ | ------- |
-| `js` | `HelloLit` | HelloLit    | hello-lit.ts |         |
+| Kind                        | Name        | Declaration | Module           | Package |
+| --------------------------- | ----------- | ----------- | ---------------- | ------- |
+| `js`                        | `HelloLit`  | HelloLit    | src/hello-lit.ts |         |
+| `custom-element-definition` | `hello-lit` | HelloLit    | src/hello-lit.ts |         |
 
-# `hello-world.js`:
+# `src/hello-world.js`:
 
 ## class: `HelloWorld`, `hello-world`
 
@@ -108,11 +97,11 @@
 
 ## Exports
 
-| Kind                        | Name          | Declaration | Module         | Package |
-| --------------------------- | ------------- | ----------- | -------------- | ------- |
-| `custom-element-definition` | `hello-world` | HelloWorld  | hello-world.js |         |
+| Kind                        | Name          | Declaration | Module             | Package |
+| --------------------------- | ------------- | ----------- | ------------------ | ------- |
+| `custom-element-definition` | `hello-world` | HelloWorld  | src/hello-world.js |         |
 
-# `hello-wrec.js`:
+# `src/hello-wrec.js`:
 
 ## class: `HelloWrec`, `hello-wrec`
 
@@ -159,11 +148,11 @@
 
 ## Exports
 
-| Kind                        | Name         | Declaration | Module        | Package |
-| --------------------------- | ------------ | ----------- | ------------- | ------- |
-| `custom-element-definition` | `hello-wrec` | HelloWrec   | hello-wrec.js |         |
+| Kind                        | Name         | Declaration | Module            | Package |
+| --------------------------- | ------------ | ----------- | ----------------- | ------- |
+| `custom-element-definition` | `hello-wrec` | HelloWrec   | src/hello-wrec.js |         |
 
-# `my-counter.js`:
+# `src/my-counter.js`:
 
 ## class: `MyCounter`, `my-counter`
 
@@ -196,11 +185,11 @@
 
 ## Exports
 
-| Kind                        | Name         | Declaration | Module        | Package |
-| --------------------------- | ------------ | ----------- | ------------- | ------- |
-| `custom-element-definition` | `my-counter` | MyCounter   | my-counter.js |         |
+| Kind                        | Name         | Declaration | Module            | Package |
+| --------------------------- | ------------ | ----------- | ----------------- | ------- |
+| `custom-element-definition` | `my-counter` | MyCounter   | src/my-counter.js |         |
 
-# `radio-group.js`:
+# `src/radio-group.js`:
 
 ## class: `RadioGroup`, `radio-group`
 
@@ -224,7 +213,6 @@
 | Name          | Privacy | Description | Parameters | Return | Inherited From |
 | ------------- | ------- | ----------- | ---------- | ------ | -------------- |
 | `makeButtons` |         |             |            |        |                |
-| `render`      |         |             |            |        |                |
 
 ### Attributes
 
@@ -239,7 +227,7 @@
 
 ## Exports
 
-| Kind                        | Name          | Declaration | Module         | Package |
-| --------------------------- | ------------- | ----------- | -------------- | ------- |
-| `js`                        | `RadioGroup`  | RadioGroup  | radio-group.js |         |
-| `custom-element-definition` | `radio-group` | RadioGroup  | radio-group.js |         |
+| Kind                        | Name          | Declaration | Module             | Package |
+| --------------------------- | ------------- | ----------- | ------------------ | ------- |
+| `js`                        | `RadioGroup`  | RadioGroup  | src/radio-group.js |         |
+| `custom-element-definition` | `radio-group` | RadioGroup  | src/radio-group.js |         |
