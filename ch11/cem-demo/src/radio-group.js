@@ -19,7 +19,7 @@ template.innerHTML = html`
 
 /**
  * This displays a set of related radio buttons.
- * @element radio-group
+ * @tag radio-group
  * @attr {string} labels - comma-separated list of radio button labels
  * @attr {string} name - name associated with the selected radio button
  * @attr {string} values - comma-separated list of radio button values

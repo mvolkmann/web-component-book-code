@@ -7,7 +7,7 @@ function createSlot(name) {
 /**
  * This displays a greeting message for a given name in a specified color.
  * @summary This displays a greeting message.
- * @element hello-world
+ * @tag hello-world
  * @attr {string} color - initial text color
  * @attr {string} name - initial name to greet
  * @prop {string} [color=black] - current text color

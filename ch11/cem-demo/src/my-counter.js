@@ -36,7 +36,7 @@ template.innerHTML = html`
 
 /**
  * This is a counter web component.
- * @element my-counter
+ * @tag my-counter
  * @attr {number} count - initial count
  * @prop {number} [count=3] - current count
  */
