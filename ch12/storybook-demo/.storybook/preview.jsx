@@ -8,7 +8,7 @@ import {
   Title,
 } from "@storybook/addon-docs/blocks";
 
-import { setCustomElementsManifest } from "@storybook/web-components";
+import { setCustomElementsManifest } from "@storybook/web-components-vite";
 import { setStorybookHelpersConfig } from "@wc-toolkit/storybook-helpers";
 import manifest from "../custom-elements.json" with { type: "json" };
 // The next line is needed even though no settings are specified.
