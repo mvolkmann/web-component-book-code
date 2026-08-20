@@ -2,9 +2,7 @@ const html = String.raw;
 
 const template = document.createElement("template");
 template.innerHTML = html`
-  <p style="color: green">
-    <span class="salutation"></span>, <span class="name"></span>!
-  </p>
+  <p style="color: green"><span class="salutation"></span>, <span class="name"></span>!</p>
 `;
 
 /**
@@ -31,9 +29,9 @@ export class HelloGoodbye extends HTMLElement {
 
   attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
     if (name === "name") {
-      this.name = newValue;
+      this.name = newValue ?? "World";
     } else if (name === "salutation") {
-      this.salutation = newValue;
+      this.salutation = newValue ?? "Hello";
     }
   }
 
