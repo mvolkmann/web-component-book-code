@@ -1,7 +1,7 @@
 import { expect, userEvent } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/web-components-vite";
 import { TrafficLight } from "../traffic-light.ts";
-import "../traffic-light.js";
+import "../traffic-light.ts";
 
 // This demonstrates using the Web Components Toolkit storybook-helpers.
 import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";

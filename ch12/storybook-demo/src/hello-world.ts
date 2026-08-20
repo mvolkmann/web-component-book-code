@@ -10,7 +10,7 @@ template.innerHTML = html`<p style="color: blue">Hello, <span></span>!</p>`;
  */
 export class HelloWorld extends HTMLElement {
   #name = "World";
-  #span: HTMLSpanElement | undefined; // assigned in connectedCallback
+  #span: HTMLSpanElement | undefined; // assigned in the constructor
 
   static get observedAttributes() {
     return ["name"];
