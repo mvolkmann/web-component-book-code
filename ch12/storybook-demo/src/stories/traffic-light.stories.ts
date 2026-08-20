@@ -3,11 +3,17 @@ import type { Meta, StoryObj } from "@storybook/web-components-vite";
 import { TrafficLight } from "../traffic-light.ts";
 import "../traffic-light.js";
 
+// This demonstrates using the Web Components Toolkit storybook-helpers.
+import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
+const component = "traffic-light";
+const { args, argTypes } = getStorybookHelpers(component);
+
 type StoryArgs = {
   state: "go" | "stop" | "yield";
 };
 
 const meta: Meta<StoryArgs> = {
+  /* Uncomment these lines when not using storybook-helpers.
   component: "traffic-light",
   args: {
     state: "stop",
@@ -18,6 +24,11 @@ const meta: Meta<StoryArgs> = {
       options: ["stop", "yield", "go"],
     },
   },
+  */
+  // Comment these lines when not using storybook-helpers.
+  component,
+  args,
+  argTypes,
 };
 export default meta;
 
