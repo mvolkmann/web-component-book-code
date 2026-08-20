@@ -24,7 +24,7 @@ export class HelloWorld extends HTMLElement {
   }
 
   attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
-    if (name === "name") this.name = newValue;
+    if (name === "name") this.name = newValue ?? "World";
   }
 
   connectedCallback() {
