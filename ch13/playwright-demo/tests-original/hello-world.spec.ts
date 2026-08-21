@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { setAttribute, setProperty } from "./util"; // utility methods shown below
+import { setAttribute, setProperty } from "./util";
 
 // This runs before each of the test functions below
 // to perform common setup steps.
