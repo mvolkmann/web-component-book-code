@@ -2,9 +2,7 @@ const html = String.raw;
 
 const template = document.createElement("template");
 template.innerHTML = html`
-  <p style="color: green">
-    <span class="salutation"></span>, <span class="name"></span>!
-  </p>
+  <p style="color: green"><span class="salutation"></span>, <span class="name"></span>!</p>
 `;
 
 /**
@@ -19,6 +17,7 @@ export class HelloGoodbye extends HTMLElement {
   #salutation = "Hello";
   #span1: HTMLSpanElement | undefined; // assigned in constructor
   #span2: HTMLSpanElement | undefined; // assigned in constructor
+
   static get observedAttributes() {
     return ["name", "salutation"];
   }

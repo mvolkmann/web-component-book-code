@@ -46,8 +46,7 @@ template.innerHTML = html`
 const states = ["stop", "yield", "go"] as const;
 type State = (typeof states)[number]; // same as "stop" | "yield" | "go"
 
-const isState = (value: string) =>
-  (states as readonly string[]).includes(value);
+const isState = (value: string) => (states as readonly string[]).includes(value);
 
 /**
  * This web component emulates a U.S. traffic light
@@ -69,28 +68,22 @@ export class TrafficLight extends HTMLElement {
 
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.appendChild(template.content.cloneNode(true));
+
+    const divs = shadowRoot.querySelectorAll("div");
+    for (const [index, state] of states.entries()) {
+      this.#stateToDivMap.set(state, divs[index]);
+    }
+
+    this.addEventListener("click", this.next);
+    this.#change(true);
   }
 
   attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
     if (name === "state" && isState(newValue)) {
       this.state = newValue as State;
     }
-  }
-
-  connectedCallback() {
-    const initial = this.getAttribute("state") ?? "";
-    this.#state = isState(initial) ? (initial as State) : "stop";
-
-    this.shadowRoot?.appendChild(template.content.cloneNode(true));
-
-    const divs = this.shadowRoot?.querySelectorAll("div") ?? [];
-    states.forEach((state, index) => {
-      this.#stateToDivMap.set(state, divs[index]);
-    });
-
-    this.addEventListener("click", () => this.next());
-    this.#change(true);
   }
 
   get state() {
