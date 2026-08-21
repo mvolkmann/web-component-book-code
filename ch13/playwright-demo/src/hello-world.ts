@@ -18,17 +18,14 @@ export class HelloWorld extends HTMLElement {
 
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.appendChild(template.content.cloneNode(true));
+    this.#span = shadowRoot.querySelector("span")!;
+    this.#span.textContent = this.#name;
   }
 
   attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
     if (name === "name") this.name = newValue;
-  }
-
-  connectedCallback() {
-    this.shadowRoot?.appendChild(template.content.cloneNode(true));
-    this.#span = this.shadowRoot?.querySelector("span")!;
-    this.name = this.getAttribute("name") || this.#name;
   }
 
   get name() {

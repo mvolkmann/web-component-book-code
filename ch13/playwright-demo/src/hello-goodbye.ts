@@ -17,16 +17,24 @@ template.innerHTML = html`
 export class HelloGoodbye extends HTMLElement {
   #name = "World";
   #salutation = "Hello";
-  #span1: HTMLSpanElement | undefined; // assigned in connectedCallback
-  #span2: HTMLSpanElement | undefined; // assigned in connectedCallback
-
+  #span1: HTMLSpanElement | undefined; // assigned in constructor
+  #span2: HTMLSpanElement | undefined; // assigned in constructor
   static get observedAttributes() {
     return ["name", "salutation"];
   }
 
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.appendChild(template.content.cloneNode(true));
+    this.#span1 = shadowRoot.querySelector(".salutation")!;
+    this.#span2 = shadowRoot.querySelector(".name")!;
+    this.#span1.textContent = this.#salutation;
+    this.#span2.textContent = this.#name;
+    this.addEventListener("click", () => {
+      const newValue = this.#salutation === "Hello" ? "Goodbye" : "Hello";
+      this.salutation = newValue;
+    });
   }
 
   attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
@@ -35,18 +43,6 @@ export class HelloGoodbye extends HTMLElement {
     } else if (name === "salutation") {
       this.salutation = newValue;
     }
-  }
-
-  connectedCallback() {
-    this.shadowRoot?.appendChild(template.content.cloneNode(true));
-    this.#span1 = this.shadowRoot?.querySelector(".salutation")!;
-    this.#span2 = this.shadowRoot?.querySelector(".name")!;
-    this.name = this.getAttribute("name") || this.#name;
-    this.salutation = this.getAttribute("salutation") || this.#salutation;
-    this.addEventListener("click", () => {
-      const newValue = this.#salutation === "Hello" ? "Goodbye" : "Hello";
-      this.salutation = newValue;
-    });
   }
 
   get name() {
