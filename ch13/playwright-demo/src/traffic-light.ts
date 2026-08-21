@@ -101,7 +101,7 @@ export class TrafficLight extends HTMLElement {
   next() {
     this.#change(false);
     const s = this.#state;
-    this.#state = s === "stop" ? "yield" : s === "yield" ? "go" : "stop";
+    this.state = s === "stop" ? "yield" : s === "yield" ? "go" : "stop";
     this.#change(true);
     this.dispatchEvent(
       new CustomEvent("state-change", {
