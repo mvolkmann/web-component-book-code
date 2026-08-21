@@ -51,7 +51,7 @@ const isState = (value: string) => (states as readonly string[]).includes(value)
 /**
  * This web component emulates a U.S. traffic light
  * with red, yellow, and green lights.
- * The `state` attribute specifies the initial state.
+ * The `state` attribute specifies the current state.
  * To advance to the next state, click the component
  * or call the next() method on an instance.
  * To get the current state, access the `state` property of an instance.
