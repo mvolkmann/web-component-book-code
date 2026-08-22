@@ -21,7 +21,7 @@ function advance() {
   window.setTimeout(advance, delay);
 }
 
-trafficLight.tabIndex = -1;
+//trafficLight.tabIndex = -1;
 trafficLight.setAttribute("role", "img");
 trafficLight.style.pointerEvents = "none";
 
