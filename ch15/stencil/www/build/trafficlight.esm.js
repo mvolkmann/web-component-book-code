@@ -1,8 +1,8 @@
-import { B as BUILD, c as consoleDevInfo, H, w as win, N as NAMESPACE, p as promiseResolve, g as globalScripts, b as bootstrapLazy } from './index-CSY3GKIt.js';
-export { s as setNonce } from './index-CSY3GKIt.js';
+import { B as BUILD, c as consoleDevInfo, H, w as win, N as NAMESPACE, p as promiseResolve, g as globalScripts, b as bootstrapLazy } from './index-Domk2fRv.js';
+export { s as setNonce } from './index-Domk2fRv.js';
 
 /*
- Stencil Client Patch Browser v4.43.3 | MIT Licensed | https://stenciljs.com
+ Stencil Client Patch Browser v4.44.0 | MIT Licensed | https://stenciljs.com
  */
 
 var patchBrowser = () => {

@@ -6,7 +6,7 @@ const globalScripts = () => {};
 const globalStyles = "";
 
 /*
- Stencil Client Platform v4.43.3 | MIT Licensed | https://stenciljs.com
+ Stencil Client Platform v4.44.0 | MIT Licensed | https://stenciljs.com
  */
 
 var Build = {
@@ -143,8 +143,10 @@ var setErrorHandler = (handler) => customError = handler;
 
 // src/client/client-load-module.ts
 var cmpModules = /* @__PURE__ */ new Map();
+var failedLoadAttempts = /* @__PURE__ */ new Map();
 var MODULE_IMPORT_PREFIX = "./";
 var loadModule = (cmpMeta, hostRef, hmrVersionId) => {
+  var _a;
   const exportName = cmpMeta.$tagName$.replace(/-/g, "_");
   const bundleId = cmpMeta.$lazyBundleId$;
   if (BUILD.isDev && typeof bundleId !== "string") {
@@ -159,21 +161,28 @@ var loadModule = (cmpMeta, hostRef, hmrVersionId) => {
   if (module) {
     return module[exportName];
   }
+  const retryCount = (_a = failedLoadAttempts.get(bundleId)) != null ? _a : 0;
+  const cacheBustParams = [
+    retryCount > 0 ? `s-retry=${retryCount}` : "",
+    BUILD.hotModuleReplacement && hmrVersionId ? `s-hmr=${hmrVersionId}` : ""
+  ].filter(Boolean).join("&");
   /*!__STENCIL_STATIC_IMPORT_SWITCH__*/
   return import(
     /* @vite-ignore */
     /* webpackInclude: /\.entry\.js$/ */
     /* webpackExclude: /\.system\.entry\.js$/ */
     /* webpackMode: "lazy" */
-    `./${bundleId}.entry.js${BUILD.hotModuleReplacement && hmrVersionId ? "?s-hmr=" + hmrVersionId : ""}`
+    `./${bundleId}.entry.js${cacheBustParams ? "?" + cacheBustParams : ""}`
   ).then(
     (importedModule) => {
       if (!BUILD.hotModuleReplacement) {
+        failedLoadAttempts.delete(bundleId);
         cmpModules.set(bundleId, importedModule);
       }
       return importedModule[exportName];
     },
     (e) => {
+      failedLoadAttempts.set(bundleId, retryCount + 1);
       consoleError(e, hostRef.$hostElement$);
     }
   );
@@ -204,6 +213,8 @@ var DEFAULT_DOC_DATA = {
 };
 var SLOT_FB_CSS = "slot-fb{display:contents}slot-fb[hidden]{display:none}";
 var XLINK_NS = "http://www.w3.org/1999/xlink";
+var MAX_LAZY_LOAD_RETRIES = 3;
+var LAZY_LOAD_RETRY_INTERVAL_MS = 1e3;
 var FORM_ASSOCIATED_CUSTOM_ELEMENT_CALLBACKS = [
   "formAssociatedCallback",
   "formResetCallback",
@@ -263,6 +274,10 @@ var queuePending = false;
 var queueDomReads = [];
 var queueDomWrites = [];
 var queueDomWritesLow = [];
+var scheduleFlush = () => {
+  var _a;
+  return ((_a = win.document) == null ? void 0 : _a.hidden) ? nextTick(flush) : plt.raf(flush);
+};
 var queueTask = (queue, write) => (cb) => {
   queue.push(cb);
   if (!queuePending) {
@@ -270,7 +285,7 @@ var queueTask = (queue, write) => (cb) => {
     if (write && plt.$flags$ & 4 /* queueSync */) {
       nextTick(flush);
     } else {
-      plt.raf(flush);
+      scheduleFlush();
     }
   }
 };
@@ -314,14 +329,14 @@ var flush = () => {
       queueDomWrites.length = 0;
     }
     if (queuePending = queueDomReads.length + queueDomWrites.length + queueDomWritesLow.length > 0) {
-      plt.raf(flush);
+      scheduleFlush();
     } else {
       queueCongestion = 0;
     }
   } else {
     consume(queueDomWrites);
     if (queuePending = queueDomReads.length > 0) {
-      plt.raf(flush);
+      scheduleFlush();
     }
   }
 };
@@ -417,7 +432,7 @@ function getHostSlotNodes(childNodes, hostName, slotName) {
       slottedNodes.push(childNode);
       if (typeof slotName !== "undefined") return slottedNodes;
     }
-    slottedNodes = [...slottedNodes, ...getHostSlotNodes(childNode.childNodes, hostName, slotName)];
+    slottedNodes = [...slottedNodes, ...getHostSlotNodes(internalCall(childNode, "childNodes"), hostName, slotName)];
   }
   return slottedNodes;
 }
@@ -764,13 +779,13 @@ var patchChildSlotNodes = (elm) => {
   patchHostOriginalAccessor("firstChild", elm);
   Object.defineProperty(elm, "firstChild", {
     get() {
-      return this.childNodes[0];
+      return this.childNodes[0] || null;
     }
   });
   patchHostOriginalAccessor("lastChild", elm);
   Object.defineProperty(elm, "lastChild", {
     get() {
-      return this.childNodes[this.childNodes.length - 1];
+      return this.childNodes[this.childNodes.length - 1] || null;
     }
   });
   patchHostOriginalAccessor("childNodes", elm);
@@ -801,7 +816,7 @@ var patchNextSibling = (node) => {
       const parentNodes = (_a = this["s-ol"]) == null ? void 0 : _a.parentNode.childNodes;
       const index = parentNodes == null ? void 0 : parentNodes.indexOf(this);
       if (parentNodes && index > -1) {
-        return parentNodes[index + 1];
+        return parentNodes[index + 1] || null;
       }
       return this.__nextSibling;
     }
@@ -816,7 +831,7 @@ var patchNextElementSibling = (element) => {
       const parentEles = (_a = this["s-ol"]) == null ? void 0 : _a.parentNode.children;
       const index = parentEles == null ? void 0 : parentEles.indexOf(this);
       if (parentEles && index > -1) {
-        return parentEles[index + 1];
+        return parentEles[index + 1] || null;
       }
       return this.__nextElementSibling;
     }
@@ -831,7 +846,7 @@ var patchPreviousSibling = (node) => {
       const parentNodes = (_a = this["s-ol"]) == null ? void 0 : _a.parentNode.childNodes;
       const index = parentNodes == null ? void 0 : parentNodes.indexOf(this);
       if (parentNodes && index > -1) {
-        return parentNodes[index - 1];
+        return parentNodes[index - 1] || null;
       }
       return this.__previousSibling;
     }
@@ -846,7 +861,7 @@ var patchPreviousElementSibling = (element) => {
       const parentNodes = (_a = this["s-ol"]) == null ? void 0 : _a.parentNode.children;
       const index = parentNodes == null ? void 0 : parentNodes.indexOf(this);
       if (parentNodes && index > -1) {
-        return parentNodes[index - 1];
+        return parentNodes[index - 1] || null;
       }
       return this.__previousElementSibling;
     }
@@ -1165,10 +1180,15 @@ var h = (nodeName, vnodeData, ...children) => {
       } else if (child != null && typeof child !== "boolean") {
         if (simple = typeof nodeName !== "function" && !isComplexType(child)) {
           child = String(child);
-        } else if (BUILD.isDev && typeof nodeName !== "function" && child.$flags$ === void 0) {
-          consoleDevError(`vNode passed as children has unexpected type.
+        } else if (typeof nodeName !== "function" && child.$flags$ === void 0) {
+          if (BUILD.isDev) {
+            consoleDevError(`vNode passed as children has unexpected type.
 Make sure it's using the correct h() function.
 Empty objects can also be the cause, look for JSX comments that became objects.`);
+          } else {
+            consoleError("Invalid vNode child");
+          }
+          continue;
         }
         if (simple && lastSimple) {
           vNodeChildren[vNodeChildren.length - 1].$text$ += child;
@@ -2127,6 +2147,31 @@ var getMode = (ref) => {
   return (_a = getHostRef(ref)) == null ? void 0 : _a.$modeName$;
 };
 
+// src/runtime/normalize-watchers.ts
+var normalizeWatchers = (raw) => {
+  if (!raw) return void 0;
+  const keys = Object.keys(raw);
+  if (keys.length === 0) return void 0;
+  let hasLegacy = false;
+  for (const propName of keys) {
+    if (hasLegacy) break;
+    for (const h2 of raw[propName]) {
+      if (typeof h2 === "string") {
+        hasLegacy = true;
+        break;
+      }
+    }
+  }
+  if (!hasLegacy) return raw;
+  const out = {};
+  for (const propName of keys) {
+    out[propName] = raw[propName].map(
+      (h2) => typeof h2 === "string" ? { [h2]: 0 } : h2
+    );
+  }
+  return out;
+};
+
 // src/utils/remote-value.ts
 var RemoteValue = class _RemoteValue {
   /**
@@ -2223,11 +2268,19 @@ var RemoteValue = class _RemoteValue {
 };
 
 // src/utils/serialize.ts
+function decodeBase64Unicode(base64) {
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i2 = 0; i2 < binary.length; i2++) {
+    bytes[i2] = binary.charCodeAt(i2);
+  }
+  return new TextDecoder().decode(bytes);
+}
 function deserializeProperty(value) {
   if (typeof value !== "string" || !value.startsWith(SERIALIZED_PREFIX)) {
     return value;
   }
-  return RemoteValue.fromLocalValue(JSON.parse(atob(value.slice(SERIALIZED_PREFIX.length))));
+  return RemoteValue.fromLocalValue(JSON.parse(decodeBase64Unicode(value.slice(SERIALIZED_PREFIX.length))));
 }
 
 // src/runtime/parse-property-value.ts
@@ -2834,7 +2887,10 @@ var markSlotContentForRelocation = (elm) => {
       const slotName = childNode["s-sn"];
       for (j = hostContentNodes.length - 1; j >= 0; j--) {
         node = hostContentNodes[j];
-        if (!node["s-cn"] && !node["s-nr"] && node["s-hn"] !== childNode["s-hn"] && (!node["s-sh"] || node["s-sh"] !== childNode["s-hn"])) {
+        if (!node["s-cn"] && !node["s-nr"] && node["s-hn"] !== childNode["s-hn"] && // let an exact named-slot match override a stale default-slot claim. Skip this for
+        // `slotName === ''` itself - a matched default node's cached `s-sn` is `''` too, which
+        // would trivially "match" on every re-render and force pointless re-insertion.
+        (!node["s-sh"] || node["s-sh"] !== childNode["s-hn"] || slotName !== "" && getSlotName(node) === slotName)) {
           if (isNodeLocatedInSlot(node, slotName)) {
             let relocateNodeData = relocateNodes.find((r) => r.$nodeToRelocate$ === node);
             checkSlotFallbackVisibility = true;
@@ -3110,7 +3166,7 @@ var attachToAncestor = (hostRef, ancestorComponent) => {
   }
 };
 var scheduleUpdate = (hostRef, isInitialLoad) => {
-  if (BUILD.taskQueue && BUILD.updatable) {
+  if (BUILD.updatable) {
     hostRef.$flags$ |= 16 /* isQueuedForUpdate */;
   }
   if (BUILD.asyncLoading && hostRef.$flags$ & 4 /* isWaitingForChildren */) {
@@ -3180,7 +3236,7 @@ var updateComponent = async (hostRef, instance, isInitialLoad) => {
   }
   const endRender = createTime("render", hostRef.$cmpMeta$.$tagName$);
   if (BUILD.isDev) {
-    hostRef.$flags$ |= 1024 /* devOnRender */;
+    hostRef.$flags$ |= 2048 /* devOnRender */;
   }
   if (BUILD.hydrateServerSide) {
     await callRender(hostRef, instance, elm, isInitialLoad);
@@ -3189,7 +3245,7 @@ var updateComponent = async (hostRef, instance, isInitialLoad) => {
   }
   if (BUILD.isDev) {
     hostRef.$renderCount$ = hostRef.$renderCount$ === void 0 ? 1 : hostRef.$renderCount$ + 1;
-    hostRef.$flags$ &= ~1024 /* devOnRender */;
+    hostRef.$flags$ &= ~2048 /* devOnRender */;
   }
   if (BUILD.hydrateServerSide) {
     try {
@@ -3229,12 +3285,11 @@ var renderingRef = null;
 var callRender = (hostRef, instance, elm, isInitialLoad) => {
   const allRenderFn = BUILD.allRenderFn ? true : false;
   const lazyLoad = BUILD.lazyLoad ? true : false;
-  const taskQueue = BUILD.taskQueue ? true : false;
   const updatable = BUILD.updatable ? true : false;
   try {
     renderingRef = instance;
     instance = allRenderFn ? instance.render() : instance.render && instance.render();
-    if (updatable && taskQueue) {
+    if (updatable) {
       hostRef.$flags$ &= ~16 /* isQueuedForUpdate */;
     }
     if (updatable || lazyLoad) {
@@ -3270,11 +3325,11 @@ var postUpdateComponent = (hostRef) => {
   const instance = BUILD.lazyLoad ? hostRef.$lazyInstance$ : elm;
   const ancestorComponent = hostRef.$ancestorComponent$;
   if (BUILD.isDev) {
-    hostRef.$flags$ |= 1024 /* devOnRender */;
+    hostRef.$flags$ |= 2048 /* devOnRender */;
   }
   safeCall(instance, "componentDidRender", void 0, elm);
   if (BUILD.isDev) {
-    hostRef.$flags$ &= ~1024 /* devOnRender */;
+    hostRef.$flags$ &= ~2048 /* devOnRender */;
   }
   emitLifecycleEvent(elm, "componentDidRender");
   if (!(hostRef.$flags$ & 64 /* hasLoadedComponent */)) {
@@ -3283,11 +3338,11 @@ var postUpdateComponent = (hostRef) => {
       addHydratedFlag(elm);
     }
     if (BUILD.isDev) {
-      hostRef.$flags$ |= 2048 /* devOnDidLoad */;
+      hostRef.$flags$ |= 4096 /* devOnDidLoad */;
     }
     safeCall(instance, "componentDidLoad", void 0, elm);
     if (BUILD.isDev) {
-      hostRef.$flags$ &= ~2048 /* devOnDidLoad */;
+      hostRef.$flags$ &= ~4096 /* devOnDidLoad */;
     }
     emitLifecycleEvent(elm, "componentDidLoad");
     endPostUpdate();
@@ -3299,11 +3354,11 @@ var postUpdateComponent = (hostRef) => {
     }
   } else {
     if (BUILD.isDev) {
-      hostRef.$flags$ |= 1024 /* devOnRender */;
+      hostRef.$flags$ |= 2048 /* devOnRender */;
     }
     safeCall(instance, "componentDidUpdate", void 0, elm);
     if (BUILD.isDev) {
-      hostRef.$flags$ &= ~1024 /* devOnRender */;
+      hostRef.$flags$ &= ~2048 /* devOnRender */;
     }
     emitLifecycleEvent(elm, "componentDidUpdate");
     endPostUpdate();
@@ -3435,7 +3490,7 @@ var setValue = (ref, propName, newVal, cmpMeta) => {
       }
     }
     if (BUILD.isDev) {
-      if (hostRef.$flags$ & 1024 /* devOnRender */) {
+      if (hostRef.$flags$ & 2048 /* devOnRender */) {
         consoleDevWarn(
           `The state/prop "${propName}" changed during rendering. This can potentially lead to infinite-loops and other bugs.`,
           "\nElement",
@@ -3445,7 +3500,7 @@ var setValue = (ref, propName, newVal, cmpMeta) => {
           "\nOld value",
           oldVal
         );
-      } else if (hostRef.$flags$ & 2048 /* devOnDidLoad */) {
+      } else if (hostRef.$flags$ & 4096 /* devOnDidLoad */) {
         consoleDevWarn(
           `The state/prop "${propName}" changed during "componentDidLoad()", this triggers extra re-renders, try to setup on "componentWillLoad()"`,
           "\nElement",
@@ -3526,7 +3581,7 @@ var proxyComponent = (Cstr, cmpMeta, flags) => {
   if (BUILD.member && cmpMeta.$members$ || BUILD.propChangeCallback) {
     if (BUILD.propChangeCallback) {
       if (Cstr.watchers && !cmpMeta.$watchers$) {
-        cmpMeta.$watchers$ = Cstr.watchers;
+        cmpMeta.$watchers$ = normalizeWatchers(Cstr.watchers);
       }
       if (Cstr.deserializers && !cmpMeta.$deserializers$) {
         cmpMeta.$deserializers$ = Cstr.deserializers;
@@ -3704,11 +3759,13 @@ More information: https://stenciljs.com/docs/properties#prop-mutability`
             return;
           }
           const propFlags = members.find(([m]) => m === propName);
-          if (propFlags && propFlags[1][0] & 4 /* Boolean */) {
+          const isBooleanTarget = propFlags && propFlags[1][0] & 4 /* Boolean */;
+          const isSpuriousBooleanRemoval = isBooleanTarget && newValue === null && this[propName] === void 0;
+          if (isBooleanTarget) {
             newValue = newValue === null || newValue === "false" ? false : true;
           }
           const propDesc = Object.getOwnPropertyDescriptor(prototype, propName);
-          if (newValue != this[propName] && (!propDesc.get || !!propDesc.set)) {
+          if (!isSpuriousBooleanRemoval && newValue != this[propName] && (!propDesc.get || !!propDesc.set)) {
             this[propName] = newValue;
           }
         });
@@ -3734,10 +3791,12 @@ More information: https://stenciljs.com/docs/properties#prop-mutability`
 
 // src/runtime/initialize-component.ts
 var initializeComponent = async (elm, hostRef, cmpMeta, hmrVersionId) => {
+  var _a;
   let Cstr;
   try {
     if ((hostRef.$flags$ & 32 /* hasInitializedComponent */) === 0) {
       hostRef.$flags$ |= 32 /* hasInitializedComponent */;
+      hostRef.$flags$ &= ~1024 /* hasFailedLoad */;
       const bundleId = cmpMeta.$lazyBundleId$;
       if (BUILD.lazyLoad && bundleId) {
         const CstrImport = loadModule(cmpMeta, hostRef, hmrVersionId);
@@ -3752,11 +3811,16 @@ var initializeComponent = async (elm, hostRef, cmpMeta, hmrVersionId) => {
           Cstr = CstrImport;
         }
         if (!Cstr) {
+          hostRef.$flags$ &= ~32 /* hasInitializedComponent */;
+          hostRef.$loadRetryCount$ = ((_a = hostRef.$loadRetryCount$) != null ? _a : 0) + 1;
+          if (hostRef.$loadRetryCount$ < MAX_LAZY_LOAD_RETRIES) {
+            hostRef.$flags$ |= 1024 /* hasFailedLoad */;
+          }
           throw new Error(`Constructor for "${cmpMeta.$tagName$}#${hostRef.$modeName$}" was not found`);
         }
         if (BUILD.member && !Cstr.isProxied) {
           if (BUILD.propChangeCallback) {
-            cmpMeta.$watchers$ = Cstr.watchers;
+            cmpMeta.$watchers$ = normalizeWatchers(Cstr.watchers);
             cmpMeta.$serializers$ = Cstr.serializers;
             cmpMeta.$deserializers$ = Cstr.deserializers;
           }
@@ -3831,7 +3895,7 @@ var initializeComponent = async (elm, hostRef, cmpMeta, hmrVersionId) => {
       hostRef.$onRenderResolve$();
       hostRef.$onRenderResolve$ = void 0;
     }
-    if (BUILD.asyncLoading && hostRef.$onReadyResolve$) {
+    if (BUILD.asyncLoading && hostRef.$onReadyResolve$ && !(hostRef.$flags$ & 1024 /* hasFailedLoad */)) {
       hostRef.$onReadyResolve$(elm);
     }
   }
@@ -3903,6 +3967,8 @@ var connectedCallback = (elm) => {
       addHostEventListeners(elm, hostRef, cmpMeta.$listeners$, false);
       if (hostRef == null ? void 0 : hostRef.$lazyInstance$) {
         fireConnectedCallback(hostRef.$lazyInstance$, elm);
+      } else if (hostRef.$flags$ & 1024 /* hasFailedLoad */) {
+        setTimeout(() => initializeComponent(elm, hostRef, cmpMeta), LAZY_LOAD_RETRY_INTERVAL_MS);
       } else if (hostRef == null ? void 0 : hostRef.$onReadyPromise$) {
         hostRef.$onReadyPromise$.then(() => fireConnectedCallback(hostRef.$lazyInstance$, elm));
       }
@@ -3970,7 +4036,7 @@ var proxyCustomElement = (Cstr, compactMeta) => {
       cmpMeta.$listeners$ = compactMeta[3];
     }
     if (BUILD.propChangeCallback) {
-      cmpMeta.$watchers$ = Cstr.$watchers$;
+      cmpMeta.$watchers$ = normalizeWatchers(Cstr.$watchers$);
       cmpMeta.$deserializers$ = Cstr.$deserializers$;
       cmpMeta.$serializers$ = Cstr.$serializers$;
     }
@@ -4126,7 +4192,7 @@ var bootstrapLazy = (lazyBundles, options = {}) => {
   let hasSlotRelocation = false;
   lazyBundles.map((lazyBundle) => {
     lazyBundle[1].map((compactMeta) => {
-      var _a2, _b, _c;
+      var _a2, _b;
       const cmpMeta = {
         $flags$: compactMeta[0],
         $tagName$: compactMeta[1],
@@ -4146,9 +4212,9 @@ var bootstrapLazy = (lazyBundles, options = {}) => {
         cmpMeta.$attrsToReflect$ = [];
       }
       if (BUILD.propChangeCallback) {
-        cmpMeta.$watchers$ = (_a2 = compactMeta[4]) != null ? _a2 : {};
-        cmpMeta.$serializers$ = (_b = compactMeta[5]) != null ? _b : {};
-        cmpMeta.$deserializers$ = (_c = compactMeta[6]) != null ? _c : {};
+        cmpMeta.$watchers$ = normalizeWatchers(compactMeta[4]);
+        cmpMeta.$serializers$ = (_a2 = compactMeta[5]) != null ? _a2 : {};
+        cmpMeta.$deserializers$ = (_b = compactMeta[6]) != null ? _b : {};
       }
       if (BUILD.shadowDom && !supportsShadow && cmpMeta.$flags$ & 1 /* shadowDomEncapsulation */) {
         cmpMeta.$flags$ |= 8 /* needsShadowDomShim */;
@@ -4200,7 +4266,7 @@ var bootstrapLazy = (lazyBundles, options = {}) => {
         }
         disconnectedCallback() {
           plt.jmp(() => disconnectedCallback(this));
-          plt.raf(() => {
+          nextTick(() => {
             var _a3;
             const hostRef = getHostRef(this);
             if (!hostRef) {
@@ -4356,16 +4422,21 @@ var setNonce = (nonce) => plt.$nonce$ = nonce;
 var setPlatformOptions = (opts) => Object.assign(plt, opts);
 
 // src/runtime/render.ts
+var hostRefCache = /* @__PURE__ */ new WeakMap();
 function render(vnode, container) {
-  const cmpMeta = {
-    $flags$: 0,
-    $tagName$: container.tagName
-  };
-  const ref = {
-    $flags$: 0,
-    $cmpMeta$: cmpMeta,
-    $hostElement$: container
-  };
+  let ref = hostRefCache.get(container);
+  if (!ref) {
+    const cmpMeta = {
+      $flags$: 0,
+      $tagName$: container.tagName
+    };
+    ref = {
+      $flags$: 0,
+      $cmpMeta$: cmpMeta,
+      $hostElement$: container
+    };
+    hostRefCache.set(container, ref);
+  }
   renderVdom(ref, vnode);
 }
 
@@ -4580,6 +4651,6 @@ var insertChildVNodeAnnotations = (doc, vnodeChild, cmpData, hostId, depth, inde
 };
 
 export { BUILD as B, H, NAMESPACE as N, Host as a, bootstrapLazy as b, consoleDevInfo as c, globalScripts as g, h, promiseResolve as p, registerInstance as r, setNonce as s, win as w };
-//# sourceMappingURL=index-CSY3GKIt.js.map
+//# sourceMappingURL=index-Domk2fRv.js.map
 
-//# sourceMappingURL=index-CSY3GKIt.js.map
+//# sourceMappingURL=index-Domk2fRv.js.map

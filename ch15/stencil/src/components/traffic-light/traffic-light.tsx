@@ -1,18 +1,18 @@
-import { Component, h, Host, Method, Prop, Watch } from '@stencil/core';
+import { Component, h, Host, Method, Prop, Watch } from "@stencil/core";
 
-type TrafficLightState = 'stop' | 'yield' | 'go';
+type TrafficLightState = "stop" | "yield" | "go";
 
-const STATES: TrafficLightState[] = ['stop', 'yield', 'go'];
+const STATES: TrafficLightState[] = ["stop", "go", "yield"];
 
 @Component({
-  tag: 'traffic-light',
-  styleUrl: 'traffic-light.css',
-  shadow: true
+  tag: "traffic-light",
+  styleUrl: "traffic-light.css",
+  shadow: true,
 })
 export class TrafficLight {
-  @Prop({ mutable: true, reflect: true }) state: TrafficLightState = 'stop';
+  @Prop({ mutable: true, reflect: true }) state: TrafficLightState = "stop";
 
-  @Watch('state')
+  @Watch("state")
   validateState(nextValue: TrafficLightState) {
     this.state = this.normalizeState(nextValue);
   }
@@ -29,9 +29,7 @@ export class TrafficLight {
   }
 
   private normalizeState(value: string): TrafficLightState {
-    return STATES.includes(value as TrafficLightState)
-      ? (value as TrafficLightState)
-      : 'stop';
+    return STATES.includes(value as TrafficLightState) ? (value as TrafficLightState) : "stop";
   }
 
   private handleClick = () => {
@@ -39,7 +37,7 @@ export class TrafficLight {
   };
 
   private handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Enter' || event.key === ' ') {
+    if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       void this.next();
     }
@@ -56,9 +54,9 @@ export class TrafficLight {
           tabindex={0}
           aria-label={`Traffic light showing ${this.state}`}
         >
-          <div class={{ light: true, red: true, active: this.state === 'stop' }}></div>
-          <div class={{ light: true, yellow: true, active: this.state === 'yield' }}></div>
-          <div class={{ light: true, green: true, active: this.state === 'go' }}></div>
+          <div class={{ light: true, red: true, active: this.state === "stop" }}></div>
+          <div class={{ light: true, yellow: true, active: this.state === "yield" }}></div>
+          <div class={{ light: true, green: true, active: this.state === "go" }}></div>
         </div>
       </Host>
     );

@@ -1,12 +1,12 @@
-import {css, html, Wrec} from 'wrec';
+import { css, html, Wrec } from "wrec";
 
 class TrafficLight extends Wrec {
   static properties = {
     state: {
       type: String,
-      values: ['stop', 'yield', 'go'],
-      value: 'stop'
-    }
+      values: ["stop", "go", "yield"],
+      value: "stop",
+    },
   };
 
   static css = css`
@@ -22,8 +22,7 @@ class TrafficLight extends Wrec {
       box-sizing: border-box;
       border-radius: 28px;
       border: 2px solid #2a2a2a;
-      background:
-        linear-gradient(180deg, #151515 0%, #030303 55%, #111111 100%);
+      background: linear-gradient(180deg, #151515 0%, #030303 55%, #111111 100%);
       box-shadow:
         inset 0 2px 2px rgb(255 255 255 / 0.08),
         inset 0 -2px 3px rgb(0 0 0 / 0.55);
@@ -106,13 +105,13 @@ class TrafficLight extends Wrec {
 
   next() {
     const nextByState = {
-      stop: 'go',
-      yield: 'stop',
-      go: 'yield'
+      stop: "go",
+      yield: "stop",
+      go: "yield",
     };
 
-    this.state = nextByState[this.state] ?? 'stop';
+    this.state = nextByState[this.state] ?? "stop";
   }
 }
 
-TrafficLight.define('traffic-light');
+TrafficLight.define("traffic-light");

@@ -1,10 +1,10 @@
-import {LitElement, css, html} from 'lit';
+import { LitElement, css, html } from "lit";
 
-const STATES = ['stop', 'yield', 'go'];
+const STATES = ["stop", "go", "yield"];
 
 export class TrafficLight extends LitElement {
   static properties = {
-    state: {reflect: true},
+    state: { reflect: true },
   };
 
   static styles = css`
@@ -77,7 +77,7 @@ export class TrafficLight extends LitElement {
 
   constructor() {
     super();
-    this.state = 'stop';
+    this.state = "stop";
   }
 
   render() {
@@ -89,18 +89,15 @@ export class TrafficLight extends LitElement {
         aria-label="Traffic light showing ${this.state}"
         @click=${this.next}
       >
-        ${this.renderLight('red', this.state === 'stop')}
-        ${this.renderLight('yellow', this.state === 'yield')}
-        ${this.renderLight('green', this.state === 'go')}
+        ${this.renderLight("red", this.state === "stop")}
+        ${this.renderLight("yellow", this.state === "yield")}
+        ${this.renderLight("green", this.state === "go")}
       </div>
     `;
   }
 
   renderLight(color, isOn) {
-    return html`<div
-      class="light ${color} ${isOn ? 'on' : ''}"
-      part="${color}-light"
-    ></div>`;
+    return html`<div class="light ${color} ${isOn ? "on" : ""}" part="${color}-light"></div>`;
   }
 
   next = () => {
@@ -110,4 +107,4 @@ export class TrafficLight extends LitElement {
   };
 }
 
-customElements.define('traffic-light', TrafficLight);
+customElements.define("traffic-light", TrafficLight);

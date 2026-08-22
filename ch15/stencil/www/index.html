@@ -1,14 +1,4 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
-    <title>Stencil Traffic Light</title>
-    <style>
-      :root {
+<!doctype html><html lang="en"><head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> <title>Stencil Traffic Light</title> <style>:root {
         font-family: "Avenir Next", "Segoe UI", sans-serif;
         color: #f8fafc;
         background:
@@ -66,25 +56,7 @@
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: #f8fafc;
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <h1>Traffic Light</h1>
-      <section class="panel" aria-label="Traffic light demo">
-        <traffic-light id="traffic-light" state="stop"></traffic-light>
-        <p>State: <span id="status">Stop</span></p>
-        <p>Sequence: stop for 3s, go for 2s, yield for 1s, then repeat.</p>
-      </section>
-    </main>
-    <script
-      type="module"
-      src="/build/trafficlight.esm.js"
-      data-stencil
-    ></script>
-    <script nomodule="" src="/build/trafficlight.js" data-stencil></script>
-    <script>
+      }</style> </head> <body> <main> <h1>Traffic Light</h1> <section class="panel" aria-label="Traffic light demo"> <traffic-light id="traffic-light" state="stop"></traffic-light> <p>State: <span id="status">Stop</span></p> <p>Sequence: stop for 3s, go for 2s, yield for 1s, then repeat.</p> </section> </main> <script src="/build/trafficlight.esm.js" type="module" data-stencil></script> <script nomodule="" src="/build/trafficlight.js" data-stencil></script> <script>
       const trafficLight = document.querySelector("#traffic-light");
       const status = document.querySelector("#status");
       const cycle = [
@@ -111,18 +83,13 @@
 
       setState("stop");
       advance();
-    </script>
-    <script>
-      if ("serviceWorker" in navigator && location.protocol !== "file:") {
-        // auto-unregister service worker during dev mode
-        navigator.serviceWorker.getRegistration().then(function (registration) {
-          if (registration) {
-            registration.unregister().then(function () {
-              location.reload(true);
-            });
-          }
-        });
-      }
-    </script>
-  </body>
-</html>
+    </script> <script>
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  // auto-unregister service worker during dev mode
+  navigator.serviceWorker.getRegistration().then(function(registration) {
+    if (registration) {
+      registration.unregister().then(function() { location.reload(true) });
+    }
+  });
+}
+</script></body></html>

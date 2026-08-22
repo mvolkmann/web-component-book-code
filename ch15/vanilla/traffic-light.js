@@ -1,4 +1,4 @@
-const STATES = ["stop", "yield", "go"];
+const STATES = ["stop", "go", "yield"];
 
 const template = document.createElement("template");
 template.innerHTML = `

@@ -4,15 +4,10 @@ import {
   html,
 } from "https://cdn.jsdelivr.net/npm/@microsoft/fast-element/dist/esm/index.js";
 
-const states = ["stop", "yield", "go"];
+const states = ["stop", "go", "yield"];
 
 const template = html`
-  <div
-    id="housing"
-    class="housing"
-    role="button"
-    tabindex="0"
-  >
+  <div id="housing" class="housing" role="button" tabindex="0">
     <div id="redLight" class="light light--red"></div>
     <div id="yellowLight" class="light light--yellow"></div>
     <div id="greenLight" class="light light--green"></div>
@@ -120,9 +115,7 @@ export class TrafficLight extends FASTElement {
 
   disconnectedCallback() {
     this.shadowRoot.getElementById("housing").removeEventListener("click", this);
-    this.shadowRoot
-      .getElementById("housing")
-      .removeEventListener("keydown", this);
+    this.shadowRoot.getElementById("housing").removeEventListener("keydown", this);
     super.disconnectedCallback();
   }
 
@@ -187,9 +180,7 @@ export class TrafficLight extends FASTElement {
 
     root.getElementById("housing")?.setAttribute("aria-label", `Traffic light: ${this.#state}`);
     root.getElementById("redLight")?.classList.toggle("is-on", this.#state === "stop");
-    root
-      .getElementById("yellowLight")
-      ?.classList.toggle("is-on", this.#state === "yield");
+    root.getElementById("yellowLight")?.classList.toggle("is-on", this.#state === "yield");
     root.getElementById("greenLight")?.classList.toggle("is-on", this.#state === "go");
   }
 }
