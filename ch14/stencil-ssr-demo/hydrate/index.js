@@ -135,7 +135,7 @@ const NAMESPACE = 'stencil-ssr-demo';
 const BUILD = /* stencil-ssr-demo */ { hotModuleReplacement: false, hydratedSelectorName: "hydrated", prop: true, propChangeCallback: false, slotRelocation: true, updatable: true};
 
 /*
- Stencil Hydrate Platform v4.43.5 | MIT Licensed | https://stenciljs.com
+ Stencil Hydrate Platform v4.44.1 | MIT Licensed | https://stenciljs.com
  */
 var __create = Object.create;
 var __defProp = Object.defineProperty;
@@ -465,6 +465,8 @@ var DEFAULT_DOC_DATA = {
   staticComponents: /* @__PURE__ */ new Set()
 };
 var SLOT_FB_CSS = "slot-fb{display:contents}slot-fb[hidden]{display:none}";
+var MAX_LAZY_LOAD_RETRIES = 3;
+var LAZY_LOAD_RETRY_INTERVAL_MS = 1e3;
 
 // src/utils/style.ts
 function createStyleSheetIfNeededAndSupported(styles2) {
@@ -525,7 +527,7 @@ function getHostSlotNodes(childNodes, hostName, slotName) {
       slottedNodes.push(childNode);
       if (typeof slotName !== "undefined") return slottedNodes;
     }
-    slottedNodes = [...slottedNodes, ...getHostSlotNodes(childNode.childNodes, hostName, slotName)];
+    slottedNodes = [...slottedNodes, ...getHostSlotNodes(internalCall(childNode, "childNodes"), hostName, slotName)];
   }
   return slottedNodes;
 }
@@ -767,6 +769,11 @@ var h = (nodeName, vnodeData, ...children) => {
       } else if (child != null && typeof child !== "boolean") {
         if (simple = typeof nodeName !== "function" && !isComplexType(child)) {
           child = String(child);
+        } else if (typeof nodeName !== "function" && child.$flags$ === void 0) {
+          {
+            consoleError("Invalid vNode child");
+          }
+          continue;
         }
         if (simple && lastSimple) {
           vNodeChildren[vNodeChildren.length - 1].$text$ += child;
@@ -2112,7 +2119,10 @@ var markSlotContentForRelocation = (elm) => {
       const slotName = childNode["s-sn"];
       for (j = hostContentNodes.length - 1; j >= 0; j--) {
         node = hostContentNodes[j];
-        if (!node["s-cn"] && !node["s-nr"] && node["s-hn"] !== childNode["s-hn"] && (!node["s-sh"] || node["s-sh"] !== childNode["s-hn"])) {
+        if (!node["s-cn"] && !node["s-nr"] && node["s-hn"] !== childNode["s-hn"] && // let an exact named-slot match override a stale default-slot claim. Skip this for
+        // `slotName === ''` itself - a matched default node's cached `s-sn` is `''` too, which
+        // would trivially "match" on every re-render and force pointless re-insertion.
+        (!node["s-sh"] || node["s-sh"] !== childNode["s-hn"] || slotName !== "" && getSlotName(node) === slotName)) {
           if (isNodeLocatedInSlot(node, slotName)) {
             let relocateNodeData = relocateNodes.find((r) => r.$nodeToRelocate$ === node);
             checkSlotFallbackVisibility = true;
@@ -2159,7 +2169,7 @@ var insertBefore = (parent, newNode, reference, isInitialLoad) => {
       return newNode;
     }
   }
-  if (parent.__insertBefore) {
+  if ((parent == null ? void 0 : parent.__insertBefore)) {
     return parent.__insertBefore(newNode, reference);
   } else {
     return parent == null ? void 0 : parent.insertBefore(newNode, reference);
@@ -2609,10 +2619,12 @@ var proxyComponent = (Cstr, cmpMeta, flags) => {
 
 // src/runtime/initialize-component.ts
 var initializeComponent = async (elm, hostRef, cmpMeta, hmrVersionId) => {
+  var _a2;
   let Cstr;
   try {
     if ((hostRef.$flags$ & 32 /* hasInitializedComponent */) === 0) {
       hostRef.$flags$ |= 32 /* hasInitializedComponent */;
+      hostRef.$flags$ &= -1025 /* hasFailedLoad */;
       const bundleId = cmpMeta.$lazyBundleId$;
       if (bundleId) {
         const CstrImport = loadModule(cmpMeta);
@@ -2624,6 +2636,11 @@ var initializeComponent = async (elm, hostRef, cmpMeta, hmrVersionId) => {
           Cstr = CstrImport;
         }
         if (!Cstr) {
+          hostRef.$flags$ &= -33 /* hasInitializedComponent */;
+          hostRef.$loadRetryCount$ = ((_a2 = hostRef.$loadRetryCount$) != null ? _a2 : 0) + 1;
+          if (hostRef.$loadRetryCount$ < MAX_LAZY_LOAD_RETRIES) {
+            hostRef.$flags$ |= 1024 /* hasFailedLoad */;
+          }
           throw new Error(`Constructor for "${cmpMeta.$tagName$}#${hostRef.$modeName$}" was not found`);
         }
         if (!Cstr.isProxied) {
@@ -2687,7 +2704,7 @@ var initializeComponent = async (elm, hostRef, cmpMeta, hmrVersionId) => {
       hostRef.$onRenderResolve$();
       hostRef.$onRenderResolve$ = void 0;
     }
-    if (hostRef.$onReadyResolve$) {
+    if (hostRef.$onReadyResolve$ && !(hostRef.$flags$ & 1024 /* hasFailedLoad */)) {
       hostRef.$onReadyResolve$(elm);
     }
   }
@@ -2742,6 +2759,8 @@ var connectedCallback = (elm) => {
     } else {
       if (hostRef == null ? void 0 : hostRef.$lazyInstance$) {
         fireConnectedCallback(hostRef.$lazyInstance$, elm);
+      } else if (hostRef.$flags$ & 1024 /* hasFailedLoad */) {
+        setTimeout(() => initializeComponent(elm, hostRef, cmpMeta), LAZY_LOAD_RETRY_INTERVAL_MS);
       } else if (hostRef == null ? void 0 : hostRef.$onReadyPromise$) {
         hostRef.$onReadyPromise$.then(() => fireConnectedCallback(hostRef.$lazyInstance$, elm));
       }
@@ -5133,7 +5152,7 @@ var NAMESPACE = (
 );
 
 /*
- Stencil Hydrate Runner v4.43.5 | MIT Licensed | https://stenciljs.com
+ Stencil Hydrate Runner v4.44.1 | MIT Licensed | https://stenciljs.com
  */
 var __create = Object.create;
 var __defProp = Object.defineProperty;

@@ -1,5 +1,5 @@
 import { newE2EPage } from "@stencil/core/testing";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "@jest/globals";
 
 describe("hello-world", () => {
   it("renders", async () => {

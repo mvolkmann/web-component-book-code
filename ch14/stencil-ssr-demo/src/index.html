@@ -5,12 +5,12 @@
     <script type="module" src="/build/stencil-ssr-demo.esm.js"></script>
     <script type="module">
       // Listen for Greet button clicks.
-      const button = document.querySelector('button');
-      button.addEventListener('click', async () => {
+      const button = document.querySelector("button");
+      button.addEventListener("click", async () => {
         // Get HTML from the greet endpoint.
-        const res = await fetch('http://localhost:3000/greet?name=SSR');
+        const res = await fetch("http://localhost:3000/greet?name=SSR");
         const html = await res.text();
-        const target = document.getElementById('ssr-content');
+        const target = document.getElementById("ssr-content");
         target.setHTMLUnsafe(html);
       });
     </script>
@@ -19,7 +19,6 @@
     <p>The following components are client-side rendered:</p>
     <hello-world></hello-world>
     <hello-world name="CSR"></hello-world>
-
     <button>Greet</button>
     <div id="ssr-content"></div>
   </body>

@@ -1,6 +1,6 @@
 import { newSpecPage } from "@stencil/core/testing";
 import { HelloWorld } from "../hello-world";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "@jest/globals";
 
 describe("hello-world", () => {
   it("renders", async () => {
@@ -11,7 +11,7 @@ describe("hello-world", () => {
     expect(page.root).toEqualHtml(`
       <hello-world>
         <mock:shadow-root>
-          <slot></slot>
+          <p>Hello, World!</p>
         </mock:shadow-root>
       </hello-world>
     `);
