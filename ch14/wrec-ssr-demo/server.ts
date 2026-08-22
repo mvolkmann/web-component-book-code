@@ -11,9 +11,9 @@ app.use("/*", serveStatic({ root: "./dist" }));
 // This returns HTML that includes server-side rendered wrec components.
 app.get("/greet", async (c: Context) => {
   const name = c.req.query("name");
-  let template = html`
+  const template = html`
     <p>The following components are server-side rendered:</p>
-    ${HelloWorld.ssr()} ${HelloWorld.ssr({ name: "SSR" })}
+    ${HelloWorld.ssr()} ${HelloWorld.ssr({ name })}
   `;
   return c.html(template);
 });
