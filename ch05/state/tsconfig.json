@@ -1,9 +1,13 @@
 {
   "compilerOptions": {
+    "checkJs": true,
     "experimentalDecorators": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "target": "ES2020",
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ESNext",
     "useDefineForClassFields": false
   }
 }

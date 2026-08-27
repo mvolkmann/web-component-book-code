@@ -1,31 +1,20 @@
-import { css, customElement, FASTElement, html, observable, ref } from "@microsoft/fast-element";
+import { css, html, Wrec } from "wrec";
 
-const template = html<ReactiveCSS>`
-  <input
-    type="range"
-    min="8"
-    max="64"
-    :value="${(x) => x.size}"
-    @input=${(x) => x.handleInput()}
-    ${ref("slider")}
-  />
-  <p style="--font-size: ${(x) => x.size}px">My size is reactive!</p>
-`;
+class ReactiveCSS extends Wrec {
+  static properties = {
+    size: { type: Number, value: 18 },
+  };
 
-@customElement({
-  name: "reactive-css",
-  template,
-  styles: css`
+  static css = css`
     p {
-      font-size: var(--font-size);
+      font-size: this.size + "px";
     }
-  `,
-})
-export class ReactiveCSS extends FASTElement {
-  @observable size: number = 18;
-  slider: HTMLInputElement;
+  `;
 
-  handleInput() {
-    this.size = Number(this.slider.value);
-  }
+  static html = html`
+    <input type="range" min="8" max="64" value:input="this.size" />
+    <p>My size is reactive!</p>
+  `;
 }
+
+ReactiveCSS.define("reactive-css");

@@ -1,39 +1,27 @@
-import { attr, css, customElement, FASTElement, html, ref } from "@microsoft/fast-element";
-import { myState } from "./my-state.js";
+import { css, html, Wrec } from "wrec";
 
-const template = html<LabeledInput>`
-  <label for=${(x) => x.inputId}>${(x) => x.label}</label>
-  <input
-    id=${(x) => x.inputId}
-    name=${(x) => x.name}
-    type="text"
-    :value=${(x) => x.name}
-    @change=${(x) => x.handleChange()}
-    ${ref("input")}
-  />
-`;
+class LabeledInput extends Wrec {
+  static properties = {
+    id: { type: String, required: true },
+    label: { type: String, required: true },
+    name: { type: String },
+    value: { type: String },
+  };
 
-@customElement({
-  name: "labeled-input",
-  template,
-  styles: css`
-    :host {
+  static css = css`
+    div {
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-  `,
-})
-export class LabeledInput extends FASTElement {
-  @attr({ attribute: "input-id" }) inputId: string;
-  @attr label: string;
-  input: HTMLInputElement;
+  `;
 
-  get name() {
-    return myState.current.name;
-  }
-
-  handleChange() {
-    myState.set({ ...myState.current, name: this.input.value });
-  }
+  static html = html`
+    <div>
+      <label for="this.id">this.label</label>
+      <input id="this.id" name="this.name" type="text" value="this.value" />
+    </div>
+  `;
 }
+
+LabeledInput.define("labeled-input");

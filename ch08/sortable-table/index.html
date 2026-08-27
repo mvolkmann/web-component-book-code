@@ -6,22 +6,19 @@
         font-family: sans-serif;
       }
     </style>
-    <script src="./sortable-table.ts" type="module"></script>
+    <script src="sortable-table.ts" type="module"></script>
     <script type="module">
       const table = document.querySelector("sortable-table");
-      if (table) {
-        table.data = [
-          { make: "BMW", model: "Z3", year: 2002 },
-          { make: "MINI", model: "Cooper", year: 2015 },
-          { make: "Subaru", model: "Forester", year: 2025 },
-          { make: "Toyota", model: "RAV4", year: 2010 },
-        ];
-        table.addEventListener("sort", event => {
-          const { descending, property } = event.detail;
-          const order = descending ? "descending" : "ascending";
-          console.log(`sorted on ${property} ${order}`);
-        });
-      }
+      table.data = [
+        { make: "BMW", model: "Z3", year: 2002 },
+        { make: "MINI", model: "Cooper", year: 2015 },
+        { make: "Subaru", model: "Forester", year: 2025 },
+        { make: "Toyota", model: "RAV4", year: 2010 },
+      ];
+      table.addEventListener("change", (event) => {
+        const { property, oldValue, value } = event.detail;
+        console.log(`${property} changed from "${oldValue}" to "${value}"`);
+      });
     </script>
   </head>
   <body>

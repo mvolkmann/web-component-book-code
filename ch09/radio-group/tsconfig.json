@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "target": "ES2022"
-  },
-  "include": ["./**/*.ts"]
-}

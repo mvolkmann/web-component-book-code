@@ -1,17 +1,17 @@
-import { css, customElement, FASTElement, html } from "@microsoft/fast-element";
-import { myState } from "./my-state.js";
+import { css, html, Wrec } from "wrec";
 
-const template = html<HelloWorld>`<p>Hello, ${x => x.name}!</p>`;
+class HelloWorld extends Wrec {
+  static properties = {
+    name: { type: String, value: "World" },
+  };
 
-@customElement({
-  name: "hello-world",
-  styles: css`
-    p { color: purple; }
-  }`,
-  template,
-})
-export class HelloWorld extends FASTElement {
-  get name() {
-    return myState.current.name;
-  }
+  static css = css`
+    p {
+      color: blue;
+    }
+  `;
+
+  static html = html`<p>Hello, <span>this.name</span>!</p>`;
 }
+
+HelloWorld.define("hello-world");

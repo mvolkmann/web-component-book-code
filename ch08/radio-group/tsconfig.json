@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "skipLibCheck": true,
-    "target": "ESNext",
-    "useDefineForClassFields": false
-  }
+    "target": "ES2022"
+  },
+  "include": ["./**/*.ts"]
 }

@@ -1,29 +1,9 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "allowUnreachableCode": false,
-    "declaration": false,
     "experimentalDecorators": true,
-    "lib": [
-      "dom",
-      "es2022"
-    ],
+    "module": "ESNext",
     "moduleResolution": "bundler",
-    "module": "esnext",
-    "target": "es2022",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "jsx": "react",
-    "jsxFactory": "h",
-    "jsxFragmentFactory": "h.Fragment",
-    "types": [
-      "@stencil/vitest/globals"
-    ]
-  },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "target": "ES2020",
+    "useDefineForClassFields": false
+  }
 }

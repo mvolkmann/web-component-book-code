@@ -1,22 +1,19 @@
-import {
-  attr,
-  css,
-  customElement,
-  FASTElement,
-  html,
-} from "@microsoft/fast-element";
+import { css, html, Wrec } from "wrec";
 
-const template = html<HelloWorld>`<p>Hello, ${x => x.name}!</p>`;
+class HelloWorld extends Wrec {
+  static properties = {
+    name: { type: String, value: "World" },
+  };
 
-@customElement({
-  name: "hello-world",
-  template,
-  styles: css`
+  static css = css`
     :host {
       color: blue;
     }
-  `,
-})
-export class HelloWorld extends FASTElement {
-  @attr name: string = "World";
+  `;
+
+  static html = html`
+    <p>Hello, <span>this.name</span>!</p>
+  `;
 }
+
+HelloWorld.define("hello-world");

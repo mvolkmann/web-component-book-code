@@ -1,94 +1,82 @@
-import { attr, css, customElement, FASTElement, html, repeat } from "@microsoft/fast-element";
+import { css, html, Wrec } from "wrec";
 
-// x is set to a RadioGroup instance.
-const template = html<RadioGroup>`
-  <fieldset>
-    <legend>${(x) => x.legend}</legend>
-    <slot name="before"></slot>
-    <div>
-      ${repeat(
-        (x) => x.pairs,
-        html`
-          <div>
-            <!-- p is short for pair and c is short for context. -->
-            <input
-              type="radio"
-              id=${(p) => p.value}
-              name=${(p, c) => c.parent.name}
-              :checked=${(p, c) => p.value === c.parent.value}
-              @change=${(p, c) => {
-                c.parent.value = p.value;
-              }}
-            />
-            <label for=${(p) => p.value}>${(x) => x.label}</label>
-          </div>
-        `,
-      )}
-    </div>
-    <slot name="after"></slot>
-  </fieldset>
-`;
+class RadioGroup extends Wrec {
+  static formAssociated = true;
 
-const styles = css`
-  :host > div {
-    display: flex;
-    gap: 0.5rem;
-  }
+  static properties = {
+    labels: { type: String, usedBy: "makeButtons" },
+    legend: { type: String },
+    name: { type: String, usedBy: "makeButtons" },
+    value: { type: String, dispatch: true, usedBy: "makeButtons" },
+    values: { type: String, usedBy: "makeButtons" },
+  };
 
-  fieldset {
-    border-color: var(--border-color, "black");
-    display: inline-flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 0.5rem;
-
-    > legend {
-      color: var(--legend-color, "black");
+  static css = css`
+    :host > div {
+      display: flex;
+      gap: 0.5rem;
     }
 
-    > div {
-      display: flex;
-      flex-direction: var(--direction, row);
-      gap: var(--gap, 1rem);
+    fieldset {
+      border-color: var(--border-color, "black");
+      display: inline-flex;
+      flex-direction: column;
+      align-items: start;
+      gap: 0.5rem;
+
+      > legend {
+        color: var(--legend-color, "black");
+      }
 
       > div {
         display: flex;
-        align-items: center;
-        gap: 0.25rem;
+        flex-direction: var(--direction, row);
+        gap: var(--gap, 1rem);
       }
     }
+
+    input {
+      margin: 0;
+    }
+  `;
+
+  static html = html`
+    <fieldset>
+      <legend style="this.displayIfSet(this.legend)">this.legend</legend>
+      <slot name="before"></slot>
+      <div>this.makeButtons()</div>
+      <slot name="after"></slot>
+    </fieldset>
+  `;
+
+  // This handles the case when the specified value
+  // is not in the list of values.
+  #fixValue() {
+    requestAnimationFrame(() => {
+      const values = this.values.split(",");
+      if (!this.value || !values.includes(this.value)) {
+        this.value = values[0];
+      }
+    });
   }
 
-  input {
-    margin: 0;
-  }
-`;
-
-@customElement({ name: "radio-group", template, styles })
-export class RadioGroup extends FASTElement {
-  @attr labels!: string;
-  @attr legend!: string;
-  @attr name!: string;
-  @attr value!: string;
-  @attr values!: string;
-
-  get pairs() {
+  makeButtons() {
+    this.#fixValue();
     const labelArray = this.labels.split(",");
-    const valueArray = this.values.split(",");
-    return labelArray.map((label, index) => ({
-      label,
-      value: valueArray[index],
-    }));
-  }
-
-  valueChanged(oldValue: string, value: string) {
-    if (value === oldValue) return;
-    this.dispatchEvent(
-      new CustomEvent("value-change", {
-        detail: { oldValue, value },
-        bubbles: true,
-        composed: true,
-      }),
+    const valueArray = this.values.split(",").map((value: string) => value.trim());
+    return valueArray.map(
+      (value: string, index: number) => html`
+        <div>
+          <input checked="this.value" id=${value} name=${this.name} type="radio" value=${value} />
+          <label for=${value}>${labelArray[index]}</label>
+        </div>
+      `,
     );
   }
+
+  propertyChangedCallback(propName: string) {
+    if (propName === "value") this.#fixValue();
+  }
 }
+
+RadioGroup.define("radio-group");

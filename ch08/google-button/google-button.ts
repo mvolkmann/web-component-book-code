@@ -1,14 +1,7 @@
-import { css, customElement, FASTElement, html } from "@microsoft/fast-element";
+import { css, html, Wrec } from "wrec";
 
-// x is set to a GoogleButton instance.
-const template = html<GoogleButton>`
-  <button type="button" @click=${(x) => x.handleClick()}>Google It</button>
-`;
-
-@customElement({
-  name: "google-button",
-  template,
-  styles: css`
+class GoogleButton extends Wrec {
+  static css = css`
     button {
       background-color: #4285f4; /* Google blue */
       border: none;
@@ -17,10 +10,13 @@ const template = html<GoogleButton>`
       font-weight: bold;
       padding: 0.5rem;
     }
-  `,
-})
-export class GoogleButton extends FASTElement {
+  `;
+
+  static html = html` <button type="button" onClick="handleClick">Google It</button> `;
+
   handleClick() {
     window.open("https://google.com", "_blank", "noopener,noreferrer");
   }
 }
+
+GoogleButton.define("google-button");
